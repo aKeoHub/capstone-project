@@ -1,23 +1,35 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository("postgres")
+@Repository("mysql")
 
 public class PersonDataAccessService implements PersonDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     @Override
     public int insertPerson(UUID id, Person person) {
+        String sql = "INSERT INTO users (id, title, content) VALUES (?, ?, ?)";
+
+        int result = jdbcTemplate.update(sql, 287, person.getName(), person.getName());
+        if(result > 0) {
+            System.out.println("A new row has been inserted.");
+            return 1;
+        }
         return 0;
     }
 
     @Override
     public List<Person> selectAllPeople() {
-        return List.of(new Person(UUID.randomUUID(), "FROM POSTGRES DB"));
+        return List.of(new Person(UUID.randomUUID(), "FROM MYSQL DB"));
     }
 
     @Override
