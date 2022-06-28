@@ -2,6 +2,7 @@ package com.example.demo.api;
 
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonService;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +11,12 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("api/v1/person")
+@RequestMapping("api/v1/person1")
 @RestController
 public class PersonController {
 
     private final PersonService personService;
+
 
     @Autowired
     public PersonController(PersonService personService) {
