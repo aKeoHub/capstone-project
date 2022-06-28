@@ -1,9 +1,8 @@
-package com.example.demo.model;
+package com.example.capstone.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
-import java.util.UUID;
 
 public class User {
 

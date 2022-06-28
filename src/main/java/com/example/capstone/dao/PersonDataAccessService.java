@@ -1,8 +1,7 @@
-package com.example.demo.dao;
+package com.example.capstone.dao;
 
-import com.example.demo.model.Person;
+import com.example.capstone.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

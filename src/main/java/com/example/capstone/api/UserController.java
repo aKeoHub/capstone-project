@@ -1,17 +1,14 @@
-package com.example.demo.api;
+package com.example.capstone.api;
 
-import com.example.demo.model.Person;
-import com.example.demo.model.User;
-import com.example.demo.service.PersonService;
-import com.example.demo.service.UserService;
+import com.example.capstone.model.User;
+import com.example.capstone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
+
 @RequestMapping("api/v1/user")
 @RestController
 public class UserController {

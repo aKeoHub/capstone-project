@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.example.capstone.dao;
 
-import com.example.demo.model.Person;
+import com.example.capstone.model.Person;
 
 import java.util.List;
 import java.util.Optional;

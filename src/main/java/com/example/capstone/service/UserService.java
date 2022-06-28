@@ -1,15 +1,13 @@
-package com.example.demo.service;
+package com.example.capstone.service;
 
-import com.example.demo.dao.UserDao;
-import com.example.demo.model.Person;
-import com.example.demo.model.User;
+import com.example.capstone.dao.UserDao;
+import com.example.capstone.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserService {

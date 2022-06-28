@@ -1,11 +1,9 @@
-package com.example.demo.dao;
+package com.example.capstone.dao;
 
-import com.example.demo.model.Person;
-import com.example.demo.model.User;
+import com.example.capstone.model.User;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface UserDao {
 

@@ -1,10 +1,7 @@
-package com.example.demo.model;
+package com.example.capstone.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.Entity;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
