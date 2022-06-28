@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
-@Entity
+
 public class Person {
 
     private final UUID id;

@@ -17,9 +17,9 @@ public class PersonDataAccessService implements PersonDao {
     private JdbcTemplate jdbcTemplate;
     @Override
     public int insertPerson(UUID id, Person person) {
-        String sql = "INSERT INTO users (id, title, content) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO users (userName, firstName, lastName, password, email) VALUES (?, ?, ?, ?, ?)";
 
-        int result = jdbcTemplate.update(sql, 287, person.getName(), person.getName());
+        int result = jdbcTemplate.update(sql, person.getName(), person.getName(), person.getName(), "1234", "andykeo@live.ca");
         if(result > 0) {
             System.out.println("A new row has been inserted.");
             return 1;
