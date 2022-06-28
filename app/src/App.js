@@ -12,7 +12,7 @@ import {
 function App() {
 
 
-<<<<<<< Updated upstream
+
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -84,8 +84,7 @@ function App() {
     //   return <p>Loading...</p>;
     // }
 
-=======
->>>>>>> Stashed changes
+
     return (
 
 
