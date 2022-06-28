@@ -9,6 +9,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 @RequestMapping("api/v1/user")
@@ -26,6 +27,10 @@ public class UserController {
         userService.addUser(user);
     }
 
+    @GetMapping("/users")
+    Collection<User> users() {
+        return userService.getAllUsers();
+    }
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();

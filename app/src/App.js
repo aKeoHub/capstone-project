@@ -5,16 +5,16 @@ import './App.css';
 function App() {
 
 
-  const [groups, setGroups] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
 
-    fetch('api/v1/person')
+    fetch('api/v1/user')
         .then(response => response.json())
         .then(data => {
-          setGroups(data);
+          setUsers(data);
           setLoading(false);
         })
   }, []);
@@ -27,17 +27,28 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          <div className="App-intro">
+              <h2>User List</h2>
+              {users.map(user =>
+                  <div key={user.id}>
+                      <table>
+                          <tr>
+                              <th>ID</th>
+                              <th>Username</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                          </tr>
+                          <tr>
+                              <td>{user.id}</td>
+                              <td>{user.userName}</td>
+                              <td>{user.firstName} {user.lastName}</td>
+                              <td>{user.email}</td>
+                          </tr>
+
+                      </table>
+                  </div>
+              )}
+          </div>
       </header>
     </div>
   );
