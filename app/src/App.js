@@ -8,10 +8,11 @@ function App() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const [username, setUsernameReg] = useState('');
+    const [id, setIdReg] = useState('');
+    const [userName, setUsernameReg] = useState('');
     const [password, setPasswordReg] = useState('');
-    const [firstname, setFirstnameReg] = useState('');
-    const [lastname, setLastnameReg] = useState('');
+    const [firstName, setFirstnameReg] = useState('');
+    const [lastName, setLastnameReg] = useState('');
     const [email, setEmailReg] = useState('');
 
 
@@ -28,53 +29,56 @@ function App() {
             })
     }, []);
 
-    const getUsers = () => {
-        fetch.get('http://localhost:8080/api/v1/user', {}).then((response) => {
-            setUserList(response.data)
-        });
-    };
+    // const getUsers = () => {
+    //     fetch.get('http://localhost:8080/api/v1/user', {}).then((response) => {
+    //         setUserList(response.data)
+    //     });
+    // };
 
     const register = () => {
-        fetch.post('http://localhost:8080/api/v1/user', {
-            username: username,
-            password: password,
-        }).then(() => {
-            console.log("Success");
-        });
-    };
+        //     fetch.post('http://localhost:8080/api/v1/user', {
+        //         id: id,
+        //         userName: userName,
+        //         password: password,
+        //         firstName: firstName,
+        //         lastName: lastName,
+        //         email: email,
+        //     }).then(() => {
+        //         console.log("Success");
+        //     });
+        // };
 
-    // fetch("http://localhost:8080/api/v1/user", {
-    //
-    //     // Adding method type
-    //     method: "POST",
-    //
-    //     // Adding body or contents to send
-    //     body: JSON.stringify({
-    //         userId: userId,
-    //         userName: username,
-    //         password: password,
-    //         firstName: firstName,
-    //         lastName: lastName,
-    //         email: email
-    //
-    //
-    //     }),
+        fetch("/api/v1/user", {
 
-    // Adding headers to the request
-    //       headers: {
-    //           "Content-type": "application/json; charset=UTF-8"
-    //       }
-    //   })
-    //
-    //       // Converting to JSON
-    //       .then(response => response.json())
-    //
-    //       // Displaying results to console
-    //       .then(json => console.log(json));
-    //
-    // if (loading) {
-    //   return <p>Loading...</p>;
-    // }
+            // Adding method type
+            method: "POST",
+
+            // Adding body or contents to send
+            body: JSON.stringify({
+                id: id,
+                userName: userName,
+                password: password,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+            }),
+
+            //Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+
+            // Converting to JSON
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(json => console.log(json));
+
+        if (loading) {
+            return <p>Loading...</p>;
+        }
+    }
 
     return (
         <div className="App">
