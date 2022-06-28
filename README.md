@@ -1,6 +1,10 @@
 # demo
  Simple crud application using Spring boot
  
+ Requirements: MySQL Workbench https://dev.mysql.com/downloads/installer/
+               IntelliJ
+               Node.js https://nodejs.org/en/
+ 
  1. Open the project in intellij.
  2. Make sure you run the backend server first (DemoApplication).
  3. Run the react app using npm start. (you may have to install dependencies using npm install).
