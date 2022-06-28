@@ -21,7 +21,7 @@ public class DemoApplication implements CommandLineRunner {
 String sql = "INSERT INTO blog (id, title, content) VALUES (?, ?, ?)";
 int result = jdbcTemplate.update(sql, 1235, "Kingston is the greatest", "Kingston is the bestest");
 
-//
+
 
 if(result > 0) {
 	System.out.println("A new row has been inserted.");
