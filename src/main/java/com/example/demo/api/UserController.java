@@ -27,10 +27,7 @@ public class UserController {
         userService.addUser(user);
     }
 
-    @GetMapping("/users")
-    Collection<User> users() {
-        return userService.getAllUsers();
-    }
+
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();

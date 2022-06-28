@@ -1,12 +1,14 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 public class User {
 
 
-    private int id;
+    private final int id;
     @NotBlank
     private String userName;
     @NotBlank
@@ -18,7 +20,12 @@ public class User {
 
 
 
-    public User(int id, String userName, String password, String firstName, String lastName, String email) {
+    public User(@JsonProperty("id") int id,
+                @JsonProperty("userName") String userName,
+                @JsonProperty("password") String password,
+                @JsonProperty("firstName") String firstName,
+                @JsonProperty("lastName") String lastName,
+                @JsonProperty("email") String email) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -69,5 +76,17 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

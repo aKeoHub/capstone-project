@@ -16,16 +16,21 @@ import java.util.UUID;
 @Repository("mysql")
 public class UserDataAccessService implements UserDao {
 
-    @Autowired
+
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public UserDataAccessService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
 
     @Override
     public int insertUser(User user) {
-        String sql = "INSERT INTO users (id, userName, password, firstName, lastName, email) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (userName, password, firstName, lastName, email) VALUES (?, ?, ?, ?, ?)";
 
-        int result = jdbcTemplate.update(sql, user.getId(), user.getUserName(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail());
-        if(result > 0) {
+        int result = jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail());
+        if (result > 0) {
             System.out.println("A new row has been inserted.");
             return 1;
         }
@@ -56,6 +61,7 @@ public class UserDataAccessService implements UserDao {
 
     private static final class UserMapper implements RowMapper<User> {
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+
             int id = (rs.getInt("id"));
             String userName = (rs.getString("userName"));
             String password = (rs.getString("password"));

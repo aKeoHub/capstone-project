@@ -11,6 +11,7 @@ public interface UserDao {
 
     int insertUser(User user);
 
+
     List<User> selectAllUsers();
 
     Optional<User> selectUserById(int id);
