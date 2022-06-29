@@ -1,8 +1,7 @@
-
 import React, {useEffect, useState} from "react";
+import {Button, Users, Wrapper} from "./Registration.styles";
 
-const Login = () => {
-
+const RegistrationForm  = () => {
 
 
     const [users, setUsers] = useState([]);
@@ -80,60 +79,68 @@ const Login = () => {
         }
     }
     return (
-        <div className="App-intro">
-            <div className="registration">
-                <h1>Registration</h1>
-                <label>Username:</label>
-                <input type="text" onChange={(e) => {
-                    setUsernameReg(e.target.value);
-                }}
-                />
-                <label>Password:</label>
-                <input type="text" onChange={(e) => {
-                    setPasswordReg(e.target.value);
-                }}
-                />
-                <label>FirstName:</label>
-                <input type="text" onChange={(e) => {
-                    setFirstnameReg(e.target.value);
-                }}
-                />
-                <label>LastName:</label>
-                <input type="text" onChange={(e) => {
-                    setLastnameReg(e.target.value);
-                }}
-                />
-                <label>Email:</label>
-                <input type="text" onChange={(e) => {
-                    setEmailReg(e.target.value);
-                }}
-                />
+
+        <Wrapper>
+
+            <h1>Registration</h1>
+
+            <label>Username:</label>
+
+            <input type="text" onChange={(e) => {
+                setUsernameReg(e.target.value);
+            }}
+            />
+
+            <label>Password:</label>
+            <input type="text" onChange={(e) => {
+                setPasswordReg(e.target.value);
+            }}
+            />
+            <label>FirstName:</label>
+            <input type="text" onChange={(e) => {
+                setFirstnameReg(e.target.value);
+            }}
+            />
+            <label>LastName:</label>
+            <input type="text" onChange={(e) => {
+                setLastnameReg(e.target.value);
+            }}
+            />
+            <label>Email:</label>
+            <input type="text" onChange={(e) => {
+                setEmailReg(e.target.value);
+            }}
+            />
+            <Button>
                 <button onClick={register}>Register</button>
-            </div>
+            </Button>
+
+            <Users>
+                <h2>User List</h2>
+                {users.map(user =>
+                    <div key={user.id}>
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                            <tr>
+                                <td>{user.id}</td>
+                                <td>{user.userName}</td>
+                                <td>{user.firstName} {user.lastName}</td>
+                                <td>{user.email}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                )}</Users>
 
 
-            <h2>User List</h2>
-            {users.map(user =>
-                <div key={user.id}>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                        </tr>
-                        <tr>
-                            <td>{user.id}</td>
-                            <td>{user.userName}</td>
-                            <td>{user.firstName} {user.lastName}</td>
-                            <td>{user.email}</td>
-                        </tr>
+        </Wrapper>
 
-                    </table>
-                </div>
-            )}
-        </div>
     );
 }
 
-export default Login;
+export default RegistrationForm;
