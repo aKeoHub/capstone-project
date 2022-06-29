@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import { Button } from './Button';
+import { LoginButton } from './LoginButton';
 import { Link } from 'react-router-dom';
 import image from '../images/WendysRVTrans.png';
 
@@ -22,7 +22,7 @@ function Footer() {
                             type='email'
                             placeholder='Your Email'
                         />
-                        <Button buttonStyle='btn--outline'>Subscribe</Button>
+                        <LoginButton buttonStyle='btn--outline'>Subscribe</LoginButton>
                     </form>
                 </div>
             </section>

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import { Button } from './Button';
+import { LoginButton } from './LoginButton';
+import { SignUpButton } from './SignUpButton';
 import './HeroSection.css';
 
 
@@ -11,21 +12,21 @@ function HeroSection() {
             <h1>Welcome to Wendy's RV!</h1>
             <p>Sign Up or Login Here!</p>
             <div className='hero-btns'>
-                <Button
+                <SignUpButton
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
                 >
                     Sign Up
-                </Button>
-                <Button
+                </SignUpButton>
+                <LoginButton
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
 
                 >
                     Login
-                </Button>
+                </LoginButton>
             </div>
         </div>
     );

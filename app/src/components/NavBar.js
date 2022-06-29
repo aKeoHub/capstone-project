@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NavBar.css';
 import './Button.css'
-import { Button } from './Button';
+import { LoginButton } from './LoginButton';
 import { Link } from 'react-router-dom';
 import image from '../images/WendyRV.png';
 
@@ -80,7 +80,7 @@ function NavBar() {
                         </Link>
                     </li>
                 </ul>
-                {button && <Button buttonStyle='btn--outline'>LOGIN</Button>}
+                {button && <LoginButton buttonStyle='btn--outline'>LOGIN</LoginButton>}
             </div>
         </nav>
     </>

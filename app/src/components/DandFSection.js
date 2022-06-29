@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import { Button } from './Button';
+import { DocumentsButton } from './DocumentsButton';
+import { ForumButton } from './ForumButton';
 import './DandFSection.css';
 
 
@@ -11,21 +12,21 @@ function DandFSection() {
             <h1>Documents and Forum</h1>
             <p>See the park documents and chat with other people on the forum!</p>
             <div className='dandf-btns'>
-                <Button
+                <DocumentsButton
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
                 >
                     Documents
-                </Button>
-                <Button
+                </DocumentsButton>
+                <ForumButton
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
 
                 >
                     Forum
-                </Button>
+                </ForumButton>
             </div>
         </div>
     );
