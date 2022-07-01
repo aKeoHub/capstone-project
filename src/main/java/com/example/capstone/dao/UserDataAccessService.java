@@ -37,7 +37,7 @@ public class UserDataAccessService implements UserDao {
 
     @Override
     public List<User> selectAllUsers() {
-        String sql = "SELECT * FROM capstone.user";
+        String sql = "SELECT * FROM capstone.users";
         return jdbcTemplate.query(sql, new UserMapper());
     }
 

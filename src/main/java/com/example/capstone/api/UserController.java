@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-//@RequestMapping("api/v1/user")
+@RequestMapping("api/v1/user")
 @RestController
 public class UserController {
     private final UserService userService;
