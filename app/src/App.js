@@ -1,141 +1,67 @@
 import logo from './logo.svg';
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import Calendar from 'react-calendar'
+import DatePicker from 'react-date-picker';
+
+
 
 function App() {
 
+    const [value, onChange] = useState(new Date());
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const [username, setUsernameReg] = useState('');
-    const [password, setPasswordReg] = useState('');
-    const [firstname, setFirstnameReg] = useState('');
-    const [lastname, setLastnameReg] = useState('');
-    const [email, setEmailReg] = useState('');
+return (
 
 
-    const [userList, setUserList] = useState([]);
+<div class="container">
+    <div class="row">
+        <div class="col-5">
+            <div class="card card-outline card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Calendar</h3>
+                </div>
 
-    useEffect(() => {
-        setLoading(true);
+            <div class="card-body">
+                <div id="Calendar_wrapper" class="">
+                    <div class="row">
+                        <div class="center">
+                            <Calendar onChange={onChange} value={value}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        fetch('api/v1/user')
-            .then(response => response.json())
-            .then(data => {
-                setUsers(data);
-                setLoading(false);
-            })
-    }, []);
+  <div class="col-5">
 
-    const getUsers = () => {
-        fetch.get('http://localhost:8080/api/v1/user', {}).then((response) => {
-            setUserList(response.data)
-        });
-    };
-
-    const register = () => {
-        fetch.post('http://localhost:8080/api/v1/user', {
-            username: username,
-            password: password,
-        }).then(() => {
-            console.log("Success");
-        });
-    };
-
-    // fetch("http://localhost:8080/api/v1/user", {
-    //
-    //     // Adding method type
-    //     method: "POST",
-    //
-    //     // Adding body or contents to send
-    //     body: JSON.stringify({
-    //         userId: userId,
-    //         userName: username,
-    //         password: password,
-    //         firstName: firstName,
-    //         lastName: lastName,
-    //         email: email
-    //
-    //
-    //     }),
-
-    // Adding headers to the request
-    //       headers: {
-    //           "Content-type": "application/json; charset=UTF-8"
-    //       }
-    //   })
-    //
-    //       // Converting to JSON
-    //       .then(response => response.json())
-    //
-    //       // Displaying results to console
-    //       .then(json => console.log(json));
-    //
-    // if (loading) {
-    //   return <p>Loading...</p>;
-    // }
-
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <div className="App-intro">
-                    <div className="registration">
-                        <h1>Registration</h1>
-                        <label>Username:</label>
-                        <input type="text" onChange={(e) => {
-                            setUsernameReg(e.target.value);
-                        }}
-                        />
-                        <label>Password:</label>
-                        <input type="text" onChange={(e) => {
-                            setPasswordReg(e.target.value);
-                        }}
-                        />
-                        <label>FirstName:</label>
-                        <input type="text" onChange={(e) => {
-                            setFirstnameReg(e.target.value);
-                        }}
-                        />
-                        <label>LastName:</label>
-                        <input type="text" onChange={(e) => {
-                            setLastnameReg(e.target.value);
-                        }}
-                        />
-                        <label>Email:</label>
-                        <input type="text" onChange={(e) => {
-                            setEmailReg(e.target.value);
-                        }}
-                        />
-                        <button onClick={register}>Register</button>
+                <div class="card card-outline card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Events</h3>
                     </div>
 
-
-                    <h2>User List</h2>
-                    {users.map(user =>
-                        <div key={user.id}>
-                            <table>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Username</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
-                                <tr>
-                                    <td>{user.id}</td>
-                                    <td>{user.userName}</td>
-                                    <td>{user.firstName} {user.lastName}</td>
-                                    <td>{user.email}</td>
-                                </tr>
-
-                            </table>
+                <div class="card-body">
+                    <div id="Calendar_wrapper" class="">
+                        <div class="row">
+                            <div>
+                                <table>
+                                </table>
+                            </div>
                         </div>
-                    )}
+                    </div>
                 </div>
-            </header>
-        </div>
-    );
+            </div>
+  </div>
+
+
+</div>
+</div>
+
+
+   );
 }
 
 export default App;

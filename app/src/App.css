@@ -92,3 +92,10 @@ button:hover {
 .user h3 {
   margin: 20px;
 }
+
+.center {
+  margin: auto;
+  border: 10px ;
+  padding: 10px;
+  width:10%;
+}
