@@ -6,20 +6,40 @@ import com.example.capstone.model.Role;
 import com.example.capstone.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class UserServImpl implements UserServ {
+public class UserServImpl implements UserServ, UserDetailsService {
 
     private final AdminRepo userRepo;
     private final RoleRepo roleRepo;
-
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepo.findByUserName(username);
+        if(user == null) {
+            log.error("User not found in the database");
+            throw new UsernameNotFoundException("User not found in the database");
+        } else {
+            log.info("User found in the database {}", username);
+        }
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        user.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        });
+        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
+    }
     @Override
     public User saveUser(User user) {
         log.info("SAVING NEW USER {} TO THE DATABASE", user.getUserName());
@@ -51,4 +71,6 @@ public class UserServImpl implements UserServ {
         log.info("FETCHING ALL USERS");
         return userRepo.findAll();
     }
+
+
 }
