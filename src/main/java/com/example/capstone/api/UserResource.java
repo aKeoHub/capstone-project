@@ -23,7 +23,7 @@ public class UserResource {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/user/save").toUriString());
+    //URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/user/save").toUriString());
     @PostMapping("/users/save")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         return ResponseEntity.created(null).body(userService.saveUser(user));
