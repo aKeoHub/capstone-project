@@ -115,27 +115,27 @@ const RegistrationForm  = () => {
                 <button onClick={register}>Register</button>
             </Button>
 
-            <Users>
-                <h2>User List</h2>
-                {users.map(user =>
-                    <div key={user.id}>
-                        <table>
-                            <tr>
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                            </tr>
-                            <tr>
-                                <td>{user.id}</td>
-                                <td>{user.userName}</td>
-                                <td>{user.firstName} {user.lastName}</td>
-                                <td>{user.email}</td>
-                            </tr>
+            {/*<Users>*/}
+            {/*    <h2>User List</h2>*/}
+            {/*    {users.map(user =>*/}
+            {/*        <div key={user.id}>*/}
+            {/*            <table>*/}
+            {/*                <tr>*/}
+            {/*                    <th>ID</th>*/}
+            {/*                    <th>Username</th>*/}
+            {/*                    <th>Name</th>*/}
+            {/*                    <th>Email</th>*/}
+            {/*                </tr>*/}
+            {/*                <tr>*/}
+            {/*                    <td>{user.id}</td>*/}
+            {/*                    <td>{user.userName}</td>*/}
+            {/*                    <td>{user.firstName} {user.lastName}</td>*/}
+            {/*                    <td>{user.email}</td>*/}
+            {/*                </tr>*/}
 
-                        </table>
-                    </div>
-                )}</Users>
+            {/*            </table>*/}
+            {/*        </div>*/}
+            {/*    )}</Users>*/}
 
 
         </Wrapper>

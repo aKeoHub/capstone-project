@@ -7,7 +7,7 @@ video {
 }
 
 .dandf-container {
-     background: url('../images/img_5.png') center center/cover no-repeat;
+     background: url('src/images/img_5.png') center center/cover no-repeat;
     height: 100vh;
     width: 100%;
     display: flex;

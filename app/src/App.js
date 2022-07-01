@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import LoginForm from "./pages/LoginPage";
 import Home from "./pages/Home";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (

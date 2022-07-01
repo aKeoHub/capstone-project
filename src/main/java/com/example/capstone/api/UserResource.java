@@ -3,6 +3,7 @@ package com.example.capstone.api;
 import com.example.capstone.model.Role;
 import com.example.capstone.model.User;
 import com.example.capstone.service.UserServ;
+import com.example.capstone.service.UserServImpl;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,17 +17,17 @@ import java.util.List;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserResource {
-    private final UserServ userService;
+    private final UserServImpl userService;
 
     @GetMapping("/users")
     public ResponseEntity<List<User>>getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    //URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/user/save").toUriString());
     @PostMapping("/users/save")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
-        return ResponseEntity.created(null).body(userService.saveUser(user));
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/user/save").toUriString());
+        return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
     @PostMapping("/role/save")
