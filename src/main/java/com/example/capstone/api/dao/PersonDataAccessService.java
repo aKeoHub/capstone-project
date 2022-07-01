@@ -1,4 +1,4 @@
-package com.example.capstone.dao;
+package com.example.capstone.api.dao;
 
 import com.example.capstone.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;

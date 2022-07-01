@@ -1,6 +1,6 @@
 package com.example.capstone.service;
 
-import com.example.capstone.dao.PersonDao;
+import com.example.capstone.api.dao.PersonDao;
 import com.example.capstone.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
