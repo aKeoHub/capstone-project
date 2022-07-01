@@ -35,17 +35,6 @@ const RegistrationForm  = () => {
     // };
 
     const register = () => {
-        //     fetch.post('http://localhost:8080/api/v1/user', {
-        //         id: id,
-        //         userName: userName,
-        //         password: password,
-        //         firstName: firstName,
-        //         lastName: lastName,
-        //         email: email,
-        //     }).then(() => {
-        //         console.log("Success");
-        //     });
-        // };
 
         fetch("/api/v1/user", {
 
