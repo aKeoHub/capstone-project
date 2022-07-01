@@ -19,9 +19,11 @@ public class UserService {
         this.userDao = userDao;
     }
 
+
     public int addUser(User user) {
         return userDao.insertUser(user);
     }
+
 
     public List<User> getAllUsers() {
         return userDao.selectAllUsers();

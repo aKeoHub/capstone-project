@@ -1,13 +1,30 @@
 package com.example.capstone.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.GenerationType.AUTO;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
-
-    private final int id;
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    private int id;
     @NotBlank
     private String userName;
     @NotBlank
@@ -16,7 +33,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-
+    @ManyToMany(fetch = EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
 
     public User(@JsonProperty("id") int id,
@@ -35,6 +53,10 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -77,6 +99,15 @@ public class User {
         this.email = email;
     }
 
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -86,6 +117,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }
