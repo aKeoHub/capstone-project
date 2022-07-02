@@ -29,11 +29,6 @@ const Form  = () => {
             })
     }, []);
 
-    // const getUsers = () => {
-    //     fetch.get('http://localhost:8080/api/v1/user', {}).then((response) => {
-    //         setUserList(response.data)
-    //     });
-    // };
 
     const register = () => {
 
@@ -71,33 +66,51 @@ const Form  = () => {
     return (
 
 
-            <div className="wrapper" style={{backgroundImage: `url('https://www.biacon.net/registration-form-background-images-7/')`}}>
+            <div className="wrapper" style={{backgroundImage: 'backgroundImg.jpg'}}>
                 <div className="inner">
                     <form action="">
                         <h3>Registration Form</h3>
                         <div className="form-wrapper">
                             <div className="form-wrapper">
+                                <label htmlFor="">Username</label>
+                                <input type="text" className="form-control" onChange={(e) => {
+                                    setUsernameReg(e.target.value);
+                                }}/>
+                            </div>
+                        </div>
+                        <div className="form-wrapper">
+                            <div className="form-wrapper">
                                 <label htmlFor="">First Name</label>
-                                <input type="text" className="form-control"/>
+                                <input type="text" className="form-control" onChange={(e) => {
+                                    setFirstnameReg(e.target.value);
+                                }}/>
                             </div>
                         </div>
                         <div>
                             <div className="form-wrapper">
                                 <label htmlFor="">Last Name</label>
-                                <input type="text" className="form-control"/>
+                                <input type="text" className="form-control" onChange={(e) => {
+                                    setLastnameReg(e.target.value);
+                                }}/>
                             </div>
                         </div>
                         <div className="form-wrapper">
                             <label htmlFor="">Email</label>
-                            <input type="text" className="form-control"/>
+                            <input type="text" className="form-control" onChange={(e) => {
+                                setEmailReg(e.target.value);
+                            }}/>
                         </div>
                         <div className="form-wrapper">
                             <label htmlFor="">Password</label>
-                            <input type="password" className="form-control"/>
+                            <input type="password" className="form-control" onChange={(e) => {
+                                setPasswordReg(e.target.value);
+                            }}/>
                         </div>
                         <div className="form-wrapper">
                             <label htmlFor="">Confirm Password</label>
-                            <input type="password" className="form-control"/>
+                            <input type="password" className="form-control" onChange={(e) => {
+                                setPasswordReg(e.target.value);
+                            }}/>
                         </div>
                         <div className="checkbox">
                             <label>
@@ -105,7 +118,7 @@ const Form  = () => {
                                 <span className="checkmark"></span>
                             </label>
                         </div>
-                        <button>Register Now</button>
+                        <button onClick={register}>Register Now</button>
                     </form>
                 </div>
             </div>
