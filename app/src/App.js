@@ -7,6 +7,7 @@ import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Toolbar from 'react-big-calendar/lib/Toolbar';
 import "./App.css";
 
 const locales = {
@@ -51,7 +52,7 @@ function App() {
         <div className="App">
             <h1>Events</h1>
 
-            <Calendar localizer={localizer}  events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 600, margin: "50px" }} />
+            <Calendar localizer={localizer} views = {['month']} components = {{toolbar : CustomToolbar}} events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 600, margin: "50px" }} />
 
 
                     <div>
@@ -67,4 +68,18 @@ function App() {
     );
 }
 
+class CustomToolbar extends Toolbar {
+  render() {
+    return (
+      <div className='rbc-toolbar'>
+        <span className="rbc-btn-group">
+          <button type="button" onClick={() => this.navigate('TODAY')} >hi</button>
+          <button type="button" onClick={() => this.navigate('PREV')}>back</button>
+          <button type="button" onClick={() => this.navigate('NEXT')}>next</button>
+        </span>
+        <span className="rbc-toolbar-label">{this.props.label}</span>
+      </div>
+    );
+  }
+}
 export default App;
