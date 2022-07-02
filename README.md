@@ -1,5 +1,5 @@
 # demo
- Simple crud application using Spring boot
+ A website for an RV Park, management system.
  
  Requirements: MySQL Workbench https://dev.mysql.com/downloads/installer/
                IntelliJ
