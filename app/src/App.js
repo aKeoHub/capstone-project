@@ -51,7 +51,7 @@ function App() {
         <div className="App">
             <h1>Events</h1>
 
-            <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 600, margin: "50px" }} />
+            <Calendar localizer={localizer}  events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 600, margin: "50px" }} />
 
 
                     <div>
