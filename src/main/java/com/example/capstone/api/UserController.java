@@ -1,3 +1,4 @@
+
 package com.example.capstone.api;
 
 import com.example.capstone.model.User;
@@ -35,6 +36,7 @@ public class UserController {
         return userService.getUserById(id).
                 orElse(null);
     }
+
     @DeleteMapping(path = "{id}")
     public void deleteUserById(@PathVariable("id") int id) {
         userService.deleteUser(id);

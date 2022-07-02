@@ -1,13 +1,14 @@
-package com.example.capstone.service;
 
-import com.example.capstone.dao.UserDao;
-import com.example.capstone.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
+        package com.example.capstone.service;
 
-import java.util.List;
-import java.util.Optional;
+        import com.example.capstone.dao.UserDao;
+        import com.example.capstone.model.User;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.beans.factory.annotation.Qualifier;
+        import org.springframework.stereotype.Service;
+
+        import java.util.List;
+        import java.util.Optional;
 
 @Service
 public class UserService {
