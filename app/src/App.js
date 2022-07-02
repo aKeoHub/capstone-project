@@ -1,6 +1,6 @@
 
 import React from "react";
-import "./App.css";
+
 import RegistrationForm from "./pages/RegistrationPage";
 import {
   BrowserRouter as Router,
