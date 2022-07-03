@@ -105,9 +105,9 @@ button:hover {
     height: 483.88px;
 }
 
-.calendarDiv{
-    margin: auto;
-    padding:5%;
+.calendar{
+    background-color:white
+    ;
 }
 
 .App {
@@ -115,5 +115,5 @@ button:hover {
 }
 
 .calendarContainer{
-    background-color: white;
+    background-color:none ;
 }
