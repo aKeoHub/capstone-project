@@ -111,3 +111,8 @@ button:hover {
     margin: auto;
     padding:5%;
 }
+
+.title-block {
+    text-align: center;
+    font-width: 10px;
+}

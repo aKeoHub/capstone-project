@@ -25,8 +25,9 @@ return (
 
 
 <div class="container">
-
+    <div class="title-block">
         <h1> Whats Going On? </h1>
+    </div>
 
     <div class="row">
         <div class="col-12">
@@ -48,7 +49,12 @@ return (
                                 />
                             </div>
                             <div class="col-md center">
-                                <h5 class="calendarDiv">{calendarText}</h5>
+                                <div>
+                                    <h5 class="calendarDiv">{calendarText}</h5>
+                                </div>
+                                <div>
+                                    Events
+                                </div>
                             </div>
                         </div>
                     </div>
