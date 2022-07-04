@@ -1,6 +1,8 @@
 import React from 'react';
+import LoginForm from "./loginForm";
 
-class LoginForm extends React.Component {
+
+class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: ''};
@@ -20,15 +22,16 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Name:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
+            <LoginForm/>
+            // <form onSubmit={this.handleSubmit}>
+            //     <label>
+            //         Name:
+            //         <input type="text" value={this.state.value} onChange={this.handleChange} />
+            //     </label>
+            //     <input type="submit" value="Submit" />
+            // </form>
         );
     }
 }
 
-export default LoginForm;
+export default LoginPage;

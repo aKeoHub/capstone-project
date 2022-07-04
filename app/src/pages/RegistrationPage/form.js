@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './register.css';
 
-const Form  = () => {
+const RegistrationForm  = () => {
 
 
     const [users, setUsers] = useState([]);
@@ -126,4 +126,4 @@ const Form  = () => {
     );
 }
 
-export default Form;
+export default RegistrationForm;

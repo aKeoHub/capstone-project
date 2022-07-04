@@ -1,13 +1,14 @@
 import React from "react";
 import Form from "./form";
+import RegistrationForm from "./form";
 
-const RegistrationForm = () => {
+const RegistrationPage = () => {
 
     return (
         <>
-            <Form/>
+            <RegistrationForm/>
         </>
     );
 }
 
-export default RegistrationForm;
+export default RegistrationPage;
