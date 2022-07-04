@@ -12,9 +12,38 @@ function App() {
     const [date, setDate] = useState(new Date());
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
+
     const [category, setCategory] = useState([]);
     const [categoryText, setCategoryText] = useState(`No Category is selected`);
     const [calendarText, setCalendarText] = useState(`No Date is selected`);
+
+ const events = [
+        {
+            title: "Big Meeting",
+            allDay: true,
+            start: new Date(2022, 7, 1),
+            end: new Date(2022, 7, 2),
+        },
+        {
+            title: "Vacation",
+            start: new Date(2022, 7, 7),
+            end: new Date(2022, 7, 10),
+        },
+        {
+            title: "Conference",
+            start: new Date(2021, 6, 20),
+            end: new Date(2021, 6, 23),
+        },
+    ];
+    const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
+    const [allEvents, setAllEvents] = useState(events);
+
+
+
+    function handleAddEvent() {
+        setAllEvents([...allEvents, newEvent]);
+    }
+
 
     const onDateChange = (newDate) => {
         setDate(newDate);
