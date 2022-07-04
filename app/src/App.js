@@ -24,13 +24,13 @@ function App() {
 return (
 
 
-<div class="container">
+<div class="eventContainer">
     <div class="title-block">
         <h1> Whats Going On? </h1>
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-10 center">
             <div class="card card-outline card-info">
                 <div class="card-header">
                     <h3 class="card-title">Calendar</h3>
@@ -39,14 +39,17 @@ return (
                 <div class="card-body  ">
                     <div id="Calendar_wrapper">
                         <div class="row">
-                            <div class="col-md center">
-                                <Calendar
-                                  onChange={onDateChange}
-                                  value={date}
-                                  showNeighboringMonth={false}
-                                  locale={"en-US"}
-                                  class="calendarDiv"
-                                />
+                            <div class="col-4">
+                                <div classname="cal">
+                                    <Calendar
+                                      onChange={onDateChange}
+                                      value={date}
+                                      showNeighboringMonth={false}
+                                      locale={"en-US"}
+                                      class="calendarDiv"
+
+                                    />
+                                </div>
                             </div>
                             <div class="col-md center">
                                 <div>
@@ -62,6 +65,35 @@ return (
             </div>
         </div>
     </div>
+
+    <div class="row">
+            <div class="col-10 center">
+                <div class="card card-outline card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Featured Events</h3>
+                    </div>
+
+                    <div class="card-body  ">
+                        <div id="Calendar_wrapper">
+                            <div class="row">
+                                <div class="col-md center">
+                               event1
+                                </div>
+                                <div class="col-md center">
+                                    <div>
+                                        <h5 class="calendarDiv">{calendarText}</h5>
+                                    </div>
+                                    <div>
+                                        Events
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </div>
 
 
