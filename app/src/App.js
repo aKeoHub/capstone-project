@@ -1,120 +1,47 @@
-import logo from './logo.svg';
-import React, {useEffect, useState} from 'react';
-import './App.css';
-import Login from "./pages/login";
+import React from "react";
+
+import RegistrationForm from "./pages/RegistrationPage";
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Navigate,
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
 } from "react-router-dom";
+import LoginForm from "./pages/LoginPage";
+import Home from "./pages/Home";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
+  return (
+      <>
+        <Router>
+          <NavBar />
+          <Routes>
 
-
-
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    const [username, setUsernameReg] = useState('');
-    const [password, setPasswordReg] = useState('');
-    const [firstname, setFirstnameReg] = useState('');
-    const [lastname, setLastnameReg] = useState('');
-    const [email, setEmailReg] = useState('');
-
-
-    const [userList, setUserList] = useState([]);
-
-    useEffect(() => {
-        setLoading(true);
-
-        fetch('api/v1/user')
-            .then(response => response.json())
-            .then(data => {
-                setUsers(data);
-                setLoading(false);
-            })
-    }, []);
-
-    const getUsers = () => {
-        fetch.get('http://localhost:8080/api/v1/user', {}).then((response) => {
-            setUserList(response.data)
-        });
-    };
-
-    const register = () => {
-        fetch.post('http://localhost:8080/api/v1/user', {
-            username: username,
-            password: password,
-        }).then(() => {
-            console.log("Success");
-        });
-    };
-
-    // fetch("http://localhost:8080/api/v1/user", {
-    //
-    //     // Adding method type
-    //     method: "POST",
-    //
-    //     // Adding body or contents to send
-    //     body: JSON.stringify({
-    //         userId: userId,
-    //         userName: username,
-    //         password: password,
-    //         firstName: firstName,
-    //         lastName: lastName,
-    //         email: email
-    //
-    //
-    //     }),
-
-    // Adding headers to the request
-    //       headers: {
-    //           "Content-type": "application/json; charset=UTF-8"
-    //       }
-    //   })
-    //
-    //       // Converting to JSON
-    //       .then(response => response.json())
-    //
-    //       // Displaying results to console
-    //       .then(json => console.log(json));
-    //
-    // if (loading) {
-    //   return <p>Loading...</p>;
-    // }
-
-
-    return (
-
-
-        <>
-            {/* This is the alias of BrowserRouter i.e. Router */}
-            <Router>
-                <Routes>
-                    {/* This route is for home component
+            {/* This route is for home component
           with exact path "/", in component props
           we passes the imported component*/}
-                    {/*<Route exact path="/" element={</>}/>*/}
+            <Route exact path="/" element={<Home />} />
 
-                    {/* This route is for about component
+            {/* This route is for about component
           with exact path "/about", in component
           props we passes the imported component*/}
-                    <Route path="/login" element={<Login/>}/>
+            <Route path="/login" element={<LoginForm />} />
 
-                    {/* This route is for contactus component
+            {/* This route is for contactus component
           with exact path "/contactus", in
           component props we passes the imported component*/}
-                    <Route path="/contactus" element={<Login/>}/>
+            <Route path="/registration" element={<RegistrationForm />} />
 
-                    {/* If any route mismatches the upper
+            {/* If any route mismatches the upper
           route endpoints then, redirect triggers
           and redirects app to home component with to="/" */}
+          </Routes>
 
-                </Routes>
-            </Router>
-        </>
-    );
+
+        </Router>
+      </>
+  );
 }
 
 export default App;
