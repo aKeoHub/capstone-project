@@ -123,3 +123,25 @@ button:hover {
 .react-datepicker-wrapper {
   width: 100%;
 }
+
+body {
+ background-image: url("/images/background.jpg");
+ background-color: black;
+ display: absolute;
+}
+.card .card-header {
+  background-color: #575757;
+  border-color: #575757;
+  text-color: white;
+}
+.card .card-body {
+  background-color: white;
+  border-color: #E67E22;
+}
+
+.cDropdown {
+ width:200px;
+ height: 50px;
+ font-width: 10px;
+ font-weight: 200%;
+}
