@@ -1,8 +1,8 @@
 import React from 'react';
 import './Footer.css';
-import { LoginButton } from './LoginButton';
+import { LoginButton } from '../Button/LoginButton';
 import { Link } from 'react-router-dom';
-import image from '../images/WendysRVTrans.png';
+import image from '../../images/WendysRVTrans.png';
 
 function Footer() {
     return (

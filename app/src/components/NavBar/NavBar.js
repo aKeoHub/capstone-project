@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './NavBar.css';
-import './Button.css'
-import { LoginButton } from './LoginButton';
+import '../Button/Button.css'
+import { LoginButton } from '../Button/LoginButton';
 import { Link } from 'react-router-dom';
-import image from '../images/WendyRV.png';
+import image from '../../images/WendyRV.png';
 
 function NavBar() {
     const [click, setClick] = useState(false);

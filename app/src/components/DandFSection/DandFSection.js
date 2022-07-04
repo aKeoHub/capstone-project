@@ -1,7 +1,7 @@
 import React from 'react';
-import '../App.css';
-import { DocumentsButton } from './DocumentsButton';
-import { ForumButton } from './ForumButton';
+import '../../App.css';
+import { DocumentsButton } from '../Button/DocumentsButton';
+import { ForumButton } from '../Button/ForumButton';
 import './DandFSection.css';
 
 

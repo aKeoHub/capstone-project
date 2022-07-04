@@ -1,7 +1,7 @@
 import React from 'react';
-import '../App.css';
-import { LoginButton } from './LoginButton';
-import { SignUpButton } from './SignUpButton';
+import '../../App.css';
+import { LoginButton } from '../Button/LoginButton';
+import { SignUpButton } from '../Button/SignUpButton';
 import './HeroSection.css';
 
 
