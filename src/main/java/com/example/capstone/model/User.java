@@ -1,48 +1,72 @@
 package com.example.capstone.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.GenerationType.AUTO;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
-
-    private final int id;
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    private int user_id;
     @NotBlank
-    private String userName;
+    private String username;
     @NotBlank
     private String password;
-
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String email;
+    private int picture_id;
+    private Date create_date;
+    @ManyToMany(fetch = EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
 
-
-    public User(@JsonProperty("id") int id,
-                @JsonProperty("userName") String userName,
+    public User(@JsonProperty("user_id") int user_id,
+                @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
-                @JsonProperty("firstName") String firstName,
-                @JsonProperty("lastName") String lastName,
+                @JsonProperty("firstname") String firstname,
+                @JsonProperty("lastname") String lastname,
                 @JsonProperty("email") String email) {
-        this.id = id;
-        this.userName = userName;
+        this.user_id = user_id;
+        this.username = username;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
     }
 
-    public int getId() {
-        return id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -53,20 +77,20 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -77,15 +101,42 @@ public class User {
         this.email = email;
     }
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+    public int getPicture_id() {
+        return picture_id;
+    }
+
+    public void setPicture_id(int picture_id) {
+        this.picture_id = picture_id;
+    }
+
+    public Date getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
+                "user_id=" + user_id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
+                ", picture_id=" + picture_id +
+                ", create_date=" + create_date +
+                ", roles=" + roles +
                 '}';
     }
 }

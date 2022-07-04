@@ -25,7 +25,7 @@ public class UserDataAccessService implements UserDao {
 
     @Override
     public int insertUser(User user) {
-        String sql = "INSERT INTO users (userName, password, firstName, lastName, email) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (userName, password, firstName, lastName, email) VALUES (?, ?, ?, ?, ?)";
 
         int result = jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail());
         if (result > 0) {
@@ -37,7 +37,7 @@ public class UserDataAccessService implements UserDao {
 
     @Override
     public List<User> selectAllUsers() {
-        String sql = "SELECT * FROM capstone.users";
+        String sql = "SELECT * FROM capstonedb.user";
         return jdbcTemplate.query(sql, new UserMapper());
     }
 
