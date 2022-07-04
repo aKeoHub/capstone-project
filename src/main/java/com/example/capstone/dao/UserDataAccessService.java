@@ -25,9 +25,18 @@ public class UserDataAccessService implements UserDao {
 
     @Override
     public int insertUser(User user) {
-        String sql = "INSERT INTO user (userName, password, firstName, lastName, email) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO capstonedb.user (" +
+                "user_id, " +
+                "userName, " +
+                "firstname, " +
+                "lastname, " +
+                "password, " +
+                "email, " +
+                "picture_id, " +
+                "create_date) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        int result = jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail());
+        int result = jdbcTemplate.update(sql, user.getUser_id(), user.getUsername(), user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), user.getPicture_id(), user.getCreate_date());
         if (result > 0) {
             System.out.println("A new row has been inserted.");
             return 1;
@@ -60,15 +69,15 @@ public class UserDataAccessService implements UserDao {
     private static final class UserMapper implements RowMapper<User> {
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-            int id = (rs.getInt("id"));
-            String userName = (rs.getString("userName"));
+            int user_id = (rs.getInt("user_id"));
+            String username = (rs.getString("username"));
             String password = (rs.getString("password"));
-            String firstName = (rs.getString("firstName"));
-            String lastName = (rs.getString("lastName"));
+            String firstname = (rs.getString("firstname"));
+            String lastname = (rs.getString("lastname"));
             String email = (rs.getString("email"));
 
 
-            return new User(id, userName, password, firstName, lastName, email);
+            return new User(user_id, username, password, firstname, lastname, email);
         }
     }
 }
