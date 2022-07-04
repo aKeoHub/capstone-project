@@ -44,13 +44,17 @@ public class User {
                 @JsonProperty("password") String password,
                 @JsonProperty("firstname") String firstname,
                 @JsonProperty("lastname") String lastname,
-                @JsonProperty("email") String email) {
+                @JsonProperty("email") String email,
+                @JsonProperty("picture_id") int picture_id,
+                @JsonProperty("create_date") Date create_date) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.picture_id = picture_id;
+        this.create_date = create_date;
     }
 
     public int getUser_id() {

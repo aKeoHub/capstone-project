@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,9 +76,11 @@ public class UserDataAccessService implements UserDao {
             String firstname = (rs.getString("firstname"));
             String lastname = (rs.getString("lastname"));
             String email = (rs.getString("email"));
+            int picture_id = (rs.getInt("picture_id"));
+            Date create_date = (rs.getDate("create_date"));
 
 
-            return new User(user_id, username, password, firstname, lastname, email);
+            return new User(user_id, username, password, firstname, lastname, email, picture_id, create_date);
         }
     }
 }
