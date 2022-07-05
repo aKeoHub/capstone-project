@@ -1,11 +1,9 @@
 package com.example.capstone.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
 
-import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(schema = "capstonedb" , name = "picture")

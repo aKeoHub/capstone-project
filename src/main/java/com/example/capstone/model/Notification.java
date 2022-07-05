@@ -1,6 +1,5 @@
 package com.example.capstone.model;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 

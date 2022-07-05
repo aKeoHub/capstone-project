@@ -1,6 +1,5 @@
-package com.example.capstone.model.audit;
+package com.example.capstone.model;
 
-import com.example.capstone.model.ParkDocument;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 

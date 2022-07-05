@@ -1,4 +1,4 @@
-package com.example.capstone.model.audit;
+package com.example.capstone.model;
 
 import org.hibernate.Hibernate;
 

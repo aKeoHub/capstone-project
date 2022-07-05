@@ -2,14 +2,12 @@ package com.example.capstone.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+
 
 import static javax.persistence.FetchType.EAGER;
 

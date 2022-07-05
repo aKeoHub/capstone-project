@@ -1,6 +1,5 @@
 package com.example.capstone.model;
 
-import com.example.capstone.model.audit.AuditLog;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
