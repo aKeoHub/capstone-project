@@ -1,43 +1,54 @@
 package com.example.capstone.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.GenerationType.AUTO;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.*;
 
 @Entity
-@Data
+@Table(schema = "capstonedb" , name = "user")
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = AUTO)
-    private int user_id;
-    @NotBlank
-    private String username;
-    @NotBlank
-    private String password;
-    private String firstname;
-    private String lastname;
-    private String email;
-    private int picture_id;
-    private Date create_date;
-    @ManyToMany(fetch = EAGER)
-    private Collection<Role> roles = new ArrayList<>();
 
+    @Id
+    @Column(name = "user_id", nullable = false)
+    private Integer id;
+
+    @Column(name = "username", nullable = false, length = 30)
+    private String username;
+
+    @Column(name = "firstname", nullable = false, length = 30)
+    private String firstname;
+
+    @Column(name = "lastname", nullable = false, length = 30)
+    private String lastname;
+
+    @Column(name = "password", nullable = false, length = 30)
+    private String password;
+
+    @Column(name = "email", nullable = false, length = 72)
+    private String email;
+
+    @Column(name = "picture_id")
+    private Integer pictureId;
+
+    @Column(name = "create_date")
+    private Date createDate;
+
+    @OneToMany(mappedBy = "eventCreater")
+    private Set<Event> events = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "owner")
+    private Set<Item> items = new LinkedHashSet<>();
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Role> roles = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "creater")
+    private Set<Forum> forums = new LinkedHashSet<>();
 
     public User(@JsonProperty("user_id") int user_id,
                 @JsonProperty("username") String username,
@@ -47,54 +58,61 @@ public class User {
                 @JsonProperty("email") String email,
                 @JsonProperty("picture_id") int picture_id,
                 @JsonProperty("create_date") Date create_date) {
-        this.user_id = user_id;
+        this.id = user_id;
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.picture_id = picture_id;
-        this.create_date = create_date;
+        this.pictureId = picture_id;
+        this.createDate = create_date;
+    }
+    public Set<Forum> getForums() {
+        return forums;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public void setForums(Set<Forum> forums) {
+        this.forums = forums;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public String getUsername() {
-        return username;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public Set<Item> getItems() {
+        return items;
     }
 
-    public String getPassword() {
-        return password;
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public Set<Event> getEvents() {
+        return events;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public String getLastname() {
-        return lastname;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public Integer getPictureId() {
+        return pictureId;
+    }
+
+    public void setPictureId(Integer pictureId) {
+        this.pictureId = pictureId;
     }
 
     public String getEmail() {
@@ -105,42 +123,43 @@ public class User {
         this.email = email;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public int getPicture_id() {
-        return picture_id;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setPicture_id(int picture_id) {
-        this.picture_id = picture_id;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "user_id=" + user_id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", email='" + email + '\'' +
-                ", picture_id=" + picture_id +
-                ", create_date=" + create_date +
-                ", roles=" + roles +
-                '}';
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

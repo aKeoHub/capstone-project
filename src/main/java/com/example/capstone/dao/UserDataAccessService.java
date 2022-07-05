@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UserDataAccessService implements UserDao {
 
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public UserDataAccessService(JdbcTemplate jdbcTemplate) {
@@ -37,7 +37,7 @@ public class UserDataAccessService implements UserDao {
                 "create_date) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        int result = jdbcTemplate.update(sql, user.getUser_id(), user.getUsername(), user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), user.getPicture_id(), user.getCreate_date());
+        int result = jdbcTemplate.update(sql, user.getId(), user.getUsername(), user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), user.getPictureId(), user.getCreateDate());
         if (result > 0) {
             System.out.println("A new row has been inserted.");
             return 1;
