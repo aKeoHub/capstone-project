@@ -1,10 +1,9 @@
-package com.example.capstone.model;
+package com.example.capstone.model.audit;
 
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.Objects;
 

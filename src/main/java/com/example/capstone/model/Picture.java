@@ -9,6 +9,9 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(schema = "capstonedb" , name = "picture")
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Picture {
 
 

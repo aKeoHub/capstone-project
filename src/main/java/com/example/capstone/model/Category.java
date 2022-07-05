@@ -14,11 +14,9 @@ import java.util.Objects;
 import static javax.persistence.FetchType.EAGER;
 
 @Entity
-@Getter
-@Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name="category")
+@Table(schema = "capstonedb" , name="category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

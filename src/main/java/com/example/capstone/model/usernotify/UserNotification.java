@@ -1,4 +1,4 @@
-package com.example.capstone.model;
+package com.example.capstone.model.usernotify;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

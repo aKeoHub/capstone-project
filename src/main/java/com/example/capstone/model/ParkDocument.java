@@ -1,5 +1,9 @@
 package com.example.capstone.model;
 
+import com.example.capstone.model.audit.AuditLog;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -7,6 +11,8 @@ import java.util.Set;
 
 @Entity
 @Table(schema = "capstonedb" , name = "park_document")
+@RequiredArgsConstructor
+@ToString
 public class ParkDocument {
 
     @Id
@@ -15,10 +21,11 @@ public class ParkDocument {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "document_category", nullable = false)
+    @ToString.Exclude
     private Category documentCategory;
 
-    @Column(name = "creater_id", nullable = false)
-    private Integer createrId;
+    @Column(name = "creator_id", nullable = false)
+    private Integer creatorId;
 
     @Column(name = "document_name", nullable = false, length = 30)
     private String documentName;
@@ -33,6 +40,7 @@ public class ParkDocument {
     private byte[] file;
 
     @OneToMany(mappedBy = "parkDocument")
+    @ToString.Exclude
     private Set<AuditLog> auditLogs = new LinkedHashSet<>();
 
     public Set<AuditLog> getAuditLogs() {
@@ -75,12 +83,12 @@ public class ParkDocument {
         this.documentName = documentName;
     }
 
-    public Integer getCreaterId() {
-        return createrId;
+    public Integer getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreaterId(Integer createrId) {
-        this.createrId = createrId;
+    public void setCreateoId(Integer createrId) {
+        this.creatorId = createrId;
     }
 
     public Category getDocumentCategory() {

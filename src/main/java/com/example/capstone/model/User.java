@@ -1,15 +1,16 @@
 package com.example.capstone.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.*;
 
 @Entity
 @Table(schema = "capstonedb" , name = "user")
-@NoArgsConstructor
+@RequiredArgsConstructor
+@ToString
 public class User {
 
 
@@ -38,16 +39,20 @@ public class User {
     @Column(name = "create_date")
     private Date createDate;
 
-    @OneToMany(mappedBy = "eventCreater")
+    @OneToMany(mappedBy = "eventCreator")
+    @ToString.Exclude
     private Set<Event> events = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "owner")
+    @ToString.Exclude
     private Set<Item> items = new LinkedHashSet<>();
 
     @ManyToMany(mappedBy = "users")
+    @ToString.Exclude
     private Set<Role> roles = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "creater")
+    @OneToMany(mappedBy = "creator")
+    @ToString.Exclude
     private Set<Forum> forums = new LinkedHashSet<>();
 
     public User(@JsonProperty("user_id") int user_id,

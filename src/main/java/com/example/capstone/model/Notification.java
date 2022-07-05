@@ -1,10 +1,18 @@
 package com.example.capstone.model;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(schema = "capstonedb" , name = "notification")
+@RequiredArgsConstructor
+@ToString
 public class Notification {
 
     @Id

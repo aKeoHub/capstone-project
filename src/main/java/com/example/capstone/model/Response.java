@@ -1,17 +1,25 @@
 package com.example.capstone.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(schema = "capstonedb" , name ="response")
+@RequiredArgsConstructor
+@ToString
 public class Response {
-
     @Id
     @Column(name = "response_id", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "forum_id", nullable = false)
+    @ToString.Exclude
     private Forum forum;
 
     @Column(name = "name", nullable = false, length = 30)

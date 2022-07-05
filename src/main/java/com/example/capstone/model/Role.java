@@ -13,7 +13,8 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(schema = "capstonedb" , name = "role")
-
+@RequiredArgsConstructor
+@ToString
 public class Role {
 
 
@@ -28,7 +29,14 @@ public class Role {
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @ToString.Exclude
     private Set<User> users = new LinkedHashSet<>();
+
+    public Role(@JsonProperty("role_id") int id,
+                @JsonProperty("role_name") String name){
+        this.id=id;
+        this.roleName=name;
+    }
 
     public Set<User> getUsers() {
         return users;
