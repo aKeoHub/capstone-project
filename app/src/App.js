@@ -1,6 +1,6 @@
 import React from "react";
 
-import RegistrationForm from "./pages/RegistrationPage";
+import RegistrationPage from "./pages/RegistrationPage";
 import {
     BrowserRouter as Router,
     Routes,
@@ -31,7 +31,7 @@ function App() {
             {/* This route is for contactus component
           with exact path "/contactus", in
           component props we passes the imported component*/}
-            <Route path="/signup" exact component={RegistrationForm} />
+            <Route path="/signup" exact component={RegistrationPage} />
 
             {/* If any route mismatches the upper
           route endpoints then, redirect triggers
