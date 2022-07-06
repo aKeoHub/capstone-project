@@ -32,7 +32,7 @@ const RegistrationForm  = () => {
 
 
     const register = () => {
-setIdReg(userId++);
+
 
         fetch("/api/v1/user", {
 
