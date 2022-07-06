@@ -14,9 +14,6 @@ const LoginForm  = () => {
     const [lastName, setLastnameReg] = useState('');
     const [email, setEmailReg] = useState('');
 
-
-    const [userList, setUserList] = useState([]);
-
     useEffect(() => {
         setLoading(true);
 

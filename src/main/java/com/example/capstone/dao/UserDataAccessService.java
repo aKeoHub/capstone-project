@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Repository("mysql")
 public class UserDataAccessService implements UserDao {
@@ -26,6 +28,11 @@ public class UserDataAccessService implements UserDao {
 
     @Override
     public int insertUser(User user) {
+        Random r = new Random();
+        int low = 0;
+        int high = 1000;
+        int randomId = r.nextInt(high-low) + low;
+
         String sql = "INSERT INTO capstonedb.user (" +
                 "user_id, " +
                 "userName, " +
