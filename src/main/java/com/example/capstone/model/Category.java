@@ -17,7 +17,7 @@ import static javax.persistence.FetchType.EAGER;
 @Table(schema = "capstonedb" , name="category")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int category_id;
     @NotBlank
     private String category_name;

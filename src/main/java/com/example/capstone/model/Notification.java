@@ -3,10 +3,7 @@ package com.example.capstone.model;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(schema = "capstonedb" , name = "notification")
@@ -16,6 +13,7 @@ public class Notification {
 
     @Id
     @Column(name = "notification_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "notification_type", nullable = false, length = 30)

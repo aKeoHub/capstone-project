@@ -16,6 +16,7 @@ public class ParkDocument {
 
     @Id
     @Column(name = "document_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

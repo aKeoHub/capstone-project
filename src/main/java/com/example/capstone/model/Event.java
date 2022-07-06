@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class Event {
     @Id
     @Column(name = "event_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

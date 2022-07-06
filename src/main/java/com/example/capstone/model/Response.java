@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class Response {
     @Id
     @Column(name = "response_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
