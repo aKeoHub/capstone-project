@@ -29,7 +29,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="d1171270-9d7b-40bb-b29a-8389923990e3">
-      <console name="capstonedb" type="STANDARD" schema="capstonedb" session="Main" />
+      <console name="capstonedb" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
