@@ -6,18 +6,16 @@ const RegistrationForm = () => {
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    let [userId, setIdReg] = useState(0);
+    const [userId, setIdReg] = useState(0);
     const [username, setUsernameReg] = useState('');
     const [password, setPasswordReg] = useState('');
     const [firstname, setFirstnameReg] = useState('');
     const [lastname, setLastnameReg] = useState('');
     const [email, setEmailReg] = useState('');
     const [picture_id, setPictureId] = useState('');
-    const [create_date, setCreateDate] = useState('');
 
 
-    const [userList, setUserList] = useState([]);
+
 
     useEffect(() => {
         setLoading(true);
@@ -36,7 +34,6 @@ const RegistrationForm = () => {
         const dd = String(today.getDate()).padStart(2, '0');
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
-
         today = yyyy + '-' + mm + '-' + dd;
 
 
@@ -67,7 +64,8 @@ const RegistrationForm = () => {
             .then(response => response.json())
 
             // Displaying results to console
-            .then(json => console.log(json));
+            .then(json => console.log(json))
+
 
         if (loading) {
             return <p>Loading...</p>;

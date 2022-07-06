@@ -6,13 +6,9 @@ const LoginForm  = () => {
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    const [id, setIdReg] = useState('');
     const [userName, setUsernameReg] = useState('');
     const [password, setPasswordReg] = useState('');
-    const [firstName, setFirstnameReg] = useState('');
-    const [lastName, setLastnameReg] = useState('');
-    const [email, setEmailReg] = useState('');
+
 
     useEffect(() => {
         setLoading(true);
@@ -26,39 +22,6 @@ const LoginForm  = () => {
     }, []);
 
 
-    const register = () => {
-
-        fetch("/api/v1/user", {
-
-            // Adding method type
-            method: "POST",
-
-            // Adding body or contents to send
-            body: JSON.stringify({
-                id: id,
-                userName: userName,
-                password: password,
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-            }),
-
-            //Adding headers to the request
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-
-            // Converting to JSON
-            .then(response => response.json())
-
-            // Displaying results to console
-            .then(json => console.log(json));
-
-        if (loading) {
-            return <p>Loading...</p>;
-        }
-    }
     return (
 
 
@@ -89,7 +52,7 @@ const LoginForm  = () => {
                             <span className="checkmark"></span>
                         </label>
                     </div>
-                    <button onClick={register}>Login</button>
+                    <button>Login</button>
                 </form>
             </div>
         </div>
