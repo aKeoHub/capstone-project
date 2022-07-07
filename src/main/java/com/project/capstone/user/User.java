@@ -1,15 +1,17 @@
 package com.project.capstone.user;
-/*
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
 import com.project.capstone.item.Item;
 import com.project.capstone.role.Role;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(schema = "capstonedb" , name = "user")
@@ -172,6 +174,3 @@ public class User {
         this.id = id;
     }
 }
-
-
- */

@@ -1,42 +1,17 @@
 package com.project.capstone.user;
-/*
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    private final UserDao userDao;
+    Optional<User> getUser(Integer id);
 
-    @Autowired
-    public UserService(@Qualifier("mysql") UserDao userDao) {
-        this.userDao = userDao;
-    }
+    User saveUser(User user);
 
-    public int addUser(User user) {
-        return userDao.insertUser(user);
-    }
+    List<User> fetchUserList();
 
-    public List<User> getAllUsers() {
-        return userDao.selectAllUsers();
-    }
+    User updateUser(User user, Integer userId) throws UserNotFoundException;
 
-    public Optional<User> getUserById(int id) {
-        return userDao.selectUserById(id);
-    }
-
-    public int deleteUser(int id) {
-        return userDao.deleteUserById(id);
-    }
-
-    public int updateUser(int id, User newUser) {
-        return userDao.updateUserById(id, newUser);
-    }
-
-
+    void deleteUserById(Integer userId);
 }
-*/

@@ -1,9 +1,9 @@
-package com.project.capstone.users;
+package com.project.capstone.user;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsersRepository extends CrudRepository<Users, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 
 }

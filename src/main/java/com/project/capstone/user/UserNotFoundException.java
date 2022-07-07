@@ -1,4 +1,4 @@
-package com.project.capstone.users;
+package com.project.capstone.user;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
