@@ -15,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("api/v1/user")
-    public User createUsers(@Valid @RequestBody User user) {
+    public User createUsers(@Valid @RequestBody User user) throws UserNotFoundException {
         return userService.saveUser(user);
     }
 
@@ -47,3 +47,6 @@ public class UserController {
         return "Deleted Successfully";
     }
 }
+
+
+

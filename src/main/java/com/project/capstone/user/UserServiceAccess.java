@@ -19,7 +19,11 @@ public class UserServiceAccess implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user) throws UserNotFoundException {
+        Boolean existsEmail = userRepository.selectExistsEmail(user.getEmail());
+        if (existsEmail) {
+            throw new UserNotFoundException("Email " + user.getEmail() + " is already used." );
+        }
         return userRepository.save(user);
     }
 
@@ -53,3 +57,7 @@ public class UserServiceAccess implements UserService {
         userRepository.deleteById(usersId);
     }
 }
+
+
+
+

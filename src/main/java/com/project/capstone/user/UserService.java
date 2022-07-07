@@ -7,7 +7,7 @@ public interface UserService {
 
     Optional<User> getUser(Integer id);
 
-    User saveUser(User user);
+    User saveUser(User user) throws UserNotFoundException;
 
     List<User> fetchUserList();
 
@@ -15,3 +15,7 @@ public interface UserService {
 
     void deleteUserById(Integer userId);
 }
+
+
+
+
