@@ -4,13 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceAccess implements CategoryService{
-
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Override
+    public Optional<Category> getCategory(Integer id){
+        return categoryRepository.findById(id);
+    }
 
     @Override
     public Category saveCategory(Category category){
@@ -23,19 +27,21 @@ public class CategoryServiceAccess implements CategoryService{
     }
 
     @Override
-    public Category updateCategory (Category category, Integer categoryId) {
-        Category categoryDB = categoryRepository.findById(categoryId).get();
+    public Category updateCategory (Category category, Integer categoryId) throws CategoryNotFoundException{
 
-        if (Objects.nonNull(category.getCategory_id()) && !"".equalsIgnoreCase(String.valueOf(category.getCategory_id()))){
-            categoryDB.setCategory_id(category.getCategory_id());
+        Optional<Category> currentCategoryOptional = getCategory(categoryId);
+
+        if (currentCategoryOptional.isPresent()) {
+            Category currentCategory = currentCategoryOptional.get();
+            currentCategory.setCategory_id(category.getCategory_id());
+            currentCategory.setCategory_name(category.getCategory_name());
+            currentCategory.setCategory_type(category.getCategory_type());
+
+            return currentCategory;
+
+        } else {
+            throw new CategoryNotFoundException(categoryId);
         }
-        if ((Objects.nonNull(category.getCategory_name()) && (!"".equalsIgnoreCase(category.getCategory_name())))){
-            categoryDB.setCategory_name(category.getCategory_name());
-        }
-        if ((Objects.nonNull(category.getCategory_type()) && (!"".equalsIgnoreCase(category.getCategory_type())))){
-            categoryDB.setCategory_type(category.getCategory_type());
-        }
-        return categoryRepository.save(categoryDB);
     }
 
     @Override

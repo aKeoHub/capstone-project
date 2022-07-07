@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CategoryController {
@@ -13,8 +14,18 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/category")
-    public Category saveCategory(@Valid @RequestBody Category category){
+    public Category createCategory(@Valid @RequestBody Category category){
         return categoryService.saveCategory(category);
+    }
+
+    @GetMapping("category/{id}")
+    public Category getCategory(@PathVariable("id") Integer id) throws CategoryNotFoundException {
+        Optional<Category> category = categoryService.getCategory(id);
+        if (category.isPresent()){
+            return category.get();
+        } else {
+            throw new CategoryNotFoundException(id);
+        }
     }
 
     @GetMapping
@@ -23,7 +34,7 @@ public class CategoryController {
     }
 
     @PutMapping
-    public Category updateCategory(@RequestBody Category category , @PathVariable("id") Integer categoryId){
+    public Category updateCategory(@RequestBody Category category , @PathVariable("id") Integer categoryId) throws CategoryNotFoundException {
 
         return categoryService.updateCategory(category, categoryId);
     }

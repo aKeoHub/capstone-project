@@ -25,7 +25,7 @@ public class Category {
     @NotBlank
     private String category_type;
 
-    public Category(@JsonProperty("category_id") int category_id,
+    public Category(@JsonProperty("category_id") Integer category_id,
                     @JsonProperty("category_name") String category_name,
                     @JsonProperty("category_type") String category_type) {
         this.category_id = category_id;
