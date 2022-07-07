@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-/*
-@Controller
+
+@RestController
 public class CategoryController {
 
     @Autowired
@@ -28,13 +28,14 @@ public class CategoryController {
             throw new CategoryNotFoundException(id);
         }
     }
-
-    @GetMapping
+    // This needs to be mapped appropriately. Temp map for passing Auto-Map
+    @GetMapping("/get")
     public List<Category> fetchCategoryList() {
         return categoryService.fetchCategoryList();
     }
 
-    @PutMapping
+    //// This needs to be mapped appropriately. Temp map for passing Auto-Map
+    @PutMapping("/put")
     public Category updateCategory(@RequestBody Category category , @PathVariable("id") Integer categoryId) throws CategoryNotFoundException {
 
         return categoryService.updateCategory(category, categoryId);
@@ -49,4 +50,3 @@ public class CategoryController {
 }
 
 
- */

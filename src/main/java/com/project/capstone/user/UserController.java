@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
