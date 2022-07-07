@@ -1,5 +1,5 @@
 package com.project.capstone.user;
-
+/*
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
 import com.project.capstone.item.Item;
@@ -172,3 +172,6 @@ public class User {
         this.id = id;
     }
 }
+
+
+ */
