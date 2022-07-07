@@ -40,8 +40,5 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @PutMapping(path = "{id}")
-    public void updateUser(@PathVariable("id") int id, @Valid @NonNull @RequestBody User userToUpdate) {
-        userService.updateUser(id, userToUpdate);
-    }
+
 }
