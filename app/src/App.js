@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import NavBar from "./components/NavBar/NavBar";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-import EventPage from "./pages/EventPage";
+import EventPage from "./pages/EventPage/EventPage";
 
 
 function App() {
