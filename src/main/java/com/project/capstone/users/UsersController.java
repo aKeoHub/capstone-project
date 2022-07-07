@@ -33,6 +33,13 @@ public class UsersController {
         return usersService.fetchUserList();
     }
 
+    @PutMapping
+    public Users updateUsers(@RequestBody Users users, @PathVariable("id") Integer usersId) throws UserNotFoundException {
+
+        return usersService.updateUser(users, usersId);
+    }
+
+
     @DeleteMapping("api/v1/user/{id}")
     public String deleteUsersById(@PathVariable("id") Integer userId){
         usersService.deleteUserById(userId);
