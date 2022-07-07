@@ -17,7 +17,6 @@ import java.util.*;
 @ToString
 public class User {
 
-
     @Id
     @Column(name = "user_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,13 +59,13 @@ public class User {
     @ToString.Exclude
     private Set<Forum> forums = new LinkedHashSet<>();
 
-    public User(@JsonProperty("user_id") int user_id,
+    public User(@JsonProperty("user_id") Integer user_id,
                 @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
                 @JsonProperty("firstname") String firstname,
                 @JsonProperty("lastname") String lastname,
                 @JsonProperty("email") String email,
-                @JsonProperty("picture_id") int picture_id,
+                @JsonProperty("picture_id") Integer picture_id,
                 @JsonProperty("create_date") Date create_date) {
         this.id = user_id;
         this.username = username;

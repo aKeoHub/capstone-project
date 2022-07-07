@@ -19,7 +19,7 @@ import static javax.persistence.FetchType.EAGER;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int category_id;
+    private Integer category_id;
     @NotBlank
     private String category_name;
     @NotBlank
@@ -38,11 +38,11 @@ public class Category {
     @ManyToMany(fetch = EAGER)
     private Collection<Event> events = new ArrayList<>();
 
-    public int getCategory_id() {
+    public Integer getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(int category_id) {
+    public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
     }
 
