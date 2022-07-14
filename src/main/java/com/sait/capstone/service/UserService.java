@@ -1,11 +1,8 @@
-package com.example.capstone.service;
+package com.sait.capstone.service;
 
-import com.example.capstone.dao.UserDao;
-import com.example.capstone.dao.UserRepository;
-import com.example.capstone.exceptions.BadRequestException;
-import com.example.capstone.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.sait.capstone.dao.UserRepository;
+import com.sait.capstone.exceptions.BadRequestException;
+import com.sait.capstone.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

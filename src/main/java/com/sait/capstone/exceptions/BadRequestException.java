@@ -1,4 +1,4 @@
-package com.example.capstone.exceptions;
+package com.sait.capstone.exceptions;
 
 public class BadRequestException extends Exception {
     public BadRequestException(String errorMessage) {

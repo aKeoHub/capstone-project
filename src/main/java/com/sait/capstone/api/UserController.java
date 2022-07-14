@@ -1,8 +1,8 @@
-package com.example.capstone.api;
+package com.sait.capstone.api;
 
-import com.example.capstone.exceptions.BadRequestException;
-import com.example.capstone.model.User;
-import com.example.capstone.service.UserService;
+import com.sait.capstone.exceptions.BadRequestException;
+import com.sait.capstone.model.User;
+import com.sait.capstone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;

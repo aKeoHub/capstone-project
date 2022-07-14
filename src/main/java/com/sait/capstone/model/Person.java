@@ -1,4 +1,4 @@
-package com.example.capstone.model;
+package com.sait.capstone.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

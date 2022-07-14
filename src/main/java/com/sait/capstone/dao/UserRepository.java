@@ -1,6 +1,6 @@
-package com.example.capstone.dao;
+package com.sait.capstone.dao;
 
-import com.example.capstone.model.User;
+import com.sait.capstone.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

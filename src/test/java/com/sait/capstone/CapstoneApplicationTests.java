@@ -1,10 +1,10 @@
-package com.example.capstone;
+package com.sait.capstone;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class CapstoneApplicationTests {
 
 	@Test
 	void contextLoads() {
