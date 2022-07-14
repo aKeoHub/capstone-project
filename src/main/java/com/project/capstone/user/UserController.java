@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("api/v1/user")
-    public User createUsers(@Valid @RequestBody User user) throws UserNotFoundException {
+    public User createUsers(@Valid @NotNull @RequestBody User user) throws UserNotFoundException {
         return userService.saveUser(user);
     }
 
@@ -29,12 +30,12 @@ public class UserController {
         }
     }
 
-    @GetMapping
+    @GetMapping("api/v1/user/all")
     public List<User> fetchUsersList() {
         return userService.fetchUserList();
     }
 
-    @PutMapping
+    @PutMapping("api/v1/user/{id}")
     public User updateUsers(@RequestBody User user, @PathVariable("id") Integer usersId) throws UserNotFoundException {
 
         return userService.updateUser(user, usersId);

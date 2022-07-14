@@ -32,7 +32,11 @@ const RegistrationForm  = () => {
 
 
     const register = () => {
-setIdReg(userId++);
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
 
         fetch("/api/v1/user", {
 
@@ -48,7 +52,7 @@ setIdReg(userId++);
                 lastname: lastname,
                 email: email,
                 picture_id: picture_id,
-                create_date: create_date,
+                create_date: today.toString(),
             }),
 
             //Adding headers to the request

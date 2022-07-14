@@ -33,7 +33,7 @@ public class UserServiceAccess implements UserService {
     public User updateUser(User user, Integer userId) throws UserNotFoundException {
         Optional<User> currentUsersOptional = getUser(userId);
 
-        if (currentUsersOptional.isPresent()) && (currentUsersOptional.equals()){
+        if (currentUsersOptional.isPresent()){
             User currentUser = currentUsersOptional.get();
             currentUser.setId(user.getId());
             currentUser.setUsername(user.getUsername());
