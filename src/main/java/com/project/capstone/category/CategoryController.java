@@ -14,12 +14,12 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/category")
-    public Category createCategory(@Valid @RequestBody Category category){
+    @PostMapping("api/v1/category")
+    public Category createCategory(@Valid @RequestBody Category category) throws CategoryNotFoundException{
         return categoryService.saveCategory(category);
     }
 
-    @GetMapping("category/{id}")
+    @GetMapping("api/v1/category/{id}")
     public Category getCategory(@PathVariable("id") Integer id) throws CategoryNotFoundException {
         Optional<Category> category = categoryService.getCategory(id);
         if (category.isPresent()){
@@ -28,20 +28,19 @@ public class CategoryController {
             throw new CategoryNotFoundException(id);
         }
     }
-    // This needs to be mapped appropriately. Temp map for passing Auto-Map
-    @GetMapping("/get")
+
+    @GetMapping("api/v1/category/all")
     public List<Category> fetchCategoryList() {
         return categoryService.fetchCategoryList();
     }
 
-    //// This needs to be mapped appropriately. Temp map for passing Auto-Map
-    @PutMapping("/put")
+    @PutMapping("api/v1/category/{id}")
     public Category updateCategory(@RequestBody Category category , @PathVariable("id") Integer categoryId) throws CategoryNotFoundException {
 
         return categoryService.updateCategory(category, categoryId);
     }
 
-    @DeleteMapping("category/{id}")
+    @DeleteMapping("api/v1/category/{id}")
     public String deleteCategoryById(@PathVariable("id") Integer categoryId){
         categoryService.deleteCategoryById(categoryId);
 

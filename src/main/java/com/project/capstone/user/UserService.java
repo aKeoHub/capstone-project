@@ -7,7 +7,7 @@ public interface UserService {
 
     Optional<User> getUser(Integer id);
 
-    User saveUser(User user) throws UserNotFoundException;
+    User saveUser(User user);
 
     List<User> fetchUserList();
 

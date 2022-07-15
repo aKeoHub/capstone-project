@@ -19,7 +19,7 @@ public class UserServiceAccess implements UserService {
     }
 
     @Override
-    public User saveUser(User user) throws UserNotFoundException {
+    public User saveUser(User user)  {
         Boolean existsEmail = userRepository.selectExistsEmail(user.getEmail());
 
         if (existsEmail) {
@@ -48,8 +48,6 @@ public class UserServiceAccess implements UserService {
             currentUser.setLastname(user.getLastname());
             currentUser.setEmail(user.getEmail());
             currentUser.setPictureId(user.getPictureId());
-            currentUser.setCreateDate(user.getCreateDate());
-
             return currentUser;
         } else {
             throw new UserNotFoundException(userId);

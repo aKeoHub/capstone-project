@@ -139,11 +139,4 @@ public class Event {
         this.id = id;
     }
 
-    public User getEventCreater() {
-        return eventCreator;
-    }
-
-    public void setEventCreater(User eventCreater) {
-        this.eventCreator = eventCreater;
-    }
 }

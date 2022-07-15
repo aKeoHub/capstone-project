@@ -16,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("api/v1/user")
-    public User createUsers(@Valid @NotNull @RequestBody User user) throws UserNotFoundException {
+    public User createUsers(@Valid @NotNull @RequestBody User user) {
         return userService.saveUser(user);
     }
 
