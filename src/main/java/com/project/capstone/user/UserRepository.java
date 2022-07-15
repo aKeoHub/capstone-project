@@ -9,6 +9,14 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     //Springboot Magic!
     //CRUDRepository and all its methods are Inherited, no boilerplate code needed!
 
+    @Query("" +
+            "SELECT CASE WHEN COUNT(u) > 0 THEN " +
+            "TRUE ELSE FALSE END " +
+            "FROM User u " +
+            "WHERE u.email = ?1"
+    )
+    Boolean selectExistsEmail(String email);
+
 }
 
 

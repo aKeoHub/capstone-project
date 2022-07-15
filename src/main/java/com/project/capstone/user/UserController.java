@@ -21,12 +21,12 @@ public class UserController {
     }
 
     @GetMapping("api/v1/user/{id}")
-    public User getUser(@PathVariable("id") Integer id) throws UserNotFoundException {
-        Optional<User> user = userService.getUser(id);
+    public User getUser(@PathVariable("id") Integer userId) throws UserNotFoundException {
+        Optional<User> user = userService.getUser(userId);
         if (user.isPresent()) {
             return user.get();
         } else {
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(userId);
         }
     }
 

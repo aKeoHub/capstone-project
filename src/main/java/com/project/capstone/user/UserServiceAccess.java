@@ -20,8 +20,14 @@ public class UserServiceAccess implements UserService {
 
     @Override
     public User saveUser(User user) throws UserNotFoundException {
+        Boolean existsEmail = userRepository.selectExistsEmail(user.getEmail());
 
-        return userRepository.save(user);
+        if (existsEmail) {
+            throw new RuntimeException("This email already exists. Please try a different email");
+        } else {
+
+            return userRepository.save(user);
+        }
     }
 
     @Override
