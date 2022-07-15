@@ -1,26 +1,58 @@
 import React, {useEffect, useState} from "react";
 import './login.css';
 
-const LoginForm  = () => {
+const LoginForm = () => {
 
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [userName, setUsernameReg] = useState('');
+    const [username, setUsernameReg] = useState('');
     const [password, setPasswordReg] = useState('');
 
 
-    useEffect(() => {
-        setLoading(true);
+    // useEffect(() => {
+    //     setLoading(true);
+    //
+    //     fetch('api/users')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setUsers(data);
+    //             setLoading(false);
+    //         })
+    // }, []);
 
-        fetch('api/v1/user')
+
+    function sendLoginRequest() {
+
+
+        fetch("/login", {
+
+            // Adding method type
+            method: "POST",
+
+            // Adding body or contents to send
+            body: JSON.stringify({
+                username: 'hello',
+                password: password,
+            }),
+
+            //Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+
+            // Converting to JSON
             .then(response => response.json())
-            .then(data => {
-                setUsers(data);
-                setLoading(false);
-            })
-    }, []);
 
+            // Displaying results to console
+            .then(json => console.log(json))
+
+
+        if (loading) {
+            return <p>Loading...</p>;
+        }
+    }
 
     return (
 
@@ -52,7 +84,7 @@ const LoginForm  = () => {
                             <span className="checkmark"></span>
                         </label>
                     </div>
-                    <button>Login</button>
+                    <button onClick={() => sendLoginRequest()}>Login</button>
                 </form>
             </div>
         </div>

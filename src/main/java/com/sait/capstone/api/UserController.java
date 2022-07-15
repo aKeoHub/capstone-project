@@ -31,8 +31,9 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping("/api")
-@Controller
+@RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:8080")
 public class UserController {
     private final UserService userService;
 
