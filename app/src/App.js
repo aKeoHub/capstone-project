@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 import NavBar from "./components/NavBar/NavBar";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-import app from "express/lib/router";
+import Login from "./pages/LoginPage/components/login.component";
 
 function App() {
 

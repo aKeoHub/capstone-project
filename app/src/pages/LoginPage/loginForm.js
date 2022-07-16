@@ -22,10 +22,10 @@ const LoginForm = () => {
     // }, []);
 
 
-    function sendLoginRequest() {
+    const sendLoginRequest = () => {
+console.log(username);
 
-
-        fetch("/login", {
+        fetch("api/login", {
 
             // Adding method type
             method: "POST",
@@ -33,7 +33,7 @@ const LoginForm = () => {
             // Adding body or contents to send
             body: JSON.stringify({
                 username: 'hello',
-                password: password,
+                password: 'password',
             }),
 
             //Adding headers to the request
@@ -43,7 +43,12 @@ const LoginForm = () => {
         })
 
             // Converting to JSON
-            .then(response => response.json())
+            .then(response => {
+                if (response.status === 200)
+                    return Promise.all([response.json(), response.headers]);
+                else
+                    return Promise.reject("Invalid login attempt");
+            })
 
             // Displaying results to console
             .then(json => console.log(json))
@@ -53,6 +58,7 @@ const LoginForm = () => {
             return <p>Loading...</p>;
         }
     }
+
 
     return (
 

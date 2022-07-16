@@ -17,16 +17,16 @@ const RegistrationForm = () => {
 
 
 
-    useEffect(() => {
-        setLoading(true);
-
-        fetch('api/v1/user')
-            .then(response => response.json())
-            .then(data => {
-                setUsers(data);
-                setLoading(false);
-            })
-    }, []);
+    // useEffect(() => {
+    //     setLoading(true);
+    //
+    //     fetch('api/users')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setUsers(data);
+    //             setLoading(false);
+    //         })
+    // }, []);
 
 
     const register = () => {
@@ -37,7 +37,7 @@ const RegistrationForm = () => {
         today = yyyy + '-' + mm + '-' + dd;
 
 
-        fetch("/api/v1/user", {
+        fetch("api/user/save", {
 
             // Adding method type
             method: "POST",

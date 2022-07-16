@@ -35,14 +35,16 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
+
         //http.authorizeRequests().anyRequest().permitAll();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/login/**", "/api/token/refresh/**", "/signup/**").permitAll();
+        http.authorizeRequests().antMatchers("/login/**", "/api/token/refresh/**", "/api/user/save/**").permitAll();
         http.authorizeRequests().antMatchers("/login/**", "/api/token/refresh/**").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
-        http.formLogin();
+        //http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
+        //http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
+        http.formLogin()
+                        .defaultSuccessUrl("http://localhost:3000");
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
