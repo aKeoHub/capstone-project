@@ -1,11 +1,11 @@
-import React, {useState, Component} from "react";
+import React, {useState} from "react";
 import Calendar from "react-calendar";
 import "./Event.css";
-import DatePicker from "react-date-picker";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function EventCalendar() {
 
-    const [value, onChange] = useState(new Date());
+//    const [value, onChange] = useState(new Date());
     const [date, setDate] = useState(new Date());
 //    const [users, setUsers] = useState([]);
 //    const [loading, setLoading] = useState(false);
@@ -61,12 +61,22 @@ return (
     <div class="title-block">
         <h1> Whats Going On? </h1>
     </div>
-    <div class="row">
         <div>
             <div class="calendarContainer">
-                <div class="calendarDiv">
-                    <h3>{calendarText}</h3>
-                    
+                <div class="calendarHeaderDiv">
+                    <div class="row">
+                        <div class="col-3">
+                        <select class="form-select" onChange={onCategoryChange} >
+                        <option value="" label="Categories">Categories</option>
+                        <option value="concerts" label="Concerts">Concerts</option>
+                        <option value="gatherings" label="Gatherings">Gathering</option>
+                        <option value="others" label="Other">Others</option>
+                        </select>
+                        </div>
+                        <div class="col-4">
+                        <h3>{calendarText}</h3>
+                        </div>
+                    </div>
                 </div>
                 <Calendar
                   onChange={onDateChange}
@@ -77,7 +87,6 @@ return (
                 />
             </div>
         </div>
-    </div>
 </div>
 
    );

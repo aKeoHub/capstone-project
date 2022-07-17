@@ -48,7 +48,6 @@ button {
 
 .react-calendar {
   width: 950px;
-  margin:auto;
   max-width: 100%;
   background: white;
   border: 1px solid #a0a096;
@@ -56,8 +55,8 @@ button {
   line-height: 1.125em;
 }
 
-.calendarDiv{
- color:white;
+.calendarHeaderDiv{
+ color:black;
 }
 
 .react-calendar__tile react-calendar__month-view__days__day {
@@ -67,3 +66,4 @@ button {
 .title-block {
     padding:10px;
 }
+
