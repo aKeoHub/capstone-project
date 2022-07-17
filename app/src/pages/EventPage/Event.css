@@ -13,13 +13,14 @@ body {
 
 h1{
     color: white;
+    font-size: 80px;
 }
 
 .calendarContainer {
       width: 80%;
       margin: auto;
       margin-top: 20px;
-      background-color: #d4f7d4;
+
       padding: 10px;
       border-radius: 3px;
 }
@@ -46,11 +47,23 @@ button {
 }
 
 .react-calendar {
-  width: 850px;
+  width: 950px;
   margin:auto;
   max-width: 100%;
   background: white;
   border: 1px solid #a0a096;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
+}
+
+.calendarDiv{
+ color:white;
+}
+
+.react-calendar__tile react-calendar__month-view__days__day {
+ color:red;
+}
+
+.title-block {
+    padding:10px;
 }
