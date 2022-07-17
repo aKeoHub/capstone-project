@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Calendar from "react-calendar";
 import "./Event.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 function EventCalendar() {
 
@@ -59,25 +59,25 @@ return (
 
 <div class="eventContainer">
     <div class="title-block">
-        <h1> Whats Going On? </h1>
+        <h1 class="white-text"> Whats Going On? </h1>
     </div>
-        <div>
-            <div class="calendarContainer">
-                <div class="calendarHeaderDiv">
-                    <div class="row">
-                        <div class="col-3">
-                        <select class="form-select" onChange={onCategoryChange} >
-                        <option value="" label="Categories">Categories</option>
-                        <option value="concerts" label="Concerts">Concerts</option>
-                        <option value="gatherings" label="Gatherings">Gathering</option>
-                        <option value="others" label="Other">Others</option>
-                        </select>
-                        </div>
-                        <div class="col-4">
-                        <h3>{calendarText}</h3>
-                        </div>
+    <div>
+        <div class="calendarContainer">
+            <div class="calendarHeaderDiv">
+                <div class="row">
+                    <div class="col-3">
+                    <select class="form-select" onChange={onCategoryChange} >
+                    <option value="" label="Categories">Categories</option>
+                    <option value="concerts" label="Concerts">Concerts</option>
+                    <option value="gatherings" label="Gatherings">Gathering</option>
+                    <option value="others" label="Other">Others</option>
+                    </select>
+                    </div>
+                    <div class="col">
+                    <h3 class="white-text">{calendarText}</h3>
                     </div>
                 </div>
+            </div>
                 <Calendar
                   onChange={onDateChange}
                   value={date}
@@ -85,8 +85,8 @@ return (
                   showNeighboringMonth={true}
                   locale={"en-US"}
                 />
-            </div>
         </div>
+    </div>
 </div>
 
    );

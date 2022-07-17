@@ -11,18 +11,20 @@ body {
   color: black;
 }
 
-h1{
-    color: white;
-    font-size: 80px;
+.white-text{
+    color:white;
 }
 
 .calendarContainer {
       width: 80%;
       margin: auto;
       margin-top: 20px;
-
       padding: 10px;
       border-radius: 3px;
+}
+
+.eventContainer {
+    background-color: #282c34;
 }
 
 .react-calendar__navigation__label {
@@ -53,10 +55,12 @@ button {
   border: 1px solid #a0a096;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
+  margin:auto;
 }
 
 .calendarHeaderDiv{
  color:black;
+ margin: auto;
 }
 
 .react-calendar__tile react-calendar__month-view__days__day {
