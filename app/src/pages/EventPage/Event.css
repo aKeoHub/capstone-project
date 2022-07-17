@@ -16,7 +16,41 @@ h1{
 }
 
 .calendarContainer {
-    margin: auto;
-    padding: 5%;
+      width: 80%;
+      margin: auto;
+      margin-top: 20px;
+      background-color: #d4f7d4;
+      padding: 10px;
+      border-radius: 3px;
+}
 
+.react-calendar__navigation__label {
+      font-weight: bold;
+      font-size:15px;
+      color:grey;
+}
+
+.react-calendar__navigation__arrow {
+  flex-grow: 1.333;
+  color: black;
+  font-weight:bolder;
+}
+
+button {
+    margin: 3px;
+    background-color: #6f876f;
+    border: 0;
+    border-radius: 3px;
+    color: grey;
+    padding: 5px 0;
+}
+
+.react-calendar {
+  width: 850px;
+  margin:auto;
+  max-width: 100%;
+  background: white;
+  border: 1px solid #a0a096;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
 }

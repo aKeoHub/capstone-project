@@ -62,20 +62,20 @@ return (
         <h1> Whats Going On? </h1>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div>
             <div class="calendarContainer">
-                     <Calendar
-                    onChange={onDateChange}
+                    <Calendar
+                      onChange={onDateChange}
         //            value={date}
-        //              tileClassName={({ activeStartDate, date, view }) => this.setClass(date)}
+        //            tileClassName={({ activeStartDate, date, view }) => this.setClass(date)}
                       showNeighboringMonth={false}
                       locale={"en-US"}
                       class="calendarDiv"
                     />
+                     <div>
+                        <h3 class="calendarDiv">{calendarText}</h3>
+                     </div>
             </div>
-        </div>
-        <div class="col-8">
-            <h5 class="calendarDiv">{calendarText}</h5>
         </div>
     </div>
 </div>
