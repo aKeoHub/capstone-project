@@ -1,13 +1,15 @@
-import React from 'react';
+/*import React from 'react';*/
 
-//import Calendar from "react-calendar";
-//import Calendar from '../components/Calendar/Calendar';
+import Calendar from "react-calendar";
+import DatePicker from "react-date-picker";
+import './Event.css';
+import EventCalendar from './EventCalendar';
 
 const EventPage = () => {
 
     return (
         <>
-            <h1>Test</h1>
+        <EventCalendar />
         </>
     );
 }

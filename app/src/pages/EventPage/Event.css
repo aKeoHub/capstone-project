@@ -1,0 +1,22 @@
+.eventsDiv{
+    height: 483.88px;
+}
+
+.calendarDiv{
+    margin: auto;
+    padding:5%;
+}
+
+body {
+  color: black;
+}
+
+h1{
+    color: white;
+}
+
+.calendarContainer {
+    margin: auto;
+    padding: 5%;
+
+}
