@@ -23,7 +23,7 @@ public class EventServiceAccess implements EventService{
     @Autowired
     private EventRepository eventRepository;
 
-
+    private static final Comparator<Event> EMPTY_COMPARATOR = (e1, e2) -> 0;
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
     @Override
@@ -114,6 +114,7 @@ public class EventServiceAccess implements EventService{
 
     private Page<Event> getPage(List<Event> employees, PagingRequest pagingRequest) {
         List<Event> filtered = employees.stream()
+                .sorted(sortEvents(pagingRequest))
                 .filter(filterEvents(pagingRequest))
                 .skip(pagingRequest.getStart())
                 .limit(pagingRequest.getLength())
@@ -157,6 +158,32 @@ public class EventServiceAccess implements EventService{
                 .equals(value);
     }
 
+    private Comparator<Event> sortEvents(PagingRequest pagingRequest) {
+        if (pagingRequest.getOrder() == null) {
+            return EMPTY_COMPARATOR;
+        }
+
+        try {
+            Order order = pagingRequest.getOrder()
+                    .get(0);
+
+            int columnIndex = order.getColumn();
+            Column column = pagingRequest.getColumns()
+                    .get(columnIndex);
+
+            Comparator<Event> comparator = EventComparator.getComparator(column.getData(), order.getDir());
+            if (comparator == null) {
+                return EMPTY_COMPARATOR;
+            }
+
+            return comparator;
+
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return EMPTY_COMPARATOR;
+    }
 
 
 }

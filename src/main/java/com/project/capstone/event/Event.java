@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Entity
 @Table(schema = "capstonedb" , name = "event")
 @RequiredArgsConstructor
-@NoArgsConstructor
 @ToString
 public class Event {
     @Id
