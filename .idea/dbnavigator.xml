@@ -32,7 +32,7 @@
       <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
     <connection id="c9791dbb-6b07-4bf3-ae6f-2b1a81c3b728">
-      <console name="capstonedb" type="STANDARD" schema="" session="Main" />
+      <console name="Connection 1" type="STANDARD" schema="" session="Main" />
     </connection>
     <connection id="1246e8c0-7f64-4bf7-aaf6-a82d017272c3">
       <console name="Connection 2" type="STANDARD" schema="" session="Main" />
