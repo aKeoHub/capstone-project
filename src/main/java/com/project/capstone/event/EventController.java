@@ -10,17 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("api/v1/events")
 public class EventController {
 
     @Autowired
     private EventService eventService;
 
-    @PostMapping("api/v1/event")
+    @PostMapping("/add")
     public Event createEvent(@Valid @RequestBody @NotNull Event event){
         return eventService.createEvent(event);
     }
 
-    @GetMapping("api/v1/event/{id}")
+    @GetMapping("/get/{id}")
     public Event getEvent(@PathVariable("id") Integer id) throws EventNotFoundException {
         Optional<Event> event = eventService.getEvent(id);
         if (event.isPresent()){
@@ -30,18 +31,18 @@ public class EventController {
         }
     }
 
-    @GetMapping("api/v1/event/all")
+    @GetMapping("/all")
     public List<Event> fetchEventList() {
         return eventService.fetchEventList();
     }
 
-    @PutMapping("api/v1/event/{id}")
+    @PutMapping("/edit/{id}")
     public Event updateEvent(@RequestBody Event event , @PathVariable("id") Integer id) throws EventNotFoundException{
 
         return eventService.updateEvent(event, id);
     }
 
-    @DeleteMapping("api/v1/event/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteEventById(@PathVariable("id") Integer id){
         eventService.deleteEventById(id);
 

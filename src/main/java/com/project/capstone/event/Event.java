@@ -1,5 +1,6 @@
 package com.project.capstone.event;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -70,11 +71,11 @@ public class Event {
     public void setEventCreator(User eventCreator) {
         this.eventCreator = eventCreator;
     }
-
+    @JsonBackReference
     public User getEventCreator() {
         return eventCreator;
     }
-
+    @JsonBackReference
     public byte[] getFile() {
         return file;
     }
@@ -122,7 +123,7 @@ public class Event {
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }
-
+    @JsonBackReference
     public Category getCategory() {
         return category;
     }

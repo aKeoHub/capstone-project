@@ -1,9 +1,10 @@
 package com.project.capstone.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
-import com.project.capstone.item.Item;
+import com.project.capstone.sales.Item;
 import com.project.capstone.role.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -78,6 +79,7 @@ public class User {
         this.pictureId = picture_id;
         this.createDate = create_date;
     }
+    @JsonManagedReference
     public Set<Forum> getForums() {
         return forums;
     }
@@ -85,7 +87,7 @@ public class User {
     public void setForums(Set<Forum> forums) {
         this.forums = forums;
     }
-
+    @JsonManagedReference
     public Set<Role> getRoles() {
         return roles;
     }
@@ -93,7 +95,7 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
+    @JsonManagedReference
     public Set<Item> getItems() {
         return items;
     }
@@ -101,7 +103,7 @@ public class User {
     public void setItems(Set<Item> items) {
         this.items = items;
     }
-
+    @JsonManagedReference
     public Set<Event> getEvents() {
         return events;
     }
