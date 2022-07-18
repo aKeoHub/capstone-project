@@ -7,7 +7,7 @@ function Datatable() {
 
 return (
 
-<div class="container">
+<div class="datatableContainer">
     <div class="row">
             <div class="col-lg-10 mt-5 mb-5">
                 <div class="row">

@@ -8,4 +8,10 @@ table {
 
 body{
 background-color: #282c34;
+
+}
+
+.datatableContainer{
+    margin: auto;
+    width: 1050px;
 }
