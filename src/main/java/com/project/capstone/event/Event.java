@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
+//hello
 @Entity
 @Table(schema = "capstonedb" , name = "event")
 @RequiredArgsConstructor
