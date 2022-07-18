@@ -11,7 +11,7 @@ const EventPage = () => {
     return (
         <>
         <EventCalendar />
-       <Datatable />
+        <Datatable />
         </>
     );
 }

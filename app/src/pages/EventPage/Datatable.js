@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Datatable.css';
+import Table from 'react-bootstrap/Table';
+
 
 function Datatable() {
 
@@ -8,26 +10,31 @@ return (
 <div class="container">
     <div class="row">
             <div class="col-lg-10 mt-5 mb-5">
-                <h3 class="">Event Datatable</h3>
-                <table id="example"  >
-
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-
-                    <tr>
-                        <td>Name</td>
-                        <td>Position</td>
-                        <td>Office</td>
-                        <td>Start date</td>
-                        <td>Salary</td>
-                    </tr>
-
-                </table>
+                <h3 class="white-text">Event Datatable</h3>
+                <Table striped bordered hover variant="dark">
+                      <thead>
+                        <tr>
+                          <th>Event ID</th>
+                          <th>Category</th>
+                          <th>Event Name</th>
+                          <th>Start Date</th>
+                          <th>End Date</th>
+                          <th>Description</th>
+                          <th>Location</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td>@mdo</td>
+                          <td>@mdo</td>
+                          <td>@mdo</td>
+                        </tr>
+                      </tbody>
+                    </Table>
             </div>
         </div>
     </div>

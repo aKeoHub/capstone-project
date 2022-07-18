@@ -60,7 +60,9 @@ button {
 
 .calendarHeaderDiv{
  color:black;
+ width: 950px;
  margin: auto;
+
 }
 
 .react-calendar__tile react-calendar__month-view__days__day {
