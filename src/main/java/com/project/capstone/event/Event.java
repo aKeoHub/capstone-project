@@ -3,10 +3,12 @@ package com.project.capstone.event;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.persistence.Column;
 import java.time.LocalDate;
 //hello
 @Entity
@@ -39,9 +41,11 @@ public class Event {
     private String description;
 
     @Column(name = "start_date")
+    @JsonProperty("start_date")
     private LocalDate startDate;
 
     @Column(name = "end_date")
+    @JsonProperty("end_date")
     private LocalDate endDate;
 
     @Column(name = "file")
