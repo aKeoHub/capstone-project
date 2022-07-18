@@ -1,5 +1,6 @@
 package com.project.capstone.parkdocument;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.capstone.audit.AuditLog;
 import com.project.capstone.category.Category;
 import lombok.RequiredArgsConstructor;
@@ -89,10 +90,10 @@ public class ParkDocument {
         return creatorId;
     }
 
-    public void setCreateoId(Integer createrId) {
+    public void setCreatorId(Integer createrId) {
         this.creatorId = createrId;
     }
-
+    @JsonBackReference
     public Category getDocumentCategory() {
         return documentCategory;
     }
