@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import DocumentsPage from "./pages/DocumentsPage";
 import Footer from "./components/Footer/Footer";
+//testing
 
 function App() {
   return (
