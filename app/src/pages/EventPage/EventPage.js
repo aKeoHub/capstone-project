@@ -6,12 +6,14 @@ import './Event.css';
 import EventCalendar from './EventCalendar';
 import Datatable from './Datatable';
 
+
 const EventPage = () => {
 
     return (
         <>
         <EventCalendar />
         <Datatable />
+
         </>
     );
 }
