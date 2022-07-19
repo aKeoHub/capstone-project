@@ -1,54 +1,63 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Datatable.css';
-import Table from 'react-bootstrap/Table';
-import EventModal from './EventModal'
 
-function Datatable() {
+import React, {useEffect, useState} from "react";
 
-return (
+const Login = () => {
 
-<div class="datatableContainer">
-    <div class="row">
-            <div class="col-lg-10 mt-5 mb-5">
-                <div class="row">
-                    <div class="col-3">
-                        <h3 class="white-text">Event Datatable</h3>
-                    </div>
-                    <div class="col">
-                        <EventModal />
-                    </div>
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+
+    useEffect(() => {
+        setLoading(true);
+
+        fetch('api/v1/events/all')
+            .then(response => response.json())
+            .then(data => {
+                setEvents(data);
+                setLoading(false);
+                console.log(data);
+            })
+    }, []);
+
+        if (loading) {
+            return <p>Loading...</p>;
+        }
+
+
+    return (
+    <div>
+            <h2>User List</h2>
+
+            {events.map(event =>
+                <div key={event.id}>
+                    <table>
+                        <tr>
+                            <th>Event ID</th>
+                            <th>Event Creator</th>
+                            <th>Category ID</th>
+                            <th>Event Name</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                        <tr>
+                            <td>{event.event_id}</td>
+                            <td>{event.event_creator}</td>
+                            <td>{event.category_id}</td>
+                            <td>{event.event_name}</td>
+                            <td>{event.location}</td>
+                            <td>{event.description}</td>
+                            <td>{event.start_date}</td>
+                            <td>{event.end_date}</td>
+                            <td>{event.end_date}</td>
+                        </tr>
+
+                    </table>
                 </div>
-                <Table striped bordered hover variant="dark">
-                      <thead>
-                        <tr>
-                          <th>Event ID</th>
-                          <th>Category</th>
-                          <th>Event Name</th>
-                          <th>Start Date</th>
-                          <th>End Date</th>
-                          <th>Description</th>
-                          <th>Location</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-            </div>
+            )}
         </div>
-    </div>
-
-
-);
+    );
 }
 
-
-export default Datatable;
+export default Login;
