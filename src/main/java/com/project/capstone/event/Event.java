@@ -54,7 +54,7 @@ public class Event {
     public Event(@JsonProperty("event_id") Integer id,
                  @JsonProperty("event_creator") User eventCreator,
                  @JsonProperty("category_id") Category category,
-                 @JsonProperty("event name") String eventName,
+                 @JsonProperty("event_name") String eventName,
                  @JsonProperty("location") String location,
                  @JsonProperty("description") String description,
                  @JsonProperty("start_date") LocalDate startDate,
