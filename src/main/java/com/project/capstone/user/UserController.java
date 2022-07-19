@@ -5,36 +5,37 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping("api/v1/user")
-    public User createUsers(@Valid @RequestBody User user) {
+    public User createUsers(@Valid @NotNull @RequestBody User user) {
         return userService.saveUser(user);
     }
 
     @GetMapping("api/v1/user/{id}")
-    public User getUser(@PathVariable("id") Integer id) throws UserNotFoundException {
-        Optional<User> user = userService.getUser(id);
+    public User getUser(@PathVariable("id") Integer userId) throws UserNotFoundException {
+        Optional<User> user = userService.getUser(userId);
         if (user.isPresent()) {
             return user.get();
         } else {
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(userId);
         }
     }
 
-    @GetMapping
+    @GetMapping("api/v1/user/all")
     public List<User> fetchUsersList() {
         return userService.fetchUserList();
     }
 
-    @PutMapping
+    @PutMapping("api/v1/user/{id}")
     public User updateUsers(@RequestBody User user, @PathVariable("id") Integer usersId) throws UserNotFoundException {
 
         return userService.updateUser(user, usersId);
@@ -47,3 +48,6 @@ public class UserController {
         return "Deleted Successfully";
     }
 }
+
+
+

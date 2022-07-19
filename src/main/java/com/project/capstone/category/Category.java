@@ -1,5 +1,7 @@
 package com.project.capstone.category;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.capstone.event.Event;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -11,6 +13,7 @@ import java.util.Collection;
 
 
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @ToString
@@ -35,8 +38,18 @@ public class Category {
 
 
 
-    @ManyToMany(fetch = EAGER)
+    @ManyToMany(fetch = LAZY)
+    @ToString.Exclude
+    @JsonBackReference
     private Collection<Event> events = new ArrayList<>();
+
+    public void setEvents(Collection<Event> events) {
+        this.events = events;
+    }
+    @JsonBackReference
+    public Collection<Event> getEvents() {
+        return events;
+    }
 
     public Integer getCategory_id() {
         return category_id;

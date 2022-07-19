@@ -1,4 +1,4 @@
-package com.project.capstone.item;
+package com.project.capstone.sales;
 
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;

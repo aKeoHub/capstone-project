@@ -1,9 +1,11 @@
 package com.project.capstone.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
-import com.project.capstone.item.Item;
+import com.project.capstone.sales.Item;
 import com.project.capstone.role.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -45,7 +47,7 @@ public class User {
     @Column(name = "create_date")
     private Date createDate;
 
-    @OneToMany(mappedBy = "eventCreator")
+    @OneToMany(mappedBy = "eventCreator", fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<Event> events = new LinkedHashSet<>();
 
@@ -78,6 +80,7 @@ public class User {
         this.pictureId = picture_id;
         this.createDate = create_date;
     }
+    @JsonBackReference
     public Set<Forum> getForums() {
         return forums;
     }
@@ -85,7 +88,7 @@ public class User {
     public void setForums(Set<Forum> forums) {
         this.forums = forums;
     }
-
+    @JsonBackReference
     public Set<Role> getRoles() {
         return roles;
     }
@@ -93,7 +96,7 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
+    @JsonBackReference
     public Set<Item> getItems() {
         return items;
     }
@@ -101,7 +104,7 @@ public class User {
     public void setItems(Set<Item> items) {
         this.items = items;
     }
-
+    @JsonBackReference
     public Set<Event> getEvents() {
         return events;
     }

@@ -19,8 +19,15 @@ public class UserServiceAccess implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public User saveUser(User user)  {
+        Boolean existsEmail = userRepository.selectExistsEmail(user.getEmail());
+
+        if (existsEmail) {
+            throw new RuntimeException("This email already exists. Please try a different email");
+        } else {
+
+            return userRepository.save(user);
+        }
     }
 
     @Override
@@ -32,7 +39,7 @@ public class UserServiceAccess implements UserService {
     public User updateUser(User user, Integer userId) throws UserNotFoundException {
         Optional<User> currentUsersOptional = getUser(userId);
 
-        if (currentUsersOptional.isPresent()) {
+        if (currentUsersOptional.isPresent()){
             User currentUser = currentUsersOptional.get();
             currentUser.setId(user.getId());
             currentUser.setUsername(user.getUsername());
@@ -41,7 +48,6 @@ public class UserServiceAccess implements UserService {
             currentUser.setLastname(user.getLastname());
             currentUser.setEmail(user.getEmail());
             currentUser.setPictureId(user.getPictureId());
-
             return currentUser;
         } else {
             throw new UserNotFoundException(userId);
@@ -53,3 +59,7 @@ public class UserServiceAccess implements UserService {
         userRepository.deleteById(usersId);
     }
 }
+
+
+
+
