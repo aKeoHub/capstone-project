@@ -1,6 +1,7 @@
 package com.project.capstone.event;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,13 +21,15 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_creator")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "event_creator", nullable = false)
+    @JsonBackReference
     @ToString.Exclude
     private User eventCreator;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonBackReference
     @ToString.Exclude
     private Category category;
 
@@ -75,7 +78,7 @@ public class Event {
     public User getEventCreator() {
         return eventCreator;
     }
-    @JsonBackReference
+
     public byte[] getFile() {
         return file;
     }

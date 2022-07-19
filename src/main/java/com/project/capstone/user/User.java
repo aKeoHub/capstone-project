@@ -22,7 +22,7 @@ public class User {
 
     @Id
     @Column(name = "user_id", nullable = false)
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "username", nullable = false, length = 30)
@@ -46,7 +46,7 @@ public class User {
     @Column(name = "create_date")
     private Date createDate;
 
-    @OneToMany(mappedBy = "eventCreator")
+    @OneToMany(mappedBy = "eventCreator", fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<Event> events = new LinkedHashSet<>();
 

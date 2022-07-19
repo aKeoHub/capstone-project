@@ -90,8 +90,8 @@ public class ParkDocument {
         return creatorId;
     }
 
-    public void setCreatorId(Integer createrId) {
-        this.creatorId = createrId;
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
     }
     @JsonBackReference
     public Category getDocumentCategory() {
