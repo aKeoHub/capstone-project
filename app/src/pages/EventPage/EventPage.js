@@ -1,7 +1,7 @@
-/*import React from 'react';*/
+import React from 'react';
 
-import Calendar from "react-calendar";
-import DatePicker from "react-date-picker";
+//import Calendar from "react-calendar";
+//import DatePicker from "react-date-picker";
 import './Event.css';
 import EventCalendar from './EventCalendar';
 import Datatable from './Datatable';
