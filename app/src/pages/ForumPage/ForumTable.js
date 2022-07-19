@@ -3,25 +3,25 @@ import React, {useEffect, useState} from "react";
 
 const ForumTable = () => {
 
-    const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(false);
+   const [forums, setForums] = useState([]);
+   // const [loading, setLoading] = useState(false);
 
 
-    useEffect(() => {
-        setLoading(true);
+    //useEffect(() => {
+        //setLoading(true);
 
-        fetch('api/v1/forums/all')
-            .then(response => response.json())
-            .then(data => {
-                setForums(data);
-                setLoading(false);
-                console.log(data);
-            })
-    }, []);
+        //fetch('api/v1/forums/all')
+            //.then(response => response.json())
+            //.then(data => {
+                //setForums(data);
+                //setLoading(false);
+                //console.log(data);
+            //})
+   //}, []);
 
-    if (loading) {
-        return <p>Loading...</p>;
-    }
+    //if (loading) {
+       // return <p>Loading...</p>;
+    //}
 
 
     return (
