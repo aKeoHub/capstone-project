@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/events")
+@RequestMapping("api/v1/events")
 public class EventController {
 
     @Autowired
     private EventService eventService;
 
-    @PostMapping("/create")
+    @PostMapping("/add")
     public Event createEvent(@Valid @RequestBody @NotNull Event event){
         return eventService.createEvent(event);
     }
@@ -36,7 +36,7 @@ public class EventController {
         return eventService.fetchEventList();
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/edit/{id}")
     public Event updateEvent(@RequestBody Event event , @PathVariable("id") Integer id) throws EventNotFoundException{
 
         return eventService.updateEvent(event, id);
