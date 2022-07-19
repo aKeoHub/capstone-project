@@ -18,7 +18,7 @@ class MainType extends Component {
     render() { 
         return (
             <div>
-                {this.state.types.map(c => <Type rule={c} onClick={this.handleLink} />)}; 
+                {this.state.types.map(c => <Type rule={c} onClick={this.handleLink} />)};
             </div>
         );
     }
