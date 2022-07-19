@@ -23,13 +23,13 @@ public class Event {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event_creator", nullable = false)
-    @JsonBackReference
+    @JsonManagedReference
     @ToString.Exclude
     private User eventCreator;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
-    @JsonBackReference
+    @JsonManagedReference
     @ToString.Exclude
     private Category category;
 
@@ -74,7 +74,7 @@ public class Event {
     public void setEventCreator(User eventCreator) {
         this.eventCreator = eventCreator;
     }
-    @JsonBackReference
+
     public User getEventCreator() {
         return eventCreator;
     }
@@ -126,7 +126,7 @@ public class Event {
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }
-    @JsonBackReference
+
     public Category getCategory() {
         return category;
     }
