@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Type from './type';
+import Type from './docSubType';
 
 class MainType extends Component {
     state = {
