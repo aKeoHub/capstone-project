@@ -43,13 +43,12 @@ const Login = () => {
                         </tr>
                         <tr>
                             <td>{event.event_id}</td>
-                            <td>{event.event_creator}</td>
-                            <td>{event.category_id}</td>
+                            <td>{event.event_creator.id}</td>
+                            <td>{event.category_id.category_id}</td>
                             <td>{event.event_name}</td>
                             <td>{event.location}</td>
                             <td>{event.description}</td>
                             <td>{event.start_date}</td>
-                            <td>{event.end_date}</td>
                             <td>{event.end_date}</td>
                         </tr>
 
