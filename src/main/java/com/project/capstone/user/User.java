@@ -1,10 +1,11 @@
 package com.project.capstone.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
-import com.project.capstone.sales.Item;
+import com.project.capstone.item.Item;
 import com.project.capstone.role.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -22,7 +23,7 @@ public class User {
 
     @Id
     @Column(name = "user_id", nullable = false)
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "username", nullable = false, length = 30)
@@ -79,7 +80,7 @@ public class User {
         this.pictureId = picture_id;
         this.createDate = create_date;
     }
-    @JsonManagedReference
+    @JsonBackReference
     public Set<Forum> getForums() {
         return forums;
     }
@@ -87,7 +88,7 @@ public class User {
     public void setForums(Set<Forum> forums) {
         this.forums = forums;
     }
-    @JsonManagedReference
+    @JsonBackReference
     public Set<Role> getRoles() {
         return roles;
     }
@@ -95,7 +96,7 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    @JsonManagedReference
+    @JsonBackReference
     public Set<Item> getItems() {
         return items;
     }
@@ -103,7 +104,7 @@ public class User {
     public void setItems(Set<Item> items) {
         this.items = items;
     }
-    @JsonManagedReference
+    @JsonBackReference
     public Set<Event> getEvents() {
         return events;
     }

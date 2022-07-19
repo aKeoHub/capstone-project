@@ -1,0 +1,32 @@
+.eventTable {
+    border: 1px solid white;
+    color: white;
+    margin:auto;
+    width:1050px;
+    text-align: center;
+
+}
+
+table, td, th {
+  border: 1px solid white;
+  width:12%;
+}
+
+.white-text{
+    color:white;
+}
+
+body{
+background-color: #282c34;
+color:white;
+}
+
+.datatableContainer{
+    margin: auto;
+    width: 1050px;
+}
+
+.dataHeader{
+    width:80%;
+    margin:auto;
+}
