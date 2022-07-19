@@ -32,11 +32,11 @@ video {
     'Lucida Sans', Arial, sans-serif;
 }
 
-.dandf-btns {
+.dandf-bttns {
     margin-top: 32px;
 }
 
-.dandf-btns .btn {
+.dandf-bttns .btn {
     margin: 6px;
 }
 
@@ -61,7 +61,7 @@ video {
         font-size: 30px;
     }
 
-    .btn-mobile {
+    .bttn-mobile {
         display: block;
         text-decoration: none;
     }

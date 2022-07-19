@@ -11,21 +11,21 @@ function HeroSection() {
 
             <h1>Welcome to Wendy's RV!</h1>
             <p>Sign Up or Login Here!</p>
-            <div className='hero-btns'>
+            <div className='hero-bttns'>
                 <SignUpButton
-                    className='btns'
-                    buttonStyle='btn--outline'
-                    buttonSize='btn--large'
+                    className='bttns'
+                    buttonStyle='bttn--outline'
+                    buttonSize='bttn--large'
                 >
-                    Sign Up
+                    SIGN UP
                 </SignUpButton>
                 <LoginButton
-                    className='btns'
-                    buttonStyle='btn--outline'
-                    buttonSize='btn--large'
+                    className='bttns'
+                    buttonStyle='bttn--outline'
+                    buttonSize='bttn--large'
 
                 >
-                    Login
+                    LOGIN
                 </LoginButton>
             </div>
         </div>
