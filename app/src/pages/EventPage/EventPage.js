@@ -13,7 +13,6 @@ const EventPage = () => {
         <>
         <EventCalendar />
         <Datatable />
-
         </>
     );
 }

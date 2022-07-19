@@ -1,5 +1,6 @@
 
 import React, {useEffect, useState} from "react";
+import './Datatable.css';
 
 const Login = () => {
 
@@ -26,21 +27,26 @@ const Login = () => {
 
     return (
     <div>
+        <div class="dataHeader">
             <h2>User List</h2>
+        </div>
 
+            <table class="eventTable">
+                <tr>
+                    <th>Event ID</th>
+                    <th>Event Creator</th>
+                    <th>Category ID</th>
+                    <th>Event Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </table>
             {events.map(event =>
                 <div key={event.id}>
-                    <table>
-                        <tr>
-                            <th>Event ID</th>
-                            <th>Event Creator</th>
-                            <th>Category ID</th>
-                            <th>Event Name</th>
-                            <th>Location</th>
-                            <th>Description</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                        </tr>
+                    <table class="eventTable">
+
                         <tr>
                             <td>{event.event_id}</td>
                             <td>{event.event_creator.id}</td>
