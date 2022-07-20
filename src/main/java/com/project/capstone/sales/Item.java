@@ -1,5 +1,7 @@
 package com.project.capstone.sales;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,13 +21,15 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "owner_id", nullable = false)
+    @JsonManagedReference
     @ToString.Exclude
     private User owner;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonManagedReference
     @ToString.Exclude
     private Category category;
 

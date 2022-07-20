@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.capstone.event.Event;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.capstone.parkdocument.ParkDocument;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,7 +37,18 @@ public class Category {
         this.category_type = category_type;
     }
 
+    @OneToMany(fetch = LAZY)
+    @ToString.Exclude
+    @JsonBackReference
+    private Collection<ParkDocument> documents = new ArrayList<>();
+    @JsonBackReference
+    public Collection<ParkDocument> getDocuments() {
+        return documents;
+    }
 
+    public void setDocuments(Collection<ParkDocument> documents) {
+        this.documents = documents;
+    }
 
     @ManyToMany(fetch = LAZY)
     @ToString.Exclude

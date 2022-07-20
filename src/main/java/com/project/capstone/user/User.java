@@ -120,7 +120,7 @@ public class User {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
+    @JsonBackReference
     public Integer getPictureId() {
         return pictureId;
     }

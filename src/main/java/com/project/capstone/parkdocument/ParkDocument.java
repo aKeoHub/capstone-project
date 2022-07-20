@@ -1,6 +1,7 @@
 package com.project.capstone.parkdocument;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.capstone.audit.AuditLog;
 import com.project.capstone.category.Category;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,9 @@ public class ParkDocument {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "document_category", nullable = false)
+    @JsonManagedReference
     @ToString.Exclude
     private Category documentCategory;
 
@@ -45,7 +47,7 @@ public class ParkDocument {
     @OneToMany(mappedBy = "parkDocument")
     @ToString.Exclude
     private Set<AuditLog> auditLogs = new LinkedHashSet<>();
-
+    @JsonManagedReference
     public Set<AuditLog> getAuditLogs() {
         return auditLogs;
     }
@@ -93,7 +95,7 @@ public class ParkDocument {
     public void setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
     }
-    @JsonBackReference
+
     public Category getDocumentCategory() {
         return documentCategory;
     }
