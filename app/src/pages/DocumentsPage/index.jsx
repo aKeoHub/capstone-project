@@ -1,4 +1,4 @@
-import NavBar from "./components/NavBar/NavBar";
+//import NavBar from "./components/NavBar/NavBar";
 import Image from './image';
 import DocTypes from './docMainType';
 import Heading from './heading';
@@ -9,8 +9,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 function DocumentsPage() {
   return (
     <React.Fragment>
-      <NavBar />
-      <Image />
+
+
       <Heading />
       <DocTypes />
       <Docs />
