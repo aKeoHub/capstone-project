@@ -1,4 +1,3 @@
-
 import Image from './image';
 import DocTypes from './docMainType';
 import Heading from './heading';

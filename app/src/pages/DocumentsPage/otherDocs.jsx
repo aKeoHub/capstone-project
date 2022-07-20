@@ -1,8 +1,12 @@
 import React, {useEffect,useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Button from '@material-ui/core/Button';
 
 const OtherDocs = () => {
      const [documents, setDocuments] = useState([]);
+     const [message, setMessage] = useState([]);
      const [loading, setLoading] = useState(false);
 
      useEffect(() => {
@@ -14,7 +18,12 @@ const OtherDocs = () => {
                      setDocuments(data);
                      setLoading(false);
                      console.log(data);
-                 })
+                 });
+
+             async function deletePost(id) {
+                await fetch(`/delete/{id}`);
+                setMessage('Delete successful');
+                 }
          }, []);
 
          if (loading) {
@@ -24,35 +33,41 @@ const OtherDocs = () => {
          return (
              <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#E8F8F5"}}>
                 <h1 className="text-left text-success mb-4">Documents</h1>
-
-                         <table class="table">
+                    <div className="table-responsive">
+                         <table className="table">
                              <tr className="bg-primary text-white">
-                                 <th>Doc_id</th>
-
-                                 <th>Creator_id</th>
-                                 <th>Doc_name</th>
-                                 <th>Date_created</th>
-                                 <th>Description</th>
-                                 <th>File</th>
+                                 <th style={{width: "9%"}}>Doc_id</th>
+                                 <th style={{width: "14%"}}>Category_id</th>
+                                 <th style={{width: "13%"}}>Creator_id</th>
+                                 <th style={{width: "15%"}}>Doc_name</th>
+                                 <th style={{width: "15%"}}>Date_created</th>
+                                 <th style={{width: "16%"}}>Description</th>
+                                 <th style={{width: "11%"}}>File</th>
+                                 <th style={{width: "7%"}}>Delete</th>
                              </tr>
                          </table>
                          {documents.map(park_document =>
                              <div key={park_document.id}>
-                                 <table class="table">
+                                 <table className="table">
                                      <tr>
-                                         <td>{park_document.id}</td>
-
-                                         <td>{park_document.creatorId}</td>
-                                         <td>{park_document.documentName}</td>
-                                         <td>{park_document.createDate}</td>
-                                         <td>{park_document.description}</td>
-                                         <td>{park_document.file}</td>
+                                         <td style={{width: "9%"}}>{park_document.id}</td>
+                                         <td style={{width: "14%"}}>1</td>
+                                         {/*<td>{park_document.documentCategory.category_id}*/}
+                                         <td style={{width: "13%"}}>{park_document.creatorId}</td>
+                                         <td style={{width: "15%"}}>{park_document.documentName}</td>
+                                         <td style={{width: "15%"}}>{park_document.createDate}</td>
+                                         <td style={{width: "16%"}}>{park_document.description}</td>
+                                         <td style={{width: "11%"}}>{park_document.file}</td>
+                                         <td style={{width: "7%"}}><Button key={park_document.id} style={{width: "7%"}}><FontAwesomeIcon icon={faTrash} /></Button></td>
+                                         {/*<td><Button onClick={() => deleteCustomer(this.customerId)}>
+                                             <FontAwesomeIcon icon={faTrash} />
+                                         </Button></td>*/}
                                      </tr>
-
                                  </table>
                              </div>
                          )}
-                     </div>
+                    </div>
+             </div>
          );
      }
 
