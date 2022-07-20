@@ -28,7 +28,7 @@ const OtherDocs = () => {
                          <table class="table">
                              <tr className="bg-primary text-white">
                                  <th>Doc_id</th>
-                                 <th>Doc_category</th>
+
                                  <th>Creator_id</th>
                                  <th>Doc_name</th>
                                  <th>Date_created</th>
@@ -40,11 +40,11 @@ const OtherDocs = () => {
                              <div key={park_document.id}>
                                  <table class="table">
                                      <tr>
-                                         <td>{park_document.document_id}</td>
-                                         <td>{park_document.document_category}</td>
-                                         <td>{park_document.creator_id}</td>
-                                         <td>{park_document.document_name}</td>
-                                         <td>{park_document.create_date}</td>
+                                         <td>{park_document.id}</td>
+
+                                         <td>{park_document.creatorId}</td>
+                                         <td>{park_document.documentName}</td>
+                                         <td>{park_document.createDate}</td>
                                          <td>{park_document.description}</td>
                                          <td>{park_document.file}</td>
                                      </tr>
