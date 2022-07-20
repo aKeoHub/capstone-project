@@ -1,5 +1,6 @@
 package com.project.capstone.forum;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.capstone.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,9 @@ public class Forum {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creator_id")
+    @JsonManagedReference
     @ToString.Exclude
     private User creator;
 
@@ -98,15 +100,6 @@ public class Forum {
         this.id = id;
     }
 
-    public User getCreater() {
-
-        return creator;
-    }
-
-    public void setCreater(User creator) {
-
-        this.creator = creator;
-    }
 
 
 }
