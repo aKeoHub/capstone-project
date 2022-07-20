@@ -1,6 +1,7 @@
 
 import React, {useEffect, useState} from "react";
 import './Datatable.css';
+import EventModal from './EventModal'
 
 const Login = () => {
 
@@ -28,7 +29,14 @@ const Login = () => {
     return (
     <div>
         <div class="dataHeader">
-            <h2>User List</h2>
+            <div class="row">
+                <div class="col">
+                    <h2>Event List</h2>
+                </div>
+                <div class="col">
+                   <EventModal />
+                </div>
+            </div>
         </div>
 
             <table class="eventTable">
