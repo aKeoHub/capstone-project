@@ -24,41 +24,6 @@ const RegistrationForm = () => {
   }, []);
 
   const register = () => {
-    let today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    const yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
-
-    fetch("/api/v1/events/delete" + event_id, {
-      // Adding method type
-      method: "DELETE",
-
-      // Adding body or contents to send
-      body: JSON.stringify({
-        user_id: userId,
-        username: username,
-        password: password,
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        picture_id: picture_id,
-        create_date: today.toString(),
-      }),
-
-      //Adding headers to the request
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      // Converting to JSON
-      .then((response) => response.json())
-
-      // Displaying results to console
-      .then((json) => console.log(json));
-
-
-    const register = () => {
         let today = new Date();
         const dd = String(today.getDate()).padStart(2, '0');
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -97,7 +62,7 @@ const RegistrationForm = () => {
         if (loading) {
             return <p>Loading...</p>;
         }
-    }
+
   };
   return (
     <div className="wrapper" style={{ backgroundImage: "backgroundImg.jpg" }}>
@@ -181,7 +146,7 @@ const RegistrationForm = () => {
         </form>
       </div>
     </div>
-  );
-};
+  );//return
+};//RegistrationFOrm
 
 export default RegistrationForm;
