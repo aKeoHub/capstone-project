@@ -25,16 +25,15 @@ const OtherDocs = () => {
          }
 
      function deleteDocument(id) {
-         fetch('api/v1/events/delete/' + id,{
+         fetch('api/v1/documents/delete/' + id,{
              method:'DELETE'
          }).then(response => response.json())
-                       .then(data => {
-                           setLoading(false);
-                           console.log(data);
-                           window.location.reload();
-                       })
-
-     };
+            .then(data => {
+                setLoading(false);
+                console.log(data);
+                window.location.reload();
+            })
+     }
 
          return (
              <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#E8F8F5"}}>
@@ -76,6 +75,5 @@ const OtherDocs = () => {
              </div>
          );
      }
-
 
 export default OtherDocs;
