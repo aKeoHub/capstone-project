@@ -37,6 +37,12 @@ public class Forum {
     @Column(name = "picture_id")
     private Integer pictureId;
 
+    @Column(name = "forum_category")
+    private String forumCategory;
+
+    @Column(name = "sub_title")
+    private String subTitle;
+
     public void setCreator(User creator) {
         this.creator = creator;
     }
@@ -100,6 +106,19 @@ public class Forum {
         this.id = id;
     }
 
+    public String getForumCategory() {
+        return forumCategory;
+    }
 
+    public void setForumCategory(String forumCategory) {
+        this.forumCategory = forumCategory;
+    }
 
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
 }

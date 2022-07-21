@@ -40,6 +40,8 @@ public class ForumServiceAccess implements ForumService {
             currentForum.setDescription(forum.getDescription());
             currentForum.setCreateDate(forum.getCreateDate());
             currentForum.setPictureId(forum.getPictureId());
+            currentForum.setForumCategory(forum.getForumCategory());
+            currentForum.setSubTitle(forum.getSubTitle());
             return currentForum;
         } else {
             throw new ForumNotFoundException(id);
