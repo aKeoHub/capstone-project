@@ -3,14 +3,14 @@ import axios from "axios";
 const API_URL = "http://localhost:8080/api";
 
 class AuthService {
-
+const
     login(username, password) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
         headers.append('Origin', 'http://localhost:3000');
 
-        return fetch("api/signin", {
+        return fetch("api/public/signin", {
 
             method: 'POST',
             body: JSON.stringify({
@@ -20,14 +20,16 @@ class AuthService {
             }),
             headers: headers
         })
-
-            .then(response => {
-                console.log(response.data);
-                if (response.data) {
-                    localStorage.setItem("user", JSON.stringify(response.data));
-                }
-                return response.data;
-            });
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch(error => console.log('Authorization failed: ' + error.message));
+            // .then(response => {
+            //     console.log(response.json());
+            //     if (response.data) {
+            //         localStorage.setItem("user", JSON.stringify(response.data));
+            //     }
+            //     return response.data;
+            // });
     }
 
     // login(username, password) {

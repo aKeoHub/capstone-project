@@ -1,7 +1,12 @@
-package com.sait.capstone.api.dto;
+package com.sait.capstone.payload.request;
 
-public class AuthCredentialsRequest {
+import javax.validation.constraints.NotBlank;
+
+public class LoginRequest {
+    @NotBlank
     private String username;
+
+    @NotBlank
     private String password;
 
     public String getUsername() {

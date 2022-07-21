@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Service @RequiredArgsConstructor @Transactional @Slf4j
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
     private final RoleRepo roleRepo;
@@ -47,21 +47,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //    public void deleteUser(int id) {
 //        userRepo.deleteById(id);
 //    }
-@Override
-public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userRepo.findByUsername(username);
-    if(user == null) {
-        log.error("User not found in the database.");
-        throw new UsernameNotFoundException("User not found in the database");
-    } else {
-        log.info("User found in the database: {}", username);
-    }
-    Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-    user.getRoles().forEach(role -> {
-        authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-    });
-    return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
-}
+//@Override
+//public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//    User user = userRepo.findByUsername(username);
+//    if(user == null) {
+//        log.error("User not found in the database.");
+//        throw new UsernameNotFoundException("User not found in the database");
+//    } else {
+//        log.info("User found in the database: {}", username);
+//    }
+//    Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//    user.getRoles().forEach(role -> {
+//        authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+//    });
+//    return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+//}
 
     @Override
     public User saveUser(User user) {

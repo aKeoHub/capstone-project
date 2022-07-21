@@ -38,7 +38,7 @@ const LoginForm = () => {
         //     })
 
 
-        fetch("api/signin", {
+        fetch("api/public/signin", {
 
             // Adding method type
             method: "POST",
@@ -57,21 +57,20 @@ const LoginForm = () => {
         })
 
             // Converting to JSON
-            .then(response => {
-                if (response.status === 201) {
-                    setData(response.data);
-                    console.log(response.formData());
-                    return Promise.all([response.json(), response.headers]);
-                } else
-                    return Promise.reject("Invalid login attempt");
-            })
-            //
             // .then(response => {
-            //     console.log(response);
+            //     if (response.status === 201) {
+            //         setData(response.data);
+            //         console.log(response.formData());
+            //         return Promise.all([response.json(), response.headers]);
+            //     } else
+            //         return Promise.reject("Invalid login attempt");
             // })
+            //
+            .then(response => response.json())
+
 
             // Displaying results to console
-            .then(json => console.log(json))
+            .then(json => console.log("helloooooooooooooooooooo" + json))
 
 
         if (loading) {
