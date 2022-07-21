@@ -12,9 +12,11 @@ function EventModal() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Add Event
-      </Button>
+
+          <Button variant="primary" onClick={handleShow}>
+            Add Event
+          </Button>
+
 
        <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>

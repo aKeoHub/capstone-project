@@ -30,9 +30,9 @@ const RegistrationForm = () => {
     const yyyy = today.getFullYear();
     today = yyyy + "-" + mm + "-" + dd;
 
-    fetch("/api/v1/user", {
+    fetch("/api/v1/events/delete" + event_id, {
       // Adding method type
-      method: "POST",
+      method: "DELETE",
 
       // Adding body or contents to send
       body: JSON.stringify({

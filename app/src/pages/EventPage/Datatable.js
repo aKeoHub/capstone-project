@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import './Datatable.css';
 import EventModal from './EventModal'
 
-const Login = () => {
+const EventTable = () => {
 
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -25,6 +25,18 @@ const Login = () => {
             return <p>Loading...</p>;
         }
 
+function deleteEvent(id) {
+
+    fetch('api/v1/events/delete/' + id,{
+        method:'DELETE'
+    }).then(response => response.json())
+                  .then(data => {
+                      setLoading(false);
+                      console.log(data);
+                      window.location.reload();
+                  })
+
+}
 
     return (
     <div>
@@ -49,6 +61,7 @@ const Login = () => {
                     <th>Description</th>
                     <th>Start Date</th>
                     <th>End Date</th>
+                    <th></th>
                 </tr>
             </table>
             {events.map(event =>
@@ -64,8 +77,8 @@ const Login = () => {
                             <td>{event.description}</td>
                             <td>{event.start_date}</td>
                             <td>{event.end_date}</td>
+                            <td> <button onClick={()=>deleteEvent(event.event_id)}> Delete </button></td>
                         </tr>
-
                     </table>
                 </div>
             )}
@@ -73,4 +86,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default EventTable;
