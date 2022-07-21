@@ -10,17 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("api/v1/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("api/v1/user")
+    @PostMapping("/add")
     public User createUsers(@Valid @NotNull @RequestBody User user) {
         return userService.saveUser(user);
     }
 
-    @GetMapping("api/v1/user/{id}")
+    @GetMapping("/get/{id}")
     public User getUser(@PathVariable("id") Integer userId) throws UserNotFoundException {
         Optional<User> user = userService.getUser(userId);
         if (user.isPresent()) {
@@ -30,19 +31,19 @@ public class UserController {
         }
     }
 
-    @GetMapping("api/v1/user/all")
+    @GetMapping("/all")
     public List<User> fetchUsersList() {
         return userService.fetchUserList();
     }
 
-    @PutMapping("api/v1/user/{id}")
+    @PutMapping("/edit/{id}")
     public User updateUsers(@RequestBody User user, @PathVariable("id") Integer usersId) throws UserNotFoundException {
 
         return userService.updateUser(user, usersId);
     }
 
 
-    @DeleteMapping("api/v1/user/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUsersById(@PathVariable("id") Integer userId){
         userService.deleteUserById(userId);
         return "Deleted Successfully";

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -45,7 +46,7 @@ public class User {
     private Integer pictureId;
 
     @Column(name = "create_date")
-    private Date createDate;
+    private LocalDate createDate;
 
     @OneToMany(mappedBy = "eventCreator", fetch = FetchType.EAGER)
     @ToString.Exclude
@@ -70,7 +71,7 @@ public class User {
                 @JsonProperty("lastname") String lastname,
                 @JsonProperty("email") String email,
                 @JsonProperty("picture_id") Integer picture_id,
-                @JsonProperty("create_date") Date create_date) {
+                @JsonProperty("create_date") LocalDate create_date) {
         this.id = user_id;
         this.username = username;
         this.password = password;
@@ -113,11 +114,11 @@ public class User {
         this.events = events;
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
     @JsonBackReference
