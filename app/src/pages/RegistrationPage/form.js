@@ -67,6 +67,7 @@ const RegistrationForm = () => {
             .then(json => console.log(json))
 
 
+
         if (loading) {
             return <p>Loading...</p>;
         }

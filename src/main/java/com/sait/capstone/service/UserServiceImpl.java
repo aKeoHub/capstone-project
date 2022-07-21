@@ -2,12 +2,10 @@ package com.sait.capstone.service;
 
 import com.sait.capstone.dao.RoleRepo;
 import com.sait.capstone.dao.UserRepository;
-import com.sait.capstone.exceptions.BadRequestException;
 import com.sait.capstone.model.Role;
 import com.sait.capstone.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +17,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -97,6 +94,11 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
     public List<User> getUsers() {
         log.info("Fetching all users");
         return userRepo.findAll();
+    }
+
+    public User loginUser(String username, String password) {
+    log.info("User exists {}", username);
+    return userRepo.findByUsername(username);
     }
 
 }

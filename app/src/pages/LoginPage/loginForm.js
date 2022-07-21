@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './login.css';
+import axios from "axios";
+
 
 const LoginForm = () => {
 
@@ -8,6 +10,7 @@ const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const [username, setUsernameReg] = useState('');
     const [password, setPasswordReg] = useState('');
+    const [dataResp, setData] = useState('');
 
 
     // useEffect(() => {
@@ -23,18 +26,29 @@ const LoginForm = () => {
 
 
     const sendLoginRequest = () => {
-console.log(username);
 
-        fetch("api/login", {
+        // axios.post('/login', {
+        //     username: username,
+        //     password: password
+        // })
+        //     .then(function (response) {
+        //         setData(response.data)
+        //         console.log("===============" + response.data.username);
+        //         console.log(data);
+        //     })
+
+
+        fetch("api/signin", {
 
             // Adding method type
             method: "POST",
 
             // Adding body or contents to send
             body: JSON.stringify({
-                username: 'hello',
-                password: 'password',
+                username: username,
+                password: password
             }),
+
 
             //Adding headers to the request
             headers: {
@@ -44,11 +58,17 @@ console.log(username);
 
             // Converting to JSON
             .then(response => {
-                if (response.status === 200)
+                if (response.status === 201) {
+                    setData(response.data);
+                    console.log(response.formData());
                     return Promise.all([response.json(), response.headers]);
-                else
+                } else
                     return Promise.reject("Invalid login attempt");
             })
+            //
+            // .then(response => {
+            //     console.log(response);
+            // })
 
             // Displaying results to console
             .then(json => console.log(json))
@@ -82,6 +102,10 @@ console.log(username);
                         <input type="password" className="form-control" onChange={(e) => {
                             setPasswordReg(e.target.value);
                         }}/>
+                    </div>
+
+                    <div>
+                        {dataResp}
                     </div>
 
                     <div className="checkbox">
