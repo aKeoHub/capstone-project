@@ -1,8 +1,102 @@
-import React from 'react';
+import React, {useEffect, useState} from "react";
 import './ForumPage.css';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+
+
 
 
 const ForumLayout = () => {
+
+    const [forums, setForums] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [forumId, setForumIdReg] = useState("");
+    const [creatorId, setCreatorIdReg] = useState("");
+    const [title, setTitleReg] = useState("");
+    const [subTitle, setSubTitleReg] = useState("");
+    const [description, setDescriptionReg] = useState("");
+    const [forumCategory, setForumCategoryReg] = useState("");
+    const [picture_id, setPictureId] = useState("");
+
+    useEffect(() => {
+        setLoading(true);
+
+        fetch('api/v1/forums/all')
+            .then(response => response.json())
+            .then(data => {
+                setForums(data);
+                setLoading(false);
+                console.log(data);
+            })
+    }, []);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    function deleteForum(id) {
+
+            fetch('api/v1/forums/delete/' + id, {
+                method: 'DELETE'
+            }).then(response => response.json())
+                .then(data => {
+                    setLoading(false);
+                    console.log(data);
+                    window.location.reload();
+                })
+        }
+    function addForum() {
+        let forumToday = new Date();
+        const dd = String(forumToday.getDate()).padStart(2, '0');
+        const mm = String(forumToday.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = forumToday.getFullYear();
+        forumToday = yyyy + '-' + mm + '-' + dd;
+        fetch("/api/v1/forums/add", {
+
+            // Adding method type
+            method: "POST",
+
+            // Adding body or contents to send
+            body: JSON.stringify({
+                forum_id: forumId,
+                creator_id: creatorId,
+                title: title,
+                sub_title: subTitle,
+                description: description,
+                picture_id: picture_id,
+                forum_category: forumCategory,
+                create_date: forumToday.toString(),
+            }),
+
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+
+        })
+
+            // Converting to JSON
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(json => console.log(json));
+    }
+    function editForum(id) {
+        fetch("/api/v1/forums/get/" + id, {
+
+            // Adding method type
+            method: "UPDATE",
+
+        }).then(response => response.json())
+            .then(data => {
+                setLoading(false);
+                console.log(data);
+                window.location.reload();
+            })
+    }
+
 
 
 return (
@@ -19,19 +113,99 @@ return (
                                 <div className="pull-right forum-desc">
                                     <samll>Total posts: 320,800</samll>
                                 </div>
-                                <h3>General subjects</h3>
+                                <h3>All Forum Posts</h3>
                             </div>
-
+                            <Button variant="primary" onClick={handleShow}>
+                                Add Forum
+                            </Button>
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Modal heading</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <form action="">
+                                        <h3>Registration Form</h3>
+                                        <div className="form-wrapper">
+                                            <div className="form-wrapper">
+                                                <label htmlFor="">Creator ID</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    onChange={(e) => {
+                                                        setCreatorIdReg(e.target.value);
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="form-wrapper">
+                                            <div className="form-wrapper">
+                                                <label htmlFor="">Title</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    onChange={(e) => {
+                                                        setTitleReg(e.target.value);
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="form-wrapper">
+                                            <div className="form-wrapper">
+                                                <label htmlFor="">Sub Title</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    onChange={(e) => {
+                                                        setSubTitleReg(e.target.value);
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="form-wrapper">
+                                            <label htmlFor="">Description</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                onChange={(e) => {
+                                                    setDescriptionReg(e.target.value);
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="form-wrapper">
+                                            <label htmlFor="">ForumCategory</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                onChange={(e) => {
+                                                    setForumCategoryReg(e.target.value);
+                                                }}
+                                            />
+                                        </div>
+                                        <button onClick={addForum}>Add Forum</button>
+                                    </form>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleClose}>
+                                        Close
+                                    </Button>
+                                    <Button variant="primary" onClick={handleClose}>
+                                        Add
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+                            {forums.map(forum =>
+                        <div key={forum.id}>
                             <div className="forum-item active">
+
                                 <div className="row">
                                     <div className="col-md-9">
                                         <div className="forum-icon">
                                             <i className="fa fa-shield"></i>
                                         </div>
-                                        <a href="forum" className="forum-item-title">General Discussion</a>
-                                        <div className="forum-sub-title">Talk about sports, entertainment, music,
-                                            movies, your favorite color, talk about enything.
+                                        <a href="forum" className="forum-item-title">{forum.title}</a>
+                                        <div className="forum-sub-title">{forum.sub_title}
                                         </div>
+                                        <div>{forum.forum_category}</div>
                                     </div>
                                     <div className="col-md-1 forum-info">
                             <span className="views-number">
@@ -46,299 +220,105 @@ return (
                                 368
                             </span>
                                         <div>
-                                            <small>Topics</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                140
-                            </span>
-                                        <div>
-                                            <small>Posts</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="forum-item">
-                                <div className="row">
-                                    <div className="col-md-9">
-                                        <div className="forum-icon">
-                                            <i className="fa fa-bolt"></i>
-                                        </div>
-                                        <a href="forum" className="forum-item-title">Introductions</a>
-                                        <div className="forum-sub-title">New to the community? Please stop by, say hi
-                                            and tell us a bit about yourself.
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                890
-                            </span>
-                                        <div>
-                                            <small>Views</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                120
-                            </span>
-                                        <div>
-                                            <small>Topics</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                154
-                            </span>
-                                        <div>
-                                            <small>Posts</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="forum-item active">
-                                <div className="row">
-                                    <div className="col-md-9">
-                                        <div className="forum-icon">
-                                            <i className="fa fa-calendar"></i>
-                                        </div>
-                                        <a href="forum" className="forum-item-title">Announcements</a>
-                                        <div className="forum-sub-title">This forum features announcements from the
-                                            community staff. If there is a new post in this forum, please check it out.
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                680
-                            </span>
-                                        <div>
-                                            <small>Views</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                124
-                            </span>
-                                        <div>
-                                            <small>Topics</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                61
-                            </span>
-                                        <div>
-                                            <small>Posts</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="forum-item">
-                                <div className="row">
-                                    <div className="col-md-9">
-                                        <div className="forum-icon">
-                                            <i className="fa fa-star"></i>
-                                        </div>
-                                        <a href="forum" className="forum-item-title">Staff Discussion</a>
-                                        <div className="forum-sub-title">This forum is for private, staff member only
-                                            discussions, usually pertaining to the community itself.
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                1450
-                            </span>
-                                        <div>
-                                            <small>Views</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                652
-                            </span>
-                                        <div>
-                                            <small>Topics</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                572
-                            </span>
-                                        <div>
-                                            <small>Posts</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                            <small>
+                                            <Button variant="primary" onClick={handleShow}>
+                                                Edit Forum
+                                            </Button>
+                                            </small>
 
-                            <div className="forum-title">
-                                <div className="pull-right forum-desc">
-                                    <samll>Total posts: 17,800,600</samll>
-                                </div>
-                                <h3>Other subjects</h3>
-                            </div>
+                                            <Modal show={show} onHide={handleClose}>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>Modal heading</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <form action="">
+                                                        <h3>Edit Your Forum</h3>
+                                                        <div className="form-wrapper">
+                                                            <div className="form-wrapper">
+                                                                <label htmlFor="">Creator ID</label>
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    onChange={(e) => {
+                                                                        setCreatorIdReg(e.target.value);
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-wrapper">
+                                                            <div className="form-wrapper">
+                                                                <label htmlFor="">Title</label>
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    onChange={(e) => {
+                                                                        setTitleReg(e.target.value);
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-wrapper">
+                                                            <div className="form-wrapper">
+                                                                <label htmlFor="">Sub Title</label>
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    onChange={(e) => {
+                                                                        setSubTitleReg(e.target.value);
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-wrapper">
+                                                            <label htmlFor="">Description</label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                onChange={(e) => {
+                                                                    setDescriptionReg(e.target.value);
+                                                                }}
+                                                            />
+                                                        </div>
+                                                        <div className="form-wrapper">
+                                                            <label htmlFor="">ForumCategory</label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                onChange={(e) => {
+                                                                    setForumCategoryReg(e.target.value);
+                                                                }}
+                                                            />
+                                                        </div>
+                                                        <button onClick={editForum}>Add Forum</button>
+                                                    </form>
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button variant="secondary" onClick={handleClose}>
+                                                        Close
+                                                    </Button>
+                                                    <Button variant="primary" onClick={handleClose}>
+                                                        Add
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-1 forum-info">
 
-                            <div className="forum-item">
-                                <div className="row">
-                                    <div className="col-md-9">
-                                        <div className="forum-icon">
-                                            <i className="fa fa-clock-o"></i>
-                                        </div>
-                                        <a href="forum" className="forum-item-title">Lorem Ipsum is simply
-                                            dummy text. </a>
-                                        <div className="forum-sub-title">Various versions have evolved over the years,
-                                            sometimes by accident, sometimes on purpose passage of Lorem Ipsum (injected
-                                            humour and the like).
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                1516
-                            </span>
                                         <div>
-                                            <small>Views</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                238
-                            </span>
-                                        <div>
-                                            <small>Topics</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                180
-                            </span>
-                                        <div>
-                                            <small>Posts</small>
+                                            <small><button onClick={()=>deleteForum(forum.forum_id)}> Delete </button></small>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="forum-item">
-                                <div className="row">
-                                    <div className="col-md-9">
-                                        <div className="forum-icon">
-                                            <i className="fa fa-bomb"></i>
-                                        </div>
-                                        <a href="forum" className="forum-item-title">There are many variations
-                                            of passages</a>
-                                        <div className="forum-sub-title"> If you are going to use a passage of Lorem
-                                            Ipsum, you need to be sure there isn't anything embarrassing hidden in the
-                                            middle of text. All the Lorem Ipsum generators on the .
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                1766
-                            </span>
-                                        <div>
-                                            <small>Views</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                321
-                            </span>
-                                        <div>
-                                            <small>Topics</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                42
-                            </span>
-                                        <div>
-                                            <small>Posts</small>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div className="forum-item">
-                                <div className="row">
-                                    <div className="col-md-9">
-                                        <div className="forum-icon">
-                                            <i className="fa fa-bookmark"></i>
-                                        </div>
-                                        <a href="forum" className="forum-item-title">The standard chunk of
-                                            Lorem Ipsum</a>
-                                        <div className="forum-sub-title">Ipsum generators on the Internet tend to repeat
-                                            predefined chunks as necessary, making this the first true generator on the
-                                            Internet.
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                765
-                            </span>
-                                        <div>
-                                            <small>Views</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                90
-                            </span>
-                                        <div>
-                                            <small>Topics</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                11
-                            </span>
-                                        <div>
-                                            <small>Posts</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="forum-item">
-                                <div className="row">
-                                    <div className="col-md-9">
-                                        <div className="forum-icon">
-                                            <i className="fa fa-ambulance"></i>
-                                        </div>
-                                        <a href="forum" className="forum-item-title">Lorem Ipsum, you need to
-                                            be sure there</a>
-                                        <div className="forum-sub-title">Internet tend to repeat predefined chunks as
-                                            necessary, making this the
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                2550
-                            </span>
-                                        <div>
-                                            <small>Views</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                122
-                            </span>
-                                        <div>
-                                            <small>Topics</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                92
-                            </span>
-                                        <div>
-                                            <small>Posts</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                </div>)}
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
 
 );
 }

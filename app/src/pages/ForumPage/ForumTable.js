@@ -4,24 +4,23 @@ import React, {useEffect, useState} from "react";
 const ForumTable = () => {
 
    const [forums, setForums] = useState([]);
-   // const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(false);
 
 
-    //useEffect(() => {
-        //setLoading(true);
+    useEffect(() => {
+        setLoading(true);
 
-        //fetch('api/v1/forums/all')
-            //.then(response => response.json())
-            //.then(data => {
-                //setForums(data);
-                //setLoading(false);
-                //console.log(data);
-            //})
-   //}, []);
+        fetch('api/v1/forums/all')
+            .then(response => response.json())
+            .then(data => {
+                setForums(data);
+                setLoading(false);
+               console.log(data);
+            })
+        }, []);
 
-    //if (loading) {
-       // return <p>Loading...</p>;
-    //}
+    if (loading) {
+       return <p>Loading...</p>;}
 
 
     return (
@@ -34,25 +33,30 @@ const ForumTable = () => {
                         <tr>
                             <th>Forum ID</th>
                             <th>Forum Creator</th>
+                            <th>Forum Category</th>
                             <th>Title</th>
+                            <th>Sub-Title</th>
                             <th>Description</th>
                             <th>Create Date</th>
-                            <th>Picture ID</th>
+                           <th>Picture ID</th>
                         </tr>
                         <tr>
-                            <td>{forum.forum_id}</td>
+                           <td>{forum.forum_id}</td>
                             <td>{forum.creator_id.id}</td>
+                            <td>{forum.forum_category}</td>
                             <td>{forum.title}</td>
+                            <td>{forum.sub_title}</td>
                             <td>{forum.description}</td>
                             <td>{forum.create_date}</td>
                             <td>{forum.picture_id}</td>
                         </tr>
 
                     </table>
-                </div>
-            )}
-        </div>
-    );
+               </div>)}
+            </div>
+
+
+   );
 }
 
 export default ForumTable;

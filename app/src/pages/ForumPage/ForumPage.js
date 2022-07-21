@@ -9,7 +9,7 @@ const ForumPage = () => {
     return (
         <>
 
-            <ForumTable />
+
             <ForumLayout />
         </>
     );

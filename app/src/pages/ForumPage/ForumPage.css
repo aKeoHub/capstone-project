@@ -1,5 +1,7 @@
 
-
+.Modal.body{
+    background: #2c313d;
+}
 .white-bg {
     background-color: #2c313d;
 }

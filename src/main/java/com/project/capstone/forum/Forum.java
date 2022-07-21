@@ -56,13 +56,17 @@ public class Forum {
                  @JsonProperty("title") String title,
                  @JsonProperty("description") String description,
                  @JsonProperty("create_date") LocalDate createDate,
-                 @JsonProperty("picture_id") Integer pictureId) {
+                 @JsonProperty("picture_id") Integer pictureId,
+                 @JsonProperty("sub_title") String subTitle,
+                 @JsonProperty("forum_category") String forumCategory) {
         this.id = id;
         this.creator = creator;
         this.title = title;
         this.description = description;
         this.createDate = createDate;
         this.pictureId = pictureId;
+        this.subTitle = subTitle;
+        this.forumCategory = forumCategory;
     }
 
     public Integer getPictureId() {
