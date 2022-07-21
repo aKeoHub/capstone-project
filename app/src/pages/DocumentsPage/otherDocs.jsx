@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 
 const OtherDocs = () => {
      const [documents, setDocuments] = useState([]);
-     const [message, setMessage] = useState([]);
      const [loading, setLoading] = useState(false);
 
      useEffect(() => {
@@ -18,17 +17,24 @@ const OtherDocs = () => {
                      setDocuments(data);
                      setLoading(false);
                      console.log(data);
-                 });
-
-             async function deletePost(id) {
-                await fetch(`/delete/{id}`);
-                setMessage('Delete successful');
-                 }
-         }, []);
+                 })
+             }, []);
 
          if (loading) {
              return <p>Loading...</p>;
          }
+
+     function deleteDocument(id) {
+         fetch('api/v1/events/delete/' + id,{
+             method:'DELETE'
+         }).then(response => response.json())
+                       .then(data => {
+                           setLoading(false);
+                           console.log(data);
+                           window.location.reload();
+                       })
+
+     };
 
          return (
              <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#E8F8F5"}}>
@@ -58,7 +64,7 @@ const OtherDocs = () => {
                                          <td style={{width: "15%"}}>{park_document.createDate}</td>
                                          <td style={{width: "16%"}}>{park_document.description}</td>
                                          <td style={{width: "11%"}}>{park_document.file}</td>
-                                         <td style={{width: "7%"}}><Button key={park_document.id} style={{width: "7%"}}><FontAwesomeIcon icon={faTrash} /></Button></td>
+                                         <td style={{width: "7%"}}><Button onClick={()=>deleteDocument(park_document.id)} style={{width: "7%"}}><FontAwesomeIcon icon={faTrash} /></Button></td>
                                          {/*<td><Button onClick={() => deleteCustomer(this.customerId)}>
                                              <FontAwesomeIcon icon={faTrash} />
                                          </Button></td>*/}
