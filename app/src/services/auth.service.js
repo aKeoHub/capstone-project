@@ -10,7 +10,7 @@ class AuthService {
         headers.append('Accept', 'application/json');
         headers.append('Origin', 'http://localhost:3000');
 
-        return fetch("api/signin", {
+        return fetch("api/login", {
 
             method: 'POST',
             body: JSON.stringify({
@@ -20,14 +20,23 @@ class AuthService {
             }),
             headers: headers
         })
+                .then(response => response.json())
+                .then(json => {
+                    //console.log(json.access_token)
+                        if (json.access_token) {
+                            localStorage.setItem("accessToken", JSON.stringify(json.access_token));
+                            console.log(localStorage.getItem('accessToken'))
+                        }
+                })
 
-            .then(response => {
-                console.log(response.data);
-                if (response.data) {
-                    localStorage.setItem("user", JSON.stringify(response.data));
-                }
-                return response.data;
-            });
+                .catch(error => console.log('Authorization failed: ' + error.message));
+            // .then(response => {
+            //     console.log(response.data);
+            //     if (response.data) {
+            //         localStorage.setItem("user", JSON.stringify(response.data));
+            //     }
+            //     return response.data;
+            // });
     }
 
     // login(username, password) {

@@ -43,24 +43,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable();
 
-        //CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
-       // customAuthenticationFilter.setFilterProcessesUrl("/api/login");
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+        customAuthenticationFilter.setFilterProcessesUrl("/api/login");
 
-        http.authorizeRequests().anyRequest().permitAll();
-//        http.sessionManagement().sessionCreationPolicy(STATELESS);
-//        http.exceptionHandling()
-//                        .authenticationEntryPoint((request, response, ex) -> {
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-//        }).and();
-//
-//        http.authorizeRequests().antMatchers("/api/login/**", "/api/signin/**", "/api/token/refresh/**", "/api/user/save/**").permitAll();
-//        http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
-//        http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
-//        http.authorizeRequests().anyRequest().authenticated();
-////        http.formLogin().defaultSuccessUrl("http://localhost:3000")
-////                .failureUrl("/login?error=true");
-//        http.addFilter(customAuthenticationFilter);
-//        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+  //      http.authorizeRequests().anyRequest().permitAll();
+        http.sessionManagement().sessionCreationPolicy(STATELESS);
+        http.exceptionHandling()
+                        .authenticationEntryPoint((request, response, ex) -> {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+        }).and();
+
+        http.authorizeRequests().antMatchers("/api/login/**", "/api/signin/**", "/api/token/refresh/**", "/api/user/save/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().anyRequest().authenticated();
+        http.formLogin().defaultSuccessUrl("http://localhost:3000")
+                .failureUrl("/login?error=true");
+        http.addFilter(customAuthenticationFilter);
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

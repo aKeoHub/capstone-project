@@ -47,10 +47,11 @@ public class User {
     @ToString.Exclude
     private Set<Item> items = new LinkedHashSet<>();
 
-    @ManyToMany(mappedBy = "users")
-    @ToString.Exclude
-    private Set<Role> roles = new LinkedHashSet<>();
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
     @OneToMany(mappedBy = "creator")
     @ToString.Exclude
     private Set<Forum> forums = new LinkedHashSet<>();
