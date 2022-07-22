@@ -1,11 +1,15 @@
 import axios from "axios";
+import {useState} from "react";
 
 const API_URL = "http://localhost:8080/api";
 
 class AuthService {
-const
+
+
+
     login(username, password) {
         let headers = new Headers();
+
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
         headers.append('Origin', 'http://localhost:3000');
@@ -21,7 +25,9 @@ const
             headers: headers
         })
             .then(response => response.json())
-            .then(json => console.log(json))
+            .then(json => console.log(json.accessToken))
+            //.then(json => setUser(json()))
+
             .catch(error => console.log('Authorization failed: ' + error.message));
             // .then(response => {
             //     console.log(response.json());
