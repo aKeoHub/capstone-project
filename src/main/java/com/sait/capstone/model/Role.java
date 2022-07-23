@@ -24,12 +24,6 @@ public class Role {
     @Column(name = "role_name", nullable = false, length = 56)
     private String roleName;
 
-    @ManyToMany
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    @ToString.Exclude
-    private Set<User> users = new LinkedHashSet<>();
 
     public Role(@JsonProperty("role_id") int id,
                 @JsonProperty("role_name") String name){
@@ -37,13 +31,7 @@ public class Role {
         this.roleName=name;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 
     public String getRoleName() {
         return roleName;
