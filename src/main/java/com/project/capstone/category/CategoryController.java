@@ -7,19 +7,20 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-/*
-@Controller
+
+@RestController
+@RequestMapping("api/v1/category")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/category")
-    public Category createCategory(@Valid @RequestBody Category category){
+    @PostMapping("/add")
+    public Category createCategory(@Valid @RequestBody Category category) throws CategoryNotFoundException{
         return categoryService.saveCategory(category);
     }
 
-    @GetMapping("category/{id}")
+    @GetMapping("/get/{id}")
     public Category getCategory(@PathVariable("id") Integer id) throws CategoryNotFoundException {
         Optional<Category> category = categoryService.getCategory(id);
         if (category.isPresent()){
@@ -29,18 +30,18 @@ public class CategoryController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Category> fetchCategoryList() {
         return categoryService.fetchCategoryList();
     }
 
-    @PutMapping
+    @PutMapping("/edit/{id}")
     public Category updateCategory(@RequestBody Category category , @PathVariable("id") Integer categoryId) throws CategoryNotFoundException {
 
         return categoryService.updateCategory(category, categoryId);
     }
 
-    @DeleteMapping("category/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteCategoryById(@PathVariable("id") Integer categoryId){
         categoryService.deleteCategoryById(categoryId);
 
@@ -49,4 +50,3 @@ public class CategoryController {
 }
 
 
- */

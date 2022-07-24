@@ -1,5 +1,7 @@
 package com.project.capstone.event;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,13 +21,15 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_creator")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "event_creator", nullable = false)
+    @JsonManagedReference
     @ToString.Exclude
     private User eventCreator;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonManagedReference
     @ToString.Exclude
     private Category category;
 
@@ -50,7 +54,7 @@ public class Event {
     public Event(@JsonProperty("event_id") Integer id,
                  @JsonProperty("event_creator") User eventCreator,
                  @JsonProperty("category_id") Category category,
-                 @JsonProperty("event name") String eventName,
+                 @JsonProperty("event_name") String eventName,
                  @JsonProperty("location") String location,
                  @JsonProperty("description") String description,
                  @JsonProperty("start_date") LocalDate startDate,
@@ -139,11 +143,4 @@ public class Event {
         this.id = id;
     }
 
-    public User getEventCreater() {
-        return eventCreator;
-    }
-
-    public void setEventCreater(User eventCreater) {
-        this.eventCreator = eventCreater;
-    }
 }

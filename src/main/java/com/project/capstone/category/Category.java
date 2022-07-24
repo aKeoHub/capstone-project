@@ -1,7 +1,10 @@
 package com.project.capstone.category;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.capstone.event.Event;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.capstone.parkdocument.ParkDocument;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +14,7 @@ import java.util.Collection;
 
 
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @ToString
@@ -33,10 +37,31 @@ public class Category {
         this.category_type = category_type;
     }
 
+    @OneToMany(fetch = LAZY)
+    @ToString.Exclude
+    @JsonBackReference
+    private Collection<ParkDocument> documents = new ArrayList<>();
+    @JsonBackReference
+    public Collection<ParkDocument> getDocuments() {
+        return documents;
+    }
 
+    public void setDocuments(Collection<ParkDocument> documents) {
+        this.documents = documents;
+    }
 
-    @ManyToMany(fetch = EAGER)
+    @ManyToMany(fetch = LAZY)
+    @ToString.Exclude
+    @JsonBackReference
     private Collection<Event> events = new ArrayList<>();
+
+    public void setEvents(Collection<Event> events) {
+        this.events = events;
+    }
+    @JsonBackReference
+    public Collection<Event> getEvents() {
+        return events;
+    }
 
     public Integer getCategory_id() {
         return category_id;

@@ -1,14 +1,17 @@
 package com.project.capstone.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
-import com.project.capstone.item.Item;
+import com.project.capstone.sales.Item;
 import com.project.capstone.role.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -43,9 +46,9 @@ public class User {
     private Integer pictureId;
 
     @Column(name = "create_date")
-    private Date createDate;
+    private LocalDate createDate;
 
-    @OneToMany(mappedBy = "eventCreator")
+    @OneToMany(mappedBy = "eventCreator", fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<Event> events = new LinkedHashSet<>();
 
@@ -68,7 +71,7 @@ public class User {
                 @JsonProperty("lastname") String lastname,
                 @JsonProperty("email") String email,
                 @JsonProperty("picture_id") Integer picture_id,
-                @JsonProperty("create_date") Date create_date) {
+                @JsonProperty("create_date") LocalDate create_date) {
         this.id = user_id;
         this.username = username;
         this.password = password;
@@ -78,6 +81,7 @@ public class User {
         this.pictureId = picture_id;
         this.createDate = create_date;
     }
+    @JsonBackReference
     public Set<Forum> getForums() {
         return forums;
     }
@@ -85,7 +89,7 @@ public class User {
     public void setForums(Set<Forum> forums) {
         this.forums = forums;
     }
-
+    @JsonBackReference
     public Set<Role> getRoles() {
         return roles;
     }
@@ -93,7 +97,7 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
+    @JsonBackReference
     public Set<Item> getItems() {
         return items;
     }
@@ -101,7 +105,7 @@ public class User {
     public void setItems(Set<Item> items) {
         this.items = items;
     }
-
+    @JsonBackReference
     public Set<Event> getEvents() {
         return events;
     }
@@ -110,14 +114,14 @@ public class User {
         this.events = events;
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
-
+    @JsonBackReference
     public Integer getPictureId() {
         return pictureId;
     }

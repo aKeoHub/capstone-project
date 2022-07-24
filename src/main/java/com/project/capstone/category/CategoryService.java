@@ -9,7 +9,7 @@ public interface CategoryService {
     Optional<Category> getCategory(Integer id);
 
 
-    Category saveCategory (Category category);
+    Category saveCategory (Category category) throws CategoryNotFoundException;
 
     List<Category> fetchCategoryList();
 
