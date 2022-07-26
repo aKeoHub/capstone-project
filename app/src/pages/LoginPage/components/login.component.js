@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -26,16 +26,19 @@ export default class Login extends Component {
             message: ""
         };
     }
+
     onChangeUsername(e) {
         this.setState({
             username: e.target.value
         });
     }
+
     onChangePassword(e) {
         this.setState({
             password: e.target.value
         });
     }
+
     handleLogin(e) {
         e.preventDefault();
         this.setState({
@@ -70,43 +73,48 @@ export default class Login extends Component {
             });
         }
     }
+
     render() {
         return (
-            <div className="col-md-12">
-                <div className="card card-container">
-                    <img
-                        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                        alt="profile-img"
-                        className="profile-img-card"
-                    />
+            <div className="wrapper" style={{backgroundImage: 'backgroundImg.jpg'}}>
+                <div className="inner">
+
                     <Form
                         onSubmit={this.handleLogin}
                         ref={c => {
                             this.form = c;
                         }}
                     >
-                        <div className="form-group">
-                            <label htmlFor="username">Username</label>
-                            <Input
-                                type="text"
-                                className="form-control"
-                                name="username"
-                                value={this.state.username}
-                                onChange={this.onChangeUsername}
-                                validations={[required]}
-                            />
+                        <div className="form-wrapper">
+                            <div className="form-wrapper">
+                                <label htmlFor="username">Username</label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="username"
+                                    value={this.state.username}
+                                    onChange={this.onChangeUsername}
+                                    validations={[required]}
+                                />
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <Input
-                                type="password"
-                                className="form-control"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.onChangePassword}
-                                validations={[required]}
-                            />
+
+
+                        <div className="form-wrapper">
+                            <div className="form-wrapper">
+                                <label htmlFor="password">Password</label>
+                                <Input
+                                    type="password"
+                                    className="form-control"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.onChangePassword}
+                                    validations={[required]}
+                                />
+                            </div>
                         </div>
+
+
                         <div className="form-group">
                             <button
                                 className="btn btn-primary btn-block"
@@ -126,7 +134,7 @@ export default class Login extends Component {
                             </div>
                         )}
                         <CheckButton
-                            style={{ display: "none" }}
+                            style={{display: "none"}}
                             ref={c => {
                                 this.checkBtn = c;
                             }}
@@ -134,6 +142,8 @@ export default class Login extends Component {
                     </Form>
                 </div>
             </div>
+
+
         );
     }
 }

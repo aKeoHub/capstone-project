@@ -2,6 +2,7 @@ import React from 'react';
 import LoginForm from "./loginForm";
 import Login from "./components/login.component";
 import axios from "axios";
+import './login.css'
 
 
 class LoginPage extends React.Component {
@@ -40,8 +41,11 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-           <LoginForm/>
-      // <Login/>
+          // <LoginForm/>
+            <div className=''>
+                <Login/>
+            </div>
+
        //      <form onSubmit={this.handleSubmit}>
        //          <label>
        //              Name:
