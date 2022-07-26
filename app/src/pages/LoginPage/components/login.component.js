@@ -47,8 +47,8 @@ export default class Login extends Component {
             AuthService.login(this.state.username, this.state.password).then(
                 (response) => {
                     //console.log(response.data,"===========================================");
-                    this.props.history.push("/");
-                    window.location.reload();
+                    this.props.history.push("/profile");
+                    //window.location.reload();
                 },
                 error => {
                     const resMessage =
@@ -64,6 +64,7 @@ export default class Login extends Component {
                 }
             );
         } else {
+
             this.setState({
                 loading: false
             });
