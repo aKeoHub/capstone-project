@@ -19,6 +19,7 @@ public class ForumServiceAccess implements ForumService {
 
     @Override
     public Forum createForum(Forum forum) {
+
         return forumRepository.save(forum);
     }
 

@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 
 
 
+
 const ForumLayout = () => {
 
     const [forums, setForums] = useState([]);
@@ -20,6 +21,7 @@ const ForumLayout = () => {
     const [description, setDescriptionReg] = useState("");
     const [forumCategory, setForumCategoryReg] = useState("");
     const [picture_id, setPictureId] = useState("");
+
 
     useEffect(() => {
         setLoading(true);
@@ -45,7 +47,7 @@ const ForumLayout = () => {
                 .then(data => {
                     setLoading(false);
                     console.log(data);
-                    window.location.reload();
+                    //window.location.reload();
                 })
         }
     function addForum() {
@@ -54,7 +56,8 @@ const ForumLayout = () => {
         const mm = String(forumToday.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = forumToday.getFullYear();
         forumToday = yyyy + '-' + mm + '-' + dd;
-        fetch("/api/v1/forums/add", {
+
+        fetch("api/v1/forums/add", {
 
             // Adding method type
             method: "POST",
@@ -64,11 +67,12 @@ const ForumLayout = () => {
                 forum_id: forumId,
                 creator_id: creatorId,
                 title: title,
-                sub_title: subTitle,
                 description: description,
-                picture_id: picture_id,
-                forum_category: forumCategory,
                 create_date: forumToday.toString(),
+                picture_id: picture_id,
+                sub_title: subTitle,
+                forum_category: forumCategory,
+
             }),
 
             headers: {
@@ -82,19 +86,21 @@ const ForumLayout = () => {
 
             // Displaying results to console
             .then(json => console.log(json));
+            //window.location.reload();
     }
-    function editForum(id) {
+    function viewForum(id) {
+
+
         fetch("/api/v1/forums/get/" + id, {
 
             // Adding method type
-            method: "UPDATE",
+            method: "VIEW",
 
         }).then(response => response.json())
             .then(data => {
                 setLoading(false);
-                console.log(data);
-                window.location.reload();
             })
+        window.location = "./viewForum";
     }
 
 
@@ -111,7 +117,7 @@ return (
 
                             <div className="forum-title">
                                 <div className="pull-right forum-desc">
-                                    <samll>Total posts: 320,800</samll>
+                                    <small>Total posts: {forums.length}</small>
                                 </div>
                                 <h3>All Forum Posts</h3>
                             </div>
@@ -119,17 +125,17 @@ return (
                                 Add Forum
                             </Button>
                             <Modal show={show} onHide={handleClose}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Modal heading</Modal.Title>
+                                <Modal.Header className="blue-color-background" closeButton>
+                                    <Modal.Title>Creating a Forum</Modal.Title>
                                 </Modal.Header>
-                                <Modal.Body>
+                                <Modal.Body className="blue-color-background">
                                     <form action="">
-                                        <h3>Registration Form</h3>
+                                        <h3>Your New Forum!</h3>
                                         <div className="form-wrapper">
                                             <div className="form-wrapper">
                                                 <label htmlFor="">Creator ID</label>
                                                 <input
-                                                    type="text"
+                                                    type="number"
                                                     className="form-control"
                                                     onChange={(e) => {
                                                         setCreatorIdReg(e.target.value);
@@ -163,7 +169,8 @@ return (
                                         </div>
                                         <div className="form-wrapper">
                                             <label htmlFor="">Description</label>
-                                            <input
+                                            <textarea
+
                                                 type="text"
                                                 className="form-control"
                                                 onChange={(e) => {
@@ -172,23 +179,20 @@ return (
                                             />
                                         </div>
                                         <div className="form-wrapper">
-                                            <label htmlFor="">ForumCategory</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                onChange={(e) => {
-                                                    setForumCategoryReg(e.target.value);
-                                                }}
-                                            />
+                                            <label htmlFor="forumCategory">ForumCategory</label>
+                                            <select name="forumCategory" id="forumCategory">
+                                                <option value="Help Needed!">Help Needed!</option>
+                                                <option value="Announcement">Announcement</option>
+                                                <option value="Event">Event</option>
+                                            </select>
                                         </div>
-                                        <button onClick={addForum}>Add Forum</button>
                                     </form>
                                 </Modal.Body>
-                                <Modal.Footer>
+                                <Modal.Footer className="blue-color-background">
                                     <Button variant="secondary" onClick={handleClose}>
                                         Close
                                     </Button>
-                                    <Button variant="primary" onClick={handleClose}>
+                                    <Button variant="primary" onClick={addForum}>
                                         Add
                                     </Button>
                                 </Modal.Footer>
@@ -202,122 +206,41 @@ return (
                                         <div className="forum-icon">
                                             <i className="fa fa-shield"></i>
                                         </div>
-                                        <a href="forum" className="forum-item-title">{forum.title}</a>
+                                        <a href="viewForum" className="forum-item-title">{forum.title}</a>
                                         <div className="forum-sub-title">{forum.sub_title}
                                         </div>
-                                        <div>{forum.forum_category}</div>
+                                        <div>Forum type: {forum.forum_category}</div>
+                                        <div>Created by: {forum.creator_id.username}</div>
+
                                     </div>
                                     <div className="col-md-1 forum-info">
                             <span className="views-number">
-                                1216
+
                             </span>
                                         <div>
-                                            <small>Views</small>
+                                            <small>Create Date: {forum.create_date}</small>
                                         </div>
                                     </div>
                                     <div className="col-md-1 forum-info">
-                            <span className="views-number">
-                                368
-                            </span>
+
                                         <div>
                                             <small>
-                                            <Button variant="primary" onClick={handleShow}>
-                                                Edit Forum
+                                            <Button variant="primary" onClick={viewForum}>
+                                                View
                                             </Button>
                                             </small>
 
-                                            <Modal show={show} onHide={handleClose}>
-                                                <Modal.Header closeButton>
-                                                    <Modal.Title>Modal heading</Modal.Title>
-                                                </Modal.Header>
-                                                <Modal.Body>
-                                                    <form action="">
-                                                        <h3>Edit Your Forum</h3>
-                                                        <div className="form-wrapper">
-                                                            <div className="form-wrapper">
-                                                                <label htmlFor="">Creator ID</label>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    onChange={(e) => {
-                                                                        setCreatorIdReg(e.target.value);
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="form-wrapper">
-                                                            <div className="form-wrapper">
-                                                                <label htmlFor="">Title</label>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    onChange={(e) => {
-                                                                        setTitleReg(e.target.value);
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="form-wrapper">
-                                                            <div className="form-wrapper">
-                                                                <label htmlFor="">Sub Title</label>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    onChange={(e) => {
-                                                                        setSubTitleReg(e.target.value);
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="form-wrapper">
-                                                            <label htmlFor="">Description</label>
-                                                            <input
-                                                                type="text"
-                                                                className="form-control"
-                                                                onChange={(e) => {
-                                                                    setDescriptionReg(e.target.value);
-                                                                }}
-                                                            />
-                                                        </div>
-                                                        <div className="form-wrapper">
-                                                            <label htmlFor="">ForumCategory</label>
-                                                            <input
-                                                                type="text"
-                                                                className="form-control"
-                                                                onChange={(e) => {
-                                                                    setForumCategoryReg(e.target.value);
-                                                                }}
-                                                            />
-                                                        </div>
-                                                        <button onClick={editForum}>Add Forum</button>
-                                                    </form>
-                                                </Modal.Body>
-                                                <Modal.Footer>
-                                                    <Button variant="secondary" onClick={handleClose}>
-                                                        Close
-                                                    </Button>
-                                                    <Button variant="primary" onClick={handleClose}>
-                                                        Add
-                                                    </Button>
-                                                </Modal.Footer>
-                                            </Modal>
                                         </div>
-                                    </div>
-                                    <div className="col-md-1 forum-info">
-
-                                        <div>
-                                            <small><button onClick={()=>deleteForum(forum.forum_id)}> Delete </button></small>
-                                        </div>
-                                    </div>
                                 </div>
                                 </div>
-                                </div>)}
 
                             </div>
-                        </div>
+                        </div>)}
                     </div>
                 </div>
             </div>
+            </div>
+        </div>
 
 
 );
