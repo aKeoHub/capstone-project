@@ -46,34 +46,31 @@ const OtherDocs = () => {
                     <div className="table-responsive">
                          <table className="table">
                              <tr className="bg-primary text-white">
-                                 <th style={{width: "8%"}}>Doc_id</th>
-                                 <th style={{width: "13%"}}>Category_id</th>
-                                 <th style={{width: "12%"}}>Creator_id</th>
-                                 <th style={{width: "14%"}}>Doc_name</th>
-                                 <th style={{width: "14%"}}>Date_created</th>
-                                 <th style={{width: "15%"}}>Description</th>
-                                 <th style={{width: "10%"}}>File</th>
-                                 <th style={{width: "7%"}}>Delete</th>
-                                 <th style={{width: "7%"}}>Edit</th>
+                                 <th style={{width: "9%"}}>Doc_id</th>
+                                 <th style={{width: "13%"}}>Creator_id</th>
+                                 <th style={{width: "16%"}}>Doc_name</th>
+                                 <th style={{width: "16%"}}>Date_created</th>
+                                 <th style={{width: "18%"}}>Description</th>
+                                 <th style={{width: "12%"}}>File</th>
+                                 <th style={{width: "8%"}}>Delete</th>
+                                 <th style={{width: "8%"}}>Edit</th>
                              </tr>
                          </table>
                          {documents.map(park_document =>
-                             <div key={park_document.id}>
+                             <div>
                                  <table className="table">
                                      <tr>
                                          <td style={{width: "9%"}}>{park_document.id}</td>
-                                         <td style={{width: "14%"}}>1</td>
-                                         {/*<td>{park_document.documentCategory.category_id}*/}
                                          <td style={{width: "13%"}}>{park_document.creatorId}</td>
-                                         <td style={{width: "15%"}}><span id={park_document.documentName}>{park_document.documentName}</span><input id={park_document.id} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "15%"}}>{park_document.createDate}</td>
-                                         <td id={park_document.id} style={{width: "16%"}}>{park_document.description}</td>
-                                         <td style={{width: "11%"}}>{park_document.file}</td>
+                                         <td style={{width: "16%"}}><span id={park_document.documentName}>{park_document.documentName}</span><input id={park_document.id} type="text" style={{display: "none", width: "67%"}} /></td>
+                                         <td style={{width: "16%"}}>{park_document.createDate}</td>
+                                         <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
+                                         <td style={{width: "12%"}}>{park_document.file}</td>
                                          <td>
-                                         <Button onClick={()=>deleteDocument(park_document.id)} style={{width: "7%"}}><FontAwesomeIcon icon={faTrash} /></Button>
+                                         <Button onClick={()=>deleteDocument(park_document.id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
                                          </td>
                                          <td>
-                                         <Button onClick={()=>{document.getElementById(park_document.id).style.display="block"; document.getElementById(park_document.documentName).style.display="none"}} style={{width: "7%"}}><FontAwesomeIcon icon={faEdit} /></Button>
+                                         <Button id={park_document.id+"b"} onClick={()=>{document.getElementById(park_document.id+"a").style.display="block"; document.getElementById(park_document.id).style.display="block"; document.getElementById(park_document.documentName).style.display="none"; document.getElementById(park_document.description).style.display="none"; document.getElementById(park_document.id+"b").innerHTML="SAVE"}} style={{width: "8%"}}><FontAwesomeIcon icon={faEdit} /></Button>
                                          </td>
 {/*onClick={()=>updateDocument(park_document.id)}*/}
                                          {/*<td><Button onClick={() => deleteCustomer(this.customerId)}>
