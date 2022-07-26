@@ -35,7 +35,6 @@ function deleteEvent(id) {
                       console.log(data);
                       window.location.reload();
                   })
-
 }
 
     return (
@@ -67,7 +66,6 @@ function deleteEvent(id) {
             {events.map(event =>
                 <div key={event.id}>
                     <table class="eventTable">
-
                         <tr>
                             <td>{event.event_id}</td>
                             <td>{event.event_creator.id}</td>

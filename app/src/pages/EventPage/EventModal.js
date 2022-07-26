@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import EventService from './EventService/EventService';
+import EventForm from './EventForm';
 
 function EventModal() {
   const [show, setShow] = useState(false);
@@ -20,10 +21,10 @@ function EventModal() {
 
        <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Add Event</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-
+                <EventForm />
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
