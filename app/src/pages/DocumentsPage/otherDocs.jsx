@@ -36,8 +36,8 @@ const OtherDocs = () => {
             })
      }
 
-    function updateDocument(id) {
-        fetch('api/v1/documents/edit/' + id)
+    function updateDocument(did, cid, dname, date, desc, file) {
+        fetch('api/v1/documents/edit/' + did)
     }
 
          return (
@@ -74,7 +74,7 @@ const OtherDocs = () => {
                                          onClick={()=>{document.getElementById(park_document.id+"a").style.display="block"; document.getElementById(park_document.id).style.display="block";
                                          document.getElementById(park_document.documentName).style.display="none"; document.getElementById(park_document.description).style.display="none";
                                          document.getElementById(park_document.id+"b").style.display="none"; let btn=document.createElement("button"); btn.innerText="SAVE";
-                                         document.getElementById(park_document.id+"c").appendChild(btn); btn.setAttribute("onclick", updateDocument(park_document.id)); }}
+                                         document.getElementById(park_document.id+"c").appendChild(btn); btn.setAttribute("onclick", updateDocument(park_document.id, park_document.creatorId, document.getElementById(park_document.id).value, park_document.createDate, document.getElementById(park_document.id+"a").value, park_document.file)); }}
                                          style={{width: "8%"}}><FontAwesomeIcon icon={faEdit} /></Button>
                                          </td>
                                      </tr>
