@@ -37,7 +37,7 @@ const OtherDocs = () => {
      }
 
     function updateDocument(id) {
-        fetch()
+        fetch('api/v1/documents/edit/' + id)
     }
 
          return (
@@ -69,13 +69,14 @@ const OtherDocs = () => {
                                          <td>
                                          <Button onClick={()=>deleteDocument(park_document.id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
                                          </td>
-                                         <td>
-                                         <Button id={park_document.id+"b"} onClick={()=>{document.getElementById(park_document.id+"a").style.display="block"; document.getElementById(park_document.id).style.display="block"; document.getElementById(park_document.documentName).style.display="none"; document.getElementById(park_document.description).style.display="none"; document.getElementById(park_document.id+"b").innerHTML="SAVE"}} style={{width: "8%"}}><FontAwesomeIcon icon={faEdit} /></Button>
+                                         <td id={park_document.id+"c"}>
+                                         <Button id={park_document.id+"b"} style={{display: "block"}}
+                                         onClick={()=>{document.getElementById(park_document.id+"a").style.display="block"; document.getElementById(park_document.id).style.display="block";
+                                         document.getElementById(park_document.documentName).style.display="none"; document.getElementById(park_document.description).style.display="none";
+                                         document.getElementById(park_document.id+"b").style.display="none"; let btn=document.createElement("button"); btn.innerText="SAVE";
+                                         document.getElementById(park_document.id+"c").appendChild(btn); btn.setAttribute("onclick", updateDocument(park_document.id)); }}
+                                         style={{width: "8%"}}><FontAwesomeIcon icon={faEdit} /></Button>
                                          </td>
-{/*onClick={()=>updateDocument(park_document.id)}*/}
-                                         {/*<td><Button onClick={() => deleteCustomer(this.customerId)}>
-                                             <FontAwesomeIcon icon={faTrash} />
-                                         </Button></td>*/}
                                      </tr>
                                  </table>
                              </div>
