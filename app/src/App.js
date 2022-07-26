@@ -6,11 +6,9 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar/NavBar";
-import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-import Login from "./pages/LoginPage/components/login.component";
-import LoginForm from "./pages/LoginPage/loginForm";
 import AdminPage from "./pages/AdminPage";
+import Login from "./pages/LoginPage/components/login.component";
 
 function App() {
 

@@ -51,29 +51,22 @@ public class CapstoneApplication {
 
 
 
-			userService.saveUser(new User(1 , "john", "1234", "john", "1234", "kingston@live.ca1", 1, null));
-			userService.saveUser(new User(2 , "kingston", "1234", "keoboun1", "1234", "kingston@live.ca1", 1, null));
-			userService.saveUser(new User(3 , "Kingston1", "1234", "keoboun1", "1234", "kingston@live.ca22", 1, null));
+			userService.saveUser(new User(1 , "john", "hockey", "john", "1234", "johnnyhockey@live.ca1", 1, null));
+			userService.saveUser(new User(2 , "kingston", "1234", "kingston", "the greatest", "kingston@live.ca", 1, null));
+			userService.saveUser(new User(3 , "1punchman", "1234", "saitama", "the all mighty", "onepunchman@live.ca", 1, null));
 
 
 			userService.addRoleToUser("john", "ROLE_USER");
-			userService.addRoleToUser("john", "ROLE_MANAGER");
-			userService.addRoleToUser("john", "ROLE_ADMIN");
+
 			userService.addRoleToUser("kingston", "ROLE_USER");
 			userService.addRoleToUser("kingston", "ROLE_MANAGER");
 			userService.addRoleToUser("kingston", "ROLE_ADMIN");
+
+			userService.addRoleToUser("1punchman", "ROLE_MANAGER");
+
+
 		};
 	}
-
-//	@Bean
-//	public WebMvcConfigurer corsConfigurer() {
-//		return new WebMvcConfigurerAdapter() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/**").allowedOrigins("http://localhost:3000");
-//			}
-//		};
-//	}
 
 }
 

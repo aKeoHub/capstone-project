@@ -113,7 +113,12 @@ export default class Login extends Component {
                                 />
                             </div>
                         </div>
-
+                        <div className="checkbox">
+                            <label>
+                                <input type="checkbox"/> I am not a human.
+                                <span className="checkmark"></span>
+                            </label>
+                        </div>
 
                         <div className="form-group">
                             <button

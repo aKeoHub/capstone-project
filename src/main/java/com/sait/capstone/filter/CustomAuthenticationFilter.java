@@ -47,12 +47,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if ("POST".equalsIgnoreCase(request.getMethod()))
-        {
+        if ("POST".equalsIgnoreCase(request.getMethod())) {
             try {
                 String credentials = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
                 log.info(credentials);
-                if(username == null && password == null ) {
+                if (username == null && password == null) {
                     JSONObject user = new JSONObject(credentials);
 
                     username = (String.valueOf(user.getString("username")));
@@ -110,7 +109,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        response.sendRedirect("http://localhost:3000/api/login");
         logger.debug("failed authentication");
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-  response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED, "Unauthorized");
+        response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED, "Unauthorized");
         //Add more descriptive message
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                 "Authentication Failed");
