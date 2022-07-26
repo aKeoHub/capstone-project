@@ -12,7 +12,7 @@ public class FileDownloadUtil {
     private Path foundFile;
 
     public Resource getFileAsResource(String fileCode) throws IOException {
-        String fpath = "capstone-project/src/main/java/com/capstone/Files-Upload";
+        String fpath = "src/main/java/com/project/capstone/Files-Upload";
         Path dirPath = Paths.get(fpath);
 
         Files.list(dirPath).forEach(file -> {

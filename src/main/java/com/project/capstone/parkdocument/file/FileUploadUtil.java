@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadUtil {
     public static String saveFile(String fileName, MultipartFile multipartFile)
             throws IOException {
-        String fpath = "capstone-project/src/main/java/com/capstone/Files-Upload";
+        String fpath = "src/main/java/com/project/capstone/Files-Upload";
         Path uploadPath = Paths.get(fpath);
 
         if (!Files.exists(uploadPath)) {
