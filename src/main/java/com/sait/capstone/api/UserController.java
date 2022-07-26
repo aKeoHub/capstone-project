@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sait.capstone.model.Role;
 import com.sait.capstone.model.User;
 import com.sait.capstone.service.UserService;
-import com.sait.capstone.service.UserServiceImpl;
+//import com.sait.capstone.service.UserServiceImpl;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +51,11 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity<User>loginUser(@RequestBody User user) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/signin").toUriString());
-        return ResponseEntity.created(uri).body(userService.loginUser(user.getUsername(), user.getPassword()));
-    }
+//    @PostMapping("/signin")
+//    public ResponseEntity<User>loginUser(@RequestBody User user) {
+//        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/signin").toUriString());
+//        return ResponseEntity.created(uri).body(userService.loginUser(user.getUsername(), user.getPassword()));
+//    }
 
     @PostMapping("/role/save")
     public ResponseEntity<Role>saveRole(@RequestBody Role role) {

@@ -31,10 +31,7 @@ public class CapstoneApplication {
 		SpringApplication.run(CapstoneApplication.class, args);
 	}
 
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
 
 
 	@Bean
