@@ -2,7 +2,6 @@ import React, {useEffect,useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Button from '@material-ui/core/Button';
 
 const OtherDocs = () => {
@@ -36,8 +35,45 @@ const OtherDocs = () => {
             })
      }
 
-    function updateDocument(id) {
-        fetch()
+    const addDocument = () => {
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+
+        fetch("/api/v1/user", {
+
+            // Adding method type
+            method: "POST",
+
+            // Adding body or contents to send
+            body: JSON.stringify({
+                user_id: userId,
+                username: username,
+                password: password,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                picture_id: picture_id,
+                create_date: today.toString(),
+            }),
+
+            //Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+
+            // Converting to JSON
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(json => console.log(json));
+
+        if (loading) {
+            return <p>Loading...</p>;
+        }
     }
 
          return (
@@ -47,32 +83,28 @@ const OtherDocs = () => {
                          <table className="table">
                              <tr className="bg-primary text-white">
                                  <th style={{width: "9%"}}>Doc_id</th>
+                                 <th style={{width: "14%"}}>Category_id</th>
                                  <th style={{width: "13%"}}>Creator_id</th>
-                                 <th style={{width: "16%"}}>Doc_name</th>
-                                 <th style={{width: "16%"}}>Date_created</th>
-                                 <th style={{width: "18%"}}>Description</th>
-                                 <th style={{width: "12%"}}>File</th>
-                                 <th style={{width: "8%"}}>Delete</th>
-                                 <th style={{width: "8%"}}>Edit</th>
+                                 <th style={{width: "15%"}}>Doc_name</th>
+                                 <th style={{width: "15%"}}>Date_created</th>
+                                 <th style={{width: "16%"}}>Description</th>
+                                 <th style={{width: "11%"}}>File</th>
+                                 <th style={{width: "7%"}}>Delete</th>
                              </tr>
                          </table>
                          {documents.map(park_document =>
-                             <div>
+                             <div key={park_document.id}>
                                  <table className="table">
                                      <tr>
                                          <td style={{width: "9%"}}>{park_document.id}</td>
+                                         <td style={{width: "14%"}}>1</td>
+                                         {/*<td>{park_document.documentCategory.category_id}*/}
                                          <td style={{width: "13%"}}>{park_document.creatorId}</td>
-                                         <td style={{width: "16%"}}><span id={park_document.documentName}>{park_document.documentName}</span><input id={park_document.id} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "16%"}}>{park_document.createDate}</td>
-                                         <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "12%"}}>{park_document.file}</td>
-                                         <td>
-                                         <Button onClick={()=>deleteDocument(park_document.id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
-                                         </td>
-                                         <td>
-                                         <Button id={park_document.id+"b"} onClick={()=>{document.getElementById(park_document.id+"a").style.display="block"; document.getElementById(park_document.id).style.display="block"; document.getElementById(park_document.documentName).style.display="none"; document.getElementById(park_document.description).style.display="none"; document.getElementById(park_document.id+"b").innerHTML="SAVE"}} style={{width: "8%"}}><FontAwesomeIcon icon={faEdit} /></Button>
-                                         </td>
-{/*onClick={()=>updateDocument(park_document.id)}*/}
+                                         <td style={{width: "15%"}}>{park_document.documentName}</td>
+                                         <td style={{width: "15%"}}>{park_document.createDate}</td>
+                                         <td style={{width: "16%"}}>{park_document.description}</td>
+                                         <td style={{width: "11%"}}>{park_document.file}</td>
+                                         <td style={{width: "7%"}}><Button onClick={()=>deleteDocument(park_document.id)} style={{width: "7%"}}><FontAwesomeIcon icon={faTrash} /></Button></td>
                                          {/*<td><Button onClick={() => deleteCustomer(this.customerId)}>
                                              <FontAwesomeIcon icon={faTrash} />
                                          </Button></td>*/}
