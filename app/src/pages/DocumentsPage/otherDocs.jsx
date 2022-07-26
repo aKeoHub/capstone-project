@@ -35,6 +35,47 @@ const OtherDocs = () => {
             })
      }
 
+    const addDocument = () => {
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+
+        fetch("/api/v1/user", {
+
+            // Adding method type
+            method: "POST",
+
+            // Adding body or contents to send
+            body: JSON.stringify({
+                user_id: userId,
+                username: username,
+                password: password,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                picture_id: picture_id,
+                create_date: today.toString(),
+            }),
+
+            //Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+
+            // Converting to JSON
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(json => console.log(json));
+
+        if (loading) {
+            return <p>Loading...</p>;
+        }
+    }
+
          return (
              <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#E8F8F5"}}>
                 <h1 className="text-left text-success mb-4">Documents</h1>
