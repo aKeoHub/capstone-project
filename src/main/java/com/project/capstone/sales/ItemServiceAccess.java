@@ -34,7 +34,7 @@ public class ItemServiceAccess implements ItemService{
         if (currentItemOptional.isPresent()) {
             Item currentItem = currentItemOptional.get();
 
-            currentItem.setId(item.getId());
+            currentItem.setItemId(item.getItemId());
             currentItem.setCategory(item.getCategory());
             currentItem.setOwner(item.getOwner());
             currentItem.setName(item.getName());

@@ -1,36 +1,42 @@
 package com.project.capstone.parkdocument;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.project.capstone.audit.AuditLog;
 import com.project.capstone.category.Category;
+import com.project.capstone.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
-@Table(schema = "capstonedb" , name = "park_document")
+@Table(name = "park_document")
 @RequiredArgsConstructor
 @ToString
-public class ParkDocument {
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+public class ParkDocument implements Serializable {
 
     @Id
     @Column(name = "document_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "document_category", nullable = false)
-    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "document_category", referencedColumnName = "category_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Category documentCategory;
 
-    @Column(name = "creator_id", nullable = false)
-    private Integer creatorId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "creator_id", referencedColumnName = "user_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
+    @ToString.Exclude
+    private User creatorId;
 
     @Column(name = "document_name", nullable = false, length = 30)
     private String documentName;
@@ -46,13 +52,30 @@ public class ParkDocument {
 
     @OneToMany(mappedBy = "parkDocument")
     @ToString.Exclude
-    private Set<AuditLog> auditLogs = new LinkedHashSet<>();
-    @JsonManagedReference
-    public Set<AuditLog> getAuditLogs() {
+    private List<AuditLog> auditLogs = new ArrayList<>();
+
+
+    public ParkDocument(@JsonProperty("document_id") Integer id,
+                        @JsonProperty("document_category") Category documentCategory,
+                        @JsonProperty("creator_id") User creatorId,
+                        @JsonProperty("document_name") String documentName,
+                        @JsonProperty("create_date") LocalDate createDate,
+                        @JsonProperty("description") String description,
+                        @JsonProperty("file") byte[] file) {
+        this.id = id;
+        this.documentCategory=documentCategory;
+        this.creatorId = creatorId;
+        this.documentName = documentName;
+        this.createDate = createDate;
+        this.description = description;
+        this.file = file;
+    }
+
+    public List<AuditLog> getAuditLogs() {
         return auditLogs;
     }
 
-    public void setAuditLogs(Set<AuditLog> auditLogs) {
+    public void setAuditLogs(List<AuditLog> auditLogs) {
         this.auditLogs = auditLogs;
     }
 
@@ -88,11 +111,11 @@ public class ParkDocument {
         this.documentName = documentName;
     }
 
-    public Integer getCreatorId() {
+    public User getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
+    public void setCreatorId(User creatorId) {
         this.creatorId = creatorId;
     }
 

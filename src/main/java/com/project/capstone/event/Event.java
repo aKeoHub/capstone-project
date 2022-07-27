@@ -1,35 +1,38 @@
 package com.project.capstone.event;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(schema = "capstonedb" , name = "event")
+@Table(name = "event")
 @RequiredArgsConstructor
 @ToString
-public class Event {
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+public class Event implements Serializable {
     @Id
     @Column(name = "event_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "event_creator", nullable = false)
-    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_creator", referencedColumnName = "user_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private User eventCreator;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
-    @JsonManagedReference
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Category category;
 

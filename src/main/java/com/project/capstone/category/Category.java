@@ -1,47 +1,45 @@
 package com.project.capstone.category;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.project.capstone.event.Event;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.capstone.parkdocument.ParkDocument;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Collection;
 
 
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @ToString
 @RequiredArgsConstructor
 @Table(schema = "capstonedb" , name="category")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class Category {
     @Id
+    @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer category_id;
-    @NotBlank
+    @JsonIdentityReference(alwaysAsId = true)
+    private Integer id;
+    @Column(name = "category_name")
     private String category_name;
-    @NotBlank
+    @Column(name = "category_type")
     private String category_type;
 
-    public Category(@JsonProperty("category_id") Integer category_id,
+    public Category(@JsonProperty("category_id") Integer id,
                     @JsonProperty("category_name") String category_name,
                     @JsonProperty("category_type") String category_type) {
-        this.category_id = category_id;
+        this.id = id;
         this.category_name = category_name;
         this.category_type = category_type;
     }
 
-    @OneToMany(fetch = LAZY)
+    @OneToMany(fetch = LAZY, mappedBy = "documentCategory")
     @ToString.Exclude
-    @JsonBackReference
     private Collection<ParkDocument> documents = new ArrayList<>();
-    @JsonBackReference
+    @JsonIgnore
     public Collection<ParkDocument> getDocuments() {
         return documents;
     }
@@ -50,25 +48,24 @@ public class Category {
         this.documents = documents;
     }
 
-    @ManyToMany(fetch = LAZY)
+    @OneToMany(fetch = LAZY, mappedBy = "category")
     @ToString.Exclude
-    @JsonBackReference
     private Collection<Event> events = new ArrayList<>();
 
     public void setEvents(Collection<Event> events) {
         this.events = events;
     }
-    @JsonBackReference
+    @JsonIgnore
     public Collection<Event> getEvents() {
         return events;
     }
 
-    public Integer getCategory_id() {
-        return category_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
+    public void setId(Integer category_id) {
+        this.id = category_id;
     }
 
     public String getCategory_name() {

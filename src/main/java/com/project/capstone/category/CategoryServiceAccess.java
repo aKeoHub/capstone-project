@@ -33,7 +33,7 @@ public class CategoryServiceAccess implements CategoryService{
 
         if (currentCategoryOptional.isPresent()) {
             Category currentCategory = currentCategoryOptional.get();
-            currentCategory.setCategory_id(category.getCategory_id());
+            currentCategory.setId(category.getId());
             currentCategory.setCategory_name(category.getCategory_name());
             currentCategory.setCategory_type(category.getCategory_type());
 
