@@ -2,11 +2,13 @@ package com.project.capstone.parkdocument;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ParkServiceAccess implements ParkService {
 
     @Autowired
@@ -19,7 +21,12 @@ public class ParkServiceAccess implements ParkService {
 
     @Override
     public ParkDocument createDocument(ParkDocument document) {
-        return parkRepository.save(document);
+
+        if (parkRepository.checkId(document.getDocumentId())) {
+            throw new RuntimeException("This id already Exists. Try PUT method");
+        } else {
+            return parkRepository.save(document);
+        }
     }
 
     @Override

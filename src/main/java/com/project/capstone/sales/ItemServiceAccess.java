@@ -2,11 +2,13 @@ package com.project.capstone.sales;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ItemServiceAccess implements ItemService{
 
     @Autowired
@@ -19,7 +21,12 @@ public class ItemServiceAccess implements ItemService{
 
     @Override
     public Item createItem(Item item) {
-        return itemRepository.save(item);
+
+        if (itemRepository.checkId(item.getItemId())) {
+            throw new RuntimeException("This id already Exists. Try PUT method");
+        } else {
+            return itemRepository.save(item);
+        }
     }
 
     @Override
@@ -38,6 +45,7 @@ public class ItemServiceAccess implements ItemService{
             currentItem.setCategory(item.getCategory());
             currentItem.setOwner(item.getOwner());
             currentItem.setName(item.getName());
+            currentItem.setLotNum(item.getLotNum());
             currentItem.setDescription(item.getDescription());
             currentItem.setPrice(item.getPrice());
             currentItem.setPictureId(item.getPictureId());
@@ -53,6 +61,6 @@ public class ItemServiceAccess implements ItemService{
 
     @Override
     public void deleteItemById(Integer id) {
-
+        itemRepository.deleteById(id);
     }
 }

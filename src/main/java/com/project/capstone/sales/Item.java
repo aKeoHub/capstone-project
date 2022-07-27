@@ -1,6 +1,8 @@
 package com.project.capstone.sales;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
@@ -15,22 +17,23 @@ import java.time.LocalDate;
 @Table(name = "item")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "itemId", resolver = EntityIdResolver.class, scope = Item.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "item_id", resolver = EntityIdResolver.class, scope = Item.class)
+@JsonSerialize(as = Item.class)
+@JsonDeserialize(as = Item.class)
 public class Item implements Serializable {
     @Id
     @Column(name = "item_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIdentityReference(alwaysAsId = true)
     private Integer itemId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "owner_id", nullable = false)
+    @JoinColumn(name = "owner_id", referencedColumnName = "user_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private User owner;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Category category;

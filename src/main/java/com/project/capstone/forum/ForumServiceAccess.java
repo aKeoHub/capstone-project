@@ -2,11 +2,13 @@ package com.project.capstone.forum;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ForumServiceAccess implements ForumService {
 
     @Autowired
@@ -19,7 +21,11 @@ public class ForumServiceAccess implements ForumService {
 
     @Override
     public Forum createForum(Forum forum) {
-        return forumRepository.save(forum);
+        if (forumRepository.checkId(forum.getForumId())) {
+            throw new RuntimeException("This id already Exists. Try PUT method");
+        } else {
+            return forumRepository.save(forum);
+        }
     }
 
     @Override

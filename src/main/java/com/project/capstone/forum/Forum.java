@@ -1,10 +1,13 @@
 package com.project.capstone.forum;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
@@ -16,8 +19,10 @@ import java.time.LocalDate;
 @Table(name = "forum")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "forumId", resolver = EntityIdResolver.class, scope = Forum.class)
-public class Forum implements Serializable {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "forum_id", resolver = EntityIdResolver.class, scope = Forum.class)
+@JsonSerialize(as = Forum.class)
+@JsonDeserialize(as = Forum.class)
+public class Forum {
    // private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "forum_id", nullable = false)

@@ -1,12 +1,19 @@
 package com.project.capstone.category;
 
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ServerErrorException;
 
+import javax.management.RuntimeErrorException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CategoryServiceAccess implements CategoryService{
     @Autowired
     private CategoryRepository categoryRepository;
@@ -18,7 +25,11 @@ public class CategoryServiceAccess implements CategoryService{
 
     @Override
     public Category saveCategory(Category category){
-        return categoryRepository.save(category);
+        if (categoryRepository.checkId(category.getCategoryId())) {
+            throw new RuntimeException("This id already Exists. Try PUT method");
+        } else {
+                return categoryRepository.save(category);
+        }
     }
 
     @Override
@@ -45,7 +56,12 @@ public class CategoryServiceAccess implements CategoryService{
     }
 
     @Override
-    public void deleteCategoryById(Integer categoryId) {
-        categoryRepository.deleteById(categoryId);
+    public void deleteCategoryById(Integer categoryId) throws CategoryNotFoundException {
+        Optional<Category> currentCategoryOptional = getCategory(categoryId);
+        if (currentCategoryOptional.isPresent()) {
+            categoryRepository.deleteById(categoryId);
+        } else {
+            throw new CategoryNotFoundException(categoryId);
+        }
     }
 }

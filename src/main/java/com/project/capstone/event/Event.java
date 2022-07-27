@@ -1,6 +1,8 @@
 package com.project.capstone.event;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
@@ -15,13 +17,14 @@ import java.time.LocalDate;
 @Table(name = "event")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "forumId", resolver = EntityIdResolver.class, scope = Event.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "event_id", resolver = EntityIdResolver.class, scope = Event.class)
+@JsonSerialize(as = Event.class)
+@JsonDeserialize(as = Event.class)
 public class Event implements Serializable {
     @Id
     @Column(name = "event_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Integer forumId;
+    private Integer eventId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_creator", referencedColumnName = "user_id", nullable = false)
@@ -30,7 +33,7 @@ public class Event implements Serializable {
     private User eventCreator;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Category category;
@@ -53,7 +56,7 @@ public class Event implements Serializable {
     @Column(name = "file")
     private byte[] file;
 
-    public Event(@JsonProperty("event_id") Integer forumId,
+    public Event(@JsonProperty("event_id") Integer eventId,
                  @JsonProperty("event_creator") User eventCreator,
                  @JsonProperty("category_id") Category category,
                  @JsonProperty("event_name") String eventName,
@@ -62,7 +65,7 @@ public class Event implements Serializable {
                  @JsonProperty("start_date") LocalDate startDate,
                  @JsonProperty("end_date") LocalDate endDate,
                  @JsonProperty("file") byte[] file) {
-        this.forumId = forumId;
+        this.eventId = eventId;
         this.eventCreator = eventCreator;
         this.category = category;
         this.eventName = eventName;
@@ -137,12 +140,12 @@ public class Event implements Serializable {
         this.category = category;
     }
 
-    public Integer getForumId() {
-        return forumId;
+    public Integer getEventId() {
+        return eventId;
     }
 
-    public void setForumId(Integer id) {
-        this.forumId = id;
+    public void setEventId(Integer id) {
+        this.eventId = id;
     }
 
 }

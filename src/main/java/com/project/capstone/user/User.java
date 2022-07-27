@@ -18,7 +18,7 @@ import java.util.*;
 @Table(name = "user")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "userId", resolver = EntityIdResolver.class, scope = User.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "user_id", resolver = EntityIdResolver.class, scope = User.class)
 public class User implements Serializable {
 
     @Id

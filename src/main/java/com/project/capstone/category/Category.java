@@ -1,12 +1,15 @@
 package com.project.capstone.category;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.event.Event;
 import com.project.capstone.parkdocument.ParkDocument;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,9 +21,12 @@ import static javax.persistence.FetchType.LAZY;
 @ToString
 @RequiredArgsConstructor
 @Table(name="category")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "categoryId", resolver = EntityIdResolver.class, scope = Category.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,  property = "category_id", resolver = EntityIdResolver.class, scope = Category.class)
+@JsonSerialize(as = Category.class)
+@JsonDeserialize(as = Category.class)
 public class Category implements Serializable {
-   // private static final long serialVersionUID = 1L;
+
+    //private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +45,7 @@ public class Category implements Serializable {
     }
 
     @OneToMany(fetch = LAZY, mappedBy = "documentCategory")
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Collection<ParkDocument> documents = new ArrayList<>();
     @JsonIgnore
@@ -51,6 +58,7 @@ public class Category implements Serializable {
     }
 
     @OneToMany(fetch = LAZY, mappedBy = "category")
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Collection<Event> events = new ArrayList<>();
 

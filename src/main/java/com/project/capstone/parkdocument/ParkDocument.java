@@ -1,6 +1,8 @@
 package com.project.capstone.parkdocument;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.audit.AuditLog;
 import com.project.capstone.category.Category;
@@ -19,13 +21,14 @@ import java.util.List;
 @Table(name = "park_document")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "documentId", resolver = EntityIdResolver.class, scope = ParkDocument.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "document_id", resolver = EntityIdResolver.class, scope = ParkDocument.class)
+@JsonSerialize(as = ParkDocument.class)
+@JsonDeserialize(as = ParkDocument.class)
 public class ParkDocument implements Serializable {
 
     @Id
     @Column(name = "document_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIdentityReference(alwaysAsId = true)
     private Integer documentId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -53,6 +56,7 @@ public class ParkDocument implements Serializable {
     private byte[] file;
 
     @OneToMany(mappedBy = "parkDocument")
+    @JsonIgnore
     @ToString.Exclude
     private List<AuditLog> auditLogs = new ArrayList<>();
 
