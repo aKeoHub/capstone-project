@@ -1,11 +1,13 @@
 package com.project.capstone.category;
 
 import com.fasterxml.jackson.annotation.*;
+import com.project.capstone.EntityIdResolver;
 import com.project.capstone.event.Event;
 import com.project.capstone.parkdocument.ParkDocument;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,23 +17,23 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(schema = "capstonedb" , name="category")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
-public class Category {
+@Table(name="category")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "categoryId", resolver = EntityIdResolver.class, scope = Category.class)
+public class Category implements Serializable {
+   // private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Integer id;
+    private Integer categoryId;
     @Column(name = "category_name")
     private String category_name;
     @Column(name = "category_type")
     private String category_type;
 
-    public Category(@JsonProperty("category_id") Integer id,
+    public Category(@JsonProperty("category_id") Integer categoryId,
                     @JsonProperty("category_name") String category_name,
                     @JsonProperty("category_type") String category_type) {
-        this.id = id;
+        this.categoryId = categoryId;
         this.category_name = category_name;
         this.category_type = category_type;
     }
@@ -60,12 +62,12 @@ public class Category {
         return events;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(Integer category_id) {
-        this.id = category_id;
+    public void setCategoryId(Integer category_id) {
+        this.categoryId = category_id;
     }
 
     public String getCategory_name() {

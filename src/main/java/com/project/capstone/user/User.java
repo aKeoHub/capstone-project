@@ -1,6 +1,7 @@
 package com.project.capstone.user;
 
 import com.fasterxml.jackson.annotation.*;
+import com.project.capstone.EntityIdResolver;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
 import com.project.capstone.sales.Item;
@@ -17,13 +18,14 @@ import java.util.*;
 @Table(name = "user")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "userId", resolver = EntityIdResolver.class, scope = User.class)
 public class User implements Serializable {
 
     @Id
     @Column(name = "user_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @JsonIdentityReference(alwaysAsId = true)
+    private Integer userId;
 
     @Column(name = "username", nullable = false, length = 30)
     private String username;
@@ -64,7 +66,7 @@ public class User implements Serializable {
     @ToString.Exclude
     private Set<Forum> forums = new LinkedHashSet<>();
 
-    public User(@JsonProperty("user_id") Integer id,
+    public User(@JsonProperty("user_id") Integer userId,
                 @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
                 @JsonProperty("firstname") String firstname,
@@ -72,7 +74,7 @@ public class User implements Serializable {
                 @JsonProperty("email") String email,
                 @JsonProperty("picture_id") Integer picture_id,
                 @JsonProperty("create_date") LocalDate create_date) {
-        this.id = id;
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -168,11 +170,11 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer id) {
+        this.userId = id;
     }
 }

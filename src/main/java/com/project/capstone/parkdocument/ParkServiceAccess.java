@@ -39,7 +39,7 @@ public class ParkServiceAccess implements ParkService {
             currentDocument.setCreateDate(document.getCreateDate());
             currentDocument.setDocumentName(document.getDocumentName());
             currentDocument.setDocumentCategory(document.getDocumentCategory());
-            currentDocument.setId(document.getId());
+            currentDocument.setDocumentId(document.getDocumentId());
             currentDocument.setCreatorId(document.getCreatorId());
 
             return currentDocument;

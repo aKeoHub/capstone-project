@@ -41,7 +41,7 @@ public class UserServiceAccess implements UserService {
 
         if (currentUsersOptional.isPresent()){
             User currentUser = currentUsersOptional.get();
-            currentUser.setId(user.getId());
+            currentUser.setUserId(user.getUserId());
             currentUser.setUsername(user.getUsername());
             currentUser.setPassword(user.getPassword());
             currentUser.setFirstname(user.getFirstname());

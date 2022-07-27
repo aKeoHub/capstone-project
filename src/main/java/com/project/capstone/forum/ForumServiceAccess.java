@@ -34,7 +34,7 @@ public class ForumServiceAccess implements ForumService {
         if (currentForumOptional.isPresent()) {
             Forum currentForum = currentForumOptional.get();
 
-            currentForum.setId(forum.getId());
+            currentForum.setForumId(forum.getForumId());
             currentForum.setCreator(forum.getCreator());
             currentForum.setTitle(forum.getTitle());
             currentForum.setDescription(forum.getDescription());

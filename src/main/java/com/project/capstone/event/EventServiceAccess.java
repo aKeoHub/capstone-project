@@ -34,7 +34,7 @@ public class EventServiceAccess implements EventService{
         if (currentEventOptional.isPresent()) {
             Event currentEvent = currentEventOptional.get();
 
-            currentEvent.setId(event.getId());
+            currentEvent.setForumId(event.getForumId());
             currentEvent.setEventCreator(event.getEventCreator());
             currentEvent.setCategory(event.getCategory());
             currentEvent.setEventName(event.getEventName());

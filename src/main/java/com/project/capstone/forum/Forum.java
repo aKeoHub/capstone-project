@@ -1,7 +1,10 @@
 package com.project.capstone.forum;
 
 import com.fasterxml.jackson.annotation.*;
+import com.project.capstone.EntityIdResolver;
+import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
@@ -13,12 +16,13 @@ import java.time.LocalDate;
 @Table(name = "forum")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "forumId", resolver = EntityIdResolver.class, scope = Forum.class)
 public class Forum implements Serializable {
+   // private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "forum_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer forumId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
@@ -53,7 +57,7 @@ public class Forum implements Serializable {
         return creator;
     }
 
-    public Forum(@JsonProperty("forum_id") Integer id,
+    public Forum(@JsonProperty("forum_id") Integer forumId,
                  @JsonProperty("creator_id") User creator,
                  @JsonProperty("title") String title,
                  @JsonProperty("description") String description,
@@ -61,7 +65,7 @@ public class Forum implements Serializable {
                  @JsonProperty("picture_id") Integer pictureId,
                  @JsonProperty("forum_category") String forumCategory,
                  @JsonProperty("sub_title") String subTitle) {
-        this.id = id;
+        this.forumId = forumId;
         this.creator = creator;
         this.title = title;
         this.description = description;
@@ -103,10 +107,10 @@ public class Forum implements Serializable {
         this.title = title;
     }
 
-    public Integer getId() {return id;}
+    public Integer getForumId() {return forumId;}
 
-    public void setId(Integer forumId) {
-        this.id = forumId;
+    public void setForumId(Integer forumId) {
+        this.forumId = forumId;
     }
 
     public String getForumCategory() {return forumCategory;}

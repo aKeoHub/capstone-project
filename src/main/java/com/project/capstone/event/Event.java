@@ -1,6 +1,7 @@
 package com.project.capstone.event;
 
 import com.fasterxml.jackson.annotation.*;
+import com.project.capstone.EntityIdResolver;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
 import lombok.RequiredArgsConstructor;
@@ -9,20 +10,18 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "event")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "forumId", resolver = EntityIdResolver.class, scope = Event.class)
 public class Event implements Serializable {
     @Id
     @Column(name = "event_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @JsonIdentityReference(alwaysAsId = true)
+    private Integer forumId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_creator", referencedColumnName = "user_id", nullable = false)
@@ -54,7 +53,7 @@ public class Event implements Serializable {
     @Column(name = "file")
     private byte[] file;
 
-    public Event(@JsonProperty("event_id") Integer id,
+    public Event(@JsonProperty("event_id") Integer forumId,
                  @JsonProperty("event_creator") User eventCreator,
                  @JsonProperty("category_id") Category category,
                  @JsonProperty("event_name") String eventName,
@@ -63,7 +62,7 @@ public class Event implements Serializable {
                  @JsonProperty("start_date") LocalDate startDate,
                  @JsonProperty("end_date") LocalDate endDate,
                  @JsonProperty("file") byte[] file) {
-        this.id = id;
+        this.forumId = forumId;
         this.eventCreator = eventCreator;
         this.category = category;
         this.eventName = eventName;
@@ -138,12 +137,12 @@ public class Event implements Serializable {
         this.category = category;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getForumId() {
+        return forumId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setForumId(Integer id) {
+        this.forumId = id;
     }
 
 }

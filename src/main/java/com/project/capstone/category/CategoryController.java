@@ -15,7 +15,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = {"application/json"})
     public Category createCategory(@Valid @RequestBody Category category) throws CategoryNotFoundException{
         return categoryService.saveCategory(category);
     }

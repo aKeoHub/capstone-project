@@ -1,6 +1,7 @@
 package com.project.capstone.sales;
 
 import com.fasterxml.jackson.annotation.*;
+import com.project.capstone.EntityIdResolver;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +15,12 @@ import java.time.LocalDate;
 @Table(name = "item")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "itemId")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "itemId", resolver = EntityIdResolver.class, scope = Item.class)
 public class Item implements Serializable {
     @Id
     @Column(name = "item_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIdentityReference(alwaysAsId = true)
     private Integer itemId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
