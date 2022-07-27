@@ -54,6 +54,7 @@ export default class Login extends Component {
                     //window.location.reload();
                 },
                 error => {
+                    //this.props.history.push("/login");
                     const resMessage =
                         (error.response &&
                             error.response.data &&
@@ -67,7 +68,7 @@ export default class Login extends Component {
                 }
             );
         } else {
-
+            //window.location.replace("https://yourdomain.com/success");
             this.setState({
                 loading: false
             });

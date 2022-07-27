@@ -51,7 +51,7 @@ public class CapstoneApplication {
 
 
 
-			userService.saveUser(new User(1 , "john", "hockey", "john", "1234", "johnnyhockey@live.ca1", 1, null));
+			userService.saveUser(new User(1 , "john", "1234", "john", "hockey", "johnnyhockey@live.ca1", 1, null));
 			userService.saveUser(new User(2 , "kingston", "1234", "kingston", "the greatest", "kingston@live.ca", 1, null));
 			userService.saveUser(new User(3 , "1punchman", "1234", "saitama", "the all mighty", "onepunchman@live.ca", 1, null));
 

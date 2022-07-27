@@ -45,6 +45,11 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
+    @PostMapping("/user")
+    public ResponseEntity<User>getUser(@RequestBody User user) {
+        return ResponseEntity.ok().body(userService.getUser(user.getUsername()));
+    }
+
     @PostMapping("/user/save")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
@@ -99,8 +104,6 @@ public class UserController {
                 error.put("error_message", exception.getMessage());
                 response.setContentType(APPLICATION_JSON_VALUE);
                 new ObjectMapper().writeValue(response.getOutputStream(), error);
-
-
             }
         } else {
             throw new RuntimeException("Refresh token is missing");

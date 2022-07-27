@@ -19,7 +19,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.client.RestTemplate;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -91,13 +90,17 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .sign(algorithm);
 //        response.setHeader("access_token",access_token);
 //        response.setHeader("refresh_token",refresh_token);
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("access_token", access_token);
-        tokens.put("refresh_token", refresh_token);
+        Map<String, Object> userInfo = new HashMap<>();
+        //Map<String, User> userMap = new HashMap<>();
+        //userMap.put("user", user);
+        userInfo.put("access_token", access_token);
+        userInfo.put("refresh_token", refresh_token);
+        userInfo.put("username", user.getUsername());
 
         response.setContentType(APPLICATION_JSON_VALUE);
-        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
-        log.info("jwt token returned {}", tokens.get("access_token"));
+       new ObjectMapper().writeValue(response.getOutputStream(), userInfo);
+        //new ObjectMapper().writeValue(response.getOutputStream(), userMap);
+        log.info("jwt token returned {}", userInfo.get("access_token"));
         //response.sendRedirect("http://localhost:3000");
 
 

@@ -25,28 +25,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
 
-//    public void addUser(User user) throws BadRequestException {
-//        Boolean existsEmail = userRepo
-//                .selectExistsEmail(user.getEmail());
-//        if (existsEmail) {
-//            throw new BadRequestException(
-//                    "Email " + user.getEmail() + " taken");
-//        }
-//        userRepo.save(user);
-//    }
-//
-//    public List<User> getAllUsers() {
-//        return userRepo.findAll();
-//    }
-//
-//
-//    public Optional<User> getUserById(int id) {
-//        return userRepo.findById(id);
-//    }
-//
-//    public void deleteUser(int id) {
-//        userRepo.deleteById(id);
-//    }
 @Override
 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userRepo.findByUsername(username);
