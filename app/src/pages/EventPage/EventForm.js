@@ -12,24 +12,30 @@ const EventForm = () => {
   const [endDate, setEndDate] = useState("");
   const [textarea, setTextarea] = useState("");
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}))
-  }
+//  const handleChange = (event) => {
+//    const name = event.target.name;
+//    const value = event.target.value;
+//    setInputs(values => ({...values, [name]: value}));
+//    setEventName(event.target.eventName.value);
+//  }
 
   const textAreaChange = (event) => {
     setTextarea(event.target.value)
   }
 
-
+  const eventNameChange = (event) => {
+       setEventName(event.target.value)
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(event.target.eventName.value);
     console.log(inputs);
+
   }
 
- const AddEvent = () => {
+ const AddEvent = (event) => {
+
       fetch('api/v1/events/add/',{
           method:'POST',
 
@@ -47,7 +53,6 @@ const EventForm = () => {
       }).then(response => response.json())
                     .then(data => {
                         console.log(data);
-
                     })
   }
 
@@ -57,12 +62,18 @@ const EventForm = () => {
       <input
         type="text"
         name="eventName"
-        value={inputs.eventName || ""}
-        onChange={handleChange}
+        onChange={(e) => {
+          setEventName(e.target.value);
+          }}
       />
       </label>
       <label>Select Category:
-      <select class="form-select" name="category" onChange={handleChange} >
+      <select
+        class="form-select"
+        name="category"
+        onChange={(e) => {
+        setCategoryId(e.target.value);
+      }} >
           <option value="" label="Categories">Categories</option>
           <option value="1" label="Concerts">Concerts</option>
           <option value="2" label="Gatherings">Gathering</option>
@@ -73,26 +84,26 @@ const EventForm = () => {
         <input
           type="number"
           name="eventCreator"
-          value={inputs.eventCreator || ""}
-          onChange={handleChange}
+          onChange={(e) => { setEventCreator(e.target.value);}}
         />
         </label>
         <label>Enter Location:
             <input
               type="text"
               name="location"
-              value={inputs.location || ""}
-              onChange={handleChange}
+              onChange={(e) => {
+                setLocation(e.target.value);
+              }}
             />
         </label>
         <label>Enter Description:
             <textarea name="description" value={textarea} onChange={textAreaChange} />
         </label>
         <label for="startDate">Start Date:
-          <input type="date" id="startDate" value={inputs.startDate}  onChange={handleChange} name="startDate"/>
+          <input type="date" id="startDate" name="startDate" onChange={(e) => { setStartDate(e.target.value);}}/>
         </label>
         <label for="birthday">End Date:
-          <input type="date" id="endDate" value={inputs.endDate} onChange={handleChange} name="endDate"/>
+          <input type="date" id="endDate"  name="endDate" onChange={(e) => { setEndDate(e.target.value);}}/>
         </label>
         <button onClick={AddEvent}>Add Event</button>
     </form>
