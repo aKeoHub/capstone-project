@@ -26,14 +26,6 @@ function EventModal() {
               <Modal.Body>
                 <EventForm />
               </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                  Add
-                </Button>
-              </Modal.Footer>
             </Modal>
     </>
   );

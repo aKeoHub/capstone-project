@@ -102,7 +102,7 @@ const EventForm = () => {
         <label for="startDate">Start Date:
           <input type="date" id="startDate" name="startDate" onChange={(e) => { setStartDate(e.target.value);}}/>
         </label>
-        <label for="birthday">End Date:
+        <label for="endDate">End Date:
           <input type="date" id="endDate"  name="endDate" onChange={(e) => { setEndDate(e.target.value);}}/>
         </label>
         <button onClick={AddEvent}>Add Event</button>
