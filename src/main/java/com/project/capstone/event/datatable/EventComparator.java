@@ -43,8 +43,8 @@ public class EventComparator {
         map.put(new Key("location", Direction.desc), Comparator.comparing(Event::getLocation)
                 .reversed());
 
-        map.put(new Key("eventid", Direction.asc), Comparator.comparing(Event::getId));
-        map.put(new Key("eventid", Direction.desc), Comparator.comparing(Event::getId)
+        map.put(new Key("eventid", Direction.asc), Comparator.comparing(Event::getEventId));
+        map.put(new Key("eventid", Direction.desc), Comparator.comparing(Event::getEventId)
                 .reversed());
     }
 

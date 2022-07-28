@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react';
 const EventForm = () => {
   const [inputs, setInputs] = useState({});
   const [eventId, setEventId] = useState(0);
-  const [categoryId, setCategoryId] = useState("");
+  const [categoryId, setCategoryId] = useState(0);
   const [eventName, setEventName] = useState("");
-  const [eventCreator, setEventCreator] = useState("");
+  const [eventCreator, setEventCreator] = useState(0);
   const [location, setLocation] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState({varOne:new Date()});
+  const [endDate, setEndDate] = useState({varOne:new Date()});
   const [textarea, setTextarea] = useState("");
-
+  const [file, setFile] = useState(null);
 //  const handleChange = (event) => {
 //    const name = event.target.name;
 //    const value = event.target.value;
@@ -36,7 +36,7 @@ const EventForm = () => {
 
  const AddEvent = (event) => {
 
-      fetch('api/v1/events/add/',{
+      fetch('api/v1/events/add',{
           method:'POST',
 
            body: JSON.stringify({
@@ -48,7 +48,7 @@ const EventForm = () => {
             description: textarea,
             start_date: startDate,
             end_date: endDate,
-            file: "",
+            file: null,
                       }),
       }).then(response => response.json())
                     .then(data => {
