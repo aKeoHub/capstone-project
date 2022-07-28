@@ -25,12 +25,13 @@ public class CategoryServiceAccess implements CategoryService{
 
     @Override
     public Category saveCategory(Category category){
-        if (categoryRepository.checkId(category.getCategoryId())) {
-            throw new RuntimeException("This id already Exists. Try PUT method");
-        } else {
+ //       if (categoryRepository.checkId(category.getCategoryId())) {
+  //          throw new RuntimeException("This id already Exists. Try PUT method");
+  //      } else {
+            System.out.println(category);
                 return categoryRepository.save(category);
         }
-    }
+  //  }
 
     @Override
     public List<Category> fetchCategoryList() {

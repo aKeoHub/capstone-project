@@ -9,3 +9,6 @@ public class CategoryNotFoundException extends Exception{
         super(String.format("No Category was found for id: %s. Check your inputs.", id));
     }
 }
+
+
+
