@@ -33,6 +33,10 @@ const EventForm = () => {
     console.log(inputs);
 
   }
+    const onUploadFile = e => {
+        console.log('file: ', file);
+        setFile(e.target.files[0]);
+    };
 
  const AddEvent = (event) => {
 
@@ -109,6 +113,11 @@ const EventForm = () => {
         <label for="endDate">End Date:
           <input type="date" id="endDate"  name="endDate" onChange={(e) => { setEndDate(e.target.value);}}/>
         </label>
+        <input
+            type="file"
+            //style={{ display: 'none' }}
+            onChange={onUploadFile}
+        />
         <button onClick={AddEvent}>Add Event</button>
     </form>
   )

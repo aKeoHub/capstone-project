@@ -28,12 +28,15 @@ const EventTable = () => {
 function deleteEvent(id) {
 
     fetch('api/v1/events/delete/' + id,{
-        method:'DELETE'
-    }).then(response => response.json())
+        method:'DELETE',
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }})
+        .then(response => response.json())
                   .then(data => {
                       setLoading(false);
                       console.log(data);
-                      window.location.reload();
+                   //   window.location.reload();
                   })
 }
 
