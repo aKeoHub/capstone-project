@@ -8,6 +8,51 @@ import Button from '@material-ui/core/Button';
 const OtherDocs = () => {
      const [documents, setDocuments] = useState([]);
      const [loading, setLoading] = useState(false);
+     const [inputs, setInputs] = useState({});
+     const [docId, setDocId] = useState(0);
+     const [creatorId, setCreatorId] = useState(0);
+     const [docName, setDocName] = useState("");
+     const [dateCreated, setDateCreated] = useState({varOne:new Date()});
+     const [textarea, setTextarea] = useState("");
+     const [file, setFile] = useState([]);
+
+    const textAreaChange = (doc) => {
+        setTextarea(doc.target.value)
+    }
+
+    const handleSubmit = (doc)=> {
+        doc.preventDefault();
+        console.log(doc.target.docName.value);
+        console.log(inputs);
+    }
+
+    const onUploadFile = e => {
+        console.log('file: ', file);
+        setFile(e.target.files[0]);
+    };
+
+    const AddDocument = (doc) => {
+
+          fetch('api/v1/documents/add',{
+              method:'POST',
+
+               body: JSON.stringify({
+                id: docId,
+                creatorId: creatorId,
+                documentName: docName,
+                createDate: dateCreated,
+                description: textarea,
+                file: null,
+                          }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+          }).then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            window.location.reload();
+                        })
+      }
 
      useEffect(() => {
              setLoading(true);
@@ -36,20 +81,52 @@ const OtherDocs = () => {
             })
      }
 
-    <form>
-        <label for='did'>Document id</label> <input name='did' id='did' type='text' />
-        <label for='cid'>Creator id</label> <input name='cid' id='cid' type='text' />
-        <label for='dname'>Document id</label> <input name='dname' id='dname' type='text' />
-        <label for='desc'>Document id</label> <input name='desc' id='desc' type='text' />
-        <label for='did'>Document id</label> <input name='did' id='did' type='text' />
-        <label for='did'>Document id</label> <input name='did' id='did' type='text' />
-    </form>
-
     function updateDocument(did, cid, dname, date, desc, file) {
         fetch('api/v1/documents/edit/' + did)
     }
 
          return (
+         <>
+         <form onSubmit={handleSubmit}>
+               <label>Enter Document Id:
+               <input
+                 type="text"
+                 name="docId"
+                 onChange={(e) => {
+                   setDocId(e.target.value);
+                   }}
+               />
+               </label>
+               <label>Enter Creator Id:
+                 <input
+                   type="number"
+                   name="creatorId"
+                   onChange={(e) => { setCreatorId(e.target.value);}}
+                 />
+                 </label>
+                 <label>Enter Document name:
+                     <input
+                       type="text"
+                       name="docName"
+                       onChange={(e) => {
+                         setDocName(e.target.value);
+                       }}
+                     />
+                 </label>
+                 <label>Enter Description:
+                     <textarea name="description" value={textarea} onChange={textAreaChange} />
+                 </label>
+                 <label for="dateCreated">Date created:
+                   <input type="date" id="dateCreated" name="dateCreated" onChange={(e) => { setDateCreated(e.target.value);}}/>
+                 </label>
+                 <input
+                     type="file"
+                     //style={{ display: 'none' }}
+                     onChange={onUploadFile}
+                 />
+                 <button onClick={AddDocument}>Add Document</button>
+             </form>
+
              <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#E8F8F5"}}>
                 <h1 className="text-left text-success mb-4">Documents</h1>
                     <div className="table-responsive">
@@ -91,13 +168,10 @@ const OtherDocs = () => {
                                 </table>
                              </div>
                          )}
-                         {/*}<div id="anotherTable"><table id="myTable"></table></div>
-                         <div id="addButton" style={{display:"block", marginLeft:"84%", marginTop:"4%"}}><Button id="add" onClick={()=>{document.getElementById('anotherTable').style.display="block"; let btn=document.createElement("button"); btn.innerText="Save Document"; document.getElementById("add").style.display="none";
-                         let row=document.createElement('tr'); let html='<td>' + '<input type=text width=9%>' + '</td>' + '<td>' + '<input type=text width=13%>' + '</td>' + '<td>' + '<input type=text width=16%>' + '</td>' + '<td>' + '<input type=text width=16%>' + '</td>' + '<td>' + '<input type=text width=18%>' + '</td>' + '<td>' + '<input type=text width=12%>' + '</td>' + '<td>' + '<input type=text width=8%>' + '</td>' + '<td>' + '<input type=text width=8%>' + '</td>';
-                         row.innerHTML=html; document.getElementById("myTable").appendChild(row); document.getElementById("addButton").appendChild(btn);}}>Add Document</Button></div>*/}
-                         <Button style={{display:"block", marginLeft:"84%", marginTop:"4%"}}>Add document</Button>
-                         </div>
+                    <Button style={{display:"block", marginLeft:"84%", marginTop:"4%"}}>Add document</Button>
+                  </div>
              </div>
+             </>
          );
      }
 
