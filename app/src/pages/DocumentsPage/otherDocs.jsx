@@ -36,6 +36,15 @@ const OtherDocs = () => {
             })
      }
 
+    <form>
+        <label for='did'>Document id</label> <input name='did' id='did' type='text' />
+        <label for='cid'>Creator id</label> <input name='cid' id='cid' type='text' />
+        <label for='dname'>Document id</label> <input name='dname' id='dname' type='text' />
+        <label for='desc'>Document id</label> <input name='desc' id='desc' type='text' />
+        <label for='did'>Document id</label> <input name='did' id='did' type='text' />
+        <label for='did'>Document id</label> <input name='did' id='did' type='text' />
+    </form>
+
     function updateDocument(did, cid, dname, date, desc, file) {
         fetch('api/v1/documents/edit/' + did)
     }
@@ -58,7 +67,7 @@ const OtherDocs = () => {
                          </table>
                          {documents.map(park_document =>
                              <div>
-                                 <table className="table">
+                                <table className="table">
                                      <tr>
                                          <td style={{width: "9%"}}>{park_document.id}</td>
                                          <td style={{width: "13%"}}>{park_document.creatorId}</td>
@@ -74,14 +83,20 @@ const OtherDocs = () => {
                                          onClick={()=>{document.getElementById(park_document.id+"a").style.display="block"; document.getElementById(park_document.id).style.display="block";
                                          document.getElementById(park_document.documentName).style.display="none"; document.getElementById(park_document.description).style.display="none";
                                          document.getElementById(park_document.id+"b").style.display="none"; let btn=document.createElement("button"); btn.innerText="SAVE";
-                                         document.getElementById(park_document.id+"c").appendChild(btn); btn.setAttribute("onclick", updateDocument(park_document.id, park_document.creatorId, document.getElementById(park_document.id).value, park_document.createDate, document.getElementById(park_document.id+"a").value, park_document.file)); }}
+                                         document.getElementById(park_document.id+"c").appendChild(btn); btn.setAttribute("onclick", updateDocument(park_document.id, park_document.creatorId, document.getElementById(park_document.id).value,
+                                         park_document.createDate, document.getElementById(park_document.id+"a").value, park_document.file)); }}
                                          style={{width: "8%"}}><FontAwesomeIcon icon={faEdit} /></Button>
                                          </td>
                                      </tr>
-                                 </table>
+                                </table>
                              </div>
                          )}
-                    </div>
+                         {/*}<div id="anotherTable"><table id="myTable"></table></div>
+                         <div id="addButton" style={{display:"block", marginLeft:"84%", marginTop:"4%"}}><Button id="add" onClick={()=>{document.getElementById('anotherTable').style.display="block"; let btn=document.createElement("button"); btn.innerText="Save Document"; document.getElementById("add").style.display="none";
+                         let row=document.createElement('tr'); let html='<td>' + '<input type=text width=9%>' + '</td>' + '<td>' + '<input type=text width=13%>' + '</td>' + '<td>' + '<input type=text width=16%>' + '</td>' + '<td>' + '<input type=text width=16%>' + '</td>' + '<td>' + '<input type=text width=18%>' + '</td>' + '<td>' + '<input type=text width=12%>' + '</td>' + '<td>' + '<input type=text width=8%>' + '</td>' + '<td>' + '<input type=text width=8%>' + '</td>';
+                         row.innerHTML=html; document.getElementById("myTable").appendChild(row); document.getElementById("addButton").appendChild(btn);}}>Add Document</Button></div>*/}
+                         <Button style={{display:"block", marginLeft:"84%", marginTop:"4%"}}>Add document</Button>
+                         </div>
              </div>
          );
      }
