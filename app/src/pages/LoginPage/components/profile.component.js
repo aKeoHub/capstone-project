@@ -11,34 +11,14 @@ export default class Profile extends Component {
         };
     }
 
-
     render() {
         const { currentUser } = this.state;
-        const [user, setUser] = useState([]);
-        const [loading, setLoading] = useState(false);
-        useEffect(() => {
-            setLoading(true);
-
-            fetch('api/user')
-                .then(response => response.json())
-                .then(data => {
-                    setUser(data);
-                    setLoading(false);
-                    console.log(data);
-                })
-        }, []);
-
-        if (loading) {
-            return <p>Loading...</p>;
-        }
-
-
-
+        console.log(this.state.currentUser);
         return (
             <div className="container">
                 <header className="jumbotron">
                     <h3>
-                        <strong>{user}</strong> Profile
+                        <strong>{currentUser.data.username}</strong> Profile
 
                     </h3>
                 </header>

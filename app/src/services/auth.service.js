@@ -56,13 +56,12 @@ class AuthService {
         const config = {
             headers: { Authorization: `Bearer ${this.getToken()}` },
         };
-        axios.post("/api/user", bodyParameters, config)
-            .then((res)=> {
-                user = res.data.username;
-              //console.log(user);
-            })
-            .catch((err) => console.log(err));
-       return user;
+       return axios.post("/api/user", bodyParameters, config)
+            .then(function (response) {
+                console.log(response.data);
+                user = (response.data);
+            }).catch((err) => console.log(err));
+
 
     };
 //         const username = (localStorage.getItem('username'));
