@@ -15,7 +15,7 @@ public class ParkController {
     @Autowired
     private ParkService parkService;
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = {"application/json"})
     public ParkDocument createDocument (@Valid @RequestBody @NotNull ParkDocument document) {
         return parkService.createDocument(document);
     }
@@ -35,12 +35,12 @@ public class ParkController {
         return parkService.fetchDocumentList();
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping(value = "/edit/{id}", consumes = {"application/json"})
     public ParkDocument updateDocument (@RequestBody ParkDocument document, @PathVariable("id") Integer id) throws DocumentNotFoundException {
         return parkService.updateDocument(document, id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}", consumes = {"application/json"})
     public String deleteDocumentById (@PathVariable("id") Integer id) {
         parkService.deleteDocumentById(id);
         return "Deleted Successfully";

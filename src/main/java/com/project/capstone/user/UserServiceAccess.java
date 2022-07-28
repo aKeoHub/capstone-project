@@ -2,11 +2,13 @@ package com.project.capstone.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceAccess implements UserService {
 
     @Autowired
@@ -41,7 +43,7 @@ public class UserServiceAccess implements UserService {
 
         if (currentUsersOptional.isPresent()){
             User currentUser = currentUsersOptional.get();
-            currentUser.setId(user.getId());
+            currentUser.setUserId(user.getUserId());
             currentUser.setUsername(user.getUsername());
             currentUser.setPassword(user.getPassword());
             currentUser.setFirstname(user.getFirstname());

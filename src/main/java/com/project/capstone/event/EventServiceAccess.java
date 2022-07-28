@@ -2,11 +2,13 @@ package com.project.capstone.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class EventServiceAccess implements EventService{
 
     @Autowired
@@ -19,7 +21,11 @@ public class EventServiceAccess implements EventService{
 
     @Override
     public Event createEvent(Event event)  {
-        return eventRepository.save(event);
+        if (eventRepository.checkId(event.getEventId())) {
+            throw new RuntimeException("This id already Exists. Try PUT method");
+        } else {
+            return eventRepository.save(event);
+        }
     }
 
     @Override
@@ -34,7 +40,7 @@ public class EventServiceAccess implements EventService{
         if (currentEventOptional.isPresent()) {
             Event currentEvent = currentEventOptional.get();
 
-            currentEvent.setId(event.getId());
+            currentEvent.setEventId(event.getEventId());
             currentEvent.setEventCreator(event.getEventCreator());
             currentEvent.setCategory(event.getCategory());
             currentEvent.setEventName(event.getEventName());

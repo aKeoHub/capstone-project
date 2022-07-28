@@ -1,31 +1,40 @@
 package com.project.capstone.sales;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.project.capstone.EntityIdResolver;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(schema = "capstonedb" , name = "item")
+@Table(name = "item")
 @RequiredArgsConstructor
 @ToString
-public class Item {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "item_id", resolver = EntityIdResolver.class, scope = Item.class)
+@JsonSerialize(as = Item.class)
+@JsonDeserialize(as = Item.class)
+public class Item implements Serializable {
     @Id
     @Column(name = "item_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer itemId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "owner_id", referencedColumnName = "user_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private User owner;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Category category;
 
@@ -53,7 +62,7 @@ public class Item {
     @Column(name = "status", nullable = false, length = 20)
     private String status;
 
-    public Item(@JsonProperty("item_id") Integer id,
+    public Item(@JsonProperty("item_id") Integer itemId,
                 @JsonProperty("owner_id")User owner,
                 @JsonProperty("category_id")Category category,
                 @JsonProperty("name")String name,
@@ -64,7 +73,7 @@ public class Item {
                 @JsonProperty("create_time")LocalDate createTime,
                 @JsonProperty("renter_id") Integer renterId,
                 @JsonProperty("status")String status) {
-        this.id = id;
+        this.itemId = itemId;
         this.owner = owner;
         this.category = category;
         this.name = name;
@@ -149,12 +158,12 @@ public class Item {
         this.category = category;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getItemId() {
+        return itemId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setItemId(Integer id) {
+        this.itemId = id;
     }
 
     public User getOwner() {

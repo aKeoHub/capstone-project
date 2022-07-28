@@ -1,25 +1,37 @@
 package com.project.capstone.forum;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.project.capstone.EntityIdResolver;
+import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(schema = "capstonedb" , name = "forum")
+@Table(name = "forum")
 @RequiredArgsConstructor
 @ToString
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "forum_id", resolver = EntityIdResolver.class, scope = Forum.class)
+@JsonSerialize(as = Forum.class)
+@JsonDeserialize(as = Forum.class)
 public class Forum {
+   // private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "forum_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer forumId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private User creator;
 
@@ -35,26 +47,37 @@ public class Forum {
     @Column(name = "picture_id")
     private Integer pictureId;
 
+    @Column(name = "forum_category")
+    private String forumCategory;
+
+    @Column(name = "sub_title")
+    private String subTitle;
+
     public void setCreator(User creator) {
         this.creator = creator;
     }
+
 
     public User getCreator() {
         return creator;
     }
 
-    public Forum(@JsonProperty("forum_id") Integer id,
+    public Forum(@JsonProperty("forum_id") Integer forumId,
                  @JsonProperty("creator_id") User creator,
                  @JsonProperty("title") String title,
                  @JsonProperty("description") String description,
                  @JsonProperty("create_date") LocalDate createDate,
-                 @JsonProperty("picture_id") Integer pictureId) {
-        this.id = id;
+                 @JsonProperty("picture_id") Integer pictureId,
+                 @JsonProperty("forum_category") String forumCategory,
+                 @JsonProperty("sub_title") String subTitle) {
+        this.forumId = forumId;
         this.creator = creator;
         this.title = title;
         this.description = description;
         this.createDate = createDate;
         this.pictureId = pictureId;
+        this.forumCategory = forumCategory;
+        this.subTitle = subTitle;
     }
 
     public Integer getPictureId() {
@@ -89,24 +112,23 @@ public class Forum {
         this.title = title;
     }
 
-    public Integer getId() {
+    public Integer getForumId() {return forumId;}
 
-        return id;
+    public void setForumId(Integer forumId) {
+        this.forumId = forumId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getForumCategory() {return forumCategory;}
+
+    public void setForumCategory(String forumCategory) {
+        this.forumCategory = forumCategory;
     }
 
-    public User getCreater() {
-
-        return creator;
+    public String getSubTitle() {
+        return subTitle;
     }
 
-    public void setCreater(User creator) {
-
-        this.creator = creator;
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
-
-
 }

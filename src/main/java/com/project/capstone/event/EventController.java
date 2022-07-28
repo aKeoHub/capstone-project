@@ -16,7 +16,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = {"application/json"})
     public Event createEvent(@Valid @RequestBody @NotNull Event event){
         return eventService.createEvent(event);
     }
@@ -36,13 +36,13 @@ public class EventController {
         return eventService.fetchEventList();
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping(value = "/edit/{id}", consumes = {"application/json"})
     public Event updateEvent(@RequestBody Event event , @PathVariable("id") Integer id) throws EventNotFoundException{
 
         return eventService.updateEvent(event, id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}", consumes = {"application/json"})
     public String deleteEventById(@PathVariable("id") Integer id){
         eventService.deleteEventById(id);
 
