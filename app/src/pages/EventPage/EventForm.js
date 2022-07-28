@@ -11,7 +11,7 @@ const EventForm = () => {
   const [startDate, setStartDate] = useState({varOne:new Date()});
   const [endDate, setEndDate] = useState({varOne:new Date()});
   const [textarea, setTextarea] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
 //  const handleChange = (event) => {
 //    const name = event.target.name;
 //    const value = event.target.value;
@@ -50,6 +50,9 @@ const EventForm = () => {
             end_date: endDate,
             file: null,
                       }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
       }).then(response => response.json())
                     .then(data => {
                         console.log(data);
@@ -71,6 +74,7 @@ const EventForm = () => {
       <select
         class="form-select"
         name="category"
+        type= "number"
         onChange={(e) => {
         setCategoryId(e.target.value);
       }} >
