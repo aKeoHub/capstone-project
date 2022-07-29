@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./register.css";
+import React, {useEffect, useState} from "react";
+import './register.css';
 
 const RegistrationForm = () => {
     const [users, setUsers] = useState([]);
