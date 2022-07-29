@@ -20,7 +20,7 @@ const ForumLayout = () => {
     const handleShowAdd = () => setShowAdd(true);
     const handleShowView = () => setShowView(true);
     const handleShowEdit = () => setShowView(true);
-    const [forumId, setForumIdReg] = useState("");
+    const [forumId, setForumIdReg] = useState(0);
     const [creatorId, setCreatorIdReg] = useState("");
     const [title, setTitleReg] = useState("");
     const [subTitle, setSubTitleReg] = useState("");
@@ -94,6 +94,39 @@ const ForumLayout = () => {
             .then(json => console.log(json));
             //window.location.reload();
     }
+
+    function viewForum(id) {
+
+        handleShowView();
+
+        fetch("api/vi/forums/get" + id, {
+        method: "GET",
+
+            // Adding body or contents to send
+            body: JSON.stringify({
+            forum_id: forumId,
+            creator_id: creatorId,
+            title: title,
+            description: description,
+            picture_id: picture_id,
+            sub_title: subTitle,
+            forum_category: forumCategory,
+
+        }),
+
+            headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+
+        })
+
+            // Converting to JSON
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(json => console.log(json));
+    }
+
     function editForum(id) {
 
         fetch("api/v1/forums/edit" + id, {
@@ -230,7 +263,7 @@ return (
                                         <div className="forum-icon">
                                             <i className="fa fa-shield"></i>
                                         </div>
-                                        <a onClick={handleShowView} className="forum-item-title">{forum.title}</a>
+                                        <a onClick={viewForum}  className="forum-item-title">{forum.title}</a>
                                         <Modal show={showView} onHide={handleCloseView}>
                                             <Modal.Header className="blue-color-background"closeButton>
                                                 <Modal.Title className="blue-color-background">{forum.title}</Modal.Title>
