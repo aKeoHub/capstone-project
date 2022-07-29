@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class FileUploadController {
 
-    @PostMapping("/uploadFile")
+    @PostMapping("/api/v1/uploadFile")
     public ResponseEntity<FileUploadResponse> uploadFile(
             @RequestParam("file") MultipartFile multipartFile)
             throws IOException {
@@ -27,7 +27,7 @@ public class FileUploadController {
         FileUploadResponse response = new FileUploadResponse();
         response.setFileName(fileName);
         response.setSize(size);
-        response.setDownloadUri("/downloadFile/" + filecode);
+        response.setDownloadUri("/api/v1/downloadFile/" + filecode);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
