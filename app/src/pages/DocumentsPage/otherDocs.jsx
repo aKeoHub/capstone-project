@@ -10,6 +10,7 @@ const OtherDocs = () => {
      const [loading, setLoading] = useState(false);
      const [inputs, setInputs] = useState({});
      const [docId, setDocId] = useState(0);
+     const [docCat, setDocCat] = useState(0);
      const [creatorId, setCreatorId] = useState(0);
      const [docName, setDocName] = useState("");
      const [dateCreated, setDateCreated] = useState({varOne:new Date()});
@@ -37,8 +38,9 @@ const OtherDocs = () => {
               method:'POST',
 
                body: JSON.stringify({
-                id: docId,
-                creatorId: creatorId,
+                document_id: docId,
+                document_category: docCat,
+                creator_id: creatorId,
                 documentName: docName,
                 createDate: dateCreated,
                 description: textarea,
