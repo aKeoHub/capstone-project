@@ -186,6 +186,15 @@ button:hover:before {
     transform: translate(-50%, -50%);
     display: none;
     content: '\f26b'; }
+.site_table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  margin: 10px 0px 50px 0px
+}
+th, td {
+  background-color: #96D4D4;
+}
+
 
 @media (max-width: 991px) {
     .inner {
