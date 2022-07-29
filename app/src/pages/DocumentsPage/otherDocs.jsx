@@ -17,6 +17,14 @@ const OtherDocs = () => {
      const [textarea, setTextarea] = useState("");
      const [file, setFile] = useState();
 
+    function FileUploadPage(){
+        const [selectedFile, setSelectedFile] = useState();
+        const [isFilePicked, setIsFilePicked] = useState(false);
+
+        const changeHandler = (event) => {
+            setSelectedFile(event.target.files[0]);
+            setIsSelected(true);
+        };
 
     const textAreaChange = (doc) => {
         setTextarea(doc.target.value)
@@ -59,26 +67,24 @@ const OtherDocs = () => {
 
     const DownloadDocument = (doc) => {
 
+
+        const formData = new FormData();
+
         fetch('/api/v1/uploadFile',{
             method:'POST',
-
-            body: JSON.stringify({
-                document_id: docId,
-                document_category: docCat,
-                creator_id: creatorId,
-                documentName: docName,
-                createDate: dateCreated,
-                description: textarea,
-                file: null,
-            }),
+            body: formData,
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+            //    "Content-type": "application/json; charset=UTF-8"
             }
         }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-                window.location.reload();
+            .then((result) => {
+                console.log('Success:', result);
             })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+
+    };
     }
 
      useEffect(() => {
