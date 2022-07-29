@@ -23,7 +23,7 @@ const OtherDocs = () => {
 
         const changeHandler = (event) => {
             setSelectedFile(event.target.files[0]);
-            setIsSelected(true);
+            //setIsSelected(true);
         };
 
     const textAreaChange = (doc) => {
@@ -85,7 +85,7 @@ const OtherDocs = () => {
             });
 
     };
-    }
+
 
      useEffect(() => {
              setLoading(true);
@@ -208,6 +208,6 @@ const OtherDocs = () => {
              </div>
              </>
          );
-     }
+     }}
 
 export default OtherDocs;
