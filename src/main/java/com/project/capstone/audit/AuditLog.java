@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(schema = "capstonedb" , name = "audit_log")
+@Table(name = "audit_log")
 @RequiredArgsConstructor
 public class AuditLog {
     @EmbeddedId

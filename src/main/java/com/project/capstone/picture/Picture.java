@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(schema = "capstonedb" , name = "picture")
+@Table(name = "picture")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

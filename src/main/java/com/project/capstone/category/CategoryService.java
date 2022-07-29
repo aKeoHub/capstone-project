@@ -15,5 +15,5 @@ public interface CategoryService {
 
     Category updateCategory(Category category, Integer categoryId) throws CategoryNotFoundException;
 
-    void deleteCategoryById(Integer categoryId);
+    void deleteCategoryById(Integer categoryId) throws CategoryNotFoundException;
 }

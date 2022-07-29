@@ -1,0 +1,75 @@
+.eventsDiv{
+    height: 483.88px;
+}
+
+.calendarDiv{
+    margin: auto;
+    padding:5%;
+}
+
+body {
+  color: black;
+}
+
+.white-text{
+    color:white;
+}
+
+.calendarContainer {
+      width: 80%;
+      margin: auto;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 3px;
+}
+
+.eventContainer {
+    background-color: #282c34;
+}
+
+.react-calendar__navigation__label {
+      font-weight: bold;
+      font-size:15px;
+      color:grey;
+}
+
+.react-calendar__navigation__arrow {
+  flex-grow: 1.333;
+  color: black;
+  font-weight:bolder;
+}
+
+button {
+    margin: 3px;
+    background-color: #6f876f;
+    border: 0;
+    border-radius: 3px;
+    color: grey;
+    padding: 5px 0;
+}
+
+.react-calendar {
+  width: 950px;
+  max-width: 100%;
+  background: white;
+  border: 1px solid #a0a096;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+  margin:auto;
+}
+
+.calendarHeaderDiv{
+ color:black;
+ width: 950px;
+ margin: auto;
+
+}
+
+.react-calendar__tile react-calendar__month-view__days__day {
+ color:red;
+}
+
+.title-block {
+    padding:10px;
+}
+

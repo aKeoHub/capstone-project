@@ -1,35 +1,40 @@
 package com.project.capstone.event;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.project.capstone.EntityIdResolver;
 import com.project.capstone.category.Category;
 import com.project.capstone.user.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(schema = "capstonedb" , name = "event")
+@Table(name = "event")
 @RequiredArgsConstructor
 @ToString
-public class Event {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "event_id", resolver = EntityIdResolver.class, scope = Event.class)
+@JsonSerialize(as = Event.class)
+@JsonDeserialize(as = Event.class)
+public class Event implements Serializable {
     @Id
     @Column(name = "event_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer eventId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "event_creator", nullable = false)
-    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_creator", referencedColumnName = "user_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private User eventCreator;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id", nullable = false)
-    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Category category;
 
@@ -51,7 +56,7 @@ public class Event {
     @Column(name = "file")
     private byte[] file;
 
-    public Event(@JsonProperty("event_id") Integer id,
+    public Event(@JsonProperty("event_id") Integer eventId,
                  @JsonProperty("event_creator") User eventCreator,
                  @JsonProperty("category_id") Category category,
                  @JsonProperty("event_name") String eventName,
@@ -60,7 +65,7 @@ public class Event {
                  @JsonProperty("start_date") LocalDate startDate,
                  @JsonProperty("end_date") LocalDate endDate,
                  @JsonProperty("file") byte[] file) {
-        this.id = id;
+        this.eventId = eventId;
         this.eventCreator = eventCreator;
         this.category = category;
         this.eventName = eventName;
@@ -135,12 +140,12 @@ public class Event {
         this.category = category;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getEventId() {
+        return eventId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEventId(Integer id) {
+        this.eventId = id;
     }
 
 }

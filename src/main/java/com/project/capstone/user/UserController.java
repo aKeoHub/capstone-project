@@ -18,6 +18,8 @@ public class UserController {
 
     @PostMapping("/add")
     public User createUsers(@Valid @NotNull @RequestBody User user) {
+
+
         return userService.saveUser(user);
     }
 

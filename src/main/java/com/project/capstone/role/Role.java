@@ -10,9 +10,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 
-
 @Entity
-@Table(schema = "capstonedb" , name = "role")
+@Table(name = "role")
 @RequiredArgsConstructor
 @ToString
 public class Role {

@@ -1,47 +1,54 @@
 package com.project.capstone.category;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.project.capstone.EntityIdResolver;
 import com.project.capstone.event.Event;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.capstone.parkdocument.ParkDocument;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(schema = "capstonedb" , name="category")
-public class Category {
+@Table(name="category")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,  property = "category_id", resolver = EntityIdResolver.class, scope = Category.class)
+@JsonSerialize(as = Category.class)
+@JsonDeserialize(as = Category.class)
+public class Category implements Serializable {
+
+    //private static final long serialVersionUID = 1L;
     @Id
+    @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer category_id;
-    @NotBlank
+    private Integer categoryId;
+    @Column(name = "category_name")
     private String category_name;
-    @NotBlank
+    @Column(name = "category_type")
     private String category_type;
 
-    public Category(@JsonProperty("category_id") Integer category_id,
+    public Category(@JsonProperty("category_id") Integer categoryId,
                     @JsonProperty("category_name") String category_name,
                     @JsonProperty("category_type") String category_type) {
-        this.category_id = category_id;
+        this.categoryId = categoryId;
         this.category_name = category_name;
         this.category_type = category_type;
     }
 
-    @OneToMany(fetch = LAZY)
+    @OneToMany(fetch = LAZY, mappedBy = "documentCategory")
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
-    @JsonBackReference
     private Collection<ParkDocument> documents = new ArrayList<>();
-    @JsonBackReference
+    @JsonIgnore
     public Collection<ParkDocument> getDocuments() {
         return documents;
     }
@@ -50,25 +57,25 @@ public class Category {
         this.documents = documents;
     }
 
-    @ManyToMany(fetch = LAZY)
+    @OneToMany(fetch = LAZY, mappedBy = "category")
+    @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
-    @JsonBackReference
     private Collection<Event> events = new ArrayList<>();
 
     public void setEvents(Collection<Event> events) {
         this.events = events;
     }
-    @JsonBackReference
+    @JsonIgnore
     public Collection<Event> getEvents() {
         return events;
     }
 
-    public Integer getCategory_id() {
-        return category_id;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(Integer category_id) {
+        this.categoryId = category_id;
     }
 
     public String getCategory_name() {

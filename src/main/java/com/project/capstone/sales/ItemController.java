@@ -15,7 +15,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = {"application/json"})
     public Item createItem (@Valid @RequestBody @NotNull Item item) {
         return itemService.createItem(item);
     }
@@ -35,12 +35,12 @@ public class ItemController {
         return itemService.fetchItemList();
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping(value = "/edit/{id}", consumes = {"application/json"})
     public Item updateItem (@RequestBody Item item, @PathVariable("id") Integer id) throws ItemNotFoundException {
         return itemService.updateItem(item, id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}", consumes = {"application/json"})
     public String deleteItemById (@PathVariable("id") Integer id) {
         itemService.deleteItemById(id);
         return "Deleted Successfully";

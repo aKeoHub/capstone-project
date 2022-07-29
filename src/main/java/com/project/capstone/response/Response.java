@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(schema = "capstonedb" , name ="response")
+@Table(name ="response")
 @RequiredArgsConstructor
 @ToString
 public class Response {
