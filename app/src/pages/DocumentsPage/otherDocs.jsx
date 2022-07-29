@@ -15,7 +15,7 @@ const OtherDocs = () => {
      const [docName, setDocName] = useState("");
      const [dateCreated, setDateCreated] = useState({varOne:new Date()});
      const [textarea, setTextarea] = useState("");
-     const [file, setFile] = useState([]);
+     const [file, setFile] = useState();
 
 
     const textAreaChange = (doc) => {
@@ -30,6 +30,7 @@ const OtherDocs = () => {
 
     const onUploadFile = e => {
         console.log('file: ', file);
+        console.log(e.target.files[0]);
         setFile(e.target.files[0]);
     };
 
@@ -45,15 +46,14 @@ const OtherDocs = () => {
                 documentName: docName,
                 createDate: dateCreated,
                 description: textarea,
-                file: DownloadDocument,
+                file: file,
                           }),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 }
           }).then(response => response.json())
                         .then(data => {
-                            console.log(data);
-                            window.location.reload();
+
                         })
       }
 
