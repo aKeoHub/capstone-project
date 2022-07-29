@@ -5,6 +5,15 @@ public class FileUploadResponse {
     private String downloadUri;
     private long size;
 
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    private byte[] file;
     public String getFileName() {
         return fileName;
     }

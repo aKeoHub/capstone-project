@@ -15,7 +15,7 @@ const OtherDocs = () => {
      const [docName, setDocName] = useState("");
      const [dateCreated, setDateCreated] = useState({varOne:new Date()});
      const [textarea, setTextarea] = useState("");
-     const [file, setFile] = useState();
+     const [file, setFile] = useState([]);
      const input = document.getElementById('fileUpload');
 
 
@@ -30,24 +30,74 @@ const OtherDocs = () => {
         console.log(inputs);
     }
 
-    const onUploadFile = e => {
-        e.preventDefault();
-          console.log('file: ', file);
-          console.log(e.target.files[0]);
+
+
+//
+    function handleChange(e) {
+     //   e.preventDefault();
+     //   fileSetter(setFile(e.target.files[0]))
+        console.log('file: ', file);
+        console.log(e.target.files[0]);
+        console.log(this.state.file)
 
         const formData = new FormData()
         formData.append('file', e.target.files[0])
-      //  this.setState({ files: file }, () => { console.log(this.state.files) });
+        //  this.setState({ files: file }, () => { console.log(this.state.files) });
+        //   setFile(e.target.files[0]);
         fetch('api/v1/uploadFile', {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
+                'Accept': 'application/json'
             },
             body: formData
         })
             .then(response => response.json())
             .then(data => {
+                setFile({file:file[0]});
+                console.log('file: ', file);
+                console.log(e.target.files[0]);
+                console.log(this.state.file)
                 console.log(data)
+                //      setFile(nfile);
+            })
+            .catch(error => {
+                console.error(error.response.data)
+            })
+
+    }
+
+
+
+
+
+
+
+
+//
+    const onUploadFile = e => {
+        e.preventDefault();
+        console.log('file: ', file);
+        console.log(e.target.files[0]);
+
+        const formData = new FormData()
+        formData.append('file', e.target.files[0])
+      //  this.setState({ files: file }, () => { console.log(this.state.files) });
+     //   setFile(e.target.files[0]);
+        fetch('api/v1/uploadFile', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData,
+
+
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(e.target.files[0])
+          //    let nfile =  document.getElementById("fileUpload");
+                console.log(data)
+                setFile(e.target.files[0]);
             })
             .catch(error => {
                 console.error(error.response.data)
@@ -55,7 +105,7 @@ const OtherDocs = () => {
     };
 
     const AddDocument = (doc) => {
-
+        console.log('file: ', file);
           fetch('api/v1/documents/add',{
               method:'POST',
 
@@ -66,7 +116,7 @@ const OtherDocs = () => {
                 document_name: docName,
                 create_date: dateCreated,
                 description: textarea,
-                file: file,
+                file: file
                           }),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
@@ -74,7 +124,7 @@ const OtherDocs = () => {
           }).then(response => response.json())
                         .then(data => {
                             console.log(data)
-                            window.location.reload();
+                        //    window.location.reload();
                         })
       }
 
@@ -147,7 +197,9 @@ const OtherDocs = () => {
                  </label>
                  <input
                      type="file" id="fileUpload" name="file"
-                     onChange={onUploadFile}
+                     onChange={onUploadFile.valueOf(file)}
+
+
                  />
                  <button onClick={AddDocument}>Add Document</button>
              </form>
