@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import ForumTable from "./ForumTable";
+
 import ForumLayout from "./ForumLayout";
 
 const ForumPage = () => {
@@ -9,7 +9,7 @@ const ForumPage = () => {
     return (
         <>
 
-            <ForumTable />
+
             <ForumLayout />
         </>
     );

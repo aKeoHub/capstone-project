@@ -7,6 +7,8 @@ import RegistrationPage from "./pages/RegistrationPage";
 import EventPage from "./pages/EventPage/EventPage";
 import ForumPage from "./pages/ForumPage/ForumPage";
 import DocumentsPage from "./pages/DocumentsPage";
+import ViewForum from "./pages/ForumPage/ViewForum";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
           <Route path="/events" exact component={EventPage} />
           <Route path="/forum" exact component={ForumPage} />
           <Route path="/documents" exact component={DocumentsPage} />
+          <Route path="/viewForum" exact component={ViewForum} />
         </Switch>
+        <Footer />
       </Router>
     </>
   );
