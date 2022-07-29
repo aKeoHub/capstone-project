@@ -17,14 +17,7 @@ const OtherDocs = () => {
      const [textarea, setTextarea] = useState("");
      const [file, setFile] = useState();
 
-    function FileUploadPage(){
-        const [selectedFile, setSelectedFile] = useState();
-        const [isFilePicked, setIsFilePicked] = useState(false);
 
-        const changeHandler = (event) => {
-            setSelectedFile(event.target.files[0]);
-            //setIsSelected(true);
-        };
 
     const textAreaChange = (doc) => {
         setTextarea(doc.target.value)
@@ -208,6 +201,6 @@ const OtherDocs = () => {
              </div>
              </>
          );
-     }}
+     }
 
 export default OtherDocs;
