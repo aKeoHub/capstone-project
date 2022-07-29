@@ -16,6 +16,7 @@ const OtherDocs = () => {
      const [dateCreated, setDateCreated] = useState({varOne:new Date()});
      const [textarea, setTextarea] = useState("");
      const [file, setFile] = useState();
+     const input = document.getElementById('fileUpload');
 
 
 
@@ -30,9 +31,27 @@ const OtherDocs = () => {
     }
 
     const onUploadFile = e => {
-        console.log('file: ', file);
-        console.log(e.target.files[0]);
-        setFile(e.target.files[0]);
+        e.preventDefault();
+          console.log('file: ', file);
+          console.log(e.target.files[0]);
+
+        const formData = new FormData()
+        formData.append('file', e.target.files[0])
+      //  this.setState({ files: file }, () => { console.log(this.state.files) });
+        fetch('api/v1/uploadFile', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+            },
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.error(error.response.data)
+            })
     };
 
     const AddDocument = (doc) => {
@@ -44,8 +63,8 @@ const OtherDocs = () => {
                 document_id: docId,
                 document_category: docCat,
                 creator_id: creatorId,
-                documentName: docName,
-                createDate: dateCreated,
+                document_name: docName,
+                create_date: dateCreated,
                 description: textarea,
                 file: file,
                           }),
@@ -54,31 +73,10 @@ const OtherDocs = () => {
                 }
           }).then(response => response.json())
                         .then(data => {
-
+                            console.log(data)
+                            window.location.reload();
                         })
       }
-
-    const DownloadDocument = (doc) => {
-
-
-        const formData = new FormData();
-
-        fetch('/api/v1/uploadFile',{
-            method:'POST',
-            body: formData,
-            headers: {
-            //    "Content-type": "application/json; charset=UTF-8"
-            }
-        }).then(response => response.json())
-            .then((result) => {
-                console.log('Success:', result);
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });
-
-    };
-
 
      useEffect(() => {
              setLoading(true);
@@ -98,8 +96,10 @@ const OtherDocs = () => {
 
      function deleteDocument(id) {
          fetch('api/v1/documents/delete/' + id,{
-             method:'DELETE'
-         }).then(response => response.json())
+             method:'DELETE',
+             headers: {
+                 "Content-type": "application/json; charset=UTF-8"
+            }}).then(response => response.json())
             .then(data => {
                 setLoading(false);
                 console.log(data);
@@ -146,8 +146,7 @@ const OtherDocs = () => {
                    <input type="date" id="dateCreated" name="dateCreated" onChange={(e) => { setDateCreated(e.target.value);}}/>
                  </label>
                  <input
-                     type="file"
-                     //style={{ display: 'none' }}
+                     type="file" id="fileUpload" name="file"
                      onChange={onUploadFile}
                  />
                  <button onClick={AddDocument}>Add Document</button>
@@ -181,7 +180,7 @@ const OtherDocs = () => {
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "12%"}}>{park_document.file}</td>
                                          <td>
-                                         <Button onClick={()=>deleteDocument(park_document.id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
+                                         <Button onClick={()=>deleteDocument(park_document.document_id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
                                          </td>
                                          <td id={park_document.id+"c"}>
                                          <Button id={park_document.id+"b"} style={{display: "block"}}

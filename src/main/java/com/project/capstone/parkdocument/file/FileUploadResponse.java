@@ -12,8 +12,8 @@ public class FileUploadResponse {
     public FileUploadResponse() {
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFileName(String file) {
+        this.fileName = file;
     }
 
     public String getDownloadUri() {

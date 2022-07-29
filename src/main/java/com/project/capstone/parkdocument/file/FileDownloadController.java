@@ -28,7 +28,7 @@ public class FileDownloadController {
             return new ResponseEntity<>("File not found", HttpStatus.NOT_FOUND);
         }
 
-        String contentType = "application/octet-stream";
+        String contentType = "application/json";
         String headerValue = "attachment; filename=\"" + resource.getFilename() + "\"";
 
         return ResponseEntity.ok()
