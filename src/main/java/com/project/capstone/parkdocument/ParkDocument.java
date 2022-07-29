@@ -52,6 +52,7 @@ public class ParkDocument implements Serializable {
     @Column(name = "description", nullable = false, length = 120)
     private String description;
 
+    @Lob
     @Column(name = "file")
     private byte[] file;
 

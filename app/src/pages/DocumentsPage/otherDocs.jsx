@@ -17,6 +17,7 @@ const OtherDocs = () => {
      const [textarea, setTextarea] = useState("");
      const [file, setFile] = useState([]);
 
+
     const textAreaChange = (doc) => {
         setTextarea(doc.target.value)
     }
@@ -44,7 +45,7 @@ const OtherDocs = () => {
                 documentName: docName,
                 createDate: dateCreated,
                 description: textarea,
-                file: null,
+                file: DownloadDocument,
                           }),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
@@ -55,6 +56,30 @@ const OtherDocs = () => {
                             window.location.reload();
                         })
       }
+
+    const DownloadDocument = (doc) => {
+
+        fetch('/api/v1/uploadFile',{
+            method:'POST',
+
+            body: JSON.stringify({
+                document_id: docId,
+                document_category: docCat,
+                creator_id: creatorId,
+                documentName: docName,
+                createDate: dateCreated,
+                description: textarea,
+                file: null,
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                window.location.reload();
+            })
+    }
 
      useEffect(() => {
              setLoading(true);
@@ -90,12 +115,12 @@ const OtherDocs = () => {
          return (
          <>
          <form onSubmit={handleSubmit}>
-               <label>Enter Document Id:
+               <label>Enter Category Id:
                <input
-                 type="text"
-                 name="docId"
+                 type="number"
+                 name="docCatd"
                  onChange={(e) => {
-                   setDocId(e.target.value);
+                   setDocCat(e.target.value);
                    }}
                />
                </label>
@@ -135,6 +160,7 @@ const OtherDocs = () => {
                          <table className="table">
                              <tr className="bg-primary text-white">
                                  <th style={{width: "9%"}}>Doc_id</th>
+                                 <th style={{width: "9%"}}>Doc_Cat</th>
                                  <th style={{width: "13%"}}>Creator_id</th>
                                  <th style={{width: "16%"}}>Doc_name</th>
                                  <th style={{width: "16%"}}>Date_created</th>
@@ -148,11 +174,12 @@ const OtherDocs = () => {
                              <div>
                                 <table className="table">
                                      <tr>
-                                         <td style={{width: "9%"}}>{park_document.id}</td>
-                                         <td style={{width: "13%"}}>{park_document.creatorId}</td>
-                                         <td style={{width: "16%"}}><span id={park_document.documentName}>{park_document.documentName}</span><input id={park_document.id} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "16%"}}>{park_document.createDate}</td>
-                                         <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
+                                         <td style={{width: "9%"}}>{park_document.document_id}</td>
+                                         <td style={{width: "9%"}}>{park_document.document_category}</td>
+                                         <td style={{width: "13%"}}>{park_document.creator_id}</td>
+                                         <td style={{width: "16%"}}><span id={park_document.document_name}>{park_document.document_name}</span><input id={park_document.document_id} type="text" style={{display: "none", width: "67%"}} /></td>
+                                         <td style={{width: "16%"}}>{park_document.create_date}</td>
+                                         <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "12%"}}>{park_document.file}</td>
                                          <td>
                                          <Button onClick={()=>deleteDocument(park_document.id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>

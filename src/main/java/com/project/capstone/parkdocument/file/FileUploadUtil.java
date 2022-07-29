@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import com.project.capstone.parkdocument.ParkDocument;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
