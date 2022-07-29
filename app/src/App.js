@@ -11,6 +11,7 @@ import AdminPage from "./pages/AdminPage";
 import Login from "./pages/LoginPage/components/login.component";
 import Profile from "./pages/LoginPage/components/profile.component";
 import ProfilePage from "./pages/ProfilePage";
+import LoginForm from "./pages/LoginPage";
 
 function App() {
 

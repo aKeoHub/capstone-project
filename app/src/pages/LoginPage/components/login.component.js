@@ -51,7 +51,7 @@ export default class Login extends Component {
                 (response) => {
                     //console.log(response.data,"===========================================");
                     this.props.history.push("/profile");
-                    //window.location.reload();
+                    window.location.reload();
                 },
                 error => {
                     //this.props.history.push("/login");
@@ -130,6 +130,15 @@ export default class Login extends Component {
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
                                 <span>Login</span>
+                            </button>
+                            <button onClick={AuthService.logout}
+                                className="btn btn-primary btn-block"
+                                disabled={this.state.loading}
+                            >
+                                {this.state.loading && (
+                                    <span className="spinner-border spinner-border-sm"></span>
+                                )}
+                                <span>Logout</span>
                             </button>
                         </div>
                         {this.state.message && (

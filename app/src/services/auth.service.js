@@ -1,4 +1,5 @@
 import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -21,22 +22,23 @@ class AuthService {
             .then(response => response.json())
             .then(json => {
                 //console.log(json.access_token)
-                if (json.access_token) {
-                    localStorage.setItem("accessToken", json.access_token);
+                if (json.accessToken) {
+                    localStorage.setItem("accessToken", json.accessToken);
                     localStorage.setItem("username", json.username);
                     console.log(localStorage.getItem('accessToken'))
                 }
-            })
-
-            .catch(error =>
-                //console.log('Authorization failed: ' + error.message)
-                window.location.assign("/login")
-            );
-
+            });
+    }
+    handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
     }
 
+
     logout() {
-        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
     }
 
     register(username, email, password) {

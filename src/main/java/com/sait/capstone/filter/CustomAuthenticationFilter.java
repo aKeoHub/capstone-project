@@ -75,32 +75,32 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         // YOU SHOULD NOT BE DOING THIS, YOU NEED TO CHANGE SECRET AND SAVE IT SOMEWHERE SECURE AND ENCRYPT IT, PASS IT IN HERE FROM A UTILITY CLASS. 1:17 in video
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
 
-        String access_token = JWT.create()
+        String accessToken = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 100000))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
 
-        String refresh_token = JWT.create()
+        String refreshToken = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000)) // THIS IS 30 MINUTES
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
-//        response.setHeader("access_token",access_token);
-//        response.setHeader("refresh_token",refresh_token);
+//        response.setHeader("accessToken",access_token);
+//        response.setHeader("refreshToken",refreshToken);
         Map<String, Object> userInfo = new HashMap<>();
         //Map<String, User> userMap = new HashMap<>();
         //userMap.put("user", user);
-        userInfo.put("access_token", access_token);
-        userInfo.put("refresh_token", refresh_token);
+        userInfo.put("accessToken", accessToken);
+        userInfo.put("refreshToken", refreshToken);
         userInfo.put("username", user.getUsername());
 
         response.setContentType(APPLICATION_JSON_VALUE);
        new ObjectMapper().writeValue(response.getOutputStream(), userInfo);
         //new ObjectMapper().writeValue(response.getOutputStream(), userMap);
-        log.info("jwt token returned {}", userInfo.get("access_token"));
+        log.info("jwt token returned {}", userInfo.get("accessToken"));
         //response.sendRedirect("http://localhost:3000");
 
 
@@ -108,13 +108,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-//        log.error("Unsuccessful attempt, Bad Credentials", failed);
-//        response.sendRedirect("http://localhost:3000/api/login");
-        logger.debug("failed authentication");
-        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED, "Unauthorized");
-        //Add more descriptive message
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                "Authentication Failed");
+  if (failed != null) {
+    // Need to force a redirect via the OAuth client filter, so rethrow here
+    throw failed;
+  }
+  else {
+    // If the exception is not a Spring Security exception this will result in a default error page
+    super.unsuccessfulAuthentication(request, response, null);
+  }
     }
 }
