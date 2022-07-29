@@ -21,7 +21,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 @SpringBootApplication
 public class CapstoneApplication {
@@ -45,15 +47,11 @@ public class CapstoneApplication {
 	CommandLineRunner run(UserService userService) {
 		return args -> {
 
-			userService.saveRole(new Role(1, "ROLE_USER"));
-			userService.saveRole(new Role(2, "ROLE_ADMIN"));
-			userService.saveRole(new Role(3, "ROLE_MANAGER"));
 
 
-
-			userService.saveUser(new User(1 , "john", "1234", "john", "hockey", "johnnyhockey@live.ca1", 1, null));
-			userService.saveUser(new User(2 , "kingston", "1234", "kingston", "the greatest", "kingston@live.ca", 1, null));
-			userService.saveUser(new User(3 , "1punchman", "1234", "saitama", "the all mighty", "onepunchman@live.ca", 1, null));
+			userService.saveUser(new User(3 , "john", "1234", "john", "hockey", "johnnyhockey@live.ca1", 1, new Date()));
+			userService.saveUser(new User(4 , "kingston", "1234", "kingston", "the greatest", "kingston@live.ca", 1, new Date()));
+			userService.saveUser(new User(5 , "1punchman", "1234", "saitama", "the all mighty", "onepunchman@live.ca", 1, new Date()));
 
 
 			userService.addRoleToUser("john", "ROLE_USER");
