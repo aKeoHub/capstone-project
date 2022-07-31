@@ -6,12 +6,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.audit.AuditLog;
 import com.project.capstone.category.Category;
-import com.project.capstone.parkdocument.file.FileUploadUtil;
+import com.project.capstone.parkdocument.file.FileInfo;
 import com.project.capstone.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,9 +53,10 @@ public class ParkDocument implements Serializable {
 
     @Column(name = "description", nullable = false, length = 120)
     private String description;
-    @Transient
+    @Lob
     @Column(name = "file")
-    private FileUploadUtil file;
+    @JsonManagedReference
+    private byte[] file;
 
     @OneToMany(mappedBy = "parkDocument")
     @JsonIgnore
@@ -68,7 +70,7 @@ public class ParkDocument implements Serializable {
                         @JsonProperty("document_name") String documentName,
                         @JsonProperty("create_date") LocalDate createDate,
                         @JsonProperty("description") String description,
-                        @JsonProperty("file") FileUploadUtil file) {
+                        @JsonProperty("file") byte[] file) {
         this.documentId = documentId;
         this.documentCategory=documentCategory;
         this.creatorId = creatorId;
@@ -86,11 +88,11 @@ public class ParkDocument implements Serializable {
         this.auditLogs = auditLogs;
     }
 
-    public FileUploadUtil getFile() {
+    public byte[] getFile() {
         return file;
     }
 
-    public void setFile(FileUploadUtil file) {
+    public void setFile(byte[] file) {
         this.file = file;
     }
 
