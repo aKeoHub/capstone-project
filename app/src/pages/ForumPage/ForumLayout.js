@@ -15,11 +15,11 @@ const ForumLayout = () => {
     const [showView, setShowView] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const handleCloseAdd = () => setShowAdd(false);
-    const handleCloseView = () => setShowView(false);
+    const handleCloseView = (id) => setShowView(false);
     const handleCloseEdit = () => setShowEdit(false);
     const handleShowAdd = () => setShowAdd(true);
-    const handleShowView = () => setShowView(true);
-    const handleShowEdit = () => setShowView(true);
+    const handleShowView = (id) => setShowView(true);
+    const handleShowEdit = () => setShowEdit(true);
     const [forumId, setForumIdReg] = useState(0);
     const [creatorId, setCreatorIdReg] = useState("");
     const [title, setTitleReg] = useState("");
@@ -48,12 +48,15 @@ const ForumLayout = () => {
     function deleteForum(id) {
 
             fetch('api/v1/forums/delete/' + id, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
             }).then(response => response.json())
                 .then(data => {
                     setLoading(false);
                     console.log(data);
-                    //window.location.reload();
+                    window.location.reload();
                 })
         }
     function addForum() {
@@ -63,7 +66,7 @@ const ForumLayout = () => {
         const yyyy = forumToday.getFullYear();
         forumToday = yyyy + '-' + mm + '-' + dd;
 
-        fetch("api/v1/forums/add", {
+        fetch('api/v1/forums/add', {
 
             // Adding method type
             method: "POST",
@@ -92,47 +95,31 @@ const ForumLayout = () => {
 
             // Displaying results to console
             .then(json => console.log(json));
-            //window.location.reload();
+            window.location.reload();
     }
 
     function viewForum(id) {
 
-        handleShowView();
-
-        fetch("api/vi/forums/get" + id, {
-        method: "GET",
-
-            // Adding body or contents to send
-            body: JSON.stringify({
-            forum_id: forumId,
-            creator_id: creatorId,
-            title: title,
-            description: description,
-            picture_id: picture_id,
-            sub_title: subTitle,
-            forum_category: forumCategory,
-
-        }),
-
+        fetch('api/v1/forums/get/' + id, {
+            method: 'GET',
             headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-
+                "Content-type": "application/json; charset=UTF-8"
+            }
         })
-
-            // Converting to JSON
             .then(response => response.json())
-
-            // Displaying results to console
-            .then(json => console.log(json));
+            .then(data => {
+                setLoading(false);
+                console.log(data);
+                handleShowView(id);
+            })
     }
 
     function editForum(id) {
 
-        fetch("api/v1/forums/edit" + id, {
+        fetch('api/v1/forums/edit/' + id, {
 
             // Adding method type
-            method: "PUT",
+            method: "UPDATE",
 
             // Adding body or contents to send
             body: JSON.stringify({
@@ -157,7 +144,8 @@ const ForumLayout = () => {
 
             // Displaying results to console
             .then(json => console.log(json));
-        //window.location.reload();
+            handleShowEdit();
+
     }
 
 
@@ -263,8 +251,8 @@ return (
                                         <div className="forum-icon">
                                             <i className="fa fa-shield"></i>
                                         </div>
-                                        <a onClick={viewForum}  className="forum-item-title">{forum.title}</a>
-                                        <Modal show={showView} onHide={handleCloseView}>
+                                        <a  className="forum-item-title">{forum.title}</a>
+                                        <Modal show={showView} onHide={() => handleCloseView(forum.forum_id)}>
                                             <Modal.Header className="blue-color-background"closeButton>
                                                 <Modal.Title className="blue-color-background">{forum.title}</Modal.Title>
                                             </Modal.Header>
@@ -273,10 +261,10 @@ return (
                                                 <div>{forum.description}</div>
                                             </Modal.Body>
                                             <Modal.Footer className="blue-color-background">
-                                                <Button variant="secondary" onClick={handleShowEdit}>
+                                                <Button variant="secondary" onClick={()=>editForum(forum.forum_id)}>
                                                     Edit
                                                 </Button>
-                                                <Button variant="primary" onClick={handleCloseView}>
+                                                <Button variant="primary" onClick={()=>deleteForum(forum.forum_id)}>
                                                     Delete
                                                 </Button>
                                             </Modal.Footer>
@@ -291,11 +279,11 @@ return (
                                                                 <div className="form-wrapper">
                                                                     <label htmlFor="">Title</label>
                                                                     <input
-                                                                        placeholder = {forum.title}
+
                                                                         type="text"
                                                                         className="form-control"
                                                                         onChange={(e) => {
-                                                                            setTitleReg(e.target.value);
+                                                                            setTitleReg(forum.title);
                                                                         }}
                                                                     />
                                                                 </div>
@@ -304,11 +292,11 @@ return (
                                                                 <div className="form-wrapper">
                                                                     <label htmlFor="">Sub Title</label>
                                                                     <input
-                                                                        placeholder ={forum.sub_title}
+
                                                                         type="text"
                                                                         className="form-control"
                                                                         onChange={(e) => {
-                                                                            setSubTitleReg(e.target.value);
+                                                                            setSubTitleReg(forum.sub_title);
                                                                         }}
                                                                     />
                                                                 </div>
@@ -316,11 +304,11 @@ return (
                                                             <div className="form-wrapper">
                                                                 <label htmlFor="">Description</label>
                                                                 <textarea
-                                                                    placeholder = {forum.description}
+
                                                                     type="text"
                                                                     className="form-control"
                                                                     onChange={(e) => {
-                                                                        setDescriptionReg(e.target.value);
+                                                                        setDescriptionReg(forum.description);
                                                                     }}
                                                                 />
                                                             </div>
@@ -335,7 +323,7 @@ return (
                                                         </form>
                                                     </Modal.Body>
                                                     <Modal.Footer className="blue-color-background">
-                                                        <Button variant="primary" onClick={editForum}>
+                                                        <Button variant="primary" onClick={() => editForum(forum.forum_id)}>
                                                             Edit
                                                         </Button>
                                                         <Button variant="primary" onClick={handleCloseEdit}>
@@ -355,6 +343,10 @@ return (
                             </span>
                                         <div>
                                             <small>Create Date: {forum.create_date}</small>
+                                            <Button variant="primary" onClick={()=>viewForum(forum.forum_id)}>
+                                                View
+                                            </Button>
+
                                         </div>
                                     </div>
                                 </div>
