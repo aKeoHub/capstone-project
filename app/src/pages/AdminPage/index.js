@@ -10,7 +10,7 @@ const AdminPage = () => {
     useEffect(() => {
         setLoading(true);
 
-        axios.get('api/users', { headers: { Authorization:`Bearer ${token}`  }})
+        axios.get('api/v1/users', { headers: { Authorization:`Bearer ${token}`  }})
             .then(function (response) {
                 console.log(response.data);
                 setUsers(response.data);

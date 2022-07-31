@@ -9,10 +9,10 @@ import DocumentsPage from "./pages/DocumentsPage";
 import ViewForum from "./pages/ForumPage/ViewForum";
 import Footer from "./components/Footer/Footer";
 import AdminPage from "./pages/AdminPage";
-import Login from "./pages/LoginPage/components/login.component";
 import Profile from "./pages/LoginPage/components/profile.component";
 import ProfilePage from "./pages/ProfilePage";
 import LoginForm from "./pages/LoginPage";
+import Login from "./pages/LoginPage/components/login.component";
 
 function App() {
   return (

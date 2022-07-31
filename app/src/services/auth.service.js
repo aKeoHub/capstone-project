@@ -1,7 +1,7 @@
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 
-const API_URL = "http://localhost:8080/api/";
+const API_URL = "http://localhost:8080/api/v1";
 
 class AuthService {
 
@@ -11,7 +11,7 @@ class AuthService {
         headers.append('Accept', 'application/json');
         headers.append('Origin', 'http://localhost:3000');
 
-        return fetch("api/login", {
+        return fetch("api/v1/login", {
             method: 'POST',
             body: JSON.stringify({
                 username: username,
@@ -58,7 +58,7 @@ class AuthService {
         const config = {
             headers: { Authorization: `Bearer ${this.getToken()}` },
         };
-       return axios.post("/api/user", bodyParameters, config)
+       return axios.post("/api/v1/user", bodyParameters, config)
             .then(function (response) {
                 console.log(response.data);
                 user = (response.data);

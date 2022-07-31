@@ -15,7 +15,7 @@ const ProfilePage = () => {
         const config = {
             headers: {Authorization: `Bearer ${token}`},
         };
-        axios.post("/api/user", bodyParameters, config)
+        axios.post("/api/v1/user", bodyParameters, config)
             .then(function (response) {
                 console.log(response.data);
                 setUsers(response.data)

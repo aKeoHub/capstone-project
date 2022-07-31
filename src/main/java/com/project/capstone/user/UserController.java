@@ -27,7 +27,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
@@ -47,7 +47,7 @@ public class UserController {
 
     @PostMapping("/user/save")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
@@ -55,7 +55,7 @@ public class UserController {
 
     @PostMapping("/role/save")
     public ResponseEntity<Role>saveRole(@RequestBody Role role) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
