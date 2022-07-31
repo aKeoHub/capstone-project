@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import React from 'react';
 
 
 const EventForm = () => {
@@ -77,9 +78,9 @@ const EventForm = () => {
       </label>
       <label>Select Category:
       <select
-        class="form-select"
+        className="form-select"
         name="category"
-        type= "number"
+        type="number"
         onChange={(e) => {
         setCategoryId(e.target.value);
       }} >
