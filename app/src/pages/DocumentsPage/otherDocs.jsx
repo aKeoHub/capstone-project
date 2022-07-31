@@ -15,9 +15,9 @@ const OtherDocs = () => {
      const [docName, setDocName] = useState("");
      const [dateCreated, setDateCreated] = useState({varOne:new Date()});
      const [textarea, setTextarea] = useState("");
-     const [file, setFile] = useState();
+     const [file, setFile] = useState([]);
      const input = document.getElementById('fileUpload');
-
+     var downloadUri = "";
 
 
     const textAreaChange = (doc) => {
@@ -31,12 +31,11 @@ const OtherDocs = () => {
     }
 
     const onUploadFile = e => {
-        e.preventDefault();
-          console.log('file: ', file);
-          console.log(e.target.files[0]);
 
         const formData = new FormData()
         formData.append('file', e.target.files[0])
+        console.log(formData);
+
       //  this.setState({ files: file }, () => { console.log(this.state.files) });
         fetch('api/v1/uploadFile', {
             method: 'POST',
@@ -47,6 +46,7 @@ const OtherDocs = () => {
         })
             .then(response => response.json())
             .then(data => {
+                downloadUri = data.downloadUri;
                 console.log(data)
             })
             .catch(error => {
@@ -74,7 +74,7 @@ const OtherDocs = () => {
           }).then(response => response.json())
                         .then(data => {
                             console.log(data)
-                            window.location.reload();
+
                         })
       }
 

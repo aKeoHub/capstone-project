@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.audit.AuditLog;
 import com.project.capstone.category.Category;
+import com.project.capstone.parkdocument.file.FileUploadUtil;
 import com.project.capstone.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -51,10 +52,9 @@ public class ParkDocument implements Serializable {
 
     @Column(name = "description", nullable = false, length = 120)
     private String description;
-
-    @Lob
+    @Transient
     @Column(name = "file")
-    private byte[] file;
+    private FileUploadUtil file;
 
     @OneToMany(mappedBy = "parkDocument")
     @JsonIgnore
@@ -68,7 +68,7 @@ public class ParkDocument implements Serializable {
                         @JsonProperty("document_name") String documentName,
                         @JsonProperty("create_date") LocalDate createDate,
                         @JsonProperty("description") String description,
-                        @JsonProperty("file") byte[] file) {
+                        @JsonProperty("file") FileUploadUtil file) {
         this.documentId = documentId;
         this.documentCategory=documentCategory;
         this.creatorId = creatorId;
@@ -86,11 +86,11 @@ public class ParkDocument implements Serializable {
         this.auditLogs = auditLogs;
     }
 
-    public byte[] getFile() {
+    public FileUploadUtil getFile() {
         return file;
     }
 
-    public void setFile(byte[] file) {
+    public void setFile(FileUploadUtil file) {
         this.file = file;
     }
 
