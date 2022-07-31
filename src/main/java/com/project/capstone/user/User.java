@@ -1,6 +1,7 @@
 package com.project.capstone.user;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+import com.project.capstone.EntityIdResolver;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
 import com.project.capstone.role.Role;
@@ -9,17 +10,22 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
-@Table(schema = "capstonedb" , name = "user")
+@Table(name = "user")
 @RequiredArgsConstructor
 @ToString
-public class User {
+public class User implements Serializable {
+
 
     @Id
     @Column(name = "user_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIdentityReference(alwaysAsId = true)
+    private Integer userId;
 
     @Column(name = "username", nullable = false, length = 30)
     private String username;
@@ -30,7 +36,7 @@ public class User {
     @Column(name = "lastname", nullable = false, length = 30)
     private String lastname;
 
-    @Column(name = "password", nullable = false, length = 30)
+    @Column(name = "password", nullable = false, length = 60)
     private String password;
 
     @Column(name = "email", nullable = false, length = 72)
@@ -40,13 +46,15 @@ public class User {
     private Integer pictureId;
 
     @Column(name = "create_date")
-    private Date createDate;
+    private LocalDate createDate;
 
-    @OneToMany(mappedBy = "eventCreator")
+    @OneToMany(fetch = FetchType.LAZY) //mappedBy - indicate the given column is owned by another entity
+    @JoinColumn(name = "event_id")
     @ToString.Exclude
     private Set<Event> events = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
     @ToString.Exclude
     private Set<Item> items = new LinkedHashSet<>();
 
@@ -66,8 +74,8 @@ public class User {
                 @JsonProperty("lastname") String lastname,
                 @JsonProperty("email") String email,
                 @JsonProperty("picture_id") int picture_id,
-                @JsonProperty("create_date") Date create_date) {
-        this.id = user_id;
+                @JsonProperty("create_date") LocalDate create_date) {
+        this.userId = user_id;
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -76,6 +84,8 @@ public class User {
         this.pictureId = picture_id;
         this.createDate = create_date;
     }
+
+    @JsonIgnore
     public Set<Forum> getForums() {
         return forums;
     }
@@ -83,7 +93,7 @@ public class User {
     public void setForums(Set<Forum> forums) {
         this.forums = forums;
     }
-
+    @JsonIgnore
     public Set<Role> getRoles() {
         return roles;
     }
@@ -91,7 +101,7 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
+    @JsonIgnore
     public Set<Item> getItems() {
         return items;
     }
@@ -99,7 +109,7 @@ public class User {
     public void setItems(Set<Item> items) {
         this.items = items;
     }
-
+    @JsonIgnore
     public Set<Event> getEvents() {
         return events;
     }
@@ -108,11 +118,11 @@ public class User {
         this.events = events;
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 
@@ -164,11 +174,11 @@ public class User {
         this.username = username;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer id) {
+        this.userId = id;
     }
 }

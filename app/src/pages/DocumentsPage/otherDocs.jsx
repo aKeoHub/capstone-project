@@ -17,7 +17,7 @@ const OtherDocs = () => {
      const [textarea, setTextarea] = useState("");
      const [file, setFile] = useState();
      const input = document.getElementById('fileUpload');
-
+    const token = localStorage.getItem("accessToken");
 
 
     const textAreaChange = (doc) => {
@@ -31,8 +31,8 @@ const OtherDocs = () => {
     }
 
     const onUploadFile = e => {
-        e.preventDefault();
-          console.log('file: ', file);
+
+          //console.log('file: ', file);
           console.log(e.target.files[0]);
 
         const formData = new FormData()
@@ -41,7 +41,7 @@ const OtherDocs = () => {
         fetch('api/v1/uploadFile', {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
+                'Accept': 'application/json', 'Authorization':`Bearer ${token}`,
             },
             body: formData
         })
@@ -50,7 +50,7 @@ const OtherDocs = () => {
                 console.log(data)
             })
             .catch(error => {
-                console.error(error.response.data)
+                console.error(error)
             })
     };
 
@@ -69,7 +69,7 @@ const OtherDocs = () => {
                 file: file,
                           }),
                 headers: {
-                    "Content-type": "application/json; charset=UTF-8"
+                    "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
                 }
           }).then(response => response.json())
                         .then(data => {
@@ -78,17 +78,30 @@ const OtherDocs = () => {
                         })
       }
 
-     useEffect(() => {
-             setLoading(true);
+     // useEffect(() => {
+     //         setLoading(true);
+     //
+     //         fetch('api/v1/documents/all')
+     //             .then(response => response.json())
+     //             .then(data => {
+     //                 setDocuments(data);
+     //                 setLoading(false);
+     //                 console.log(data);
+     //             })
+     //         }, []);
 
-             fetch('api/v1/documents/all')
-                 .then(response => response.json())
-                 .then(data => {
-                     setDocuments(data);
-                     setLoading(false);
-                     console.log(data);
-                 })
-             }, []);
+    fetch('api/v1/documents/all', {
+        headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+    })
+        .then(response => response.json())
+        .then(data => {
+            setDocuments(data);
+            setLoading(false);
+            console.log(data);
+        })
+        .catch((err) => console.log(err));
+
+
 
          if (loading) {
              return <p>Loading...</p>;

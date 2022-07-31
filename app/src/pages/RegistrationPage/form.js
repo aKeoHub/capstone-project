@@ -24,13 +24,20 @@ const RegistrationForm = () => {
   // }, []);
 
   const register = () => {
-    let today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    const yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
+    // let today = new Date();
+    // const dd = String(today.getDate()).padStart(2, "0");
+    // const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    // const yyyy = today.getFullYear();
+    // today = yyyy + "-" + mm + "-" + dd;
 
-    fetch("api/user/save", {
+    let date = new Date()
+    let day = date.getDate();
+    let month = date.getMonth()+1;
+    let year = date.getFullYear();
+
+    let fullDate = `${year}-${month}-${day}`;
+    console.log(fullDate);
+    fetch("api/v1/user/save/", {
       // Adding method type
       method: "POST",
 
@@ -43,7 +50,7 @@ const RegistrationForm = () => {
         lastname: lastname,
         email: email,
         picture_id: picture_id,
-        create_date: today.toString(),
+        create_date: fullDate,
       }),
 
       //Adding headers to the request
@@ -55,7 +62,10 @@ const RegistrationForm = () => {
       .then((response) => response.json())
 
       // Displaying results to console
-      .then((json) => console.log(json));
+      .then((json) => {
+        console.log(json)
+        //this.props.history.push("/profile");
+      });
 
     if (loading) {
       return <p>Loading...</p>;

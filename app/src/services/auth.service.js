@@ -41,27 +41,27 @@ class AuthService {
         localStorage.removeItem("accessToken");
     }
 
-    register(username, email, password) {
-        return axios.post(API_URL + "save", {
-            username,
-            email,
-            password
-        });
-    }
+    // register(username, email, password) {
+    //     return axios.post(API_URL + "save", {
+    //         username,
+    //         email,
+    //         password
+    //     });
+    // }
 
     getCurrentUser() {
         const username = (localStorage.getItem('username'));
         const bodyParameters = {
             username: username,
         };
-        let user = '';
+        //let user = '';
         const config = {
             headers: { Authorization: `Bearer ${this.getToken()}` },
         };
        return axios.post("/api/v1/user", bodyParameters, config)
             .then(function (response) {
                 console.log(response.data);
-                user = (response.data);
+                //user = (response.data);
             }).catch((err) => console.log(err));
 
 

@@ -52,10 +52,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         }).and();
 
         http.authorizeRequests().antMatchers("/api/v1/login/**", "/api/v1/token/refresh/**", "/api/v1/user/save/**").permitAll();
+
         http.authorizeRequests().antMatchers(GET, "/api/v1/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(POST, "/api/v1/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(GET, "/api/v1/users/**").hasAnyAuthority("ROLE_ADMIN");
+
+        http.authorizeRequests().antMatchers("/api/v1/events/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/documents/add/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers("/api/v1/documents/**").permitAll();
+        http.authorizeRequests().antMatchers(POST,"/api/v1/uploadFile/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers("/api/v1/forums/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/events/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/category/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/events/add/**").hasAnyAuthority("ROLE_USER");
+
         http.authorizeRequests().anyRequest().authenticated();
+       // "/api/v1/events/**"
+      //  /api/v1/events/add/**
+//        api/v1/events/get/{id}
+//        api/v1/events/edit/{id}
+//        api/v1/events/delete/{id}
         http.formLogin().defaultSuccessUrl("http://localhost:3000")
                 .failureUrl("/login?error=true");
         http.addFilter(customAuthenticationFilter);

@@ -42,7 +42,7 @@ const ProfilePage = () => {
                 {/*</p>*/}
                 <p>
                     <strong>ID:</strong>{" "}
-                    {users.id}
+                    {users.userId}
                 </p>
                 <p>
                     <strong>First name:</strong>{" "}
@@ -57,10 +57,10 @@ const ProfilePage = () => {
                     {users.email}
                 </p>
                 <strong>Authorities:</strong>
-                {/*<ul>*/}
-                {/*    {users.roles &&*/}
-                {/*        users.roles.map((role, index) => <li key={index}>{role}</li>)}*/}
-                {/*</ul>*/}
+                <ul>
+                    {users.roles &&
+                        users.roles.map((role, index) => <li key={index}>{role}</li>)}
+                </ul>
             </div>
         </div>
 
