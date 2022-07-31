@@ -7,12 +7,14 @@ const EventTable = () => {
 
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    const token = localStorage.getItem("accessToken");
 
     useEffect(() => {
         setLoading(true);
 
-        fetch('api/v1/events/all')
+        fetch('api/v1/events/all', {
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+        })
             .then(response => response.json())
             .then(data => {
                 setEvents(data);
@@ -30,7 +32,7 @@ function deleteEvent(id) {
     fetch('api/v1/events/delete/' + id,{
         method:'DELETE',
         headers: {
-            "Content-type": "application/json; charset=UTF-8"
+            "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
         }})
         .then(response => response.json())
                   .then(data => {

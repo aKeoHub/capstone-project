@@ -30,13 +30,11 @@ const RegistrationForm = () => {
     // const yyyy = today.getFullYear();
     // today = yyyy + "-" + mm + "-" + dd;
 
-    let date = new Date()
-    let day = date.getDate();
-    let month = date.getMonth()+1;
-    let year = date.getFullYear();
 
-    let fullDate = `${year}-${month}-${day}`;
-    console.log(fullDate);
+
+    const todaysDate = new Date();
+    console.log(todaysDate.toLocaleDateString());
+
     fetch("api/v1/user/save/", {
       // Adding method type
       method: "POST",
@@ -50,7 +48,7 @@ const RegistrationForm = () => {
         lastname: lastname,
         email: email,
         picture_id: picture_id,
-        create_date: fullDate,
+        create_date: todaysDate,
       }),
 
       //Adding headers to the request

@@ -57,14 +57,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(POST, "/api/v1/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(GET, "/api/v1/users/**").hasAnyAuthority("ROLE_ADMIN");
 
+
+
         http.authorizeRequests().antMatchers("/api/v1/events/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/events/add/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(GET, "/api/v1/events/all/**").hasAnyAuthority("ROLE_USER");
+
+
+
         http.authorizeRequests().antMatchers(POST, "/api/v1/documents/add/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers("/api/v1/documents/**").permitAll();
         http.authorizeRequests().antMatchers(POST,"/api/v1/uploadFile/**").hasAnyAuthority("ROLE_USER");
+
+
+
+
         http.authorizeRequests().antMatchers("/api/v1/forums/**").permitAll();
-        http.authorizeRequests().antMatchers("/api/v1/events/**").permitAll();
+
         http.authorizeRequests().antMatchers("/api/v1/category/**").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/api/v1/events/add/**").hasAnyAuthority("ROLE_USER");
+
 
         http.authorizeRequests().anyRequest().authenticated();
        // "/api/v1/events/**"
