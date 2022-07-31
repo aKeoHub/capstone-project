@@ -1,9 +1,7 @@
-package com.sait.capstone.service;
+package com.project.capstone.user;
 
-import com.sait.capstone.dao.RoleRepo;
-import com.sait.capstone.dao.UserRepository;
-import com.sait.capstone.model.Role;
-import com.sait.capstone.model.User;
+import com.project.capstone.role.Role;
+import com.project.capstone.role.RoleRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -46,6 +44,16 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
         log.info("Saving new user {} to the database", user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
+    }
+
+    @Override
+    public User updateUser(User user, Integer userId)  {
+        return null;
+    }
+
+    @Override
+    public void deleteUserById(Integer userId) {
+
     }
 
     @Override

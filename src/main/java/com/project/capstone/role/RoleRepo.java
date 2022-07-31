@@ -1,6 +1,5 @@
-package com.sait.capstone.dao;
+package com.project.capstone.role;
 
-import com.sait.capstone.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepo extends JpaRepository<Role, Long> {

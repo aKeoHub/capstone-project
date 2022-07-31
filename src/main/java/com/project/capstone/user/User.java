@@ -1,35 +1,25 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/user/User.java
 package com.project.capstone.user;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/User.java
 
-import com.fasterxml.jackson.annotation.*;
-import com.project.capstone.EntityIdResolver;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
-import com.project.capstone.sales.Item;
 import com.project.capstone.role.Role;
+import com.project.capstone.sales.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.*;
 
 @Entity
-@Table(name = "user")
+@Table(schema = "capstonedb" , name = "user")
 @RequiredArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "user_id", resolver = EntityIdResolver.class, scope = User.class)
-public class User implements Serializable {
+public class User {
 
     @Id
     @Column(name = "user_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Integer userId;
+    private Integer id;
 
     @Column(name = "username", nullable = false, length = 30)
     private String username;
@@ -50,43 +40,34 @@ public class User implements Serializable {
     private Integer pictureId;
 
     @Column(name = "create_date")
-    private LocalDate createDate;
+    private Date createDate;
 
-    @OneToMany(fetch = FetchType.LAZY) //mappedBy - indicate the given column is owned by another entity
-    @JoinColumn(name = "event_id")
+    @OneToMany(mappedBy = "eventCreator")
     @ToString.Exclude
-    private Collection<Event> events = new LinkedHashSet<>();
+    private Set<Event> events = new LinkedHashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
+    @OneToMany(mappedBy = "owner")
     @ToString.Exclude
-    private Collection<Item> items = new LinkedHashSet<>();
+    private Set<Item> items = new LinkedHashSet<>();
 
-<<<<<<<< HEAD:src/main/java/com/project/capstone/user/User.java
-    @ManyToMany(mappedBy = "users")
-    @ToString.Exclude
-    private Collection<Role> roles = new LinkedHashSet<>();
-
-========
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/User.java
     @OneToMany(mappedBy = "creator")
     @ToString.Exclude
     private Set<Forum> forums = new LinkedHashSet<>();
 
-    public User(@JsonProperty("user_id") Integer userId,
+    public User(@JsonProperty("user_id") int user_id,
                 @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
                 @JsonProperty("firstname") String firstname,
                 @JsonProperty("lastname") String lastname,
                 @JsonProperty("email") String email,
-                @JsonProperty("picture_id") Integer picture_id,
-                @JsonProperty("create_date") LocalDate create_date) {
-        this.userId = userId;
+                @JsonProperty("picture_id") int picture_id,
+                @JsonProperty("create_date") Date create_date) {
+        this.id = user_id;
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -95,7 +76,6 @@ public class User implements Serializable {
         this.pictureId = picture_id;
         this.createDate = create_date;
     }
-    @JsonIgnore
     public Set<Forum> getForums() {
         return forums;
     }
@@ -104,23 +84,23 @@ public class User implements Serializable {
         this.forums = forums;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    @JsonIgnore
-    public Collection<Item> getItems() {
+
+    public Set<Item> getItems() {
         return items;
     }
 
     public void setItems(Set<Item> items) {
         this.items = items;
     }
-    @JsonIgnore
-    public Collection<Event> getEvents() {
+
+    public Set<Event> getEvents() {
         return events;
     }
 
@@ -128,9 +108,11 @@ public class User implements Serializable {
         this.events = events;
     }
 
-    public LocalDate getCreateDate() {return createDate;}
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
@@ -182,11 +164,11 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer id) {
-        this.userId = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

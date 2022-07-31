@@ -1,14 +1,11 @@
 package com.project.capstone.user;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
-    //Springboot Magic!
-    //CRUDRepository and all its methods are Inherited, no boilerplate code needed!
-
+public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("" +
             "SELECT CASE WHEN COUNT(u) > 0 THEN " +
             "TRUE ELSE FALSE END " +
@@ -16,10 +13,5 @@ public interface UserRepository extends CrudRepository<User, Integer> {
             "WHERE u.email = ?1"
     )
     Boolean selectExistsEmail(String email);
-
+    User findByUsername(String username);
 }
-
-
-
-
-

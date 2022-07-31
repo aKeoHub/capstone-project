@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/sales/Item.java
 package com.project.capstone.sales;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/Item.java
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/audit/AuditLog.java
 package com.project.capstone.audit;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/AuditLog.java
 
 import com.project.capstone.parkdocument.ParkDocument;
 import com.fasterxml.jackson.annotation.JsonProperty;

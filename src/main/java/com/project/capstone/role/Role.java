@@ -1,10 +1,5 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/role/Role.java
 package com.project.capstone.role;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/Role.java
 
-import com.project.capstone.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -14,8 +9,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 
+
 @Entity
-@Table(name = "role")
+@Table(schema = "capstonedb" , name = "role")
 @RequiredArgsConstructor
 @ToString
 public class Role {
@@ -23,7 +19,6 @@ public class Role {
 
     @Id
     @Column(name = "role_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "role_name", nullable = false, length = 56)

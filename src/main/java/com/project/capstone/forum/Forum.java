@@ -1,4 +1,3 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/forum/Forum.java
 package com.project.capstone.forum;
 
 import com.fasterxml.jackson.annotation.*;
@@ -6,9 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.user.User;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/Forum.java
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

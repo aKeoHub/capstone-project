@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/response/Response.java
 package com.project.capstone.response;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/Response.java
 
 import com.project.capstone.forum.Forum;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/picture/Picture.java
 package com.project.capstone.picture;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/Picture.java
 
 import lombok.*;
 

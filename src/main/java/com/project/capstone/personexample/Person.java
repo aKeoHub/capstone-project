@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/personexample/Person.java
 package com.project.capstone.personexample;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/Person.java
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

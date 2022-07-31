@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/notification/Notification.java
 package com.project.capstone.notification;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/Notification.java
 
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

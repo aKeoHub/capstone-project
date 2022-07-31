@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/com/project/capstone/audit/AuditLogId.java
 package com.project.capstone.audit;
-========
-package com.sait.capstone.model;
->>>>>>>> KingstonBranch2.0:src/main/java/com/sait/capstone/model/AuditLogId.java
 
 import org.hibernate.Hibernate;
 

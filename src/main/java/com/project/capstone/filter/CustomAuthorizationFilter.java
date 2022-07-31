@@ -1,4 +1,4 @@
-package com.sait.capstone.filter;
+package com.project.capstone.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
