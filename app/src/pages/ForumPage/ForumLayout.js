@@ -2,41 +2,51 @@ import React, {useEffect, useState} from "react";
 import './ForumPage.css';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
+const token = localStorage.getItem("accessToken");
 
 
 
 
 const ForumLayout = () => {
 
+
+
+
     const [forums, setForums] = useState([]);
+    const [forum, setForum] = useState([]);
+    const [forumLoaded, setForumLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
+
     const [showAdd, setShowAdd] = useState(false);
-    const [showView, setShowView] = useState(false);
-    const [showEdit, setShowEdit] = useState(false);
     const handleCloseAdd = () => setShowAdd(false);
-    const handleCloseView = () => setShowView(false);
-    const handleCloseEdit = () => setShowEdit(false);
     const handleShowAdd = () => setShowAdd(true);
+
+    const [showEdit, setShowEdit] = useState(false);
+    const handleCloseEdit = () => setShowEdit(false);
+    const handleShowEdit = () => setShowEdit(true);
+
+    const[showView, setShowView] = useState (false);
+    const handleCloseView = () => setShowView(false);
     const handleShowView = () => setShowView(true);
-    const handleShowEdit = () => setShowView(true);
-    const [forumId, setForumIdReg] = useState(0);
+
+
+    const [forumId, setForumIdReg] = useState("");
     const [creatorId, setCreatorIdReg] = useState("");
     const [title, setTitleReg] = useState("");
     const [subTitle, setSubTitleReg] = useState("");
     const [description, setDescriptionReg] = useState("");
     const [forumCategory, setForumCategoryReg] = useState("");
     const [picture_id, setPictureId] = useState("");
-    const token = localStorage.getItem("accessToken");
+    const [createDate, setCreateDate] = useState(new Date);
+
+
 
 
     useEffect(() => {
         setLoading(true);
 
-        fetch('api/v1/forums/all' ,{
-            headers: {
-                "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
-            }
+        fetch('api/v1/forums/all',{
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
         })
             .then(response => response.json())
             .then(data => {
@@ -52,23 +62,25 @@ const ForumLayout = () => {
 
     function deleteForum(id) {
 
-            fetch('api/v1/forums/delete/' + id, {
-                method: 'DELETE'
-            }).then(response => response.json())
-                .then(data => {
-                    setLoading(false);
-                    console.log(data);
-                    //window.location.reload();
-                })
-        }
+        fetch('api/v1/forums/delete/' + id, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+        }).then(response => response.json())
+            .then(data => {
+                setLoading(false);
+                console.log(data);
+                window.location.reload();
+            })
+    }
     function addForum() {
         let forumToday = new Date();
         const dd = String(forumToday.getDate()).padStart(2, '0');
-        const mm = String(forumToday.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const mm = String(forumToday.getMonth() + 1).padStart(2, '0');
         const yyyy = forumToday.getFullYear();
         forumToday = yyyy + '-' + mm + '-' + dd;
+        setCreateDate(forumToday);
 
-        fetch("api/v1/forums/add", {
+        fetch('api/v1/forums/add', {
 
             // Adding method type
             method: "POST",
@@ -79,16 +91,14 @@ const ForumLayout = () => {
                 creator_id: creatorId,
                 title: title,
                 description: description,
-                create_date: forumToday.toString(),
+                create_date: createDate.toString(),
                 picture_id: picture_id,
                 sub_title: subTitle,
                 forum_category: forumCategory,
 
             }),
 
-            headers: {
-                "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
-            }
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
 
         })
 
@@ -97,77 +107,66 @@ const ForumLayout = () => {
 
             // Displaying results to console
             .then(json => console.log(json));
-            //window.location.reload();
+        window.location.reload();
     }
+
 
     function viewForum(id) {
 
-        handleShowView();
-
-        fetch("api/vi/forums/get" + id, {
-        method: "GET",
-
-            // Adding body or contents to send
-            body: JSON.stringify({
-            forum_id: forumId,
-            creator_id: creatorId,
-            title: title,
-            description: description,
-            picture_id: picture_id,
-            sub_title: subTitle,
-            forum_category: forumCategory,
-
-        }),
-
-            headers: {
-            "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
-        }
-
+        fetch('api/v1/forums/get/' + id, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
         })
-
-            // Converting to JSON
             .then(response => response.json())
+            .then(data => {
+                setForum(data);
+                setLoading(false);
+                console.log(data);
+                handleShowView();
+            })
 
-            // Displaying results to console
-            .then(json => console.log(json));
+
+
+
     }
 
-    function editForum(id) {
 
-        fetch("api/v1/forums/edit" + id, {
+    function editForum(forumId)  {
 
-            // Adding method type
+        fetch('api/v1/forums/edit/' + forumId, {
             method: "PUT",
-
-            // Adding body or contents to send
             body: JSON.stringify({
                 forum_id: forumId,
                 creator_id: creatorId,
                 title: title,
                 description: description,
+                create_date: createDate,
                 picture_id: picture_id,
                 sub_title: subTitle,
                 forum_category: forumCategory,
-
             }),
-
-            headers: {
-                "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
-            }
-
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
         })
-
-            // Converting to JSON
             .then(response => response.json())
+            .then(data => {
+                handleShowEdit();
+                setLoading(false);
+                console.log(data);
+            })
 
-            // Displaying results to console
-            .then(json => console.log(json));
-        //window.location.reload();
+
+        // Displaying results to console
+
+
+
+
+
+
     }
 
 
 
-return (
+    return (
 
 
         <div className="container">
@@ -186,11 +185,11 @@ return (
                             <Button variant="primary" onClick={handleShowAdd}>
                                 Add Forum
                             </Button>
-                            <Modal show={showAdd} onHide={handleCloseAdd}>
-                                <Modal.Header  className="blue-color-background"closeButton>
-                                    <Modal.Title className="blue-color-background">Creating a Forum</Modal.Title>
+                            <Modal className="blue-color-background" show={showAdd} onHide={handleCloseAdd}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Creating a Forum</Modal.Title>
                                 </Modal.Header>
-                                <Modal.Body className="blue-color-background">
+                                <Modal.Body>
                                     <form action="">
                                         <h3>Your New Forum!</h3>
                                         <div className="form-wrapper">
@@ -242,7 +241,9 @@ return (
                                         </div>
                                         <div className="form-wrapper">
                                             <label htmlFor="forumCategory">ForumCategory</label>
-                                            <select name="forumCategory" id="forumCategory">
+                                            <select onChange={(e) => {
+                                                setForumCategoryReg(e.target.value);
+                                            }}name="forumCategory" id="forumCategory">
                                                 <option value="Help Needed!">Help Needed!</option>
                                                 <option value="Announcement">Announcement</option>
                                                 <option value="Event">Event</option>
@@ -250,7 +251,7 @@ return (
                                         </div>
                                     </form>
                                 </Modal.Body>
-                                <Modal.Footer className="blue-color-background">
+                                <Modal.Footer >
                                     <Button variant="secondary" onClick={handleCloseAdd}>
                                         Close
                                     </Button>
@@ -260,38 +261,48 @@ return (
                                 </Modal.Footer>
                             </Modal>
                             {forums.map(forum =>
-                        <div key={forum.id}>
-                            <div className="forum-item active">
+                                <div key={forum.id}>
+                                    <div className="forum-item active">
 
-                                <div className="row">
-                                    <div className="col-md-9">
-                                        <div className="forum-icon">
-                                            <i className="fa fa-shield"></i>
-                                        </div>
-                                        <a onClick={viewForum}  className="forum-item-title">{forum.title}</a>
-                                        <Modal show={showView} onHide={handleCloseView}>
-                                            <Modal.Header className="blue-color-background"closeButton>
-                                                <Modal.Title className="blue-color-background">{forum.title}</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body className="blue-color-background">
-                                                <h3>{forum.sub_title}</h3>
-                                                <div>{forum.description}</div>
-                                            </Modal.Body>
-                                            <Modal.Footer className="blue-color-background">
-                                                <Button variant="secondary" onClick={handleShowEdit}>
-                                                    Edit
-                                                </Button>
-                                                <Button variant="primary" onClick={handleCloseView}>
-                                                    Delete
-                                                </Button>
-                                            </Modal.Footer>
-                                        </Modal>
-                                                <Modal show={showEdit} onHide={handleCloseEdit}>
-                                                    <Modal.Header className="blue-color-background"closeButton>
-                                                        <Modal.Title className="blue-color-background">Edit This forum.</Modal.Title>
+                                        <div className="row">
+                                            <div className="col-md-9">
+                                                <div className="forum-icon">
+                                                    <i className="fa fa-shield"></i>
+                                                </div>
+                                                <a href="" className="forum-item-title">{forum.title}</a>
+                                                <Modal className="blue-color-background" show={showView} onHide={() => handleCloseView(forum.forum_id)}>
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title >{forum.title}</Modal.Title>
                                                     </Modal.Header>
-                                                    <Modal.Body className="blue-color-background">
+                                                    <Modal.Body>
+                                                        <h3>{forum.sub_title}</h3>
+                                                        <div>{forum.description}</div>
+                                                    </Modal.Body>
+                                                    <Modal.Footer>
+                                                        <Button variant="secondary" onClick={handleShowEdit}>
+                                                            Edit
+                                                        </Button>
+                                                        <Button variant="primary" onClick={()=>deleteForum(forum.forum_id)}>
+                                                            Delete
+                                                        </Button>
+                                                    </Modal.Footer>
+                                                </Modal>
+                                                <Modal className="blue-color-background"show={showEdit} onHide={handleCloseEdit}>
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>Edit This forum.</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Body>
                                                         <form action="">
+                                                            <div className="form-wrapper">
+                                                                <div className="form-wrapper">
+                                                                    <label htmlFor="">Creator ID</label>
+                                                                    <input
+                                                                        value={forum.creator_id}
+                                                                        type="text"
+                                                                        className="form-control"
+                                                                    />
+                                                                </div>
+                                                            </div>
                                                             <div className="form-wrapper">
                                                                 <div className="form-wrapper">
                                                                     <label htmlFor="">Title</label>
@@ -309,7 +320,7 @@ return (
                                                                 <div className="form-wrapper">
                                                                     <label htmlFor="">Sub Title</label>
                                                                     <input
-                                                                        placeholder ={forum.sub_title}
+                                                                        placeholder = {forum.sub_title}
                                                                         type="text"
                                                                         className="form-control"
                                                                         onChange={(e) => {
@@ -331,7 +342,9 @@ return (
                                                             </div>
                                                             <div className="form-wrapper">
                                                                 <label htmlFor="forumCategory">ForumCategory</label>
-                                                                <select name="forumCategory" id="forumCategory">
+                                                                <select onChange={(e) => {
+                                                                    setForumCategoryReg(e.target.value);
+                                                                }} name="forumCategory" id="forumCategory">
                                                                     <option value="Help Needed!">Help Needed!</option>
                                                                     <option value="Announcement">Announcement</option>
                                                                     <option value="Event">Event</option>
@@ -339,8 +352,8 @@ return (
                                                             </div>
                                                         </form>
                                                     </Modal.Body>
-                                                    <Modal.Footer className="blue-color-background">
-                                                        <Button variant="primary" onClick={editForum}>
+                                                    <Modal.Footer>
+                                                        <Button variant="primary" onClick={() => editForum(forum.forum_id)}>
                                                             Edit
                                                         </Button>
                                                         <Button variant="primary" onClick={handleCloseEdit}>
@@ -348,33 +361,36 @@ return (
                                                         </Button>
                                                     </Modal.Footer>
                                                 </Modal>
-                                        <div className="forum-sub-title">{forum.sub_title}
-                                        </div>
-                                        <div>Forum type: {forum.forum_category}</div>
-                                        <div>Created by: {forum.creator_id}</div>
+                                                <div className="forum-sub-title">{forum.sub_title}
+                                                </div>
+                                                <div>Forum type: {forum.forum_category}</div>
 
-                                    </div>
-                                    <div className="col-md-1 forum-info">
+                                            </div>
+                                            <div className="col-md-1 forum-info">
                             <span className="views-number">
 
                             </span>
-                                        <div>
-                                            <small>Create Date: {forum.create_date}</small>
+                                                <div>
+                                                    <small>Create Date: {forum.create_date}</small>
+                                                    <Button variant="primary" onClick={()=>viewForum(forum.forum_id)}>
+                                                        View
+                                                    </Button>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                </div>
 
-                            </div>)}
+                                </div>)}
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
 
 
 
-);
+    );
 }
 
 export default ForumLayout;
