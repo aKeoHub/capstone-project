@@ -19,6 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.client.RestTemplate;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -97,8 +98,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         userInfo.put("refreshToken", refreshToken);
         userInfo.put("username", user.getUsername());
 
+
         response.setContentType(APPLICATION_JSON_VALUE);
-       new ObjectMapper().writeValue(response.getOutputStream(), userInfo);
+        new ObjectMapper().writeValue(response.getOutputStream(), userInfo);
         //new ObjectMapper().writeValue(response.getOutputStream(), userMap);
         log.info("jwt token returned {}", userInfo.get("accessToken"));
         //response.sendRedirect("http://localhost:3000");
@@ -108,13 +110,12 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-  if (failed != null) {
-    // Need to force a redirect via the OAuth client filter, so rethrow here
-    throw failed;
-  }
-  else {
-    // If the exception is not a Spring Security exception this will result in a default error page
-    super.unsuccessfulAuthentication(request, response, null);
-  }
+        if (failed != null) {
+            // Need to force a redirect via the OAuth client filter, so rethrow here
+            throw failed;
+        } else {
+            // If the exception is not a Spring Security exception this will result in a default error page
+            super.unsuccessfulAuthentication(request, response, null);
+        }
     }
 }

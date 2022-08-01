@@ -63,7 +63,7 @@ export default class Login extends Component {
                         error.toString();
                     this.setState({
                         loading: false,
-                        message: resMessage
+                        message: "Username or Password incorrect."
                     });
                 }
             );

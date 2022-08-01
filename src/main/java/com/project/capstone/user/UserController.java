@@ -7,9 +7,9 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.project.capstone.role.Role;
+import com.project.capstone.role.RoleRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,6 +31,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     private final UserService userService;
+    private final RoleRepository roleRepo;
 
 
     @GetMapping("/users")
@@ -50,6 +51,7 @@ public class UserController {
     @PostMapping("/user/save")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/user/save").toUriString());
+        user.setRoles(List.of(roleRepo.findByRoleName("ROLE_USER")));
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 

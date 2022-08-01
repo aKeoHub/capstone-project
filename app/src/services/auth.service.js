@@ -41,13 +41,13 @@ class AuthService {
         localStorage.removeItem("accessToken");
     }
 
-    // register(username, email, password) {
-    //     return axios.post(API_URL + "save", {
-    //         username,
-    //         email,
-    //         password
-    //     });
-    // }
+    register(username, email, password) {
+        return axios.post(API_URL + "save", {
+            username,
+            email,
+            password
+        });
+    }
 
     getCurrentUser() {
         const username = (localStorage.getItem('username'));

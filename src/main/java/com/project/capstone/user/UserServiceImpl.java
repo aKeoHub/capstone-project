@@ -1,7 +1,7 @@
 package com.project.capstone.user;
 
 import com.project.capstone.role.Role;
-import com.project.capstone.role.RoleRepo;
+import com.project.capstone.role.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private final UserRepository userRepo;
-    private final RoleRepo roleRepo;
+    private final RoleRepository roleRepo;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void deleteUserById(Integer userId) {
-            log.info("Deleting user id {} from the database", userId);
+        log.info("Deleting user id {} from the database", userId);
             userRepo.deleteById(userId);
     }
 
