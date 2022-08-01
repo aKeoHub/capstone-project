@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import image from '../../images/WendyRV.png';
 
 function NavBar() {
+    const token = localStorage.getItem("accessToken");
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -25,6 +26,15 @@ function NavBar() {
     }, []);
 
     window.addEventListener('resize', showButton);
+
+    let loggedIn = '';
+    if(token) {
+        loggedIn = '/Profile';
+        console.log('logged in');
+    } else {
+        loggedIn = '/'
+        console.log('not logged in')
+    }
     return(
     <>
         <nav className='navbar'>
@@ -38,7 +48,7 @@ function NavBar() {
                 </div>
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li className='nav-item'>
-                        <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                        <Link to={loggedIn} className='nav-links' onClick={closeMobileMenu}>
                             Home
                         </Link>
                     </li>

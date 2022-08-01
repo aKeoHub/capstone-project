@@ -13,8 +13,14 @@ import Profile from "./pages/LoginPage/components/profile.component";
 import ProfilePage from "./pages/ProfilePage";
 import LoginForm from "./pages/LoginPage";
 import Login from "./pages/LoginPage/components/login.component";
-
+const token = localStorage.getItem("accessToken");
 function App() {
+let loggedIn = '';
+  if(token) {
+    loggedIn = 'ProfilePage';
+  } else {
+    loggedIn = 'Home'
+  }
   return (
     <>
       <Router>

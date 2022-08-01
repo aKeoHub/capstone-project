@@ -131,15 +131,6 @@ export default class Login extends Component {
                                 )}
                                 <span>Login</span>
                             </button>
-                            <button onClick={AuthService.logout}
-                                className="btn btn-primary btn-block"
-                                disabled={this.state.loading}
-                            >
-                                {this.state.loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
-                                )}
-                                <span>Logout</span>
-                            </button>
                         </div>
                         {this.state.message && (
                             <div className="form-group">
@@ -155,6 +146,15 @@ export default class Login extends Component {
                             }}
                         />
                     </Form>
+                    <button onClick={AuthService.logout}
+                            className="btn btn-primary btn-block"
+                            disabled={this.state.loading}
+                    >
+                        {this.state.loading && (
+                            <span className="spinner-border spinner-border-sm"></span>
+                        )}
+                        <span>Logout</span>
+                    </button>
                 </div>
             </div>
 
