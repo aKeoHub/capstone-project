@@ -79,7 +79,7 @@ const OtherDocs = () => {
     }
 
     useEffect(() => {
-        setLoading(true);
+        //setLoading(true);
 
     //     fetch('api/v1/documents/all')
     //         .then(response => response.json())
@@ -96,8 +96,8 @@ const OtherDocs = () => {
         .then(response => response.json())
         .then(data => {
             setDocuments(data);
-            setLoading(false);
-            //console.log(data);
+
+            console.log(data);
         })
        // .catch((err) => console.log(err));
 }, []);
@@ -174,7 +174,7 @@ const OtherDocs = () => {
                              <tr className="bg-primary text-white">
                                  <th style={{width: "9%"}}>Doc_id</th>
                                  <th style={{width: "9%"}}>Doc_Cat</th>
-                                 <th style={{width: "13%"}}>Creator_id</th>
+
                                  <th style={{width: "16%"}}>Doc_name</th>
                                  <th style={{width: "16%"}}>Date_created</th>
                                  <th style={{width: "18%"}}>Description</th>
@@ -189,7 +189,6 @@ const OtherDocs = () => {
                                      <tr>
                                          <td style={{width: "9%"}}>{park_document.document_id}</td>
                                          <td style={{width: "9%"}}>{park_document.document_category}</td>
-                                         <td style={{width: "13%"}}>{park_document.creator_id}</td>
                                          <td style={{width: "16%"}}><span id={park_document.document_name}>{park_document.document_name}</span><input id={park_document.document_id} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "16%"}}>{park_document.create_date}</td>
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>

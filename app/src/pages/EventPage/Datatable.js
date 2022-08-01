@@ -58,7 +58,6 @@ function deleteEvent(id) {
             <table class="eventTable">
                 <tr>
                     <th>Event ID</th>
-                    <th>Event Creator</th>
                     <th>Category ID</th>
                     <th>Event Name</th>
                     <th>Location</th>
@@ -73,7 +72,6 @@ function deleteEvent(id) {
                     <table class="eventTable">
                         <tr>
                             <td>{event.event_id}</td>
-                            <td>{event.event_creator}</td>
                             <td>{event.category_id}</td>
                             <td>{event.event_name}</td>
                             <td>{event.location}</td>

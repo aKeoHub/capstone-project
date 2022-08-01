@@ -42,7 +42,7 @@ const ProfilePage = () => {
                 {/*</p>*/}
                 <p>
                     <strong>ID:</strong>{" "}
-                    {users.userId}
+                    {users.user_id}
                 </p>
                 <p>
                     <strong>First name:</strong>{" "}

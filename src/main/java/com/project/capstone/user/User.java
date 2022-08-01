@@ -60,12 +60,14 @@ public class User implements Serializable {
     private Collection<Item> items = new LinkedHashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(  name = "user_role",
+    @JoinTable( name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles = new HashSet<>();
     @OneToMany(mappedBy = "creator")
     @ToString.Exclude
+    @JsonIgnore
+    @JsonBackReference
     private Set<Forum> forums = new LinkedHashSet<>();
 
     public User(@JsonProperty("user_id") Integer userId,

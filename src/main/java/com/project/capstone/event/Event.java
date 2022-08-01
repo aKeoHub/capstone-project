@@ -33,6 +33,7 @@ public class Event implements Serializable {
     @JoinColumn(name = "event_creator", referencedColumnName = "user_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
+    @JsonBackReference
     private User eventCreator;
 
     @ManyToOne(fetch = FetchType.LAZY)

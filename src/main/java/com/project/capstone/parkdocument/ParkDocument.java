@@ -29,6 +29,7 @@ public class ParkDocument implements Serializable {
     @Id
     @Column(name = "document_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIdentityReference(alwaysAsId = true)
     private Integer documentId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -37,10 +38,11 @@ public class ParkDocument implements Serializable {
     @ToString.Exclude
     private Category documentCategory;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creator_id", referencedColumnName = "user_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
+    @JsonBackReference
     private User creatorId;
 
     @Column(name = "document_name", nullable = false, length = 30)
