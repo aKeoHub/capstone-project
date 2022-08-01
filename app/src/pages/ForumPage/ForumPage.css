@@ -3,7 +3,7 @@
     background-color: #2c313d;
 }
 .white-bg {
-    background-color: #2c313d;
+    background-color: #fdfdfd;
 }
 .page-heading {
     border-top: 0;
@@ -13,7 +13,7 @@
 .forum-post-container .media {
     margin: 10px 10px 10px 10px;
     padding: 20px 10px 20px 10px;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid #2c313d;
 }
 .forum-avatar {
     float: left;
@@ -154,7 +154,7 @@ a.forum-item-title:hover {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background-color: #2c313d;
+    background-color: #fdfdfd;
     border-color: #e7eaec;
     border-image: none;
     border-style: solid solid none;
@@ -165,7 +165,7 @@ a.forum-item-title:hover {
     min-height: 48px;
 }
 .ibox-content {
-    background-color: #2c313d;
+    background-color: #fdfdfd;
     color: inherit;
     padding: 15px 20px 20px 20px;
     border-color: #e7eaec;
@@ -177,7 +177,7 @@ a.forum-item-title:hover {
     color: inherit;
     border-top: 1px solid #e7eaec;
     font-size: 90%;
-    background: #2c313d;
+    background: #fdfdfd;
     padding: 10px 15px;
 }
 
@@ -185,7 +185,7 @@ a.forum-item-title:hover {
     height: 90px !important;
 }
 .form-control, .single-line {
-    background-color: #2c313d;
+    background-color: #fdfdfd;
     background-image: none;
     border: 1px solid #e5e6e7;
     border-radius: 1px;
