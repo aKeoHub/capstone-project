@@ -71,6 +71,9 @@ const EventForm = () => {
       <input
         type="text"
         name="eventName"
+        pattern="/^[a-z ,.'-]+$/i"
+        max="20"
+        placeholder="Name of Event!"
         onChange={(e) => {
           setEventName(e.target.value);
           }}
@@ -81,13 +84,18 @@ const EventForm = () => {
         className="form-select"
         name="category"
         type="number"
+        required="value>0"
         onChange={(e) => {
         setCategoryId(e.target.value);
       }} >
           <option value="" label="Categories">Categories</option>
-          <option value="1" label="Concerts">Concerts</option>
-          <option value="2" label="Gatherings">Gathering</option>
-          <option value="3" label="Other">Others</option>
+          <option value="1" label="LEGAL">Concerts</option>
+          <option value="2" label="ENTERTAINMENT">Gathering</option>
+          <option value="3" label="ACCOUNTING">Others</option>
+          <option value="4" label="SOCIAL">Concerts</option>
+          <option value="5" label="MEETING">Gathering</option>
+          <option value="6" label="NOTICE">Others</option>
+          <option value="7" label="PRIORITY">Concerts</option>
       </select>
       </label>
       <label>Enter Creator Name:
@@ -101,13 +109,17 @@ const EventForm = () => {
             <input
               type="text"
               name="location"
+              pattern="/[<]*<[\s\u200B]*script[\s\u200B]*>.*[/]*[<]*<[\s\u200B]*\/[\s\u200B]*script[\s\u200B]*>/ig;"
+              min="10"
+              max="30"
+              placeholder="A location must be specified"
               onChange={(e) => {
                 setLocation(e.target.value);
               }}
             />
         </label>
         <label>Enter Description:
-            <textarea name="description" value={textarea} onChange={textAreaChange} />
+            <textarea name="description" value={textarea} max="120" onChange={textAreaChange} />
         </label>
         <label for="startDate">Start Date:
           <input type="date" id="startDate" name="startDate" onChange={(e) => { setStartDate(e.target.value);}}/>
