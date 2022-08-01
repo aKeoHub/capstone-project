@@ -39,6 +39,7 @@ class AuthService {
 
     logout() {
         localStorage.removeItem("accessToken");
+        //window.location.reload();
     }
 
     register(username, email, password) {

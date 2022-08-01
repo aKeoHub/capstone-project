@@ -4,6 +4,8 @@ import '../Button/Button.css'
 import { LoginButton } from '../Button/LoginButton';
 import { Link } from 'react-router-dom';
 import image from '../../images/WendyRV.png';
+import AuthService from "../../services/auth.service";
+import {LogoutButton} from "../Button/LogoutButton";
 
 function NavBar() {
     const token = localStorage.getItem("accessToken");
@@ -30,10 +32,11 @@ function NavBar() {
     let loggedIn = '';
     if(token) {
         loggedIn = '/Profile';
-        console.log('logged in');
+        console.log(loggedIn);
     } else {
         loggedIn = '/'
-        console.log('not logged in')
+        //console.log('not logged in')
+        console.log(loggedIn)
     }
     return(
     <>
@@ -91,6 +94,7 @@ function NavBar() {
                     </li>
                 </ul>
                 {button && <LoginButton buttonStyle='btn--outline'>LOGIN</LoginButton>}
+                {button && <LogoutButton buttonStyle='btn--outline'>LOGOUT</LogoutButton>}
             </div>
         </nav>
     </>
