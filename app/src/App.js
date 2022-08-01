@@ -18,6 +18,7 @@ function App() {
 let loggedIn = '';
   if(token) {
     loggedIn = 'ProfilePage';
+
   } else {
     loggedIn = 'Home'
   }
