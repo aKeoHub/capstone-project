@@ -6,17 +6,17 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Button from '@material-ui/core/Button';
 
 const OtherDocs = () => {
-     const [documents, setDocuments] = useState([]);
-     const [loading, setLoading] = useState(false);
-     const [inputs, setInputs] = useState({});
-     const [docId, setDocId] = useState(0);
-     const [docCat, setDocCat] = useState(0);
-     const [creatorId, setCreatorId] = useState(0);
-     const [docName, setDocName] = useState("");
-     const [dateCreated, setDateCreated] = useState({varOne:new Date()});
-     const [textarea, setTextarea] = useState("");
-     const [file, setFile] = useState();
-     const input = document.getElementById('fileUpload');
+    const [documents, setDocuments] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [inputs, setInputs] = useState({});
+    const [docId, setDocId] = useState(0);
+    const [docCat, setDocCat] = useState(0);
+    const [creatorId, setCreatorId] = useState(0);
+    const [docName, setDocName] = useState("");
+    const [dateCreated, setDateCreated] = useState({varOne: new Date()});
+    const [textarea, setTextarea] = useState("");
+    const [file, setFile] = useState();
+    const input = document.getElementById('fileUpload');
     const token = localStorage.getItem("accessToken");
 
 
@@ -24,7 +24,7 @@ const OtherDocs = () => {
         setTextarea(doc.target.value)
     }
 
-    const handleSubmit = (doc)=> {
+    const handleSubmit = (doc) => {
         doc.preventDefault();
         console.log(doc.target.docName.value);
         console.log(inputs);
@@ -32,16 +32,16 @@ const OtherDocs = () => {
 
     const onUploadFile = e => {
 
-          //console.log('file: ', file);
-          console.log(e.target.files[0]);
+        //console.log('file: ', file);
+        console.log(e.target.files[0]);
 
         const formData = new FormData()
         formData.append('file', e.target.files[0])
-      //  this.setState({ files: file }, () => { console.log(this.state.files) });
+        //  this.setState({ files: file }, () => { console.log(this.state.files) });
         fetch('api/v1/uploadFile', {
             method: 'POST',
             headers: {
-                'Accept': 'application/json', 'Authorization':`Bearer ${token}`,
+                'Accept': 'application/json', 'Authorization': `Bearer ${token}`,
             },
             body: formData
         })
@@ -56,10 +56,10 @@ const OtherDocs = () => {
 
     const AddDocument = (doc) => {
 
-          fetch('api/v1/documents/add',{
-              method:'POST',
+        fetch('api/v1/documents/add', {
+            method: 'POST',
 
-               body: JSON.stringify({
+            body: JSON.stringify({
                 document_id: docId,
                 document_category: docCat,
                 creator_id: creatorId,
@@ -67,39 +67,41 @@ const OtherDocs = () => {
                 create_date: dateCreated,
                 description: textarea,
                 file: file,
-                          }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
-                }
-          }).then(response => response.json())
-                        .then(data => {
-                            console.log(data)
-                            window.location.reload();
-                        })
-      }
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8", 'Authorization': `Bearer ${token}`
+            }
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data)
+                window.location.reload();
+            })
+    }
 
-     // useEffect(() => {
-     //         setLoading(true);
-     //
-     //         fetch('api/v1/documents/all')
-     //             .then(response => response.json())
-     //             .then(data => {
-     //                 setDocuments(data);
-     //                 setLoading(false);
-     //                 console.log(data);
-     //             })
-     //         }, []);
+    useEffect(() => {
+        setLoading(true);
 
-    fetch('api/v1/documents/all', {
-        headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+    //     fetch('api/v1/documents/all')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setDocuments(data);
+    //             setLoading(false);
+    //             console.log(data);
+    //         })
+    // }, []);
+
+    fetch('api/v1/documents/all/', {
+        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
     })
         .then(response => response.json())
         .then(data => {
             setDocuments(data);
             setLoading(false);
-            console.log(data);
+            //console.log(data);
         })
-        .catch((err) => console.log(err));
+       // .catch((err) => console.log(err));
+}, []);
+
 
 
 

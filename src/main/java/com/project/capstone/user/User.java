@@ -18,6 +18,7 @@ import java.util.*;
 @Table(name = "user")
 @RequiredArgsConstructor
 @ToString
+
 public class User implements Serializable {
 
 
@@ -51,31 +52,31 @@ public class User implements Serializable {
     @OneToMany(fetch = FetchType.LAZY) //mappedBy - indicate the given column is owned by another entity
     @JoinColumn(name = "event_id")
     @ToString.Exclude
-    private Set<Event> events = new LinkedHashSet<>();
+    private Collection<Event> events = new LinkedHashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     @ToString.Exclude
-    private Set<Item> items = new LinkedHashSet<>();
+    private Collection<Item> items = new LinkedHashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Collection<Role> roles = new HashSet<>();
     @OneToMany(mappedBy = "creator")
     @ToString.Exclude
     private Set<Forum> forums = new LinkedHashSet<>();
 
-    public User(@JsonProperty("user_id") int user_id,
+    public User(@JsonProperty("user_id") Integer userId,
                 @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
                 @JsonProperty("firstname") String firstname,
                 @JsonProperty("lastname") String lastname,
                 @JsonProperty("email") String email,
-                @JsonProperty("picture_id") int picture_id,
+                @JsonProperty("picture_id") Integer picture_id,
                 @JsonProperty("create_date") LocalDate create_date) {
-        this.userId = user_id;
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -94,23 +95,23 @@ public class User implements Serializable {
         this.forums = forums;
     }
     @JsonIgnore
-    public Set<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
     @JsonIgnore
-    public Set<Item> getItems() {
+    public Collection<Item> getItems() {
         return items;
     }
 
-    public void setItems(Set<Item> items) {
+    public void setItems(Collection<Item> items) {
         this.items = items;
     }
     @JsonIgnore
-    public Set<Event> getEvents() {
+    public Collection<Event> getEvents() {
         return events;
     }
 
