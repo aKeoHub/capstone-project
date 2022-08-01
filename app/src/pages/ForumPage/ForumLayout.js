@@ -27,12 +27,17 @@ const ForumLayout = () => {
     const [description, setDescriptionReg] = useState("");
     const [forumCategory, setForumCategoryReg] = useState("");
     const [picture_id, setPictureId] = useState("");
+    const token = localStorage.getItem("accessToken");
 
 
     useEffect(() => {
         setLoading(true);
 
-        fetch('api/v1/forums/all')
+        fetch('api/v1/forums/all' ,{
+            headers: {
+                "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 setForums(data);
@@ -82,7 +87,7 @@ const ForumLayout = () => {
             }),
 
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
             }
 
         })
@@ -115,7 +120,7 @@ const ForumLayout = () => {
         }),
 
             headers: {
-            "Content-type": "application/json; charset=UTF-8"
+            "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
         }
 
         })
@@ -147,7 +152,7 @@ const ForumLayout = () => {
             }),
 
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
             }
 
         })
@@ -346,7 +351,7 @@ return (
                                         <div className="forum-sub-title">{forum.sub_title}
                                         </div>
                                         <div>Forum type: {forum.forum_category}</div>
-                                        <div>Created by: {forum.creator_id.username}</div>
+                                        <div>Created by: {forum.creator_id}</div>
 
                                     </div>
                                     <div className="col-md-1 forum-info">

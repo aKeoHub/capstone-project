@@ -2,6 +2,7 @@ package com.project.capstone;
 
 import com.project.capstone.category.Category;
 import com.project.capstone.category.CategoryService;
+import com.project.capstone.event.EventService;
 import com.project.capstone.parkdocument.ParkDocument;
 import com.project.capstone.parkdocument.ParkService;
 import com.project.capstone.user.User;
@@ -38,7 +39,7 @@ public class CapstoneApplication {
 		return new RestTemplate();
 	};
 	@Bean
-	CommandLineRunner run(UserService userService, ParkService parkService, CategoryService categoryService) {
+	CommandLineRunner run(UserService userService, ParkService parkService, CategoryService categoryService, EventService eventService) {
 		return args -> {
 
 			userService.saveUser(new User( 0, "john", "1234", "john", "hockey", "johnnyhockey@live.ca1", 1, LocalDate.now()));
@@ -47,12 +48,9 @@ public class CapstoneApplication {
 
 
 			userService.addRoleToUser("john", "ROLE_USER");
-//
-//
 			userService.addRoleToUser("kingston", "ROLE_ADMIN");
-//
 			userService.addRoleToUser("1punchman", "ROLE_MANAGER");
-//
+
 
 
 

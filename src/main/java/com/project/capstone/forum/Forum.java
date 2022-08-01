@@ -26,12 +26,14 @@ public class Forum implements Serializable{
     @Id
     @Column(name = "forum_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIdentityReference(alwaysAsId = true)
     private Integer forumId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
+    @JsonBackReference
     private User creator;
 
     @Column(name = "title", nullable = false, length = 30)
