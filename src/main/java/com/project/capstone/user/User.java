@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
+import com.project.capstone.parkdocument.ParkDocument;
 import com.project.capstone.role.Role;
 import com.project.capstone.sales.Item;
 import lombok.RequiredArgsConstructor;
@@ -49,12 +50,12 @@ public class User implements Serializable {
     @Column(name = "create_date")
     private LocalDate createDate;
 
-    @OneToMany(fetch = FetchType.LAZY) //mappedBy - indicate the given column is owned by another entity
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //mappedBy - indicate the given column is owned by another entity
     @JoinColumn(name = "event_id")
     @ToString.Exclude
     private Collection<Event> events = new LinkedHashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "item_id")
     @ToString.Exclude
     private Collection<Item> items = new LinkedHashSet<>();
@@ -64,11 +65,18 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles = new HashSet<>();
-    @OneToMany(mappedBy = "creator")
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
     @JsonBackReference
     private Set<Forum> forums = new LinkedHashSet<>();
+
+
+    @OneToMany(mappedBy = "creatorId", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @JsonIgnore
+    @JsonBackReference
+    private Collection<ParkDocument> documents = new LinkedHashSet<>();
 
     public User(@JsonProperty("user_id") Integer userId,
                 @JsonProperty("username") String username,
@@ -117,9 +125,6 @@ public class User implements Serializable {
         return events;
     }
 
-    public void setEvents(Set<Event> events) {
-        this.events = events;
-    }
 
     public LocalDate getCreateDate() {
         return createDate;
@@ -183,5 +188,17 @@ public class User implements Serializable {
 
     public void setUserId(Integer id) {
         this.userId = id;
+    }
+
+    public void setEvents(Collection<Event> events) {
+        this.events = events;
+    }
+
+    public Collection<ParkDocument> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Collection<ParkDocument> documents) {
+        this.documents = documents;
     }
 }

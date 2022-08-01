@@ -7,6 +7,7 @@ const AdminPage = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("accessToken");
+    const username = localStorage.getItem("username");
     useEffect(() => {
         setLoading(true);
 
@@ -17,6 +18,22 @@ const AdminPage = () => {
             })
     }, []);
 
+
+    function deleteUser(id) {
+if(username) {
+    console.log("not allowed")
+} else {fetch('api/v1/user/delete/' + id,{
+    method:'DELETE',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
+    }})
+    .then(data => {
+        setLoading(false);
+        console.log(data);
+        window.location.reload();
+    })}
+
+    }
     return (
  <div className='userList'>
           <h2>User List</h2>
@@ -28,6 +45,7 @@ const AdminPage = () => {
                           <th>Username</th>
                           <th>Name</th>
                           <th>Email</th>
+                          <th></th>
 
                       </tr>
                       <tr>
@@ -35,7 +53,7 @@ const AdminPage = () => {
                           <td>{user.username}</td>
                           <td>{user.firstname} {user.lastname}</td>
                           <td>{user.email}</td>
-
+                          <td> <button onClick={()=>deleteUser(user.user_id)}> Delete </button></td>
                       </tr>
 
                   </table>

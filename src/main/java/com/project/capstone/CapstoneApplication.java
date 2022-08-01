@@ -41,18 +41,17 @@ public class CapstoneApplication {
 	CommandLineRunner run(UserService userService, ParkService parkService, CategoryService categoryService) {
 		return args -> {
 
-//			userService.saveUser(new User( 0, "john", "1234", "john", "hockey", "johnnyhockey@live.ca1", 1, null));
-//			userService.saveUser(new User(0 , "kingston", "1234", "kingston", "the greatest", "kingston@live.ca", 1, null));
-//			userService.saveUser(new User(0, "1punchman", "1234", "saitama", "the all mighty", "onepunchman@live.ca", 1, null));
+			userService.saveUser(new User( 0, "john", "1234", "john", "hockey", "johnnyhockey@live.ca1", 1, LocalDate.now()));
+			userService.saveUser(new User(0 , "kingston", "1234", "kingston", "the greatest", "kingston@live.ca", 1, LocalDate.now()));
+			userService.saveUser(new User(0, "1punchman", "1234", "saitama", "the all mighty", "onepunchman@live.ca", 1, LocalDate.now()));
 
+
+			userService.addRoleToUser("john", "ROLE_USER");
 //
-//			userService.addRoleToUser("john", "ROLE_USER");
 //
-//			userService.addRoleToUser("kingston", "ROLE_USER");
-//			userService.addRoleToUser("kingston", "ROLE_MANAGER");
-//			userService.addRoleToUser("kingston", "ROLE_ADMIN");
+			userService.addRoleToUser("kingston", "ROLE_ADMIN");
 //
-//			userService.addRoleToUser("1punchman", "ROLE_MANAGER");
+			userService.addRoleToUser("1punchman", "ROLE_MANAGER");
 //
 
 

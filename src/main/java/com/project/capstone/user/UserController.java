@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.capstone.role.Role;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,10 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -44,7 +42,11 @@ public class UserController {
     public ResponseEntity<User>getUser(@RequestBody User user) {
         return ResponseEntity.ok().body(userService.getUser(user.getUsername()));
     }
-
+    @DeleteMapping(value = "user/delete/{id}", consumes = {"application/json"})
+    public ResponseEntity<?>deleteUserById(@PathVariable("id") Integer id){
+        userService.deleteUserById(id);
+        return ResponseEntity.ok().build();
+    }
     @PostMapping("/user/save")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/user/save").toUriString());

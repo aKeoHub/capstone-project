@@ -32,13 +32,13 @@ public class ParkDocument implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     private Integer documentId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "document_category", referencedColumnName = "category_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Category documentCategory;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "creator_id", referencedColumnName = "user_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
@@ -58,7 +58,7 @@ public class ParkDocument implements Serializable {
     @Column(name = "file")
     private byte[] file;
 
-    @OneToMany(mappedBy = "parkDocument")
+    @OneToMany(mappedBy = "parkDocument", cascade = CascadeType.ALL)
     @JsonIgnore
     @ToString.Exclude
     private List<AuditLog> auditLogs = new ArrayList<>();
