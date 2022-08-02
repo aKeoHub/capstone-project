@@ -6,13 +6,13 @@ const STYLES = ['--btn--primary', '--btn--outline', '--btn--test'];
 
 const SIZES = ['--btn--medium', '--btn--large'];
 
-export const ViewButton = ({
-                                children,
-                                type,
-                                onClick,
-                                buttonStyle,
-                                buttonSize
-                            }) => {
+export const AddButtonEvent = ({
+                                   children,
+                                   type,
+                                   onClick,
+                                   buttonStyle,
+                                   buttonSize
+                               }) => {
     const checkButtonStyle = STYLES.includes(buttonStyle)
         ? buttonStyle
         : STYLES[0];
@@ -20,7 +20,7 @@ export const ViewButton = ({
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
     return (
-        <Link to='/forum' className='--btn-mobile'>
+        <Link to='/events' className='--btn-mobile'>
             <button
                 className={`--btn ${checkButtonStyle} ${checkButtonSize}`}
                 onClick={onClick}

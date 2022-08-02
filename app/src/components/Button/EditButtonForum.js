@@ -6,7 +6,7 @@ const STYLES = ['--btn--primary', '--btn--outline', '--btn--test'];
 
 const SIZES = ['--btn--medium', '--btn--large'];
 
-export const DeleteButton = ({
+export const EditButtonForum = ({
                                 children,
                                 type,
                                 onClick,

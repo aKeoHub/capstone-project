@@ -3,11 +3,11 @@ import './ForumPage.css';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
-import {AddButton} from "../../components/Button/AddButton";
-import {ViewButton} from "../../components/Button/ViewButton";
-import {EditButton} from "../../components/Button/EditButton";
-import {DeleteButton} from "../../components/Button/DeleteButton";
-import {CancelButton} from "../../components/Button/CancelButton";
+import {AddButtonForum} from "../../components/Button/AddButtonForum";
+import {ViewButtonForum} from "../../components/Button/ViewButtonForum";
+import {EditButtonForum} from "../../components/Button/EditButtonForum";
+import {DeleteButtonForum} from "../../components/Button/DeleteButtonForum";
+import {CancelButtonForum} from "../../components/Button/CancelButtonForum";
 const token = localStorage.getItem("accessToken");
 
 
@@ -201,9 +201,9 @@ const ForumLayout = () => {
                             </div>
 
                             {/*Button to Show Add Forum Form */}
-                            <AddButton variant="primary" onClick={handleShowAdd}>
+                            <AddButtonForum variant="primary" onClick={handleShowAdd}>
                                 Add Forum
-                            </AddButton>
+                            </AddButtonForum>
 
                             {/*The Modal for Add Forum*/}
                             <Modal className="blue-color-background" show={showAdd} onHide={handleCloseAdd}>
@@ -262,12 +262,12 @@ const ForumLayout = () => {
                                     </form>
                                 </Modal.Body>
                                 <Modal.Footer >
-                                    <AddButton variant="secondary" onClick={handleCloseAdd}>
+                                    <AddButtonForum variant="secondary" onClick={handleCloseAdd}>
                                         Close
-                                    </AddButton>
-                                    <CancelButton variant="primary" onClick={addForum}>
+                                    </AddButtonForum>
+                                    <CancelButtonForum variant="primary" onClick={addForum}>
                                         Add
-                                    </CancelButton>
+                                    </CancelButtonForum>
                                 </Modal.Footer>
                             </Modal>
 
@@ -297,12 +297,12 @@ const ForumLayout = () => {
                                                         <div>{modalViewInfo.description}</div>
                                                     </Modal.Body>
                                                     <Modal.Footer>
-                                                        <EditButton variant="secondary" onClick={handleShowEdit}>
+                                                        <EditButtonForum variant="secondary" onClick={handleShowEdit}>
                                                             Edit
-                                                        </EditButton>
-                                                        <DeleteButton variant="primary" onClick={()=>deleteForum(modalViewInfo.forum_id)}>
+                                                        </EditButtonForum>
+                                                        <DeleteButtonForum variant="primary" onClick={()=>deleteForum(modalViewInfo.forum_id)}>
                                                             Delete
-                                                        </DeleteButton>
+                                                        </DeleteButtonForum>
                                                     </Modal.Footer>
                                                 </Modal>
 
@@ -363,12 +363,12 @@ const ForumLayout = () => {
                                                         </form>
                                                     </Modal.Body>
                                                     <Modal.Footer>
-                                                        <EditButton variant="primary" onClick={() => editForum(modalEditInfo.forum_id)}>
+                                                        <EditButtonForum variant="primary" onClick={() => editForum(modalEditInfo.forum_id)}>
                                                             Edit
-                                                        </EditButton>
-                                                        <CancelButton variant="primary" onClick={handleCloseEdit}>
+                                                        </EditButtonForum>
+                                                        <CancelButtonForum variant="primary" onClick={handleCloseEdit}>
                                                             Cancel
-                                                        </CancelButton>
+                                                        </CancelButtonForum>
                                                     </Modal.Footer>
                                                 </Modal>
 
@@ -380,9 +380,9 @@ const ForumLayout = () => {
                             </span>
                                                 {/*Button For Viewing Forum*/}
                                                 <div>
-                                                    <ViewButton buttonStyle='--btn--primary' onClick={() => viewForum(forum.forum_id)}>
+                                                    <ViewButtonForum buttonStyle='--btn--primary' onClick={() => viewForum(forum.forum_id)}>
                                                         View
-                                                    </ViewButton>
+                                                    </ViewButtonForum>
 
                                                 </div>
                                             </div>

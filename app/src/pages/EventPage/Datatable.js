@@ -4,6 +4,8 @@ import './Datatable.css';
 import EventModal from './EventModal'
 import UserService from "../../services/user.service";
 import axios from "axios";
+import {DeleteButtonEvent} from "../../components/Button/DeleteButtonEvent";
+
 
 const EventTable = () => {
 
@@ -95,7 +97,7 @@ function deleteEvent(id) {
                             <td>{event.description}</td>
                             <td>{event.start_date}</td>
                             <td>{event.end_date}</td>
-                            <td> <button onClick={()=>deleteEvent(event.event_id)}> Delete </button></td>
+                            <td> <DeleteButtonEvent onClick={()=>deleteEvent(event.event_id)}> Delete </DeleteButtonEvent></td>
                         </tr>
                     </table>
                 </div>

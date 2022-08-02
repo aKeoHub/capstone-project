@@ -6,13 +6,13 @@ const STYLES = ['--btn--primary', '--btn--outline', '--btn--test'];
 
 const SIZES = ['--btn--medium', '--btn--large'];
 
-export const CancelButton = ({
-                              children,
-                              type,
-                              onClick,
-                              buttonStyle,
-                              buttonSize
-                          }) => {
+export const DeleteButtonForum = ({
+                                children,
+                                type,
+                                onClick,
+                                buttonStyle,
+                                buttonSize
+                            }) => {
     const checkButtonStyle = STYLES.includes(buttonStyle)
         ? buttonStyle
         : STYLES[0];

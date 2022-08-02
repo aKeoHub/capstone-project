@@ -4,6 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import EventService from './EventService/EventService';
 import EventForm from './EventForm';
+import {AddButtonEvent} from "../../components/Button/AddButtonEvent";
+
 
 function EventModal() {
   const [show, setShow] = useState(false);
@@ -14,9 +16,9 @@ function EventModal() {
   return (
     <>
 
-          <Button variant="primary" onClick={handleShow}>
+          <AddButtonEvent variant="primary" onClick={handleShow}>
             Add Event
-          </Button>
+          </AddButtonEvent>
 
 
        <Modal show={show} onHide={handleClose}>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 import axios from "axios";
+import {AddButtonEvent} from "../../components/Button/AddButtonEvent";
 
 
 const EventForm = () => {
@@ -146,7 +147,7 @@ const EventForm = () => {
             //style={{ display: 'none' }}
             onChange={onUploadFile}
         />
-        <button onClick={AddEvent}>Add Event</button>
+        <AddButtonEvent onClick={AddEvent}>Add Event</AddButtonEvent>
     </form>
   )
 };
