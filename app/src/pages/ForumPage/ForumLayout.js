@@ -35,14 +35,14 @@ const ForumLayout = () => {
     const handleShowView = () => setShowView(true);
 
 
-    const [forumId, setForumIdReg] = useState("");
+    const [forumId, setForumIdReg] = useState(0);
     const [creatorId, setCreatorIdReg] = useState("");
     const [title, setTitleReg] = useState("");
     const [subTitle, setSubTitleReg] = useState("");
     const [description, setDescriptionReg] = useState("");
     const [forumCategory, setForumCategoryReg] = useState("");
     const [picture_id, setPictureId] = useState("");
-    const [createDate, setCreateDate] = useState(new Date);
+    const [createDate, setCreateDate] = useState(new Date());
 
 
 
@@ -90,12 +90,10 @@ const ForumLayout = () => {
             })
     }
     function addForum() {
-        let forumToday = new Date();
-        const dd = String(forumToday.getDate()).padStart(2, '0');
-        const mm = String(forumToday.getMonth() + 1).padStart(2, '0');
-        const yyyy = forumToday.getFullYear();
-        forumToday = yyyy + '-' + mm + '-' + dd;
-        setCreateDate(forumToday);
+        const todaysDate = new Date();
+        console.log(todaysDate.toLocaleDateString());
+        setCreateDate(todaysDate);
+
 
         fetch('api/v1/forums/add', {
 
@@ -108,7 +106,7 @@ const ForumLayout = () => {
                 creator_id: user,
                 title: title,
                 description: description,
-                create_date: createDate.toString(),
+                create_date: todaysDate,
                 picture_id: picture_id,
                 sub_title: subTitle,
                 forum_category: forumCategory,
@@ -124,7 +122,7 @@ const ForumLayout = () => {
 
             // Displaying results to console
             .then(json => console.log(json));
-      //  window.location.reload();
+            window.location.reload();
     }
 
 
@@ -154,7 +152,7 @@ const ForumLayout = () => {
             method: "PUT",
             body: JSON.stringify({
                 forum_id: forumId,
-                creator_id: creatorId,
+                creator_id: user,
                 title: title,
                 description: description,
                 create_date: createDate,
