@@ -36,38 +36,39 @@ const OtherDocs = () => {
     const onUploadFile = e => {
 
         //console.log('file: ', file);
-        console.log(e.target.files[0]);
+        //console.log(e.target.files[0]);
 
         const formData = new FormData();
         const bodyParameters = {
-            body: formData,
+            body: formData
         };
         const config = {
             headers: {Authorization: `Bearer ${token}`},
         };
-        formData.append('file', e.target.files[0])
-        axios.post("/api/v1/uploadFile", bodyParameters, config)
-            .then(function (response) {
-                console.log(response.data);
-                setUser(response.data)
-                //console.log(user)
-            })
+         formData.append('file', e.target.files[0])
+        // console.log(formData);
+        // axios.post("/api/v1/uploadFile", bodyParameters, config)
+        //     .then(function (response) {
+        //         //console.log(response.data);
+        //         setUser(response.data)
+        //         //console.log(user)
+        //     })
 
         //  this.setState({ files: file }, () => { console.log(this.state.files) });
-        // fetch('api/v1/uploadFile', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json', 'Authorization': `Bearer ${token}`,
-        //     },
-        //     body: formData
-        // })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data)
-        //     })
-        //     .catch(error => {
-        //         console.error(error)
-        //     })
+        fetch('api/v1/uploadFile', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json', 'Authorization': `Bearer ${token}`,
+            },
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.error(error)
+            })
     };
 
     const AddDocument = (doc) => {
@@ -90,7 +91,7 @@ const OtherDocs = () => {
         }).then(response => response.json())
             .then(data => {
                 console.log(data)
-                window.location.reload();
+                //window.location.reload();
             });
     }
 
