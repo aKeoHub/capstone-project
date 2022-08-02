@@ -160,6 +160,7 @@ const OtherDocs = () => {
                        type="text"
                        name="docName"
                        max="30"
+                       pattern="[a-zA-Z0-9,#.-]+"
                        required="true"
                        onChange={(e) => {
                          setDocName(e.target.value);
@@ -167,7 +168,7 @@ const OtherDocs = () => {
                      />
                  </label>
                  <label>Enter Description:
-                     <textarea name="description" value={textarea} max="120" required="true" onChange={textAreaChange} />
+                     <textarea name="description" value={textarea} max="120" pattern="/[<]*<[\s\u200B]*script[\s\u200B]*>.*[/]*[<]*<[\s\u200B]*\/[\s\u200B]*script[\s\u200B]*>/ig;" required="true" onChange={textAreaChange} />
                  </label>
                  <label for="dateCreated">Date created:
                    <input type="date" id="dateCreated" name="dateCreated" required="true" onChange={(e) => { setDateCreated(e.target.value);}}/>

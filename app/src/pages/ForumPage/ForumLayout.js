@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import './ForumPage.css';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 const token = localStorage.getItem("accessToken");
 
 
@@ -16,6 +17,10 @@ const ForumLayout = () => {
     const [forum, setForum] = useState([]);
     const [forumLoaded, setForumLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const token = localStorage.getItem("accessToken");
+    const username = (localStorage.getItem('username'));
+    const [user, setUser] = useState('');
 
     const [showAdd, setShowAdd] = useState(false);
     const handleCloseAdd = () => setShowAdd(false);
@@ -54,7 +59,19 @@ const ForumLayout = () => {
                 setLoading(false);
                 console.log(data);
             })
-    }, []);
+            const bodyParameters = {
+                username: username,
+            };
+            const config = {
+                headers: {Authorization: `Bearer ${token}`},
+            };
+            axios.post("/api/v1/user", bodyParameters, config)
+                .then(function (response) {
+                    console.log(response.data);
+                    setUser(response.data)
+                    //console.log(user)
+                })},
+        []);
 
     if (loading) {
         return <p>Loading...</p>;
@@ -88,7 +105,7 @@ const ForumLayout = () => {
             // Adding body or contents to send
             body: JSON.stringify({
                 forum_id: forumId,
-                creator_id: creatorId,
+                creator_id: user,
                 title: title,
                 description: description,
                 create_date: createDate.toString(),
