@@ -93,6 +93,7 @@ const ForumLayout = () => {
                 window.location.reload();
             })
     }
+
 //This will add a forum when clicking the button, but you need to be logged in to do so.
     function addForum() {
         const todaysDate = new Date();
@@ -129,6 +130,7 @@ const ForumLayout = () => {
             .then(json => console.log(json));
             window.location.reload();
     }
+
 //This will make you view the forum, you do not need to be logged in to see the forum.
     const viewForum = async(id) => {
 
@@ -183,9 +185,9 @@ const ForumLayout = () => {
         <div className="container">
             <div className="row">
                 <div className="col-lg-12">
-                    <div className="wrapper wrapper-content animated fadeInRight">
+                    <div className="--wrapper --wrapper-content animated fadeInRight">
 
-                        <div className="ibox-content forum-container">
+                        <div className="--ibox-content --forum-container">
                             <div className="forum-title">
                                 <div className="pull-right forum-desc">
                                     <small>Total posts: {forums.length}</small>
@@ -267,15 +269,15 @@ const ForumLayout = () => {
                             {/*Mapping every forum to the Forum Page*/}
                             {forums.map(forum =>
                                 <div key={forum.id}>
-                                    <div className="forum-item active">
+                                    <div className="--forum-item active">
 
                                         <div className="row">
                                             <div className="col-md-9">
                                                 <div className="forum-icon">
                                                     <i className="fa fa-shield"></i>
                                                 </div>
-                                                <a href="" className="forum-item-title">{forum.title}</a>
-                                                <div className="forum-sub-title">{forum.sub_title}
+                                                <a href="" className="--forum-item-title">{forum.title}</a>
+                                                <div className="--forum-sub-title">{forum.sub_title}
                                                 </div>
                                                 <div>Forum type: {forum.forum_category}</div>
                                                 <div>Create Date: {forum.create_date}</div>
