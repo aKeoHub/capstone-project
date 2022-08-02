@@ -13,19 +13,16 @@ import Profile from "./pages/LoginPage/components/profile.component";
 import ProfilePage from "./pages/ProfilePage";
 import LoginForm from "./pages/LoginPage";
 import Login from "./pages/LoginPage/components/login.component";
+import NavBarLoggedIn from "./components/NavBar/NavBarLoggedIn";
 const token = localStorage.getItem("accessToken");
 function App() {
 let loggedIn = '';
   if(token) {
-    loggedIn = 'ProfilePage';
-
-  } else {
-    loggedIn = 'Home'
-  }
-  return (
+    loggedIn = 'Home';
+return(
     <>
       <Router>
-        <NavBar disabled/>
+        <NavBarLoggedIn />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
@@ -40,7 +37,33 @@ let loggedIn = '';
         <Footer />
       </Router>
     </>
-  );
+)
+  } else {
+    loggedIn = 'Home'
+    return(
+        <>
+          <Router>
+            <NavBar />
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/admin" exact component={AdminPage} />
+              <Route path="/profile" exact component={ProfilePage} />
+              <Route path="/signup" exact component={RegistrationPage} />
+              <Route path="/events" exact component={EventPage} />
+              <Route path="/forum" exact component={ForumPage} />
+              <Route path="/documents" exact component={DocumentsPage} />
+              <Route path="/viewForum" exact component={ViewForum} />
+            </Switch>
+            <Footer />
+          </Router>
+        </>
+
+    );
+  }
+
+
+
 }
 
 export default App;
