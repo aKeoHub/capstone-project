@@ -69,16 +69,45 @@ const OtherDocs = () => {
             })
     };
 
-    const GetDownloadUrl = (fileName) => {
-        const config = {
+    // const GetDownloadUrl = (fileName) => {
+    //     const config = {
+    //         headers: {Authorization: `Bearer ${token}`},
+    //     };
+    //     return axios.get("/api/v1/downloadFile/" + fileName, config)
+    //         .then(function (response) {
+    //             console.log(response.data);
+    //             setDownloadUrl(response.data)
+    //             //console.log(user)
+    //         })
+    // }
+
+    const getDownloadUrl = (fileName) => {
+        fetch('api/v1/downloadFile/' + fileName, {
+            method: 'GET',
             headers: {Authorization: `Bearer ${token}`},
-        };
-        return axios.get("/api/v1/downloadFile/" + fileName, config)
-            .then(function (response) {
-                console.log(response.data);
-                setDownloadUrl(response.data)
-                //console.log(user)
-            })
+        })
+            .then((response) => response.blob())
+            .then((blob) => {
+                // Create blob link to download
+                const url = window.URL.createObjectURL(
+                    new Blob([blob]),
+                );
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute(
+                    'download',
+                    fileName,
+                );
+                console.log(link)
+                // Append to html link element page
+                document.body.appendChild(link);
+
+                // Start download
+                link.click();
+
+                // Clean up and remove the link
+                link.parentNode.removeChild(link);
+            });
     }
 
     const AddDocument = (doc) => {
@@ -261,7 +290,7 @@ const OtherDocs = () => {
                                          <td style={{width: "16%"}}><span id={park_document.document_name}>{park_document.document_name}</span><input id={park_document.document_id} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "16%"}}>{park_document.create_date}</td>
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "12%"}}><a href={"/login"}>Download File</a></td>
+                                         <td style={{width: "12%"}}>{getDownloadUrl()}</td>
                                          <td>
                                          <Button onClick={()=>deleteDocument(park_document.document_id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
                                          </td>
