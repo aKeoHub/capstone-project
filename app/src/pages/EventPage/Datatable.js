@@ -10,8 +10,22 @@ const EventTable = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("accessToken");
+    const [user, setUser] = useState('');
+    const username = (localStorage.getItem('username'));
     useEffect(() => {
         setLoading(true);
+        const bodyParameters = {
+            username: username,
+        };
+        const config = {
+            headers: {Authorization: `Bearer ${token}`},
+        };
+        axios.post("/api/v1/user", bodyParameters, config)
+            .then(function (response) {
+                console.log(response.data);
+                setUser(response.data)
+                //console.log(user)
+            })
 
         fetch('api/v1/events/all', {
             headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
@@ -21,6 +35,7 @@ const EventTable = () => {
                 setEvents(data);
                 setLoading(false);
             })
+
 
     }, []);
 
@@ -49,6 +64,7 @@ function deleteEvent(id) {
             <div class="row">
                 <div class="col">
                     <h2>Event List</h2>
+                    <h3>{user.user_id}</h3>
                 </div>
                 <div class="col">
                    <EventModal />
