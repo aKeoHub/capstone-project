@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Button from '@material-ui/core/Button';
+import axios from "axios";
 
 const OtherDocs = () => {
     const [documents, setDocuments] = useState([]);
@@ -18,6 +19,8 @@ const OtherDocs = () => {
     const [file, setFile] = useState();
     const input = document.getElementById('fileUpload');
     const token = localStorage.getItem("accessToken");
+    const username = (localStorage.getItem('username'));
+    const [user, setUser] = useState('');
 
 
     const textAreaChange = (doc) => {
@@ -35,23 +38,36 @@ const OtherDocs = () => {
         //console.log('file: ', file);
         console.log(e.target.files[0]);
 
-        const formData = new FormData()
+        const formData = new FormData();
+        const bodyParameters = {
+            body: formData,
+        };
+        const config = {
+            headers: {Authorization: `Bearer ${token}`},
+        };
         formData.append('file', e.target.files[0])
+        axios.post("/api/v1/uploadFile", bodyParameters, config)
+            .then(function (response) {
+                console.log(response.data);
+                setUser(response.data)
+                //console.log(user)
+            })
+
         //  this.setState({ files: file }, () => { console.log(this.state.files) });
-        fetch('api/v1/uploadFile', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json', 'Authorization': `Bearer ${token}`,
-            },
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        // fetch('api/v1/uploadFile', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json', 'Authorization': `Bearer ${token}`,
+        //     },
+        //     body: formData
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data)
+        //     })
+        //     .catch(error => {
+        //         console.error(error)
+        //     })
     };
 
     const AddDocument = (doc) => {
@@ -62,7 +78,7 @@ const OtherDocs = () => {
             body: JSON.stringify({
                 document_id: docId,
                 document_category: docCat,
-                creator_id: creatorId,
+                creator_id: user,
                 document_name: docName,
                 create_date: dateCreated,
                 description: textarea,
@@ -75,34 +91,35 @@ const OtherDocs = () => {
             .then(data => {
                 console.log(data)
                 window.location.reload();
-            })
+            });
     }
 
     useEffect(() => {
-        //setLoading(true);
+        setLoading(true);
+        const bodyParameters = {
+            username: username,
+        };
+        const config = {
+            headers: {Authorization: `Bearer ${token}`},
+        };
+        axios.post("/api/v1/user", bodyParameters, config)
+            .then(function (response) {
+                console.log(response.data);
+                setUser(response.data)
+                //console.log(user)
+            })
 
-    //     fetch('api/v1/documents/all')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setDocuments(data);
-    //             setLoading(false);
-    //             console.log(data);
-    //         })
-    // }, []);
-
-    fetch('api/v1/documents/all/', {
-        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
-    })
-        .then(response => response.json())
-        .then(data => {
-            setDocuments(data);
-
-            console.log(data);
+        fetch('api/v1/documents/all', {
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
         })
-       // .catch((err) => console.log(err));
-}, []);
+            .then(response => response.json())
+            .then(data => {
+                setDocuments(data);
+                setLoading(false);
+            })
 
 
+    }, []);
 
 
          if (loading) {
@@ -148,13 +165,13 @@ const OtherDocs = () => {
                      <option value="7" label="PRIORITY">Concerts</option>
                  </select>
              </label>
-               <label>Enter Creator Id:
-                 <input//this will be automatic to whoever is logged in
-                   type="number"
-                   name="creatorId"
-                   onChange={(e) => { setCreatorId(e.target.value);}}
-                 />
-                 </label>
+               {/*<label>Enter Creator Id:*/}
+               {/*  <input//this will be automatic to whoever is logged in*/}
+               {/*    type="number"*/}
+               {/*    name="creatorId"*/}
+               {/*    onChange={(e) => { setCreatorId(e.target.value);}}*/}
+               {/*  />*/}
+               {/*  </label>*/}
                  <label>Enter Document name:
                      <input
                        type="text"
