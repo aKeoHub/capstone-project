@@ -369,7 +369,7 @@ const ForumLayout = () => {
 
 
                                             </div>
-                                            <div className="col-md-1 forum-info">
+                                            <div className="col-md-1 --forum-info">
                             <span className="views-number">
 
                             </span>
