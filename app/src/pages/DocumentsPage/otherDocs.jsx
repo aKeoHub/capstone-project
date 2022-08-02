@@ -263,7 +263,7 @@ const OtherDocs = () => {
                                          <td style={{width: "16%"}}><span id={park_document.document_name}>{park_document.document_name}</span><input id={park_document.document_id} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "16%"}}>{park_document.create_date}</td>
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "12%"}}>{saveAs(blob, GetDownloadUrl('CMPS369Lab8MemoryUsage%20(1).pdf'))}</td>
+                                         {/*<td style={{width: "12%"}}>{saveAs(blob, GetDownloadUrl(''))}</td>*/}
                                          <td>
                                          <Button onClick={()=>deleteDocument(park_document.document_id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
                                          </td>
@@ -281,19 +281,19 @@ const OtherDocs = () => {
                              </div>
                          )}
 
-                        {downloadLink.map(link => link.name
-                        )}
-                        {downloadLink.map(link =>
-                            <div key={link.id}>
-                                <table class="urlTable">
-                                    <tr>
-                                        <td>{link.fileId}</td>
-                                        <td>{link.name}</td>
-                                        <td>{link.url}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        )}
+                        {/*{downloadLink.map(link => link.name*/}
+                        {/*)}*/}
+                        {/*{downloadLink.map(link =>*/}
+                        {/*    <div key={link.id}>*/}
+                        {/*        <table class="urlTable">*/}
+                        {/*            <tr>*/}
+                        {/*                <td>{link.fileId}</td>*/}
+                        {/*                <td>{link.name}</td>*/}
+                        {/*                <td>{link.url}</td>*/}
+                        {/*            </tr>*/}
+                        {/*        </table>*/}
+                        {/*    </div>*/}
+                        {/*)}*/}
                     <Button style={{display:"block", marginLeft:"84%", marginTop:"4%"}}>Add document</Button>
                   </div>
              </div>
