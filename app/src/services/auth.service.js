@@ -38,8 +38,8 @@ class AuthService {
 
 
     logout() {
-        localStorage.removeItem("accessToken");
-        //window.location.reload();
+        localStorage.clear();
+        window.location = '/login';
     }
 
     register(username, email, password) {

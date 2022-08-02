@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
+import axios from "axios";
 
 
 const EventForm = () => {
@@ -7,12 +8,15 @@ const EventForm = () => {
   const [eventId, setEventId] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
   const [eventName, setEventName] = useState("");
-  const [eventCreator, setEventCreator] = useState(0);
+  // const [eventCreator, setEventCreator] = useState('');
   const [location, setLocation] = useState("");
   const [startDate, setStartDate] = useState({varOne:new Date()});
   const [endDate, setEndDate] = useState({varOne:new Date()});
   const [textarea, setTextarea] = useState("");
   const [file, setFile] = useState([]);
+    const token = localStorage.getItem("accessToken");
+    const username = (localStorage.getItem('username'));
+    const [user, setUser] = useState('');
 //  const handleChange = (event) => {
 //    const name = event.target.name;
 //    const value = event.target.value;
@@ -39,15 +43,34 @@ const EventForm = () => {
         setFile(e.target.files[0]);
     };
 
- const AddEvent = (event) => {
+    useEffect(() => {
+        //setLoading(true);
 
+        const bodyParameters = {
+            username: username,
+        };
+        const config = {
+            headers: {Authorization: `Bearer ${token}`},
+        };
+        axios.post("/api/v1/user", bodyParameters, config)
+            .then(function (response) {
+                console.log(response.data);
+                setUser(response.data)
+                //console.log(user)
+            })
+    }, []);
+
+
+        const AddEvent = (event) => {
+            console.log(eventId);
       fetch('api/v1/events/add',{
+
           method:'POST',
 
            body: JSON.stringify({
             event_id: eventId,
             category_id: categoryId,
-            event_creator: eventCreator,
+            event_creator: user,
             event_name: eventName,
             location: location,
             description: textarea,
@@ -55,13 +78,11 @@ const EventForm = () => {
             end_date: endDate,
             file: null,
                       }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`}
       }).then(response => response.json())
                     .then(data => {
                         console.log(data);
-                        //window.location.reload();
+                        window.location.reload();
                     })
   }
 
@@ -90,13 +111,6 @@ const EventForm = () => {
           <option value="3" label="Other">Others</option>
       </select>
       </label>
-      <label>Enter Creator Name:
-        <input
-          type="number"
-          name="eventCreator"
-          onChange={(e) => { setEventCreator(e.target.value);}}
-        />
-        </label>
         <label>Enter Location:
             <input
               type="text"

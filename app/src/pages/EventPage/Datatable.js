@@ -2,13 +2,14 @@
 import React, {useEffect, useState} from "react";
 import './Datatable.css';
 import EventModal from './EventModal'
+import UserService from "../../services/user.service";
+import axios from "axios";
 
 const EventTable = () => {
 
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("accessToken");
-
     useEffect(() => {
         setLoading(true);
 
@@ -19,8 +20,8 @@ const EventTable = () => {
             .then(data => {
                 setEvents(data);
                 setLoading(false);
-                console.log(data);
             })
+
     }, []);
 
         if (loading) {
@@ -38,7 +39,7 @@ function deleteEvent(id) {
                   .then(data => {
                       setLoading(false);
                       console.log(data);
-                  //    window.location.reload();
+                      window.location.reload();
                   })
 }
 

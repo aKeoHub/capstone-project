@@ -13,7 +13,10 @@ const required = value => {
         );
     }
 };
+
+
 export default class Login extends Component {
+
     constructor(props) {
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
@@ -76,7 +79,9 @@ export default class Login extends Component {
     }
 
     render() {
+
         return (
+
             <div className="wrapper" style={{backgroundImage: 'backgroundImg.jpg'}}>
                 <div className="inner">
 
@@ -124,7 +129,8 @@ export default class Login extends Component {
                         <div className="form-group">
                             <button
                                 className="btn btn-primary btn-block"
-                                disabled={this.state.loading}
+                                //disabled={this.state.loading}
+                                //disabled={disable} onClick={() => setDisable(true)}
                             >
                                 {this.state.loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
