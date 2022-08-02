@@ -12,7 +12,7 @@ body {
 }
 
 .white-text{
-    color:white;
+    color: #ffffff;
 }
 
 .calendarContainer {
@@ -30,7 +30,7 @@ body {
 .react-calendar__navigation__label {
       font-weight: bold;
       font-size:15px;
-      color:grey;
+      color: #ffffff;
 }
 
 .react-calendar__navigation__arrow {
@@ -39,23 +39,17 @@ body {
   font-weight:bolder;
 }
 
-button {
-    margin: 3px;
-    background-color: #6f876f;
-    border: 0;
-    border-radius: 3px;
-    color: grey;
-    padding: 5px 0;
-}
+
 
 .react-calendar {
   width: 950px;
   max-width: 100%;
-  background: white;
+  background: #ffffff;
   border: 1px solid #a0a096;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
   margin:auto;
+    color: gray;
 }
 
 .calendarHeaderDiv{

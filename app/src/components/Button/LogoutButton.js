@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import AuthService from "../../services/auth.service";
 
 
-const STYLES = ['btn--primary', 'btn--outline', 'btn--test'];
+const STYLES = ['--btn--primary', '--btn--outline', '--btn--test'];
 
-const SIZES = ['btn--medium', 'btn--large'];
+const SIZES = ['--btn--medium', '--btn--large'];
 
 export const LogoutButton = ({
                                 children,
@@ -22,9 +22,9 @@ export const LogoutButton = ({
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
     return (
-        <Link to='/' className='btn-mobile'>
+        <Link to='/' className='--btn-mobile'>
             <button
-                className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+                className={`--btn ${checkButtonStyle} ${checkButtonSize}`}
                 onClick={AuthService.logout}
                 type={type}
             >

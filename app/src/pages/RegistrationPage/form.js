@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./register.css";
+import Button from "react-bootstrap/Button";
 
 const RegistrationForm = () => {
     const [users, setUsers] = useState([]);
@@ -189,7 +190,7 @@ const RegistrationForm = () => {
                             <span className="checkmark"></span>
                         </label>
                     </div>
-                    <button onClick={register}>Register Now</button>
+                    <Button variant="primary" onClick={register}>Register Now</Button>
                 </form>
             </div>
         </div>

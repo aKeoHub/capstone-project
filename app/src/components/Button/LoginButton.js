@@ -2,9 +2,9 @@ import React from 'react';
 import './Button.css';
 import { Link } from 'react-router-dom';
 
-const STYLES = ['btn--primary', 'btn--outline', 'btn--test'];
+const STYLES = ['--btn--primary', '--btn--outline', '--btn--test'];
 
-const SIZES = ['btn--medium', 'btn--large'];
+const SIZES = ['--btn--medium', '--btn--large'];
 
 export const LoginButton = ({
                            children,
@@ -20,9 +20,9 @@ export const LoginButton = ({
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
     return (
-        <Link to='/login' className='btn-mobile'>
+        <Link to='/login' className='--btn-mobile'>
             <button
-                className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+                className={`--btn ${checkButtonStyle} ${checkButtonSize}`}
                 onClick={onClick}
                 type={type}
             >

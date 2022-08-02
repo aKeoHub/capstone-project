@@ -13,15 +13,15 @@ function HeroSection() {
             <p>Sign Up or Login Here!</p>
             <div className='hero-btns'>
                 <SignUpButton
-                    className='btns'
-                    buttonStyle='btn--outline'
+                    className='--btns'
+                    buttonStyle='--btn--primary'
                     buttonSize='btn--large'
                 >
                     Sign Up
                 </SignUpButton>
                 <LoginButton
-                    className='btns'
-                    buttonStyle='btn--outline'
+                    className='--btns'
+                    buttonStyle='--btn--primary'
                     buttonSize='btn--large'
 
                 >

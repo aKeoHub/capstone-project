@@ -13,15 +13,15 @@ function DandFSection() {
             <p>See the park documents and chat with other people on the forum!</p>
             <div className='dandf-btns'>
                 <DocumentsButton
-                    className='btns'
-                    buttonStyle='btn--outline'
+                    className='--btns'
+                    buttonStyle='--btn--primary'
                     buttonSize='btn--large'
                 >
                     Documents
                 </DocumentsButton>
                 <ForumButton
-                    className='btns'
-                    buttonStyle='btn--outline'
+                    className='--btns'
+                    buttonStyle='--btn--primary'
                     buttonSize='btn--large'
 
                 >

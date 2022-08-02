@@ -93,7 +93,7 @@ function NavBar() {
                             </Link>
                         </li>
                     </ul>
-                    {button && <LogoutButton buttonStyle='btn--outline'>LOGOUT</LogoutButton>}
+                    {button && <LogoutButton buttonStyle='--btn--outline'>LOGOUT</LogoutButton>}
                 </div>
             </nav>
         </>

@@ -3,6 +3,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../../../services/auth.service";
+import {LoginButton} from "../../../components/Button/LoginButton";
+import {LogoutButton} from "../../../components/Button/LogoutButton";
 
 const required = value => {
     if (!value) {
@@ -127,8 +129,8 @@ export default class Login extends Component {
                         </div>
 
                         <div className="form-group">
-                            <button
-                                className="btn btn-primary btn-block"
+                            <LoginButton
+                                buttonStyle="--btn--primary"
                                 //disabled={this.state.loading}
                                 //disabled={disable} onClick={() => setDisable(true)}
                             >
@@ -136,7 +138,7 @@ export default class Login extends Component {
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
                                 <span>Login</span>
-                            </button>
+                            </LoginButton>
                         </div>
                         {this.state.message && (
                             <div className="form-group">
@@ -152,15 +154,15 @@ export default class Login extends Component {
                             }}
                         />
                     </Form>
-                    <button onClick={AuthService.logout}
-                            className="btn btn-primary btn-block"
+                    <LogoutButton onClick={AuthService.logout}
+                                  buttonStyle="--btn--primary"
                             disabled={this.state.loading}
                     >
                         {this.state.loading && (
                             <span className="spinner-border spinner-border-sm"></span>
                         )}
                         <span>Logout</span>
-                    </button>
+                    </LogoutButton>
                 </div>
             </div>
 

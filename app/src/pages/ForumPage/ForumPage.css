@@ -1,9 +1,9 @@
 
 .blue-color-background{
-    background-color: #2c313d;
+    background-color: #d4d7dc;
 }
 .white-bg {
-    background-color: #2c313d;
+    background-color: #bfc2c7;
 }
 .--page-heading {
     border-top: 0;
@@ -26,18 +26,18 @@
     width: 48px;
 }
 .--author-info {
-    color: #676a6c;
+    color: #000000;
     font-size: 11px;
     margin-top: 5px;
     text-align: center;
 }
 .--forum-post-info {
     padding: 9px 12px 6px 12px;
-    background: #2c313d;
+    background: #edeeef;
     border: 1px solid #f1f1f1;
 }
 .--media-body > .--media {
-    background: #2c313d;
+    background: #e8e9ee;
     border-radius: 3px;
     border: 1px solid #f1f1f1;
 }
@@ -62,7 +62,7 @@
 .--forum-item {
     margin: 10px 0;
     padding: 10px 0 20px;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid #000000;
 }
 .--views-number {
     font-size: 24px;
@@ -74,10 +74,10 @@
     padding: 30px !important;
 }
 .--forum-item small {
-    color: #999;
+    color: #000000;
 }
 .--forum-item .--forum-sub-title {
-    color: #999;
+    color: #000000;
     margin-left: 50px;
 }
 .--forum-title {
@@ -87,7 +87,7 @@
     text-align: center;
 }
 .--forum-desc {
-    color: #999;
+    color: #000000;
 }
 .--forum-icon {
     float: left;
@@ -107,13 +107,13 @@ a.--forum-item-title:hover {
 .--forum-icon .fa {
     font-size: 30px;
     margin-top: 8px;
-    color: #9b9b9b;
+    color: #000000;
 }
 .--forum-item.active .--fa {
-    color: #444c65;
+    color: #ffffff;
 }
 .--forum-item.active a.--forum-item-title {
-    color: #444c65;
+    color: #000000;
 }
 @media (max-width: 992px) {
     .--forum-info {
@@ -154,7 +154,7 @@ a.--forum-item-title:hover {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background-color: #2c313d;
+    background-color: #e7e8ea;
     border-color: #e7eaec;
     border-image: none;
     border-style: solid solid none;
@@ -165,10 +165,10 @@ a.--forum-item-title:hover {
     min-height: 48px;
 }
 .--ibox-content {
-    background-color: #2c313d;
+    background-color: #e7e9ef;
     color: inherit;
     padding: 15px 20px 20px 20px;
-    border-color: #e7eaec;
+    border-color: #e5e8ea;
     border-image: none;
     border-style: solid solid none;
     border-width: 1px 0;
@@ -177,7 +177,7 @@ a.--forum-item-title:hover {
     color: inherit;
     border-top: 1px solid #e7eaec;
     font-size: 90%;
-    background: #2c313d;
+    background: #d7d9dc;
     padding: 10px 15px;
 }
 
@@ -185,7 +185,7 @@ a.--forum-item-title:hover {
     height: 90px !important;
 }
 .--form-control, .--single-line {
-    background-color: #2c313d;
+    background-color: #ffffff;
     background-image: none;
     border: 1px solid #e5e6e7;
     border-radius: 1px;
