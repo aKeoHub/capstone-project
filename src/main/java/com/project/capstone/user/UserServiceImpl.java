@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -51,8 +52,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User updateUser(User user, Integer userId) {
-        return null;
+    public User updateUser(User user, Integer userId) throws UserNotFoundException {
+        Optional<User> currentUserOptional = userRepo.findById(userId);
+
+        if (currentUserOptional.isPresent()){
+            User currentUser = currentUserOptional.get();
+            currentUser.setUserId(user.getUserId());
+            currentUser.setUsername(user.getUsername());
+            currentUser.setPassword(user.getPassword());
+            currentUser.setFirstname(user.getFirstname());
+            currentUser.setLastname(user.getLastname());
+            currentUser.setEmail(user.getEmail());
+            currentUser.setPictureId(user.getPictureId());
+            return currentUser;
+        } else {
+            throw new UserNotFoundException(userId);
+        }
     }
 
     @Override
@@ -79,6 +94,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User getUser(String username) {
         log.info("Fetching user {}", username);
         return userRepo.findByUsername(username);
+    }
+
+    @Override
+    public User getUserById(Integer userId) {
+        return null;
     }
 
     @Override

@@ -55,7 +55,11 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
-
+    @PutMapping("/user/edit/{id}")
+    public ResponseEntity<User> updateUsers(@RequestBody User user, @PathVariable("id") Integer usersId) throws UserNotFoundException {
+        userService.updateUser(user, usersId);
+        return ResponseEntity.ok().build();
+    }
 
     @PostMapping("/role/save")
     public ResponseEntity<Role>saveRole(@RequestBody Role role) {
@@ -106,7 +110,6 @@ public class UserController {
 
 
     }
-
 }
 
 @Data
