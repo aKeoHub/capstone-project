@@ -129,17 +129,27 @@ const OtherDocs = () => {
          return (
          <>
          <form onSubmit={handleSubmit}>
-               <label>Enter Category Id:
-               <input
-                 type="number"
-                 name="docCatd"
-                 onChange={(e) => {
-                   setDocCat(e.target.value);
-                   }}
-               />
-               </label>
+             <label>Select Category:
+                 <select
+                     //className="form-select"
+                     name="docCatId"
+                     type="number"
+                     required="true"
+                     onChange={(e) => {
+                         setDocCat(e.target.value);
+                     }} >
+                     <option value="" label="Categories">Categories</option>
+                     <option value="1" label="LEGAL">Concerts</option>
+                     <option value="2" label="ENTERTAINMENT">Gathering</option>
+                     <option value="3" label="ACCOUNTING">Others</option>
+                     <option value="4" label="SOCIAL">Concerts</option>
+                     <option value="5" label="MEETING">Gathering</option>
+                     <option value="6" label="NOTICE">Others</option>
+                     <option value="7" label="PRIORITY">Concerts</option>
+                 </select>
+             </label>
                <label>Enter Creator Id:
-                 <input
+                 <input//this will be automatic to whoever is logged in
                    type="number"
                    name="creatorId"
                    onChange={(e) => { setCreatorId(e.target.value);}}
@@ -149,16 +159,18 @@ const OtherDocs = () => {
                      <input
                        type="text"
                        name="docName"
+                       max="30"
+                       required="true"
                        onChange={(e) => {
                          setDocName(e.target.value);
                        }}
                      />
                  </label>
                  <label>Enter Description:
-                     <textarea name="description" value={textarea} onChange={textAreaChange} />
+                     <textarea name="description" value={textarea} max="120" required="true" onChange={textAreaChange} />
                  </label>
                  <label for="dateCreated">Date created:
-                   <input type="date" id="dateCreated" name="dateCreated" onChange={(e) => { setDateCreated(e.target.value);}}/>
+                   <input type="date" id="dateCreated" name="dateCreated" required="true" onChange={(e) => { setDateCreated(e.target.value);}}/>
                  </label>
                  <input
                      type="file" id="fileUpload" name="file"
