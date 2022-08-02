@@ -92,7 +92,7 @@ const EventForm = () => {
       <input
         type="text"
         name="eventName"
-        pattern="/^[a-z ,.'-]+$/i"
+        pattern="[a-zA-Z0-9,#.-]+"
         max="20"
         placeholder="Name of Event!"
         onChange={(e) => {
