@@ -12,10 +12,9 @@ const ForumLayout = () => {
 
 
 
+// Constants that are used to set variables and the states of the variables.
 
     const [forums, setForums] = useState([]);
-    const [forum, setForum] = useState([]);
-    const [forumLoaded, setForumLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const token = localStorage.getItem("accessToken");
@@ -26,13 +25,16 @@ const ForumLayout = () => {
     const handleCloseAdd = () => setShowAdd(false);
     const handleShowAdd = () => setShowAdd(true);
 
+    const [modalEditInfo, setModalEditInfo] = useState([]);
     const [showEdit, setShowEdit] = useState(false);
     const handleCloseEdit = () => setShowEdit(false);
     const handleShowEdit = () => setShowEdit(true);
 
-    const[showView, setShowView] = useState (new Array(forums.length).fill(false));
-    const handleCloseView = (id) => setShowView(false);
-    const handleShowView = (id) => setShowView(true);
+
+    const [modalViewInfo, setModalViewInfo] = useState([]);
+    const [showView, setShowView] = useState (false);
+    const handleCloseView = () => setShowView( false);
+    const handleShowView = () => setShowView( true);
 
 
     const [forumId, setForumIdReg] = useState(0);
@@ -45,19 +47,19 @@ const ForumLayout = () => {
     const [createDate, setCreateDate] = useState(new Date());
 
 
-
-
+//This will load all the forums into the forums array and display on forum page.
     useEffect(() => {
         setLoading(true);
 
         fetch('api/v1/forums/all',{
-            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+            headers: { 'Content-Type': 'application/json',}
         })
             .then(response => response.json())
             .then(data => {
                 setForums(data);
                 setLoading(false);
                 console.log(data);
+
             })
             const bodyParameters = {
                 username: username,
@@ -70,6 +72,7 @@ const ForumLayout = () => {
                     console.log(response.data);
                     setUser(response.data)
                     //console.log(user)
+
                 })},
         []);
 
@@ -77,6 +80,7 @@ const ForumLayout = () => {
         return <p>Loading...</p>;
     }
 
+//This will delete a forum when clicking the button, but you need to be logged in to do so.
     function deleteForum(id) {
 
         fetch('api/v1/forums/delete/' + id, {
@@ -89,6 +93,7 @@ const ForumLayout = () => {
                 window.location.reload();
             })
     }
+//This will add a forum when clicking the button, but you need to be logged in to do so.
     function addForum() {
         const todaysDate = new Date();
         console.log(todaysDate.toLocaleDateString());
@@ -122,39 +127,29 @@ const ForumLayout = () => {
 
             // Displaying results to console
             .then(json => console.log(json));
-            //window.location.reload();
+            window.location.reload();
     }
+//This will make you view the forum, you do not need to be logged in to see the forum.
+    const viewForum = async(id) => {
 
-
-    function viewForum(id) {
-
-        fetch('api/v1/forums/get/' + id, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
-        })
-            .then(response => response.json())
-            .then(data => {
-                setForum(data);
-                setLoading(false);
-                console.log(data);
-                for (let i = 0; i < forums.length; i ++) {
-                    for(let j = 0; j < showView.length; j ++){
-                        if(showView[j] === forums[i]){
-                            handleShowView(j);
-                            break;
-                        }
-                    }
-                }
-
+        try{
+            await axios.get('api/v1/forums/get/' + id,
+            ).then(function (response){
+                console.log(response.data);
+                setModalViewInfo(response.data);
+                setModalEditInfo(response.data);
+                console.log(modalViewInfo);
+                handleShowView();
             })
-
-
-
+        }catch (e) {
+        }
 
     }
 
 
-    function editForum(forumId)  {
+
+//This will edit a selected forum, you need to be logged in to do so.
+    const editForum = async(forumId) => {
 
         fetch('api/v1/forums/edit/' + forumId, {
             method: "PUT",
@@ -172,19 +167,12 @@ const ForumLayout = () => {
         })
             .then(response => response.json())
             .then(data => {
-                handleShowEdit();
                 setLoading(false);
                 console.log(data);
+                console.log(modalEditInfo);
+                handleShowEdit();
+                window.location.reload();
             })
-
-
-        // Displaying results to console
-
-
-
-
-
-
     }
 
 
@@ -198,16 +186,19 @@ const ForumLayout = () => {
                     <div className="wrapper wrapper-content animated fadeInRight">
 
                         <div className="ibox-content forum-container">
-
                             <div className="forum-title">
                                 <div className="pull-right forum-desc">
                                     <small>Total posts: {forums.length}</small>
                                 </div>
                                 <h3>All Forum Posts</h3>
                             </div>
+
+                            {/*Button to Show Add Forum Form */}
                             <Button variant="primary" onClick={handleShowAdd}>
                                 Add Forum
                             </Button>
+
+                            {/*The Modal for Add Forum*/}
                             <Modal className="blue-color-background" show={showAdd} onHide={handleCloseAdd}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Creating a Forum</Modal.Title>
@@ -272,6 +263,8 @@ const ForumLayout = () => {
                                     </Button>
                                 </Modal.Footer>
                             </Modal>
+
+                            {/*Mapping every forum to the Forum Page*/}
                             {forums.map(forum =>
                                 <div key={forum.id}>
                                     <div className="forum-item active">
@@ -282,23 +275,31 @@ const ForumLayout = () => {
                                                     <i className="fa fa-shield"></i>
                                                 </div>
                                                 <a href="" className="forum-item-title">{forum.title}</a>
-                                                <Modal className="blue-color-background" show={showView[forum.id]} onHide={() => handleCloseView(forum.forum_id)}>
+                                                <div className="forum-sub-title">{forum.sub_title}
+                                                </div>
+                                                <div>Forum type: {forum.forum_category}</div>
+                                                <div>Create Date: {forum.create_date}</div>
+
+                                                {/*The Modal for View Forum*/}
+                                                <Modal className="blue-color-background" show={showView} onHide={handleCloseView}>
                                                     <Modal.Header closeButton>
-                                                        <Modal.Title >{forum.title}</Modal.Title>
+                                                        <Modal.Title > {modalViewInfo.title}</Modal.Title>
                                                     </Modal.Header>
                                                     <Modal.Body>
-                                                        <h3>{forum.sub_title}</h3>
-                                                        <div>{forum.description}</div>
+                                                        <h3>{modalViewInfo.sub_title}</h3>
+                                                        <div>{modalViewInfo.description}</div>
                                                     </Modal.Body>
                                                     <Modal.Footer>
                                                         <Button variant="secondary" onClick={handleShowEdit}>
                                                             Edit
                                                         </Button>
-                                                        <Button variant="primary" onClick={()=>deleteForum(forum.forum_id)}>
+                                                        <Button variant="primary" onClick={()=>deleteForum(modalViewInfo.forum_id)}>
                                                             Delete
                                                         </Button>
                                                     </Modal.Footer>
                                                 </Modal>
+
+                                                {/*Modal For Edit Forum*/}
                                                 <Modal className="blue-color-background"show={showEdit} onHide={handleCloseEdit}>
                                                     <Modal.Header closeButton>
                                                         <Modal.Title>Edit This forum.</Modal.Title>
@@ -309,7 +310,7 @@ const ForumLayout = () => {
                                                                 <div className="form-wrapper">
                                                                     <label htmlFor="">Title</label>
                                                                     <input
-                                                                        placeholder = {forum.title}
+                                                                        placeholder = {modalEditInfo.title}
                                                                         type="text"
                                                                         className="form-control"
                                                                         onChange={(e) => {
@@ -322,7 +323,7 @@ const ForumLayout = () => {
                                                                 <div className="form-wrapper">
                                                                     <label htmlFor="">Sub Title</label>
                                                                     <input
-                                                                        placeholder = {forum.sub_title}
+                                                                        placeholder = {modalEditInfo.sub_title}
                                                                         type="text"
                                                                         className="form-control"
                                                                         onChange={(e) => {
@@ -334,7 +335,7 @@ const ForumLayout = () => {
                                                             <div className="form-wrapper">
                                                                 <label htmlFor="">Description</label>
                                                                 <textarea
-                                                                    placeholder = {forum.description}
+                                                                    placeholder = {modalEditInfo.description}
                                                                     type="text"
                                                                     className="form-control"
                                                                     onChange={(e) => {
@@ -344,7 +345,7 @@ const ForumLayout = () => {
                                                             </div>
                                                             <div className="form-wrapper">
                                                                 <label htmlFor="forumCategory">ForumCategory</label>
-                                                                <select onChange={(e) => {
+                                                                <select placeholder = {modalEditInfo.forum_category}onChange={(e) => {
                                                                     setForumCategoryReg(e.target.value);
                                                                 }} name="forumCategory" id="forumCategory">
                                                                     <option value="Help Needed!">Help Needed!</option>
@@ -355,7 +356,7 @@ const ForumLayout = () => {
                                                         </form>
                                                     </Modal.Body>
                                                     <Modal.Footer>
-                                                        <Button variant="primary" onClick={() => editForum(forum.forum_id)}>
+                                                        <Button variant="primary" onClick={() => editForum(modalEditInfo.forum_id)}>
                                                             Edit
                                                         </Button>
                                                         <Button variant="primary" onClick={handleCloseEdit}>
@@ -363,18 +364,16 @@ const ForumLayout = () => {
                                                         </Button>
                                                     </Modal.Footer>
                                                 </Modal>
-                                                <div className="forum-sub-title">{forum.sub_title}
-                                                </div>
-                                                <div>Forum type: {forum.forum_category}</div>
+
 
                                             </div>
                                             <div className="col-md-1 forum-info">
                             <span className="views-number">
 
                             </span>
+                                                {/*Button For Viewing Forum*/}
                                                 <div>
-                                                    <small>Create Date: {forum.create_date}</small>
-                                                    <Button variant="primary" onClick={()=>viewForum(forum.forum_id)}>
+                                                    <Button variant="primary" onClick={() => viewForum(forum.forum_id)}>
                                                         View
                                                     </Button>
 

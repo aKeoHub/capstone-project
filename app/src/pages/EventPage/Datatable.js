@@ -28,7 +28,7 @@ const EventTable = () => {
             })
 
         fetch('api/v1/events/all', {
-            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+            headers: { 'Content-Type': 'application/json',},
         })
             .then(response => response.json())
             .then(data => {
