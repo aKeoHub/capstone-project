@@ -25,7 +25,7 @@ let loggedIn = '';
   return (
     <>
       <Router>
-        <NavBar />
+        <NavBar disabled/>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />

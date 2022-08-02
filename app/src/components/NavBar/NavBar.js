@@ -34,7 +34,7 @@ function NavBar() {
         loggedIn = '/Profile';
         //console.log(loggedIn);
     } else {
-        loggedIn = '/'
+        loggedIn = '/login'
         //console.log('not logged in')
        // console.log(loggedIn)
     }
@@ -52,7 +52,7 @@ function NavBar() {
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li className='nav-item'>
                         <Link to={loggedIn} className='nav-links' onClick={closeMobileMenu}>
-                            Home
+                            Profile
                         </Link>
                     </li>
                     <li className='nav-item'>
