@@ -1,5 +1,7 @@
 package com.project.capstone.parkdocument.file;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,7 @@ public class FilesController {
     @Autowired
     FilesStorageService storageService;
 
+    Integer id = 0;
     @PostMapping("/api/v1/uploadFile")
     @JsonBackReference
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
@@ -42,10 +45,11 @@ public class FilesController {
     @GetMapping("api/v1/files")
     public ResponseEntity<List<FileInfo>> getListFiles() {
         List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
+            id++;
             String filename = path.getFileName().toString();
             String url = MvcUriComponentsBuilder
                     .fromMethodName(FilesController.class, "getFile", path.getFileName().toString()).build().toString();
-            return new FileInfo(filename, url);
+            return new FileInfo(filename, url, id);
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
@@ -53,6 +57,8 @@ public class FilesController {
     @GetMapping("/api/v1/downloadFile/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+        // get rid of white spaces
+        filename= URLDecoder.decode(filename, StandardCharsets.UTF_8).replaceAll("[\s|\u00A0]+", " ");
         Resource file = storageService.load(filename);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);

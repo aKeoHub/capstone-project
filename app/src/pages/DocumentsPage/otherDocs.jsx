@@ -5,6 +5,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Button from '@material-ui/core/Button';
 import axios from "axios";
+import {  saveAs} from 'file-saver';
 
 const OtherDocs = () => {
     const [documents, setDocuments] = useState([]);
@@ -17,14 +18,20 @@ const OtherDocs = () => {
     const [dateCreated, setDateCreated] = useState({varOne: new Date()});
     const [textarea, setTextarea] = useState("");
     const [file, setFile] = useState();
+    const [downloadLink, setDownloadLinks] = useState([]);
+    const [downloadUrl, setDownloadUrl] = useState('');
     const input = document.getElementById('fileUpload');
     const token = localStorage.getItem("accessToken");
     const username = (localStorage.getItem('username'));
     const [user, setUser] = useState('');
+    let blob = new Blob([], {
+        type: "text/plain;charset=utf-8"
+    });
 
 
     const textAreaChange = (doc) => {
         setTextarea(doc.target.value)
+
     }
 
     const handleSubmit = (doc) => {
@@ -46,15 +53,6 @@ const OtherDocs = () => {
             headers: {Authorization: `Bearer ${token}`},
         };
          formData.append('file', e.target.files[0])
-        // console.log(formData);
-        // axios.post("/api/v1/uploadFile", bodyParameters, config)
-        //     .then(function (response) {
-        //         //console.log(response.data);
-        //         setUser(response.data)
-        //         //console.log(user)
-        //     })
-
-        //  this.setState({ files: file }, () => { console.log(this.state.files) });
         fetch('api/v1/uploadFile', {
             method: 'POST',
             headers: {
@@ -70,6 +68,22 @@ const OtherDocs = () => {
                 console.error(error)
             })
     };
+
+    const GetDownloadUrl = (fileName) => {
+        const config = {
+            headers: {Authorization: `Bearer ${token}`},
+        };
+        axios.get("/api/v1/downloadFile/" + fileName, config)
+            .then(function (response) {
+                console.log(response.data);
+                setDownloadUrl(response.data)
+                //console.log(user)
+            })
+
+
+
+
+    }
 
     const AddDocument = (doc) => {
 
@@ -120,6 +134,17 @@ const OtherDocs = () => {
             })
 
 
+        fetch('api/v1/files', {
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setDownloadLinks(data);
+                //console.log(downloadLink.find((x => x.name === 'CMPS369Lab8MemoryUsage%20(1).pdf')))
+                setLoading(false);
+            })
+
     }, []);
 
 
@@ -143,6 +168,20 @@ const OtherDocs = () => {
     function updateDocument(did, cid, dname, date, desc, file) {
         fetch('api/v1/documents/edit/' + did)
     }
+
+         const getFileFromList = (id) => {
+             {downloadLink.map(link => link =>
+                 <div key={link.id}>
+                     <table class="urlTable">
+                         <tr>
+                             <td>{link.fileId}</td>
+                             <td>{link.name}</td>
+                             <td>{link.url}</td>
+                         </tr>
+                     </table>
+                 </div>
+             )}
+         }
 
          return (
          <>
@@ -215,6 +254,7 @@ const OtherDocs = () => {
                              </tr>
                          </table>
                          {documents.map(park_document =>
+
                              <div>
                                 <table className="table">
                                      <tr>
@@ -223,7 +263,7 @@ const OtherDocs = () => {
                                          <td style={{width: "16%"}}><span id={park_document.document_name}>{park_document.document_name}</span><input id={park_document.document_id} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "16%"}}>{park_document.create_date}</td>
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "12%"}}>{park_document.file}</td>
+                                         <td style={{width: "12%"}}>saveAs(blob, filename)</td>
                                          <td>
                                          <Button onClick={()=>deleteDocument(park_document.document_id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
                                          </td>
@@ -240,6 +280,20 @@ const OtherDocs = () => {
                                 </table>
                              </div>
                          )}
+
+                        {downloadLink.map(link => link.name
+                        )}
+                        {downloadLink.map(link =>
+                            <div key={link.id}>
+                                <table class="urlTable">
+                                    <tr>
+                                        <td>{link.fileId}</td>
+                                        <td>{link.name}</td>
+                                        <td>{link.url}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        )}
                     <Button style={{display:"block", marginLeft:"84%", marginTop:"4%"}}>Add document</Button>
                   </div>
              </div>
