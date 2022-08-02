@@ -30,9 +30,9 @@ const ForumLayout = () => {
     const handleCloseEdit = () => setShowEdit(false);
     const handleShowEdit = () => setShowEdit(true);
 
-    const[showView, setShowView] = useState (false);
-    const handleCloseView = () => setShowView(false);
-    const handleShowView = () => setShowView(true);
+    const[showView, setShowView] = useState (new Array(forums.length).fill(false));
+    const handleCloseView = (id) => setShowView(false);
+    const handleShowView = (id) => setShowView(true);
 
 
     const [forumId, setForumIdReg] = useState(0);
@@ -122,7 +122,7 @@ const ForumLayout = () => {
 
             // Displaying results to console
             .then(json => console.log(json));
-            window.location.reload();
+            //window.location.reload();
     }
 
 
@@ -137,7 +137,15 @@ const ForumLayout = () => {
                 setForum(data);
                 setLoading(false);
                 console.log(data);
-                handleShowView();
+                for (let i = 0; i < forums.length; i ++) {
+                    for(let j = 0; j < showView.length; j ++){
+                        if(showView[j] === forums[i]){
+                            handleShowView(j);
+                            break;
+                        }
+                    }
+                }
+
             })
 
 
@@ -247,6 +255,7 @@ const ForumLayout = () => {
                                             <select onChange={(e) => {
                                                 setForumCategoryReg(e.target.value);
                                             }}name="forumCategory" id="forumCategory">
+                                                <option value="">Select a Category</option>
                                                 <option value="Help Needed!">Help Needed!</option>
                                                 <option value="Announcement">Announcement</option>
                                                 <option value="Event">Event</option>
@@ -273,7 +282,7 @@ const ForumLayout = () => {
                                                     <i className="fa fa-shield"></i>
                                                 </div>
                                                 <a href="" className="forum-item-title">{forum.title}</a>
-                                                <Modal className="blue-color-background" show={showView} onHide={() => handleCloseView(forum.forum_id)}>
+                                                <Modal className="blue-color-background" show={showView[forum.id]} onHide={() => handleCloseView(forum.forum_id)}>
                                                     <Modal.Header closeButton>
                                                         <Modal.Title >{forum.title}</Modal.Title>
                                                     </Modal.Header>
