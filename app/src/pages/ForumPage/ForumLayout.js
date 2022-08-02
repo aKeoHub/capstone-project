@@ -211,18 +211,6 @@ const ForumLayout = () => {
                                         <h3>Your New Forum!</h3>
                                         <div className="form-wrapper">
                                             <div className="form-wrapper">
-                                                <label htmlFor="">Creator ID</label>
-                                                <input
-                                                    type="number"
-                                                    className="form-control"
-                                                    onChange={(e) => {
-                                                        setCreatorIdReg(e.target.value);
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="form-wrapper">
-                                            <div className="form-wrapper">
                                                 <label htmlFor="">Title</label>
                                                 <input
                                                     type="text"
@@ -310,16 +298,6 @@ const ForumLayout = () => {
                                                     </Modal.Header>
                                                     <Modal.Body>
                                                         <form action="">
-                                                            <div className="form-wrapper">
-                                                                <div className="form-wrapper">
-                                                                    <label htmlFor="">Creator ID</label>
-                                                                    <input
-                                                                        value={forum.creator_id}
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                    />
-                                                                </div>
-                                                            </div>
                                                             <div className="form-wrapper">
                                                                 <div className="form-wrapper">
                                                                     <label htmlFor="">Title</label>
