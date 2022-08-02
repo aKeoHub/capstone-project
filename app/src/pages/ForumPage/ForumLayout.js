@@ -12,9 +12,9 @@ const ForumLayout = () => {
 
 
 
+// Constants that are used to set variables and the states of the variables.
 
     const [forums, setForums] = useState([]);
-    const [forumLoaded, setForumLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const token = localStorage.getItem("accessToken");
@@ -47,6 +47,7 @@ const ForumLayout = () => {
     const [createDate, setCreateDate] = useState(new Date());
 
 
+//This will load all the forums into the forums array and display on forum page.
     useEffect(() => {
         setLoading(true);
 
@@ -79,7 +80,7 @@ const ForumLayout = () => {
         return <p>Loading...</p>;
     }
 
-
+//This will delete a forum when clicking the button, but you need to be logged in to do so.
     function deleteForum(id) {
 
         fetch('api/v1/forums/delete/' + id, {
@@ -92,6 +93,7 @@ const ForumLayout = () => {
                 window.location.reload();
             })
     }
+//This will add a forum when clicking the button, but you need to be logged in to do so.
     function addForum() {
         const todaysDate = new Date();
         console.log(todaysDate.toLocaleDateString());
@@ -127,8 +129,7 @@ const ForumLayout = () => {
             .then(json => console.log(json));
             window.location.reload();
     }
-
-
+//This will make you view the forum, you do not need to be logged in to see the forum.
     const viewForum = async(id) => {
 
         try{
@@ -140,18 +141,14 @@ const ForumLayout = () => {
                 console.log(modalViewInfo);
                 handleShowView();
             })
-
         }catch (e) {
-
         }
-
-
 
     }
 
 
 
-
+//This will edit a selected forum, you need to be logged in to do so.
     const editForum = async(forumId) => {
 
         fetch('api/v1/forums/edit/' + forumId, {
@@ -176,15 +173,6 @@ const ForumLayout = () => {
                 handleShowEdit();
                 window.location.reload();
             })
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -292,7 +280,7 @@ const ForumLayout = () => {
                                                 <div>Forum type: {forum.forum_category}</div>
                                                 <div>Create Date: {forum.create_date}</div>
 
-
+                                                {/*The Modal for View Forum*/}
                                                 <Modal className="blue-color-background" show={showView} onHide={handleCloseView}>
                                                     <Modal.Header closeButton>
                                                         <Modal.Title > {modalViewInfo.title}</Modal.Title>
@@ -310,6 +298,8 @@ const ForumLayout = () => {
                                                         </Button>
                                                     </Modal.Footer>
                                                 </Modal>
+
+                                                {/*Modal For Edit Forum*/}
                                                 <Modal className="blue-color-background"show={showEdit} onHide={handleCloseEdit}>
                                                     <Modal.Header closeButton>
                                                         <Modal.Title>Edit This forum.</Modal.Title>
@@ -381,6 +371,7 @@ const ForumLayout = () => {
                             <span className="views-number">
 
                             </span>
+                                                {/*Button For Viewing Forum*/}
                                                 <div>
                                                     <Button variant="primary" onClick={() => viewForum(forum.forum_id)}>
                                                         View
