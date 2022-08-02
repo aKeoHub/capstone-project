@@ -32,11 +32,11 @@ function NavBar() {
     let loggedIn = '';
     if(token) {
         loggedIn = '/Profile';
-        console.log(loggedIn);
+        //console.log(loggedIn);
     } else {
         loggedIn = '/'
         //console.log('not logged in')
-        console.log(loggedIn)
+       // console.log(loggedIn)
     }
     return(
     <>
