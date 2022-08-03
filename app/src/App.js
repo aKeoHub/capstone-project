@@ -16,6 +16,22 @@ import Login from "./pages/LoginPage/components/login.component";
 import NavBarLoggedIn from "./components/NavBar/NavBarLoggedIn";
 const token = localStorage.getItem("accessToken");
 function App() {
+  // window.onunload = () => {
+  //   // Clear the local storage
+  //   window.accessToken.clear()
+  // }
+
+  window.onbeforeunload = function (e) {
+    window.onunload = function () {
+      window.localStorage.isMySessionActive = "false";
+    }
+    return undefined;
+  };
+
+  window.onload = function () {
+    window.localStorage.isMySessionActive = "true";
+  };
+
 let loggedIn = '';
   if(token) {
     loggedIn = 'Home';

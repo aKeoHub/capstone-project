@@ -78,7 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers(POST, "/api/v1/uploadFile/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(GET, "/api/v1/files/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/downloadFile/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
+        http.authorizeRequests().antMatchers("/api/v1/downloadFile/**").permitAll();
+//        http.authorizeRequests().antMatchers(GET, "/api/v1/downloadFile/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
 
         // Forums permissions
