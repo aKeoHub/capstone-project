@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import './ForumPage.css';
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import {AddButtonForum} from "../../components/Button/AddButtonForum";
@@ -8,7 +7,7 @@ import {ViewButtonForum} from "../../components/Button/ViewButtonForum";
 import {EditButtonForum} from "../../components/Button/EditButtonForum";
 import {DeleteButtonForum} from "../../components/Button/DeleteButtonForum";
 import {CancelButtonForum} from "../../components/Button/CancelButtonForum";
-const token = localStorage.getItem("accessToken");
+
 
 
 
@@ -43,7 +42,6 @@ const ForumLayout = () => {
 
 
     const [forumId, setForumIdReg] = useState(0);
-    const [creatorId, setCreatorIdReg] = useState("");
     const [title, setTitleReg] = useState("");
     const [subTitle, setSubTitleReg] = useState("");
     const [description, setDescriptionReg] = useState("");
@@ -138,7 +136,7 @@ const ForumLayout = () => {
 
 //This will make you view the forum, you do not need to be logged in to see the forum.
     const viewForum = async(id) => {
-
+        handleShowView();
         try{
             await axios.get('api/v1/forums/get/' + id,
             ).then(function (response){
@@ -146,8 +144,8 @@ const ForumLayout = () => {
                 setModalViewInfo(response.data);
                 setModalEditInfo(response.data);
                 console.log(modalViewInfo);
-                handleShowView();
             })
+
         }catch (e) {
         }
 
@@ -156,11 +154,14 @@ const ForumLayout = () => {
 
 
 //This will edit a selected forum, you need to be logged in to do so.
-    const editForum = async(event, forumId) => {
-        const config = {
-            headers: { 'Authorization':`Bearer ${token}`},
-        };
-        const body = {
+    const editForum = async(forumId) => {
+        
+         await fetch('api/v1/forums/edit/' + forumId, {
+
+            // Adding method type
+            method: "PUT",
+
+            // Adding body or contents to send
             body: JSON.stringify({
                 forum_id: forumId,
                 creator_id: user,
@@ -171,20 +172,18 @@ const ForumLayout = () => {
                 sub_title: subTitle,
                 forum_category: forumCategory,
 
-            })
-        }
-        try {
-            await axios.put('api/v1/forums/edit/' + forumId, body, config,
-            ).then(function(response){
-                    setLoading(false);
-                    console.log(response.data);
-                    console.log(modalEditInfo);
-                    handleShowEdit();
-                    //window.location.reload();
-                })
-        }
-            catch (e){
-        }
+            }),
+
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+
+        })
+
+            // Converting to JSON
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(json => console.log(json));
+
         }
 
 
