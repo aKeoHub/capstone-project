@@ -50,7 +50,7 @@ a:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     padding-top: 68px;
     padding-bottom: 48px;
-    background: #AEB6BF;
+    background: linear-gradient(to bottom, #D6DBDF 0%, #5D6D7E 100%);
     opacity: 9;
 }
 
