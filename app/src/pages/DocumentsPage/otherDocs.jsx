@@ -6,6 +6,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Button from '@material-ui/core/Button';
 import axios from "axios";
 import {  saveAs } from 'file-saver';
+import DocModal from './docModal'
 
 const OtherDocs = () => {
     const [documents, setDocuments] = useState([]);
@@ -235,7 +236,7 @@ const OtherDocs = () => {
                  />
                  <button onClick={AddDocument}>Add Document</button>
              </form>
-
+                <DocModal />
              <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#E8F8F5"}}>
                 <h1 className="text-left text-success mb-4">Documents</h1>
                     <div className="table-responsive">
