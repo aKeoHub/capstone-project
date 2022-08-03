@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage";
 import LoginForm from "./pages/LoginPage";
 import Login from "./pages/LoginPage/components/login.component";
 import NavBarLoggedIn from "./components/NavBar/NavBarLoggedIn";
+import RentPage from "./pages/RentSalesPage/index";
 const token = localStorage.getItem("accessToken");
 function App() {
   // window.onunload = () => {
@@ -49,6 +50,7 @@ return(
           <Route path="/forum" exact component={ForumPage} />
           <Route path="/documents" exact component={DocumentsPage} />
           <Route path="/viewForum" exact component={ViewForum} />
+          <Route path="/rent" exact component={RentPage} />
         </Switch>
         <Footer />
       </Router>
@@ -70,6 +72,7 @@ return(
               <Route path="/forum" exact component={ForumPage} />
               <Route path="/documents" exact component={DocumentsPage} />
               <Route path="/viewForum" exact component={ViewForum} />
+              <Route path="/rent" exact component={RentPage} />
             </Switch>
             <Footer />
           </Router>
