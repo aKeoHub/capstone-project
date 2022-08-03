@@ -5,7 +5,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Button from '@material-ui/core/Button';
 import axios from "axios";
-import {  saveAs} from 'file-saver';
+import {  saveAs } from 'file-saver';
 
 const OtherDocs = () => {
     const [documents, setDocuments] = useState([]);
@@ -75,6 +75,7 @@ const OtherDocs = () => {
         };
         return axios.get("/api/v1/downloadFile/" + fileName, config)
             .then(function (response) {
+                response.blob();
                 console.log(response.data);
                 setDownloadUrl(response.data)
                 //console.log(user)
@@ -101,7 +102,7 @@ const OtherDocs = () => {
         }).then(response => response.json())
             .then(data => {
                 console.log(data)
-                //window.location.reload();
+                window.location.reload();
             });
     }
 
@@ -178,8 +179,8 @@ const OtherDocs = () => {
                  </div>
              )}
          }
-        blob = downloadUrl;
-         const downloadFile = saveAs(blob, "");
+         // blob = downloadUrl;
+         // const downloadFile = saveAs(blob, "");
 
          return (
          <>
@@ -261,7 +262,7 @@ const OtherDocs = () => {
                                          <td style={{width: "16%"}}><span id={park_document.document_name}>{park_document.document_name}</span><input id={park_document.document_id} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "16%"}}>{park_document.create_date}</td>
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "12%"}}><a href={"/login"}>Download File</a></td>
+                                         <td style={{width: "12%"}}><a href={"http://localhost:8080/api/v1/downloadFile/CMPS369Lab8MemoryUsage.pdf"} download={downloadUrl}>Download File</a></td>
                                          <td>
                                          <Button onClick={()=>deleteDocument(park_document.document_id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
                                          </td>
@@ -279,9 +280,14 @@ const OtherDocs = () => {
                              </div>
                          )}
 
-                        {}
-                        {downloadLink.map(link => link.name
-                        )}
+
+                        {/*{downloadLink.map(link => link.name*/}
+                        {/*    */}
+                        {/*)}*/}
+                        {/*blob = {downloadLink.map(link =>*/}
+                        {/*    GetDownloadUrl(link.name)*/}
+                        {/*)};*/}
+
                         {/*{downloadLink.map(link =>*/}
                         {/*    <div key={link.id}>*/}
                         {/*        <table class="urlTable">*/}
