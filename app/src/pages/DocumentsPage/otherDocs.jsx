@@ -130,6 +130,17 @@ const OtherDocs = () => {
                 setLoading(false);
             })
 
+        fetch('api/v1/files', {
+            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setDownloadLinks(data);
+                //console.log(downloadLink.find((x => x.name === 'CMPS369Lab8MemoryUsage%20(1).pdf')))
+                setLoading(false);
+            })
+
     }, []);
 
 
@@ -288,7 +299,7 @@ const OtherDocs = () => {
                                          <td style={{width: "16%"}}>{park_document.create_date}</td>
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "12%"}}>{downloadLink.map(link =>
-                                             <a href={link.url}>Hello</a>
+                                             <a href={link.url}>Download</a>
                                          )}</td>
 
                                          {/*<td style={{width: "12%"}}><a href={downloadLink.find(element => element.fileId === 0)} >Link</a></td>*/}
