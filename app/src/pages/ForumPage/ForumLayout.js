@@ -156,10 +156,11 @@ const ForumLayout = () => {
 
 
 //This will edit a selected forum, you need to be logged in to do so.
-    const editForum = async(forumId) => {
-
-        fetch('api/v1/forums/edit/' + forumId, {
-            method: "PUT",
+    const editForum = async(event, forumId) => {
+        const config = {
+            headers: { 'Authorization':`Bearer ${token}`},
+        };
+        const body = {
             body: JSON.stringify({
                 forum_id: forumId,
                 creator_id: user,
@@ -169,18 +170,23 @@ const ForumLayout = () => {
                 picture_id: picture_id,
                 sub_title: subTitle,
                 forum_category: forumCategory,
-            }),
-            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
-        })
-            .then(response => response.json())
-            .then(data => {
-                setLoading(false);
-                console.log(data);
-                console.log(modalEditInfo);
-                handleShowEdit();
-                //window.location.reload();
+
             })
-    }
+        }
+        try {
+            await axios.put('api/v1/forums/edit/' + forumId, body, config,
+            ).then(function(response){
+                    setLoading(false);
+                    console.log(response.data);
+                    console.log(modalEditInfo);
+                    handleShowEdit();
+                    //window.location.reload();
+                })
+        }
+            catch (e){
+        }
+        }
+
 
 
 
