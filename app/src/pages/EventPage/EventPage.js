@@ -5,6 +5,8 @@ import DatePicker from "react-date-picker";
 import './Event.css';
 import EventCalendar from './EventCalendar';
 import Datatable from './Datatable';
+import Cards from "../../components/Card/Cards";
+
 
 
 const EventPage = () => {
@@ -12,6 +14,7 @@ const EventPage = () => {
     return (
         <>
         <EventCalendar />
+            <Cards />
         <Datatable />
         </>
     );
