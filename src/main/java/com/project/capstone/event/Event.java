@@ -29,14 +29,14 @@ public class Event implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer eventId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "event_creator", referencedColumnName = "user_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     @JsonBackReference
     private User eventCreator;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
