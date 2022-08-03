@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import DocForm from './docForm';
+import {AddDocumentButton} from "../../components/Button/AddDocumentButton";
 
 
 function DocModal() {
@@ -14,9 +15,9 @@ function DocModal() {
   return (
     <>
 
-          <Button variant="primary" onClick={handleShow}>
+          <AddDocumentButton variant="primary" onClick={handleShow}>
             Add Document
-          </Button>
+          </AddDocumentButton>
 
 
        <Modal show={show} onHide={handleClose}>

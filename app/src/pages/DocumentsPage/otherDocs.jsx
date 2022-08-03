@@ -7,6 +7,11 @@ import Button from '@material-ui/core/Button';
 import axios from "axios";
 import {  saveAs } from 'file-saver';
 import DocModal from './docModal'
+import * as PropTypes from "prop-types";
+import {AddDocumentButton} from "../../components/Button/AddDocumentButton";
+
+
+
 
 const OtherDocs = () => {
     const [documents, setDocuments] = useState([]);
@@ -182,7 +187,7 @@ const OtherDocs = () => {
 
          return (
          <>
-                <DocModal />
+
              <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#D6DBDF"}}>
                 <h1 className="text-secondary text-success mb-4">Documents</h1>
                     <div className="table-responsive">
@@ -250,7 +255,9 @@ const OtherDocs = () => {
                         {/*        </table>*/}
                         {/*    </div>*/}
                         {/*)}*/}
-                    <Button style={{display:"block", marginLeft:"84%", marginTop:"4%"}}>Add document</Button>
+                        <div>
+                            <DocModal />
+                    </div>
                   </div>
              </div>
              </>

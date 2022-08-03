@@ -86,7 +86,7 @@ export default class Login extends Component {
 
             <div className="wrapper" style={{backgroundImage: 'backgroundImg.jpg'}}>
                 <div className="inner">
-
+                    <h1>Login Here!</h1>
                     <Form
                         onSubmit={this.handleLogin}
                         ref={c => {
