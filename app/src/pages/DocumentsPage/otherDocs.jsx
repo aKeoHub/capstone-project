@@ -195,7 +195,6 @@ const OtherDocs = () => {
                              <tr className="bg-dark text-white">
                                  <th style={{width: "9%"}}>Doc_id</th>
                                  <th style={{width: "9%"}}>Doc_Cat</th>
-
                                  <th style={{width: "16%"}}>Doc_name</th>
                                  <th style={{width: "16%"}}>Date_created</th>
                                  <th style={{width: "18%"}}>Description</th>
@@ -204,9 +203,9 @@ const OtherDocs = () => {
                                  <th style={{width: "8%"}}>Edit</th>
                              </tr>
                          </table>
-                         {documents.map(park_document =>
+                         {documents.map(park_document => downloadLink.map(link =>
 
-                             <div>
+                             <div key={park_document.id && link.id}>
                                 <table className="table">
                                      <tr>
                                          <td style={{width: "9%"}}>{park_document.document_id}</td>
@@ -214,14 +213,12 @@ const OtherDocs = () => {
                                          <td style={{width: "16%"}}><span id={park_document.document_name}>{park_document.document_name}</span><input id={park_document.document_id} type="text" style={{display: "none", width: "67%"}} /></td>
                                          <td style={{width: "16%"}}>{park_document.create_date}</td>
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "12%"}}>{downloadLink.map(link =>
-                                             <a href={link.url}>Download</a>
-                                         )}</td>
-
+                                         <td style={{width: "50%"}}> <a href={link.url}>{link.name}</a> </td>
                                          {/*<td style={{width: "12%"}}><a href={downloadLink.find(element => element.fileId === 0)} >Link</a></td>*/}
                                          <td>
                                          <Button onClick={()=>deleteDocument(park_document.document_id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
                                          </td>
+
                                          <td id={park_document.id+"c"}>
                                          <Button id={park_document.id+"b"} style={{display: "block"}}
                                          onClick={()=>{document.getElementById(park_document.id+"a").style.display="block"; document.getElementById(park_document.id).style.display="block";
@@ -231,15 +228,43 @@ const OtherDocs = () => {
                                          park_document.createDate, document.getElementById(park_document.id+"a").value, park_document.file)); }}
                                          style={{width: "8%"}}><FontAwesomeIcon icon={faEdit} /></Button>
                                          </td>
+
                                      </tr>
                                 </table>
+
                              </div>
-                         )}
+
+                         ))}
 
 
-                        {downloadLink.map(link => link.url
+                        {downloadLink.map(link =>
+                            <div key={link.id}>
+                        <table className="table">
 
+                            <th> File Links
+                                <td style={{width: "50%"}}>
+                                    <a href={link.url}>{link.name}</a>
+                                )}</td>
+                        </th>
+                            <th> Category List
+                                <rtc>
+                                    <td>
+
+                                        <option value="1" label="ID 1: LEGAL">EGAL</option>
+                                        <option value="2" label="ID 2: ENTERTAINMENT">ENTERTAINMENT</option>
+                                        <option value="3" label="ID 3: ACCOUNTING">ACCOUNTING</option>
+                                        <option value="4" label="ID 4: SOCIAL">SOCIAL</option>
+                                        <option value="5" label="ID 5: MEETING">MEETING</option>
+                                        <option value="6" label="ID 6: NOTICE">NOTICE</option>
+                                        <option value="7" label="ID 7: PRIORITY">PRIORITY</option>
+
+                                    </td>
+                                </rtc>
+                        </th>
+                        </table>
+                            </div>
                         )}
+
                         {/*blob = {downloadLink.map(link =>*/}
                         {/*    GetDownloadUrl(link.name)*/}
                         {/*)};*/}
@@ -259,7 +284,9 @@ const OtherDocs = () => {
                             <DocModal />
                     </div>
                   </div>
+
              </div>
+
              </>
          );
      }
