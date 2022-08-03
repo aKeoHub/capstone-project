@@ -8,12 +8,6 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
 
-body {
-    font-family: 'Arial', serif;
-    color: #333;
-    font-size: 13px;
-    margin: 0;
-    background-color: #1F222DFF;}
 
 input, textarea, select, button {
     font-family: 'Arial', serif;
@@ -45,12 +39,12 @@ a:hover {
     align-items: center; }
 
 .inner {
-    min-width: 850px;
+    min-width: 1500px;
     margin: auto;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     padding-top: 68px;
     padding-bottom: 48px;
-    background: url("backgroundImg.jpg");
+    background: #D6DBDF;
     opacity: 9;
 }
 
@@ -141,7 +135,7 @@ select option[value=""][disabled] {
   margin: 10px 0px 50px 0px
 }
 th, td {
-  background-color: #96D4D4;
+  background-color: #D6DBDF;
 }
 
 

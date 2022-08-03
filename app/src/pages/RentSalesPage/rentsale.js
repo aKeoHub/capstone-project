@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-//import 'bootstrap/dist/css/bootstrap.css';
 import "./rentsale.css";
 import '../../components/Card/Cards.css';
 import Button from 'react-bootstrap/Button';
@@ -12,7 +11,7 @@ import image2 from '../../images/img_7.jpeg';
 
 const RentSale = () => {
 	return (
-		<div className="wrapper" style={{ backgroundImage: "backgroundImg.jpg" }}>
+		<div className="wrapper">
 			<div className="inner">
 				<h3>Rent and Sales Page</h3>
 				<h1>Available Sites</h1>

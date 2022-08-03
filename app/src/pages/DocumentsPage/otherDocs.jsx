@@ -301,11 +301,11 @@ const OtherDocs = () => {
                  <button onClick={AddDocument}>Add Document</button>
              </form>
                 <DocModal />
-             <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#E8F8F5"}}>
-                <h1 className="text-left text-success mb-4">Documents</h1>
+             <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#D6DBDF"}}>
+                <h1 className="text-secondary text-success mb-4">Documents</h1>
                     <div className="table-responsive">
                          <table className="table">
-                             <tr className="bg-primary text-white">
+                             <tr className="bg-dark text-white">
                                  <th style={{width: "9%"}}>Doc_id</th>
                                  <th style={{width: "9%"}}>Doc_Cat</th>
 
