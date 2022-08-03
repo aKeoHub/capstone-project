@@ -4,9 +4,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import {EditButtonUser} from "../../components/Button/EditButtonUser";
 import {CancelButtonUser} from "../../components/Button/CancelButtonUser";
+import './Profile.css';
 
 const ProfilePage = () => {
-    const [users, setUsers] = useState('');
+    const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const [modalEditInfo, setModalEditInfo] = useState([]);
@@ -38,8 +39,9 @@ const ProfilePage = () => {
         axios.post("/api/v1/user", bodyParameters, config)
             .then(function (response) {
                 console.log(response.data);
+                setUser(response.data);
                 setModalEditInfo(response.data);
-                setUsers(response.data)
+                console.log(user);
             })
     }, []);
 
@@ -62,13 +64,13 @@ const editUser = async(userId) => {
             }),
             headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
         })
-            .then(response => response.json())
+            //.then(response => response.json())
             .then(data => {
                 setLoading(false);
-                //console.log(data);
+                console.log(data);
                 console.log(modalEditInfo);
                 handleShowEdit();
-                window.location.reload();
+                //window.location.reload();
             })
     }
 
@@ -125,43 +127,47 @@ const editUser = async(userId) => {
     <CancelButtonUser variant="primary" onClick={handleCloseEdit}>Cancel</CancelButtonUser>
     </Modal.Footer>
 </Modal>
+            <section className="bg-light">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12 mb-4 mb-sm-5">
+                            <div className="card card-style1 border-0">
+                                <div className="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                                    <div className="row align-items-center">
+                                        <div className="col-lg-6 mb-4 mb-lg-0">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="..." />
+                                        </div>
+                                        <div className="col-lg-6 px-xl-10">
+                                            <div
+                                                className="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                                <h3 className="h2 text-white mb-0">{user.username}</h3>
+                                            </div>
+                                            <ul className="list-unstyled mb-1-9">
+                                                <li className="mb-2 mb-xl-3 display-28"><span
+                                                    className="display-26 text-secondary me-2 font-weight-600">First Name:</span> {user.firstname}
+                                                </li>
+                                                <li className="mb-2 mb-xl-3 display-28"><span
+                                                    className="display-26 text-secondary me-2 font-weight-600">Last Name:</span> {user.lastname}
+                                                </li>
+                                                <li className="mb-2 mb-xl-3 display-28"><span
+                                                    className="display-26 text-secondary me-2 font-weight-600">Email:</span> {user.email}
+                                                </li>
+                                            </ul>
+                                        </div>
 
-            <div className="container">
-                <header className="jumbotron">
-                    <h1>Profile</h1>
-                    <EditButtonUser variant="secondary" onClick={handleShowEdit}>Edit profile</EditButtonUser>
-                    <h3>
-                        <strong>Username:</strong>{" "}
-                        {users.username}
-                    </h3>
-                </header>
-                {/*<p>*/}
-                {/*    <strong>Token:</strong>{" "}*/}
+                                    </div>
+                                    <EditButtonUser variant="secondary" onClick={handleShowEdit}>Edit profile</EditButtonUser>
+                                </div>
+                            </div>
+                        </div>
 
-                {/*    /!*{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}*!/*/}
-                {/*</p>*/}
-                <p>
-                    <strong>ID:</strong>{" "}
-                    {users.user_id}
-                </p>
-                <p>
-                    <strong>First name:</strong>{" "}
-                    {users.firstname}
-                </p>
-                <p>
-                    <strong>Last name:</strong>{" "}
-                    {users.lastname}
-                </p>
-                <p>
-                    <strong>Email:</strong>{" "}
-                    {users.email}
-                </p>
-                <strong>Authorities:</strong>
-                <ul>
-                    {users.roles &&
-                        users.roles.map((role, index) => <li key={index}>{role}</li>)}
-                </ul>
-            </div>
+
+
+                    </div>
+                </div>
+            </section>
+
+
         </div>
 
     );
