@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react";
 import './Datatable.css';
 import EventModal from './EventModal'
+import EventEditModal from './EventEditModal'
 import UserService from "../../services/user.service";
 import axios from "axios";
 import {DeleteButtonEvent} from "../../components/Button/DeleteButtonEvent";
@@ -84,6 +85,7 @@ function deleteEvent(id) {
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </table>
             {events.map(event =>
@@ -97,7 +99,8 @@ function deleteEvent(id) {
                             <td>{event.description}</td>
                             <td>{event.start_date}</td>
                             <td>{event.end_date}</td>
-                            <td> <DeleteButtonEvent onClick={()=>deleteEvent(event.event_id)}> Delete </DeleteButtonEvent></td>
+                            <td> <EventEditModal /> </td>
+                            <td> <button onClick={()=>deleteEvent(event.event_id)}> Delete </button></td>
                         </tr>
                     </table>
                 </div>
