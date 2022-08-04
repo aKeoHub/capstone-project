@@ -56,7 +56,7 @@ export default class Login extends Component {
                 (response) => {
                     //console.log(response.data,"===========================================");
                     this.props.history.push("/profile");
-                    window.location.reload();
+                   // window.location.reload();
                 },
                 error => {
                     //this.props.history.push("/login");
@@ -73,7 +73,7 @@ export default class Login extends Component {
                 }
             );
         } else {
-            //window.location.replace("https://yourdomain.com/success");
+            window.location.replace("/login");
             this.setState({
                 loading: false
             });
@@ -130,8 +130,8 @@ export default class Login extends Component {
 
                         <div className="form-group">
                             <button
-                                onClick={AuthService.login}
-                                buttonStyle="--btn--primary"
+                                type="submit"
+                                //buttonStyle="--btn--primary"
                                 //disabled={this.state.loading}
                                 //disabled={disable} onClick={() => setDisable(true)}
                             >

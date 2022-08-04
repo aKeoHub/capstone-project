@@ -1,5 +1,6 @@
 import axios from "axios";
 import {Redirect} from "react-router-dom";
+import TokenService from "./token.service";
 
 const API_URL = "http://localhost:8080/api/v1";
 
@@ -24,10 +25,14 @@ class AuthService {
                 //console.log(json.access_token)
                 if (json.accessToken) {
                     localStorage.setItem("accessToken", json.accessToken);
+                    localStorage.setItem("refreshToken", json.refreshToken);
                     localStorage.setItem("username", json.username);
-                    console.log(localStorage.getItem('accessToken'))
+                    //console.log('logged in' + localStorage.getItem('accessToken'))
                 }
-            });
+                return json.data
+            })
+
+
     }
     handleErrors(response) {
         if (!response.ok) {
