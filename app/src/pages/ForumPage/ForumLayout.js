@@ -179,10 +179,14 @@ const ForumLayout = () => {
         })
 
             // Converting to JSON
-            .then(response => response.json())
+             .then(data => {
+                 setLoading(false);
+                 console.log(data);
+                 window.location.reload();
+             })
 
             // Displaying results to console
-            .then(json => console.log(json));
+
 
         }
 
