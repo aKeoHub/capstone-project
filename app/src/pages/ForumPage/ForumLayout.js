@@ -23,7 +23,7 @@ const ForumLayout = () => {
 
     const token = localStorage.getItem("accessToken");
     const username = (localStorage.getItem('username'));
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState([]);
 
     const [showAdd, setShowAdd] = useState(false);
     const handleCloseAdd = () => setShowAdd(false);
@@ -155,7 +155,7 @@ const ForumLayout = () => {
 
 //This will edit a selected forum, you need to be logged in to do so.
     const editForum = async(forumId) => {
-        
+
          await fetch('api/v1/forums/edit/' + forumId, {
 
             // Adding method type

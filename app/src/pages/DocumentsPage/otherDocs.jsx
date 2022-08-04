@@ -153,15 +153,15 @@ const OtherDocs = () => {
     }
 
      function deleteDocument(id) {
+
          fetch('api/v1/documents/delete/' + id,{
              method:'DELETE',
-             headers: {
-                 "Content-type": "application/json; charset=UTF-8"
-            }}).then(response => response.json())
+             headers: {'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+            }).then(response => response.json())
             .then(data => {
                 setLoading(false);
                 console.log(data);
-                window.location.reload();
+                //window.location.reload();
             })
      }
 

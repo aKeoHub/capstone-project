@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import DocForm from './docForm';
 import {AddDocumentButton} from "../../components/Button/AddDocumentButton";
+import {Grid} from "@material-ui/core";
 
 
 function DocModal() {
