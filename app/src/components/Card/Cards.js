@@ -16,13 +16,13 @@ function Cards() {
                     <ul className='cards__items'>
                         <CardItem
                             src={image1}
-                            text='New Event'
+                            text='EuroFest'
                             label='Event'
                             path='/events'
                         />
                         <CardItem
                             src={image2}
-                            text='New Event'
+                            text='Fastball Open'
                             label='Event'
                             path='/events'
                         />
@@ -30,13 +30,13 @@ function Cards() {
                     <ul className='cards__items'>
                         <CardItem
                             src={image3}
-                            text='New Event'
+                            text='Color Parade'
                             label='Event'
                             path='/events'
                         />
                         <CardItem
                             src={image4}
-                            text='New Event'
+                            text='Car Meet'
                             label='Event'
                             path='/events'
                         />

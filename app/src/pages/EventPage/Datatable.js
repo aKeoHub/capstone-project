@@ -62,12 +62,12 @@ function deleteEvent(id) {
 }
 
     return (
-    <div>
+    <div class="dataTableContainer">
         <div class="dataHeader">
             <div class="row">
                 <div class="col">
                     <h2>Event List</h2>
-                    <h3>{user.user_id}</h3>
+
                 </div>
                 <div class="col">
                    <EventModal />

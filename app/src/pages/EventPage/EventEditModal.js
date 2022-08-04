@@ -13,7 +13,7 @@ function EventEditModal() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button onClick={handleShow}>
         Edit
       </Button>
 

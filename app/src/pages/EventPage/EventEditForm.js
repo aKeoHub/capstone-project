@@ -1,22 +1,25 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 import axios from "axios";
+import {AddButtonEvent} from "../../components/Button/AddButtonEvent";
 
 
-const EventEditForm = async(forumId) => {
-
-const [eventId, setEventId] = useState(0);
-  const [categoryId, setCategoryId] = useState(0);
-  const [eventName, setEventName] = useState("");
-  // const [eventCreator, setEventCreator] = useState('');
-  const [location, setLocation] = useState("");
-  const [startDate, setStartDate] = useState({varOne:new Date()});
-  const [endDate, setEndDate] = useState({varOne:new Date()});
-  const [textarea, setTextarea] = useState("");
-  const [file, setFile] = useState([]);
+const EventEditForm = () => {
+    const [inputs, setInputs] = useState({});
+    const [eventId, setEventId] = useState(0);
+    const [categoryId, setCategoryId] = useState(0);
+    const [eventName, setEventName] = useState("");
+    // const [eventCreator, setEventCreator] = useState('');
+    const [location, setLocation] = useState("");
+    const [startDate, setStartDate] = useState({varOne:new Date()});
+    const [endDate, setEndDate] = useState({varOne:new Date()});
+    const [textarea, setTextarea] = useState("");
+    const [file, setFile] = useState([]);
     const token = localStorage.getItem("accessToken");
     const username = (localStorage.getItem('username'));
     const [user, setUser] = useState('');
+    const [Events, setEvents] = useState({});
+    const [loading, setLoading] = useState('');
 //  const handleChange = (event) => {
 //    const name = event.target.name;
 //    const value = event.target.value;
@@ -24,59 +27,92 @@ const [eventId, setEventId] = useState(0);
 //    setEventName(event.target.eventName.value);
 //  }
 
-  const textAreaChange = (event) => {
+    useEffect(() => {
+        setLoading(true);
+
+        fetch('api/v1/events/all',{
+            headers: { 'Content-Type': 'application/json',}
+        })
+            .then(response => response.json())
+            .then(events => {
+                setEvents(events);
+                setLoading(false);
+                console.log(events);
+
+            })
+            const bodyParameters = {
+                username: username,
+            };
+            const config = {
+                headers: {Authorization: `Bearer ${token}`},
+            };
+            axios.post("/api/v1/user", bodyParameters, config)
+                .then(function (response) {
+                    console.log(response.data);
+                    setUser(response.data)
+                    //console.log(user)
+
+                })},
+    []);
+
+        if (loading) {
+            return <p>Loading...</p>;
+        }
+
+    const textAreaChange = (event) => {
     setTextarea(event.target.value)
-  }
+    }
 
-  const eventNameChange = (event) => {
+    const eventNameChange = (event) => {
        setEventName(event.target.value)
-  }
+    }
 
-  const handleSubmit = (event) => {
+    const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event.target.eventName.value);
+    console.log(inputs);
 
-
-  }
+    }
     const onUploadFile = e => {
         console.log('file: ', file);
         setFile(e.target.files[0]);
     };
 
-        fetch('api/v1/forums/edit/' + forumId, {
-            method: "PUT",
-            body: JSON.stringify({
-               event_id: eventId,
-               category_id: categoryId,
-               event_creator: user,
-               event_name: eventName,
-               location: location,
-               description: textarea,
-               start_date: startDate,
-               end_date: endDate,
-               file: null,
-            }),
-            headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
-        })
-            .then(response => response.json())
-            .then(data => {
+        const editEvents = async(eventId) => {
 
-                console.log(data);
+                fetch('api/v1/events/edit/' + eventId, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        event_id: eventId,
+                        category_id: categoryId,
+                        event_creator: user,
+                        event_name: eventName,
+                        location: location,
+                        description: textarea,
+                        start_date: startDate,
+                        end_date: endDate,
+                        file: null,
+                    }),
+                headers: {
+                            "Content-type": "application/json; charset=UTF-8", 'Authorization':`Bearer ${token}`
+                        }})
+                        .then(events => {
+                                      setLoading(false);
+                                      console.log(events);
 
+                                  })
+                                  }
 
-                window.location.reload();
-            })
-
-
-    return (
- <form onSubmit={handleSubmit}>
+  return (
+    <form onSubmit={handleSubmit}>
       <label>Enter Event Name:
       <input
         type="text"
         name="eventName"
+        value={eventName}
         pattern="[a-zA-Z0-9,#.-]+"
         max="20"
-        placeholder="Name of Event!"
+        placeholder= {eventName}
         onChange={(e) => {
           setEventName(e.target.value);
           }}
@@ -128,7 +164,9 @@ const [eventId, setEventId] = useState(0);
             //style={{ display: 'none' }}
             onChange={onUploadFile}
         />
-        <button onClick={EventEditForm}>Add Event</button>
+
+        <AddButtonEvent onClick={editEvents(eventId)}>Save</AddButtonEvent>
+
     </form>
   )
 };
