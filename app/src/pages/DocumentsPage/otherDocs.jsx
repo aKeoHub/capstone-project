@@ -80,7 +80,7 @@ const OtherDocs = () => {
             .then(data => {
                 setLoading(false);
                 console.log(data);
-                //window.location.reload();
+                window.location.reload();
             })
     }
 
