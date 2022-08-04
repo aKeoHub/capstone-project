@@ -42,7 +42,9 @@ a:hover {
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
-    align-items: center; }
+    align-items: center;
+     width: 100%;
+     }
 
 .--inner {
     min-width: 1250px;
@@ -140,7 +142,8 @@ select option[value=""][disabled] {
 .site_table, th, td {
   border: 1px solid white;
   border-collapse: collapse;
-  margin: 10px 0px 50px 0px
+  margin: auto;
+
 }
 th, td {
   background-color: #9f9f9f;

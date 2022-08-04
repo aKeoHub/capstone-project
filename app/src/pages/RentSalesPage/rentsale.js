@@ -15,7 +15,7 @@ const RentSale = () => {
 			<div className="--inner">
 				<h3>Rent and Sales Page</h3>
 				<h1>Available Sites</h1>
-				<table className="site_table" style={{width: "100%"}}>
+				<table className="site_table" style={{width: "90%"}}>
 					<thead>
 						<tr>
 							<th>Lot Num</th>
@@ -35,6 +35,30 @@ const RentSale = () => {
 							<td>Beautiful site</td>
 							<td>Yearly rental</td>
 						</tr>
+						<tr>
+                            <td>20</td>
+                            <td>South Crevasse</td>
+                            <td>$1,000</td>
+                            <td>Social</td>
+                            <td>Adventurous Route</td>
+                            <td>Monthly rental</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Eastern Forest</td>
+                            <td>$10,000</td>
+                            <td>Entertainment</td>
+                            <td>Great Space</td>
+                            <td>Yearly rental</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>West Park</td>
+                            <td>$100</td>
+                            <td>Entertainment</td>
+                            <td>For Various Activities</td>
+                            <td>Daily rental</td>
+                        </tr>
 					</tbody>
 				</table>
 				<h1>Site Previews</h1>
