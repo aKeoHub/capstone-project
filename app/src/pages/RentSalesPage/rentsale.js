@@ -17,6 +17,7 @@ const RentSale = () => {
 			<div className="--inner">
 				<h3>Rent and Sales Page</h3>
 				<h1>Available Sites</h1>
+
 				<table className="site_table" style={{width: "90%"}}>
 					<thead>
 						<tr>
@@ -63,6 +64,8 @@ const RentSale = () => {
                         </tr>
 					</tbody>
 				</table>
+				<br></br>
+				<br></br>
 				<h1>Site Previews</h1>
 				<div className='cards__container'>
 					<div className='cards__wrapper'>
