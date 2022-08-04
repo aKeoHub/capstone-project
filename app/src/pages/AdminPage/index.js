@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Content, Wrapper} from "./Admin.styles";
 import './Admin.styles.css'
+import Button from "@material-ui/core/Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
+
 
 const AdminPage = () => {
     const [users, setUsers] = useState([]);
@@ -13,14 +16,15 @@ const AdminPage = () => {
 
         axios.get('api/v1/users', {headers: {Authorization: `Bearer ${token}`}})
             .then(function (response) {
+                setLoading(false);
                 console.log(response.data);
                 setUsers(response.data);
             })
     }, []);
 
 
-
     function deleteUser(id) {
+        setLoading(true)
         if (!username) {
             console.log("not allowed")
         } else {
@@ -38,35 +42,54 @@ const AdminPage = () => {
         }
 
     }
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
     return (
-        <div className='userList'>
-            <h2>User List</h2>
-            {users.map(user =>
-                <div key={user.id}>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th></th>
-
+        <>
+            <div className="mx-auto mb-7 px-7 py-7" style={{width: "1070px", background: "#bcc1c4"}}>
+                <h1 className="text-secondary text-success mb-4">Users</h1>
+                <div className="table-responsive">
+                    <table className="table">
+                        <tr className="bg-dark text-black">
+                            <th style={{width: "2%"}}>&nbsp;ID</th>
+                            <th style={{width: "9%"}}>&nbsp;Username</th>
+                            <th style={{width: "16%"}}>&nbsp;First Name</th>
+                            <th style={{width: "16%"}}>&nbsp;Last Name</th>
+                            <th style={{width: "16%"}}>&nbsp;Email</th>
+                            <th style={{width: "8%"}}>&nbsp;Delete</th>
+                            {/*<th style={{width: "8%"}}>&nbsp;Edit</th>*/}
                         </tr>
-                        <tr>
-                            <td>{user.id}</td>
-                            <td>{user.username}</td>
-                            <td>{user.firstname} {user.lastname}</td>
-                            <td>{user.email}</td>
-                            <td>
-                                <button onClick={() => deleteUser(user.user_id)}> Delete</button>
-                            </td>
-                        </tr>
-
                     </table>
+                    {users.map(user =>
+
+                        <div key={user.id}>
+                            <table className="table">
+                                <tr>
+                                    <td style={{width: "2%"}}>&nbsp;{user.user_id}</td>
+                                    <td style={{width: "9%"}}>&nbsp;{user.username}</td>
+                                    <td style={{width: "16%"}}>&nbsp;{user.firstname}</td>
+                                    <td style={{width: "16%"}}>&nbsp;{user.lastname}</td>
+                                    <td style={{width: "16%"}}>&nbsp;{user.email}</td>
+
+
+                                    <td>
+                                        <Button onClick={() => deleteUser(user.user_id)}
+                                                style={{width: "8%"}}><FontAwesomeIcon icon={faTrash}/></Button>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+                    )}
+
+
                 </div>
-            )}
-        </div>
+
+            </div>
+        </>
 
     );
 }

@@ -42,14 +42,14 @@ public class CapstoneApplication {
 	CommandLineRunner run(UserService userService, ParkService parkService, CategoryService categoryService, EventService eventService) {
 		return args -> {
 
-			userService.saveUser(new User( 0, "john", "1234", "john", "hockey", "johnnyhockey@live.ca1", 1, LocalDate.now()));
-			userService.saveUser(new User(0 , "kingston", "1234", "kingston", "the greatest", "kingston@live.ca", 1, LocalDate.now()));
-			userService.saveUser(new User(0, "1punchman", "1234", "saitama", "the all mighty", "onepunchman@live.ca", 1, LocalDate.now()));
+			userService.saveUser(new User( 0, "user", "1234", "user", "regular", "user@live.ca", 1, LocalDate.now()));
+			userService.saveUser(new User(0 , "admin", "1234", "admin", "admin", "admin@live.ca", 1, LocalDate.now()));
+			userService.saveUser(new User(0, "manager", "1234", "manager", "manager", "manager@live.ca", 1, LocalDate.now()));
 
 
-			userService.addRoleToUser("john", "ROLE_USER");
-			userService.addRoleToUser("kingston", "ROLE_ADMIN");
-			userService.addRoleToUser("1punchman", "ROLE_MANAGER");
+			userService.addRoleToUser("user", "ROLE_USER");
+			userService.addRoleToUser("admin", "ROLE_ADMIN");
+			userService.addRoleToUser("manager", "ROLE_MANAGER");
 
 
 
