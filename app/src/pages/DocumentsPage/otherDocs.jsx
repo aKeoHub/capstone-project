@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Button from '@material-ui/core/Button';
 import axios from "axios";
 import DocModal from './docModal'
@@ -16,7 +16,7 @@ const OtherDocs = () => {
     const username = (localStorage.getItem('username'));
     const [user, setUser] = useState('');
 
-// const GetDownloadUrl = (fileName) => {
+    // const GetDownloadUrl = (fileName) => {
     //     const config = {
     //         headers: {Authorization: `Bearer ${token}`},
     //     };
@@ -34,7 +34,7 @@ const OtherDocs = () => {
             username: username,
         };
         const config = {
-            headers: {Authorization: `Bearer ${token}`},
+            headers: { Authorization: `Bearer ${token}` },
         };
         axios.post("/api/v1/user", bodyParameters, config)
             .then(function (response) {
@@ -45,7 +45,7 @@ const OtherDocs = () => {
             })
 
         fetch('api/v1/documents/all', {
-            headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         })
             .then(response => response.json())
             .then(data => {
@@ -54,7 +54,7 @@ const OtherDocs = () => {
             })
 
         fetch('api/v1/files', {
-            headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         })
             .then(response => response.json())
             .then(data => {
@@ -72,16 +72,15 @@ const OtherDocs = () => {
     }
 
     function deleteDocument(id) {
+
         fetch('api/v1/documents/delete/' + id, {
             method: 'DELETE',
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         }).then(response => response.json())
             .then(data => {
                 setLoading(false);
                 console.log(data);
-                window.location.reload();
+                //window.location.reload();
             })
     }
 
@@ -93,18 +92,18 @@ const OtherDocs = () => {
     return (
         <>
 
-            <div className="mx-auto mb-7 px-7 py-7" style={{width: "1070px", background: "#bcc1c4"}}>
+            <div className="mx-auto mb-7 px-7 py-7" style={{ width: "1070px", background: "#bcc1c4" }}>
                 <h1 className="text-secondary text-success mb-4">Documents</h1>
                 <div className="table-responsive">
                     <table className="table">
                         <tr className="bg-dark text-black">
-                            <th style={{width: "9%"}}>&nbsp;Doc_id</th>
-                            <th style={{width: "9%"}}>&nbsp;Doc_Cat</th>
-                            <th style={{width: "16%"}}>&nbsp;Doc_name</th>
-                            <th style={{width: "16%"}}>&nbsp;Date_created</th>
-                            <th style={{width: "18%"}}>&nbsp;Description</th>
-                            <th style={{width: "8%"}}>&nbsp;Delete</th>
-                            <th style={{width: "8%"}}>&nbsp;Edit</th>
+                            <th style={{ width: "9%" }}>&nbsp;Doc_id</th>
+                            <th style={{ width: "9%" }}>&nbsp;Doc_Cat</th>
+                            <th style={{ width: "16%" }}>&nbsp;Doc_name</th>
+                            <th style={{ width: "16%" }}>&nbsp;Date_created</th>
+                            <th style={{ width: "18%" }}>&nbsp;Description</th>
+                            <th style={{ width: "8%" }}>&nbsp;Delete</th>
+                            <th style={{ width: "8%" }}>&nbsp;Edit</th>
                         </tr>
                     </table>
                     {documents.map(park_document =>
@@ -112,39 +111,39 @@ const OtherDocs = () => {
                         <div key={park_document.id}>
                             <table className="table">
                                 <tr>
-                                    <td style={{width: "9%"}}>&nbsp;{park_document.document_id}</td>
-                                    <td style={{width: "9%"}}>&nbsp;{park_document.document_category}</td>
-                                    <td style={{width: "16%"}}><span
+                                    <td style={{ width: "9%" }}>&nbsp;{park_document.document_id}</td>
+                                    <td style={{ width: "9%" }}>&nbsp;{park_document.document_category}</td>
+                                    <td style={{ width: "16%" }}><span
                                         id={park_document.document_name}>{park_document.document_name}</span><input
-                                        id={park_document.document_id} type="text"
-                                        style={{display: "none", width: "67%"}}/></td>
-                                    <td style={{width: "16%"}}>&nbsp;{park_document.create_date}</td>
-                                    <td style={{width: "18%"}}><span
+                                            id={park_document.document_id} type="text"
+                                            style={{ display: "none", width: "67%" }} /></td>
+                                    <td style={{ width: "16%" }}>&nbsp;{park_document.create_date}</td>
+                                    <td style={{ width: "18%" }}><span
                                         id={park_document.description}>{park_document.description}</span><input
-                                        id={park_document.document_id + "a"} type="text"
-                                        style={{display: "none", width: "67%"}}/></td>
+                                            id={park_document.document_id + "a"} type="text"
+                                            style={{ display: "none", width: "67%" }} /></td>
 
                                     {/*<td style={{width: "12%"}}><a href={downloadLink.find(element => element.fileId === 0)} >Link</a></td>*/}
                                     <td>
                                         <Button onClick={() => deleteDocument(park_document.document_id)}
-                                                style={{width: "8%"}}><FontAwesomeIcon icon={faTrash}/></Button>
+                                            style={{ width: "8%" }}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </td>
 
                                     <td id={park_document.id + "c"}>
-                                        <Button id={park_document.id + "b"} style={{display: "block"}}
-                                                onClick={() => {
-                                                    document.getElementById(park_document.id + "a").style.display = "block";
-                                                    document.getElementById(park_document.id).style.display = "block";
-                                                    document.getElementById(park_document.documentName).style.display = "none";
-                                                    document.getElementById(park_document.description).style.display = "none";
-                                                    document.getElementById(park_document.id + "b").style.display = "none";
-                                                    let btn = document.createElement("button");
-                                                    btn.innerText = "SAVE";
-                                                    document.getElementById(park_document.id + "c").appendChild(btn);
-                                                    btn.setAttribute("onclick", updateDocument(park_document.id, park_document.creatorId, document.getElementById(park_document.id).value,
-                                                        park_document.createDate, document.getElementById(park_document.id + "a").value, park_document.file));
-                                                }}
-                                                style={{width: "8%"}}><FontAwesomeIcon icon={faEdit}/></Button>
+                                        <Button id={park_document.id + "b"} style={{ display: "block" }}
+                                            onClick={() => {
+                                                document.getElementById(park_document.id + "a").style.display = "block";
+                                                document.getElementById(park_document.id).style.display = "block";
+                                                document.getElementById(park_document.documentName).style.display = "none";
+                                                document.getElementById(park_document.description).style.display = "none";
+                                                document.getElementById(park_document.id + "b").style.display = "none";
+                                                let btn = document.createElement("button");
+                                                btn.innerText = "SAVE";
+                                                document.getElementById(park_document.id + "c").appendChild(btn);
+                                                btn.setAttribute("onclick", updateDocument(park_document.id, park_document.creatorId, document.getElementById(park_document.id).value,
+                                                    park_document.createDate, document.getElementById(park_document.id + "a").value, park_document.file));
+                                            }}
+                                            style={{ width: "8%" }}><FontAwesomeIcon icon={faEdit} /></Button>
                                     </td>
 
                                 </tr>
@@ -187,27 +186,27 @@ const OtherDocs = () => {
                             </div>
                         )}
                     </div>
-                    {/*blob = {downloadLink.map(link =>*/}
-                    {/*    GetDownloadUrl(link.name)*/}
-                    {/*)};*/}
+    {/*blob = {downloadLink.map(link =>*/ }
+    {/*    GetDownloadUrl(link.name)*/ }
+    {/*)};*/ }
 
-                    {/*{downloadLink.map(link =>*/}
-                    {/*    <div key={link.id}>*/}
-                    {/*        <table class="urlTable">*/}
-                    {/*            <tr>*/}
-                    {/*                <td>{link.fileId}</td>*/}
-                    {/*                <td>{link.name}</td>*/}
-                    {/*                <td>{link.url}</td>*/}
-                    {/*            </tr>*/}
-                    {/*        </table>*/}
-                    {/*    </div>*/}
-                    {/*)}*/}
-                    <div>
+    {/*{downloadLink.map(link =>*/ }
+    {/*    <div key={link.id}>*/ }
+    {/*        <table class="urlTable">*/ }
+    {/*            <tr>*/ }
+    {/*                <td>{link.fileId}</td>*/ }
+    {/*                <td>{link.name}</td>*/ }
+    {/*                <td>{link.url}</td>*/ }
+    {/*            </tr>*/ }
+    {/*        </table>*/ }
+    {/*    </div>*/ }
+    {/*)}*/ }
+    <div>
 
-                    </div>
-                </div>
+    </div>
+                </div >
 
-            </div>
+            </div >
 
         </>
     );
