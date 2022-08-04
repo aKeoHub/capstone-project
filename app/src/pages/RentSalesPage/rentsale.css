@@ -148,6 +148,12 @@ select option[value=""][disabled] {
 th, td {
   background-color: #9f9f9f;
 }
+.inquire {
+  font-size: 20pt;
+  font-weight: bolder;
+  text-align: center;
+  color: white;
+}
 
 
 @media (max-width: 991px) {
