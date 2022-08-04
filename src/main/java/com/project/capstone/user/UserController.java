@@ -44,7 +44,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUser(user.getUsername()));
     }
     @DeleteMapping(value = "user/delete/{id}", consumes = {"application/json"})
-    public ResponseEntity<?>deleteUserById(@PathVariable("id") Integer id){
+    public ResponseEntity<User>deleteUserById(@PathVariable("id") Integer id){
         userService.deleteUserById(id);
         return ResponseEntity.ok().build();
     }

@@ -33,7 +33,7 @@ public class Forum implements Serializable{
     @JoinColumn(name = "creator_id")
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
-    @JsonBackReference
+    @JsonBackReference("forums")
     private User creator;
 
     @Column(name = "title", nullable = false, length = 30)

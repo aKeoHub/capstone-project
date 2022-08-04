@@ -1,6 +1,8 @@
 package com.project.capstone.user;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.capstone.EntityIdResolver;
 import com.project.capstone.event.Event;
 import com.project.capstone.forum.Forum;
@@ -19,7 +21,9 @@ import java.util.*;
 @Table(name = "user")
 @RequiredArgsConstructor
 @ToString
-
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "user_id", resolver = EntityIdResolver.class, scope = User.class)
+@JsonSerialize(as = User.class)
+@JsonDeserialize(as = User.class)
 public class User implements Serializable {
 
 
@@ -50,13 +54,14 @@ public class User implements Serializable {
     @Column(name = "create_date")
     private LocalDate createDate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //mappedBy - indicate the given column is owned by another entity
-    @JoinColumn(name = "event_id")
+    @OneToMany(mappedBy = "eventCreator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
+    @JsonIgnore//mappedBy - indicate the given column is owned by another entity
+    @JsonManagedReference("events")
     private Collection<Event> events = new LinkedHashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_id")
+    @OneToMany(mappedBy = "owner" , fetch = FetchType.LAZY)
+    @JsonManagedReference("items")
     @ToString.Exclude
     private Collection<Item> items = new LinkedHashSet<>();
 
@@ -65,17 +70,17 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles = new HashSet<>();
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     @JsonIgnore
-    @JsonBackReference
+    @JsonManagedReference("forums")
     private Set<Forum> forums = new LinkedHashSet<>();
 
 
-    @OneToMany(mappedBy = "creatorId", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "creatorId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     @JsonIgnore
-    @JsonBackReference
+    @JsonManagedReference("docs")
     private Collection<ParkDocument> documents = new LinkedHashSet<>();
 
     public User(@JsonProperty("user_id") Integer userId,
@@ -120,7 +125,8 @@ public class User implements Serializable {
     public void setItems(Collection<Item> items) {
         this.items = items;
     }
-    @JsonIgnore
+
+
     public Collection<Event> getEvents() {
         return events;
     }

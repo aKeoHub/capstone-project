@@ -42,7 +42,7 @@ public class ParkDocument implements Serializable {
     @JoinColumn(name = "creator_id", referencedColumnName = "user_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
-    @JsonBackReference
+    @JsonBackReference("docs")
     private User creatorId;
 
     @Column(name = "document_name", nullable = false, length = 30)

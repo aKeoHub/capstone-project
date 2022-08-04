@@ -29,6 +29,7 @@ public class Item implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "owner_id", referencedColumnName = "user_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
+    @JsonBackReference("items")
     @ToString.Exclude
     private User owner;
 
