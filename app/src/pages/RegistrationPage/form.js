@@ -53,7 +53,7 @@ const RegistrationForm = () => {
             // Displaying results to console
             .then((json) => {
                 console.log(json)
-                //this.props.history.push("/profile");
+                window.location.replace("/")
             });
 
         if (loading) {
