@@ -8,6 +8,8 @@ import Table from 'react-bootstrap/Table';
 import CardItem from '../../components/Card/CardItem';
 import image1 from '../../images/img_6.jpg';
 import image2 from '../../images/img_7.jpeg';
+import image3 from '../../images/img_10.jpg';
+import image4 from '../../images/img_11.jpg';
 
 const RentSale = () => {
 	return (
@@ -66,12 +68,12 @@ const RentSale = () => {
 					<div className='cards__wrapper'>
 						<ul className='cards__items'>
 							<CardItem src={image1} text='$20,000/year' label='Housing' />
-							<CardItem src={image1} text='$30,000/year' label='Entertainment' />
+							<CardItem src={image3} text='$30,000/year' label='Entertainment' />
 
 						</ul>
 						<ul className='cards__items'>
 							<CardItem src={image2} text='$1000/day' label='Day use' />
-							<CardItem src={image2} text='$10,000/year' label='Storage' />
+							<CardItem src={image4} text='$10,000/year' label='Storage' />
 						</ul>
 					</div>
 				</div>
