@@ -72,13 +72,13 @@ const EventTable = () => {
 
             <table class="eventTable">
                 <tr>
-                    <th style={{width: "2%"}}>&nbsp;id</th>
+                    <th style={{width: "2%"}}>&nbsp;Id</th>
                     <th style={{width: "9%"}}>&nbsp;Category</th>
-                    <th style={{width: "9%"}}>&nbsp;name</th>
+                    <th style={{width: "9%"}}>&nbsp;Name</th>
                     <th style={{width: "6%"}}>&nbsp;Location</th>
                     <th style={{width: "16%"}}>&nbsp;Description</th>
-                    <th style={{width: "8%"}}>&nbsp;start date</th>
-                    <th style={{width: "8%"}}>&nbsp;end date</th>
+                    <th style={{width: "8%"}}>&nbsp;Start Date</th>
+                    <th style={{width: "8%"}}>&nbsp;End Date</th>
                     <th style={{width: "13%"}}>&nbsp;Edit</th>
                     <th style={{width: "13%"}}>&nbsp;Delete</th>
                 </tr>
