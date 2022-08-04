@@ -56,7 +56,7 @@ export default class Login extends Component {
                 (response) => {
                     //console.log(response.data,"===========================================");
                     this.props.history.push("/profile");
-                   // window.location.reload();
+                   window.location.reload();
                 },
                 error => {
                     //this.props.history.push("/login");
