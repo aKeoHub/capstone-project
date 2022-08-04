@@ -188,32 +188,31 @@ const OtherDocs = () => {
          return (
          <>
 
-             <div className="mx-auto mb-5 px-5 py-5" style={{width: "1070px", background: "#D6DBDF"}}>
+             <div className="mx-auto mb-7 px-7 py-7" style={{width: "1070px", background: "#bcc1c4"}}>
                 <h1 className="text-secondary text-success mb-4">Documents</h1>
                     <div className="table-responsive">
                          <table className="table">
-                             <tr className="bg-dark text-white">
-                                 <th style={{width: "9%"}}>Doc_id</th>
-                                 <th style={{width: "9%"}}>Doc_Cat</th>
-                                 <th style={{width: "16%"}}>Doc_name</th>
-                                 <th style={{width: "16%"}}>Date_created</th>
-                                 <th style={{width: "18%"}}>Description</th>
-                                 <th style={{width: "12%"}}>File</th>
-                                 <th style={{width: "8%"}}>Delete</th>
-                                 <th style={{width: "8%"}}>Edit</th>
+                             <tr className="bg-dark text-black">
+                                 <th style={{width: "9%"}}>&nbsp;Doc_id</th>
+                                 <th style={{width: "9%"}}>&nbsp;Doc_Cat</th>
+                                 <th style={{width: "16%"}}>&nbsp;Doc_name</th>
+                                 <th style={{width: "16%"}}>&nbsp;Date_created</th>
+                                 <th style={{width: "18%"}}>&nbsp;Description</th>
+                                 <th style={{width: "8%"}}>&nbsp;Delete</th>
+                                 <th style={{width: "8%"}}>&nbsp;Edit</th>
                              </tr>
                          </table>
-                         {documents.map(park_document => downloadLink.map(link =>
+                         {documents.map(park_document =>
 
-                             <div key={park_document.id && link.id}>
+                             <div key={park_document.id}>
                                 <table className="table">
                                      <tr>
-                                         <td style={{width: "9%"}}>{park_document.document_id}</td>
-                                         <td style={{width: "9%"}}>{park_document.document_category}</td>
+                                         <td style={{width: "9%"}}>&nbsp;{park_document.document_id}</td>
+                                         <td style={{width: "9%"}}>&nbsp;{park_document.document_category}</td>
                                          <td style={{width: "16%"}}><span id={park_document.document_name}>{park_document.document_name}</span><input id={park_document.document_id} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "16%"}}>{park_document.create_date}</td>
+                                         <td style={{width: "16%"}}>&nbsp;{park_document.create_date}</td>
                                          <td style={{width: "18%"}}><span id={park_document.description}>{park_document.description}</span><input id={park_document.document_id+"a"} type="text" style={{display: "none", width: "67%"}} /></td>
-                                         <td style={{width: "50%"}}> <a href={link.url}>{link.name}</a> </td>
+
                                          {/*<td style={{width: "12%"}}><a href={downloadLink.find(element => element.fileId === 0)} >Link</a></td>*/}
                                          <td>
                                          <Button onClick={()=>deleteDocument(park_document.document_id)} style={{width: "8%"}}><FontAwesomeIcon icon={faTrash} /></Button>
@@ -233,38 +232,42 @@ const OtherDocs = () => {
                                 </table>
 
                              </div>
+                         )}
 
-                         ))}
+                       <DocModal />
+
+                        <div className="mx-auto mb-4 px-4 py-4" style={{width: "980px", background: "#bcc1c4"}}>
+                        <h1 className="text-secondary text-success mb-4"> Document Categories</h1>
+
+                             <tr className="bg-dark text-black">
+                             <th style={{width: "9%"}}>&nbsp; ID 1: LEGAL</th>
+                             <th style={{width: "16%"}}>&nbsp; ID 2: ENTERTAINMENT</th>
+                             <th style={{width: "14%"}}>&nbsp; ID 3: ACCOUNTING</th>
+                             <th style={{width: "10%"}}>&nbsp; ID 4: SOCIAL</th>
+                             <th style={{width: "11%"}}>&nbsp; ID 5: MEETING</th>
+                             <th style={{width: "10%"}}>&nbsp; ID 6: NOTICE</th>
+                             <th style={{width: "11%"}}>&nbsp; ID 7: PRIORITY</th>
+                             </tr>
+                        <tr><br></br></tr>
+                            <tr><br></br></tr>
 
 
+                        <h1 className="text-secondary text-success mb-4">File Links:</h1>
                         {downloadLink.map(link =>
                             <div key={link.id}>
+
                         <table className="table">
 
-                            <th> File Links
-                                <td style={{width: "50%"}}>
-                                    <a href={link.url}>{link.name}</a>
-                                )}</td>
-                        </th>
-                            <th> Category List
-                                <rtc>
-                                    <td>
-
-                                        <option value="1" label="ID 1: LEGAL">EGAL</option>
-                                        <option value="2" label="ID 2: ENTERTAINMENT">ENTERTAINMENT</option>
-                                        <option value="3" label="ID 3: ACCOUNTING">ACCOUNTING</option>
-                                        <option value="4" label="ID 4: SOCIAL">SOCIAL</option>
-                                        <option value="5" label="ID 5: MEETING">MEETING</option>
-                                        <option value="6" label="ID 6: NOTICE">NOTICE</option>
-                                        <option value="7" label="ID 7: PRIORITY">PRIORITY</option>
-
-                                    </td>
-                                </rtc>
-                        </th>
+                            <td style={{background: "#bcc1c4", width: "0.10%" }}>
+                                File ID:{link.fileId}
+                            </td>
+                                <td style={{ background: "#bcc1c4" }}>
+                                    <a href={link.url}> {link.name}</a>
+                                </td>
                         </table>
                             </div>
                         )}
-
+                        </div>
                         {/*blob = {downloadLink.map(link =>*/}
                         {/*    GetDownloadUrl(link.name)*/}
                         {/*)};*/}
@@ -281,7 +284,7 @@ const OtherDocs = () => {
                         {/*    </div>*/}
                         {/*)}*/}
                         <div>
-                            <DocModal />
+
                     </div>
                   </div>
 
