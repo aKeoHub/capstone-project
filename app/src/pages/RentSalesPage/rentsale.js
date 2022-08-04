@@ -15,9 +15,8 @@ const RentSale = () => {
 	return (
 		<div className="wrapper">
 			<div className="--inner">
-				<h3>Rent and Sales Page</h3>
 				<h1>Available Sites</h1>
-
+				<br/>
 				<table className="site_table" style={{width: "90%"}}>
 					<thead>
 						<tr>
@@ -80,6 +79,8 @@ const RentSale = () => {
 						</ul>
 					</div>
 				</div>
+				<p className="inquire">For inquiries about renting or selling a property, please:</p>
+				<p className="inquire"> email at rent_sale@wendys.ca || call at 123-456-7890</p>
 			</div>
 		</div>
 	);
