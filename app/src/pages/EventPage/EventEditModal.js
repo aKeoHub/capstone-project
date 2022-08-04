@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import EventService from './EventService/EventService';
 import EventEditForm from './EventEditForm';
+import {EditButtonEvent} from "../../components/Button/EditButtonEvent";
 
 function EventEditModal() {
   const [show, setShow] = useState(false);
@@ -13,9 +14,9 @@ function EventEditModal() {
 
   return (
     <>
-      <Button onClick={handleShow}>
+      <EditButtonEvent onClick={handleShow}>
         Edit
-      </Button>
+      </EditButtonEvent>
 
        <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>

@@ -324,9 +324,10 @@ const ForumLayout = () => {
                                                         <form action="">
                                                             <div className="form-wrapper">
                                                                 <div className="form-wrapper">
-                                                                    <label htmlFor="">Title</label>
+                                                                    <label>Title</label>
                                                                     <input
-                                                                        defaultValue= {modalEditInfo.title}
+                                                                        defaultValue={modalEditInfo.title}
+                                                                        onLoad= {modalEditInfo.title}
                                                                         type="text"
                                                                         className="form-control"
                                                                         onChange={(e) => {
@@ -337,9 +338,10 @@ const ForumLayout = () => {
                                                             </div>
                                                             <div className="form-wrapper">
                                                                 <div className="form-wrapper">
-                                                                    <label htmlFor="">Sub Title</label>
+                                                                    <label>Sub Title</label>
                                                                     <input
-                                                                        defaultValue = {modalEditInfo.sub_title}
+                                                                        defaultValue={modalEditInfo.sub_title}
+                                                                        onLoad = {modalEditInfo.sub_title}
                                                                         type="text"
                                                                         className="form-control"
                                                                         onChange={(e) => {
@@ -349,9 +351,10 @@ const ForumLayout = () => {
                                                                 </div>
                                                             </div>
                                                             <div className="form-wrapper">
-                                                                <label htmlFor="">Description</label>
+                                                                <label>Description</label>
                                                                 <textarea
-                                                                    defaultValue = {modalEditInfo.description}
+                                                                    defaultValue={modalEditInfo.description}
+                                                                    onLoad = {modalEditInfo.description}
                                                                     type="text"
                                                                     className="form-control"
                                                                     onChange={(e) => {
@@ -360,9 +363,9 @@ const ForumLayout = () => {
                                                                 />
                                                             </div>
                                                             <div className="form-wrapper">
-                                                                <label htmlFor="forumCategory">ForumCategory</label>
-                                                                <select defaultValue = {modalEditInfo.forum_category} onChange={(e) => {
-                                                                    setForumCategoryReg(e.target.value);
+                                                                <label>ForumCategory</label>
+                                                                <select defaultValue={modalEditInfo.forum_category} onLoad = {modalEditInfo.forum_category} onChange={(e) => {
+                                                                    setForumCategoryReg(modalEditInfo.forum_category);
                                                                 }} name="forumCategory" id="forumCategory">
                                                                     <option value="Help Needed!">Help Needed!</option>
                                                                     <option value="Announcement">Announcement</option>

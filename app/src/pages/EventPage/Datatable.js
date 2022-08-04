@@ -100,7 +100,7 @@ function deleteEvent(id) {
                             <td>{event.start_date}</td>
                             <td>{event.end_date}</td>
                             <td> <EventEditModal /> </td>
-                            <td> <button onClick={()=>deleteEvent(event.event_id)}> Delete </button></td>
+                            <td> <DeleteButtonEvent onClick={()=>deleteEvent(event.event_id)}> Delete </DeleteButtonEvent></td>
                         </tr>
                     </table>
                 </div>
