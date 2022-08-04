@@ -32,13 +32,13 @@ public class ParkDocument implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     private Integer documentId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "document_category", referencedColumnName = "category_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Category documentCategory;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id", referencedColumnName = "user_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude

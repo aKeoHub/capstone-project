@@ -152,7 +152,7 @@ const OtherDocs = () => {
                         </div>
                     )}
 
-                    <DocModal/>
+                    <div style={{textAlign: "center"}}> <DocModal/> </div>
 
                     <div className="mx-auto mb-4 px-4 py-4" style={{width: "980px", background: "#bcc1c4"}}>
                         <h1 className="text-secondary text-success mb-4"> Document Categories</h1>
