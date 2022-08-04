@@ -12,7 +12,7 @@ import image2 from '../../images/img_7.jpeg';
 const RentSale = () => {
 	return (
 		<div className="wrapper">
-			<div className="inner">
+			<div className="--inner">
 				<h3>Rent and Sales Page</h3>
 				<h1>Available Sites</h1>
 				<table className="site_table" style={{width: "100%"}}>

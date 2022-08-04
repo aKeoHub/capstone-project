@@ -129,13 +129,13 @@ return(
                          setDocCat(e.target.value);
                      }} >
                      <option value="" label="Categories">Categories</option>
-                     <option value="1" label="LEGAL">Concerts</option>
-                     <option value="2" label="ENTERTAINMENT">Gathering</option>
-                     <option value="3" label="ACCOUNTING">Others</option>
-                     <option value="4" label="SOCIAL">Concerts</option>
-                     <option value="5" label="MEETING">Gathering</option>
-                     <option value="6" label="NOTICE">Others</option>
-                     <option value="7" label="PRIORITY">Concerts</option>
+                     <option value="1" label="LEGAL">LEGAL</option>
+                     <option value="2" label="ENTERTAINMENT">ENTERTAINMENT</option>
+                     <option value="3" label="ACCOUNTING">ACCOUNTING</option>
+                     <option value="4" label="SOCIAL">SOCIAL</option>
+                     <option value="5" label="MEETING">MEETING</option>
+                     <option value="6" label="NOTICE">NOTICE</option>
+                     <option value="7" label="PRIORITY">PRIORITY</option>
                  </select>
              </label>
                {/*<label>Enter Creator Id:*/}

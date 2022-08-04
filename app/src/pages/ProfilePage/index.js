@@ -80,7 +80,7 @@ const ProfilePage = () => {
 
     //console.log(users);
 
-//Edit users
+//Edit user that is logged in
 const editUser = async(userId) => {
 
         fetch('api/v1/user/edit/' + userId, {
@@ -120,7 +120,7 @@ const editUser = async(userId) => {
             <div className="form-wrapper">
                 <label htmlFor="">First Name</label>
                     <input
-                        placeholder = {modalEditInfo.firstname}
+                        defaultValue = {modalEditInfo.firstname}
                         type="text"
                         className="form-control"
                         onChange={(e) => {
@@ -133,7 +133,7 @@ const editUser = async(userId) => {
             <div className="form-wrapper">
                 <label htmlFor="">Last Name</label>
                     <input
-                        placeholder = {modalEditInfo.lastname}
+                        defaultValue = {modalEditInfo.lastname}
                         type="text"
                         className="form-control"
                         onChange={(e) => {
@@ -145,7 +145,7 @@ const editUser = async(userId) => {
         <div className="form-wrapper">
             <label htmlFor="">Email</label>
             <textarea
-                placeholder = {modalEditInfo.email}
+                defaultValue = {modalEditInfo.email}
                 type="text"
                 className="form-control"
                 onChange={(e) => {

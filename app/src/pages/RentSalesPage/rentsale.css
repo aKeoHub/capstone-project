@@ -8,6 +8,12 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
 
+body {
+    font-family: 'Arial', serif;
+    color: #333;
+    font-size: 13px;
+    margin: 0;
+    background-color: #ffffff;}
 
 input, textarea, select, button {
     font-family: 'Arial', serif;
@@ -38,17 +44,17 @@ a:hover {
     display: flex;
     align-items: center; }
 
-.inner {
-    min-width: 1500px;
+.--inner {
+    min-width: 1250px;
     margin: auto;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     padding-top: 68px;
     padding-bottom: 48px;
-    background: #D6DBDF;
+    background: linear-gradient(to bottom, #D6DBDF 0%, #5D6D7E 100%);
     opacity: 9;
 }
 
-.inner h3 {
+.--inner h3 {
     text-transform: uppercase;
     font-size: 35px;
     font-family: "Arial", serif;
@@ -96,6 +102,8 @@ select {
     padding-left: 20px; }
 select option[value=""][disabled] {
     display: none; }
+
+
 .checkbox {
     position: relative; }
 .checkbox label {
@@ -135,7 +143,7 @@ select option[value=""][disabled] {
   margin: 10px 0px 50px 0px
 }
 th, td {
-  background-color: #D6DBDF;
+  background-color: #9f9f9f;
 }
 
 

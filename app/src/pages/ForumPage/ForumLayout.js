@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import './ForumPage.css';
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import {AddButtonForum} from "../../components/Button/AddButtonForum";
@@ -8,7 +7,7 @@ import {ViewButtonForum} from "../../components/Button/ViewButtonForum";
 import {EditButtonForum} from "../../components/Button/EditButtonForum";
 import {DeleteButtonForum} from "../../components/Button/DeleteButtonForum";
 import {CancelButtonForum} from "../../components/Button/CancelButtonForum";
-const token = localStorage.getItem("accessToken");
+
 
 
 
@@ -43,7 +42,6 @@ const ForumLayout = () => {
 
 
     const [forumId, setForumIdReg] = useState(0);
-    const [creatorId, setCreatorIdReg] = useState("");
     const [title, setTitleReg] = useState("");
     const [subTitle, setSubTitleReg] = useState("");
     const [description, setDescriptionReg] = useState("");
@@ -138,7 +136,7 @@ const ForumLayout = () => {
 
 //This will make you view the forum, you do not need to be logged in to see the forum.
     const viewForum = async(id) => {
-
+        handleShowView();
         try{
             await axios.get('api/v1/forums/get/' + id,
             ).then(function (response){
@@ -146,8 +144,8 @@ const ForumLayout = () => {
                 setModalViewInfo(response.data);
                 setModalEditInfo(response.data);
                 console.log(modalViewInfo);
-                handleShowView();
             })
+
         }catch (e) {
         }
 
@@ -157,9 +155,13 @@ const ForumLayout = () => {
 
 //This will edit a selected forum, you need to be logged in to do so.
     const editForum = async(forumId) => {
+        
+         await fetch('api/v1/forums/edit/' + forumId, {
 
-        fetch('api/v1/forums/edit/' + forumId, {
+            // Adding method type
             method: "PUT",
+
+            // Adding body or contents to send
             body: JSON.stringify({
                 forum_id: forumId,
                 creator_id: user,
@@ -169,18 +171,21 @@ const ForumLayout = () => {
                 picture_id: picture_id,
                 sub_title: subTitle,
                 forum_category: forumCategory,
+
             }),
+
             headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
+
         })
+
+            // Converting to JSON
             .then(response => response.json())
-            .then(data => {
-                setLoading(false);
-                console.log(data);
-                console.log(modalEditInfo);
-                handleShowEdit();
-                //window.location.reload();
-            })
-    }
+
+            // Displaying results to console
+            .then(json => console.log(json));
+
+        }
+
 
 
 
