@@ -45,7 +45,7 @@ const OtherDocs = () => {
             })
 
         fetch('api/v1/documents/all', {
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            headers: { 'Content-Type': 'application/json'},
         })
             .then(response => response.json())
             .then(data => {
@@ -54,7 +54,7 @@ const OtherDocs = () => {
             })
 
         fetch('api/v1/files', {
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            headers: { 'Content-Type': 'application/json'},
         })
             .then(response => response.json())
             .then(data => {

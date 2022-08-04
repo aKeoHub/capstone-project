@@ -62,37 +62,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Events permissions
         http.authorizeRequests().antMatchers("/api/v1/events/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/events/all/**").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/v1/events/add/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/events/all/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(DELETE, "/api/v1/events/delete/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(PUT, "/api/v1/events/edit/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
 
         // Documents permissions
         http.authorizeRequests().antMatchers("/api/v1/documents/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/documents/all/**").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/v1/documents/add/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/documents/all/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(DELETE, "/api/v1/documents/delete/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(PUT, "/api/v1/documents/edit/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
 
         http.authorizeRequests().antMatchers(POST, "/api/v1/uploadFile/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/files/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/api/v1/files/**").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/downloadFile/**").permitAll();
 //        http.authorizeRequests().antMatchers(GET, "/api/v1/downloadFile/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
 
         // Forums permissions
         http.authorizeRequests().antMatchers("/api/v1/forums/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/forums/all/**").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/v1/forums/add/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/forums/all/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(DELETE, "/api/v1/forums/delete/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(PUT, "/api/v1/forums/edit/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
         // Category permissions
         http.authorizeRequests().antMatchers("/api/v1/category/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/category/all/**").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/v1/category/add/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/category/all/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(DELETE, "/api/v1/category/delete/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
         http.authorizeRequests().antMatchers(PUT, "/api/v1/category/edit/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 
