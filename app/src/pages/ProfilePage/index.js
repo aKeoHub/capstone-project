@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import {EditButtonUser} from "../../components/Button/EditButtonUser";
 import {CancelButtonUser} from "../../components/Button/CancelButtonUser";
 import './Profile.css';
+import TokenService from "../../services/token.service";
 
 const ProfilePage = () => {
     const [user, setUser] = useState([]);
@@ -42,7 +43,39 @@ const ProfilePage = () => {
                 setUser(response.data);
                 setModalEditInfo(response.data);
                 console.log(user);
-            })
+            }).catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                //window.location.replace("/login")
+
+                console.log(error.response.data);
+                let expiredToken = error.response.data;
+                //console.log(expiredToken.error_message);
+
+                if(expiredToken.error_message.startsWith('expired', 14)){
+                    console.log('hello')
+                 TokenService.getRefreshToken()
+                     .then(json => {
+                         console.log(json)
+                         localStorage.setItem("accessToken", json.accessToken);
+                         localStorage.setItem("refreshToken", json.refreshToken)
+                     })
+                }
+
+                //console.log(error.response.status);
+                //console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+        });
     }, []);
 
     //console.log(users);
@@ -70,7 +103,7 @@ const editUser = async(userId) => {
                 console.log(data);
                 console.log(modalEditInfo);
                 handleShowEdit();
-                //window.location.reload();
+                window.location.reload();
             })
     }
 
