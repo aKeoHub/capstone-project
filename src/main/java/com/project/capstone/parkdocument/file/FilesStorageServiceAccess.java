@@ -49,6 +49,22 @@ public class FilesStorageServiceAccess implements FilesStorageService{
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(root.toFile());
     }
+
+    @Override
+    public void deleteFile(String filename) {
+    try {
+        Path file = root.resolve(filename);
+        Resource resource = new UrlResource(file.toUri());
+        if (resource.exists() || resource.isReadable()) {
+            Files.deleteIfExists(file);
+        } else {
+            throw new RuntimeException("Could not read the file!");
+        }
+
+    } catch (Exception e) {
+        throw new RuntimeException("File not found. Unable to Delete");
+    }
+    }
     @Override
     public Stream<Path> loadAll() {
         try {

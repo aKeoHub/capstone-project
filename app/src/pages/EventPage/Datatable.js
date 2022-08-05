@@ -53,7 +53,7 @@ const EventTable = () => {
             .then((data) => {
                 setLoading(false);
                 console.log(data);
-                window.location.reload();
+
             });
     }
 
@@ -102,6 +102,7 @@ const EventTable = () => {
                                 <button
                                     onClick={() => {
                                         deleteEvent(event.event_id);
+                                        window.location.reload();
                                     }}
                                 >
                                     Delete

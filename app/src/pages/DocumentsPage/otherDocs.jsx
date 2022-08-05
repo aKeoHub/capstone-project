@@ -80,7 +80,20 @@ const OtherDocs = () => {
             .then(data => {
                 setLoading(false);
                 console.log(data);
-                window.location.reload();
+
+            })
+    }
+
+    function deleteFile(id) {
+
+        fetch('api/v1/files/delete/' + id, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        }).then(response => response.json())
+            .then(data => {
+                setLoading(false);
+                console.log(data);
+
             })
     }
 
@@ -125,7 +138,8 @@ const OtherDocs = () => {
 
                                     {/*<td style={{width: "12%"}}><a href={downloadLink.find(element => element.fileId === 0)} >Link</a></td>*/}
                                     <td>
-                                        <Button onClick={() => deleteDocument(park_document.document_id)}
+                                        <Button onClick={() => {deleteDocument(park_document.document_id);
+                                        window.location.reload();}}
                                             style={{ width: "8%" }}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </td>
 
@@ -181,6 +195,11 @@ const OtherDocs = () => {
                                     </td>
                                     <td style={{background: "#bcc1c4"}}>
                                         <a href={link.url}> {link.name}</a>
+                                    </td>
+                                    <td>
+                                        <Button onClick={() => {deleteFile(link.name);
+                                        window.location.reload();}}
+                                            style={{ width: "8%" }}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </td>
                                 </table>
                             </div>

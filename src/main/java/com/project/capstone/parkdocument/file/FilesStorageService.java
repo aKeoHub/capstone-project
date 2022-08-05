@@ -9,5 +9,6 @@ public interface FilesStorageService {
      void save(MultipartFile file);
      Resource load(String filename);
      void deleteAll();
+     void deleteFile(String filename);
      Stream<Path> loadAll();
 }
