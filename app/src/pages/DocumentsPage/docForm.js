@@ -82,7 +82,8 @@ const DocForm = () => {
                 window.location.reload();
             })
             .catch((error) => {
-                alert(error)
+                alert("Document Failed to Add");
+                window.location.reload();
             })
     }
 
