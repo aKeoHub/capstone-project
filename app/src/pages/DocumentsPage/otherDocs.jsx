@@ -196,6 +196,11 @@ const OtherDocs = () => {
                                     <td style={{background: "#bcc1c4"}}>
                                         <a href={link.url}> {link.name}</a>
                                     </td>
+                                    <td>
+                                        <Button onClick={() => {deleteFile(link.name);
+                                        window.location.reload();}}
+                                            style={{ width: "8%" }}><FontAwesomeIcon icon={faTrash} /></Button>
+                                    </td>
                                 </table>
                             </div>
                         )}
