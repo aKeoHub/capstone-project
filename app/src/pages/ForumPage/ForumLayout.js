@@ -40,6 +40,9 @@ const ForumLayout = () => {
     const handleCloseView = () => setShowView( false);
     const handleShowView = () => setShowView( true);
 
+    const [showDelete, setShowDelete] = useState (false);
+    const handleCloseDelete = () => setShowDelete( false);
+    const handleShowDelete = () => setShowDelete( true);
 
     const [forumId, setForumIdReg] = useState(0);
     const [title, setTitleReg] = useState("");
@@ -83,17 +86,23 @@ const ForumLayout = () => {
         return <p>Loading...</p>;
     }
 
+// Validation for the add form.
+    function handleValidation(){
+        
+    }
+
+
 //This will delete a forum when clicking the button, but you need to be logged in to do so.
     function deleteForum(id) {
 
         fetch('api/v1/forums/delete/' + id, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
-        }).then(response => response.json())
+        }).then(response => response.json() )
             .then(data => {
                 setLoading(false);
                 console.log(data);
-                window.location.reload();
+
             })
     }
 
@@ -215,23 +224,24 @@ const ForumLayout = () => {
                             </AddButtonForum>
 
                             {/*The Modal for Add Forum*/}
-                            <Modal className="blue-color-background" show={showAdd} onHide={handleCloseAdd}>
+                            <Modal className="blue-color-background modal-xl" show={showAdd} onHide={handleCloseAdd}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Creating a Forum</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
                                     <form action="">
-                                        <h3>Your New Forum!</h3>
                                         <div className="form-wrapper">
                                             <div className="form-wrapper">
                                                 <label htmlFor="">Title</label>
                                                 <input
                                                     type="text"
+                                                    size="55"
+                                                    required = "required"
                                                     className="form-control"
                                                     onChange={(e) => {
                                                         setTitleReg(e.target.value);
                                                     }}
-                                                />
+                                                required/>
                                             </div>
                                         </div>
                                         <div className="form-wrapper">
@@ -243,23 +253,24 @@ const ForumLayout = () => {
                                                     onChange={(e) => {
                                                         setSubTitleReg(e.target.value);
                                                     }}
-                                                />
+                                                required/>
                                             </div>
                                         </div>
                                         <div className="form-wrapper">
                                             <label htmlFor="">Description</label>
                                             <textarea
-
+                                                style={{height: '300px'}}
                                                 type="text"
-                                                className="form-control"
+                                                className="form-control col-xs-12"
+                                                rows="7" cols="50"
                                                 onChange={(e) => {
                                                     setDescriptionReg(e.target.value);
                                                 }}
-                                            />
+                                            required/>
                                         </div>
                                         <div className="form-wrapper">
                                             <label htmlFor="forumCategory">ForumCategory</label>
-                                            <select onChange={(e) => {
+                                            <select className="form-select" onChange={(e) => {
                                                 setForumCategoryReg(e.target.value);
                                             }}name="forumCategory" id="forumCategory">
                                                 <option value="">Select a Category</option>
@@ -271,12 +282,12 @@ const ForumLayout = () => {
                                     </form>
                                 </Modal.Body>
                                 <Modal.Footer >
-                                    <CancelButtonForum variant="secondary" onClick={handleCloseAdd}>
-                                        Close
-                                    </CancelButtonForum>
                                     <AddButtonForum variant="primary" onClick={addForum}>
                                         Add
                                     </AddButtonForum>
+                                    <CancelButtonForum variant="secondary" onClick={handleCloseAdd}>
+                                        Close
+                                    </CancelButtonForum>
                                 </Modal.Footer>
                             </Modal>
 
@@ -287,9 +298,6 @@ const ForumLayout = () => {
 
                                         <div className="row">
                                             <div className="col-md-9">
-                                                <div className="forum-icon">
-                                                    <i className="fa fa-shield"></i>
-                                                </div>
                                                 <a href="" className="--forum-item-title">{forum.title}</a>
                                                 <div className="--forum-sub-title">{forum.sub_title}
                                                 </div>
@@ -297,9 +305,9 @@ const ForumLayout = () => {
                                                 <div>Create Date: {forum.create_date}</div>
 
                                                 {/*The Modal for View Forum*/}
-                                                <Modal className="blue-color-background" show={showView} onHide={handleCloseView}>
+                                                <Modal className="blue-color-background modal-xl" show={showView} onHide={handleCloseView}>
                                                     <Modal.Header closeButton>
-                                                        <Modal.Title > {modalViewInfo.title}</Modal.Title>
+                                                        <Modal.Title><h1>{modalViewInfo.title}</h1></Modal.Title>
                                                     </Modal.Header>
                                                     <Modal.Body>
                                                         <h3>{modalViewInfo.sub_title}</h3>
@@ -309,14 +317,31 @@ const ForumLayout = () => {
                                                         <EditButtonForum variant="secondary" onClick={handleShowEdit}>
                                                             Edit
                                                         </EditButtonForum>
-                                                        <DeleteButtonForum variant="primary" onClick={()=>deleteForum(modalViewInfo.forum_id)}>
+                                                        <DeleteButtonForum variant="primary" onClick={handleShowDelete}>
                                                             Delete
+                                                        </DeleteButtonForum>
+                                                    </Modal.Footer>
+                                                </Modal>
+                                                {/*Modal For Delete Forum*/}
+                                                <Modal className="blue-color-background modal-lg" show={showDelete} onHide={handleCloseDelete}>
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title >Are you sure you want to Delete the Forum?</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Footer>
+                                                        <EditButtonForum variant="secondary" onClick={()=> {
+                                                            deleteForum(modalViewInfo.forum_id);
+                                                            window.location.reload();
+                                                        }}>
+                                                            Yes
+                                                        </EditButtonForum>
+                                                        <DeleteButtonForum variant="primary" onClick={handleShowDelete}>
+                                                            No
                                                         </DeleteButtonForum>
                                                     </Modal.Footer>
                                                 </Modal>
 
                                                 {/*Modal For Edit Forum*/}
-                                                <Modal className="blue-color-background"show={showEdit} onHide={handleCloseEdit}>
+                                                <Modal className="blue-color-background modal-xl"show={showEdit} onHide={handleCloseEdit}>
                                                     <Modal.Header closeButton>
                                                         <Modal.Title>Edit This forum.</Modal.Title>
                                                     </Modal.Header>
@@ -333,7 +358,7 @@ const ForumLayout = () => {
                                                                         onChange={(e) => {
                                                                             setTitleReg(e.target.value);
                                                                         }}
-                                                                    />
+                                                                   />
                                                                 </div>
                                                             </div>
                                                             <div className="form-wrapper">
@@ -353,6 +378,7 @@ const ForumLayout = () => {
                                                             <div className="form-wrapper">
                                                                 <label>Description</label>
                                                                 <textarea
+                                                                    style={{height: '300px'}}
                                                                     defaultValue={modalEditInfo.description}
                                                                     onLoad = {modalEditInfo.description}
                                                                     type="text"
@@ -364,7 +390,7 @@ const ForumLayout = () => {
                                                             </div>
                                                             <div className="form-wrapper">
                                                                 <label>ForumCategory</label>
-                                                                <select defaultValue={modalEditInfo.forum_category} onLoad = {modalEditInfo.forum_category} onChange={(e) => {
+                                                                <select className="form-select" defaultValue={modalEditInfo.forum_category} onLoad = {modalEditInfo.forum_category} onChange={(e) => {
                                                                     setForumCategoryReg(modalEditInfo.forum_category);
                                                                 }} name="forumCategory" id="forumCategory">
                                                                     <option value="Help Needed!">Help Needed!</option>
@@ -387,9 +413,6 @@ const ForumLayout = () => {
 
                                             </div>
                                             <div className="col-md-1 --forum-info">
-                            <span className="views-number">
-
-                            </span>
                                                 {/*Button For Viewing Forum*/}
                                                 <div>
                                                     <ViewButtonForum buttonStyle='--btn--primary' onClick={() => viewForum(forum.forum_id)}>
