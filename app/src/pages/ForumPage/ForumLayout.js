@@ -144,7 +144,7 @@ const ForumLayout = () => {
                 alert("Forum Failed to Add");
                 window.location.reload();
             });
-            window.location.reload();
+
     }
 
 //This will make you view the forum, you do not need to be logged in to see the forum.
@@ -286,7 +286,10 @@ const ForumLayout = () => {
                                     </form>
                                 </Modal.Body>
                                 <Modal.Footer >
-                                    <AddButtonForum variant="primary" onClick={addForum}>
+                                    <AddButtonForum variant="primary" onClick={() =>{
+                                        addForum();
+                                        window.location.reload();
+                                    }}>
                                         Add
                                     </AddButtonForum>
                                     <CancelButtonForum variant="secondary" onClick={handleCloseAdd}>
@@ -338,7 +341,7 @@ const ForumLayout = () => {
                                                         }}>
                                                             Yes
                                                         </EditButtonForum>
-                                                        <DeleteButtonForum variant="primary" onClick={handleShowDelete}>
+                                                        <DeleteButtonForum variant="primary" onClick={handleCloseDelete}>
                                                             No
                                                         </DeleteButtonForum>
                                                     </Modal.Footer>
