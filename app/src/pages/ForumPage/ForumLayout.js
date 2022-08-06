@@ -45,11 +45,11 @@ const ForumLayout = () => {
     const handleShowDelete = () => setShowDelete( true);
 
     const [forumId, setForumIdReg] = useState(0);
-    const [title, setTitleReg] = useState("");
-    const [subTitle, setSubTitleReg] = useState("");
-    const [description, setDescriptionReg] = useState("");
-    const [forumCategory, setForumCategoryReg] = useState("");
-    const [picture_id, setPictureId] = useState("");
+    const [title, setTitleReg] = useState(null);
+    const [subTitle, setSubTitleReg] = useState(null);
+    const [description, setDescriptionReg] = useState(null);
+    const [forumCategory, setForumCategoryReg] = useState(null);
+    const [picture_id, setPictureId] = useState(null);
     const [createDate, setCreateDate] = useState(new Date());
 
 
@@ -86,11 +86,6 @@ const ForumLayout = () => {
         return <p>Loading...</p>;
     }
 
-// Validation for the add form.
-    function handleValidation(){
-        
-    }
-
 
 //This will delete a forum when clicking the button, but you need to be logged in to do so.
     function deleteForum(id) {
@@ -104,6 +99,11 @@ const ForumLayout = () => {
                 console.log(data);
 
             })
+    }
+
+    const handleSubmit = (forum) => {
+        forum.preventDefault();
+        console.log(forum.target.eventName.value);
     }
 
 //This will add a forum when clicking the button, but you need to be logged in to do so.
@@ -139,15 +139,18 @@ const ForumLayout = () => {
             .then(response => response.json())
 
             // Displaying results to console
-            .then(json => console.log(json));
-            window.location.reload();
+            .then(json => console.log(json))
+            .catch((error) => {
+                alert("Forum Failed to Add");
+                window.location.reload();
+            });
+            //window.location.reload();
     }
 
 //This will make you view the forum, you do not need to be logged in to see the forum.
-    const viewForum = async(id) => {
-        handleShowView();
+    function viewForum(id) {
         try{
-            await axios.get('api/v1/forums/get/' + id,
+             axios.get('api/v1/forums/get/' + id,
             ).then(function (response){
                 console.log(response.data);
                 setModalViewInfo(response.data);
@@ -163,9 +166,9 @@ const ForumLayout = () => {
 
 
 //This will edit a selected forum, you need to be logged in to do so.
-    const editForum = async(forumId) => {
+    function editForum(forumId) {
 
-         await fetch('api/v1/forums/edit/' + forumId, {
+         fetch('api/v1/forums/edit/' + forumId, {
 
             // Adding method type
             method: "PUT",
@@ -191,8 +194,11 @@ const ForumLayout = () => {
              .then(data => {
                  setLoading(false);
                  console.log(data);
-                 window.location.reload();
              })
+             .catch((error) => {
+             alert("Forum Failed to Edit");
+             window.location.reload();
+         });
 
             // Displaying results to console
 
@@ -229,19 +235,18 @@ const ForumLayout = () => {
                                     <Modal.Title>Creating a Forum</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <form action="">
+                                    <form onSubmit={handleSubmit}>
                                         <div className="form-wrapper">
                                             <div className="form-wrapper">
                                                 <label htmlFor="">Title</label>
                                                 <input
                                                     type="text"
                                                     size="55"
-                                                    required = "required"
                                                     className="form-control"
                                                     onChange={(e) => {
                                                         setTitleReg(e.target.value);
                                                     }}
-                                                required/>
+                                                />
                                             </div>
                                         </div>
                                         <div className="form-wrapper">
@@ -253,7 +258,7 @@ const ForumLayout = () => {
                                                     onChange={(e) => {
                                                         setSubTitleReg(e.target.value);
                                                     }}
-                                                required/>
+                                                />
                                             </div>
                                         </div>
                                         <div className="form-wrapper">
@@ -261,12 +266,11 @@ const ForumLayout = () => {
                                             <textarea
                                                 style={{height: '300px'}}
                                                 type="text"
-                                                className="form-control col-xs-12"
-                                                rows="7" cols="50"
+                                                className="form-control"
                                                 onChange={(e) => {
                                                     setDescriptionReg(e.target.value);
                                                 }}
-                                            required/>
+                                            />
                                         </div>
                                         <div className="form-wrapper">
                                             <label htmlFor="forumCategory">ForumCategory</label>
@@ -401,7 +405,9 @@ const ForumLayout = () => {
                                                         </form>
                                                     </Modal.Body>
                                                     <Modal.Footer>
-                                                        <EditButtonForum variant="primary" onClick={() => editForum(modalEditInfo.forum_id)}>
+                                                        <EditButtonForum variant="primary" onClick={() => {
+                                                            editForum(modalEditInfo.forum_id);
+                                                            window.location.reload();}}>
                                                             Edit
                                                         </EditButtonForum>
                                                         <CancelButtonForum variant="primary" onClick={handleCloseEdit}>
@@ -415,7 +421,9 @@ const ForumLayout = () => {
                                             <div className="col-md-1 --forum-info">
                                                 {/*Button For Viewing Forum*/}
                                                 <div>
-                                                    <ViewButtonForum buttonStyle='--btn--primary' onClick={() => viewForum(forum.forum_id)}>
+                                                    <ViewButtonForum buttonStyle='--btn--primary' onClick={()=> {
+                                                        viewForum(forum.forum_id);
+                                                        handleShowView();}}>
                                                         View
                                                     </ViewButtonForum>
 
