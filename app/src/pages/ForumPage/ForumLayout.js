@@ -140,9 +140,13 @@ const ForumLayout = () => {
 
             // Displaying results to console
 
-            .catch((error) => {
-                alert("Forum Failed to Add");
-                window.location.reload();
+            .then((json) => {
+                console.log(json)
+                if (title === null || todaysDate === null || description === null || forumCategory === null ){
+                    alert("Forum Failed to Add, Please Review your Inputs");
+                } else {
+                    window.location.reload();
+                }
             });
 
     }
@@ -287,11 +291,13 @@ const ForumLayout = () => {
                                             </select>
                                         </div>
                                     </form>
+
+
                                 </Modal.Body>
                                 <Modal.Footer >
                                     <AddButtonForum variant="primary" onClick={() =>{
                                         addForum();
-                                        window.location.reload();
+                                        //window.location.reload();
                                     }}>
                                         Add
                                     </AddButtonForum>
@@ -332,6 +338,8 @@ const ForumLayout = () => {
                                                         </DeleteButtonForum>
                                                     </Modal.Footer>
                                                 </Modal>
+
+
                                                 {/*Modal For Delete Forum*/}
                                                 <Modal className="blue-color-background modal-lg" show={showDelete} onHide={handleCloseDelete}>
                                                     <Modal.Header closeButton>
