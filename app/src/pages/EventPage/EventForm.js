@@ -86,8 +86,8 @@ const EventForm = () => {
                      window.location.reload();
                     })
                     .catch((error) => {
-                            alert("Event Failed to Add");
-                            window.location.reload();
+                            alert("Event Failed to Add, Please Review your Inputs");
+
                         })
   }
 
