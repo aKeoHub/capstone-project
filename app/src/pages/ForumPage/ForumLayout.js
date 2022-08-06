@@ -144,7 +144,7 @@ const ForumLayout = () => {
                 alert("Forum Failed to Add");
                 window.location.reload();
             });
-            //window.location.reload();
+            window.location.reload();
     }
 
 //This will make you view the forum, you do not need to be logged in to see the forum.
@@ -246,7 +246,7 @@ const ForumLayout = () => {
                                                     onChange={(e) => {
                                                         setTitleReg(e.target.value);
                                                     }}
-                                                />
+                                                required/>
                                             </div>
                                         </div>
                                         <div className="form-wrapper">
@@ -258,7 +258,7 @@ const ForumLayout = () => {
                                                     onChange={(e) => {
                                                         setSubTitleReg(e.target.value);
                                                     }}
-                                                />
+                                               required />
                                             </div>
                                         </div>
                                         <div className="form-wrapper">
@@ -270,7 +270,7 @@ const ForumLayout = () => {
                                                 onChange={(e) => {
                                                     setDescriptionReg(e.target.value);
                                                 }}
-                                            />
+                                            required/>
                                         </div>
                                         <div className="form-wrapper">
                                             <label htmlFor="forumCategory">ForumCategory</label>
