@@ -103,7 +103,7 @@ const ForumLayout = () => {
 
     const handleSubmit = (forum) => {
         forum.preventDefault();
-        console.log(forum.target.eventName.value);
+        console.log(forum.target.forumId.value);
     }
 
 //This will add a forum when clicking the button, but you need to be logged in to do so.
@@ -139,7 +139,7 @@ const ForumLayout = () => {
             .then(response => response.json())
 
             // Displaying results to console
-            .then(json => console.log(json))
+
             .catch((error) => {
                 alert("Forum Failed to Add");
                 window.location.reload();
@@ -240,37 +240,40 @@ const ForumLayout = () => {
                                             <div className="form-wrapper">
                                                 <label htmlFor="">Title</label>
                                                 <input
+                                                    required="true"
                                                     type="text"
                                                     size="55"
                                                     className="form-control"
                                                     onChange={(e) => {
                                                         setTitleReg(e.target.value);
                                                     }}
-                                                required/>
+                                                />
                                             </div>
                                         </div>
                                         <div className="form-wrapper">
                                             <div className="form-wrapper">
                                                 <label htmlFor="">Sub Title</label>
                                                 <input
+                                                    required="true"
                                                     type="text"
                                                     className="form-control"
                                                     onChange={(e) => {
                                                         setSubTitleReg(e.target.value);
                                                     }}
-                                               required />
+                                                />
                                             </div>
                                         </div>
                                         <div className="form-wrapper">
                                             <label htmlFor="">Description</label>
                                             <textarea
+                                                required="true"
                                                 style={{height: '300px'}}
                                                 type="text"
                                                 className="form-control"
                                                 onChange={(e) => {
                                                     setDescriptionReg(e.target.value);
                                                 }}
-                                            required/>
+                                            />
                                         </div>
                                         <div className="form-wrapper">
                                             <label htmlFor="forumCategory">ForumCategory</label>
