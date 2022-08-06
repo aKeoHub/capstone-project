@@ -23,7 +23,7 @@ function DocModal() {
 
        <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Add Event</Modal.Title>
+                <Modal.Title>Add Document</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <DocForm />

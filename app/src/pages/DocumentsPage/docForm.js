@@ -16,7 +16,7 @@ const DocForm = () => {
     const token = localStorage.getItem("accessToken");
     const username = (localStorage.getItem('username'));
     const [user, setUser] = useState('');
-
+    const [createDate, setCreateDate] = useState(new Date());
 
     const textAreaChange = (doc) => {
         setTextarea(doc.target.value)
@@ -60,6 +60,9 @@ const DocForm = () => {
 
 
     const AddDocument = (doc) => {
+        const todaysDate = new Date();
+        console.log(todaysDate.toLocaleDateString());
+        setCreateDate(todaysDate);
 
         fetch('api/v1/documents/add', {
             method: 'POST',
@@ -69,7 +72,7 @@ const DocForm = () => {
                 document_category: docCat,
                 creator_id: user,
                 document_name: docName,
-                create_date: dateCreated,
+                create_date: todaysDate,
                 description: textarea,
                 file: file,
             }),
@@ -115,7 +118,7 @@ const DocForm = () => {
                     onChange={(e) => {
                         setDocCat(e.target.value);
                     }}>
-                    <option value="" label="Categories">Categories</option>
+                    <option value="" label="Select a Category">Categories</option>
                     <option value="1" label="LEGAL">LEGAL</option>
                     <option value="2" label="ENTERTAINMENT">ENTERTAINMENT</option>
                     <option value="3" label="ACCOUNTING">ACCOUNTING</option>
@@ -142,18 +145,11 @@ const DocForm = () => {
                           pattern="/[<]*<[\s\u200B]*script[\s\u200B]*>.*[/]*[<]*<[\s\u200B]*\/[\s\u200B]*script[\s\u200B]*>/ig;"
                           required="true" onChange={textAreaChange}/>
             </label>
-            <label for="dateCreated">Date created:
-                <input type="date" id="dateCreated" name="dateCreated" required="true" onChange={(e) => {
-                    setDateCreated(e.target.value);
-                }}/>
-            </label>
-            <input
-                type="file" id="fileUpload" name="file"
-                onChange={onUploadFile}
-            />
+
+
             <button onClick={AddDocument}>Add Document</button>
         </form>
 
-    )
-};
+    );
+}
 export default DocForm;

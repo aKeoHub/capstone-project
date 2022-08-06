@@ -15,7 +15,34 @@ const OtherDocs = () => {
     const token = localStorage.getItem("accessToken");
     const username = (localStorage.getItem('username'));
     const [user, setUser] = useState('');
+    const [file, setFile] = useState();
 
+     const onUploadFile = e => {
+
+        //console.log('file: ', file);
+        //console.log(e.target.files[0]);
+
+        const formData = new FormData();
+        const bodyParameters = {
+            body: formData
+        };
+        const config = {
+            headers: {Authorization: `Bearer ${token}`},
+        };
+        formData.append('file', e.target.files[0])
+        fetch('api/v1/uploadFile', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json', 'Authorization': `Bearer ${token}`,
+            },
+            body: formData
+        })
+            .then(response => response.json())
+                .then(data => {
+                    setLoading(false);
+                    window.location.reload();
+                })
+      }
     // const GetDownloadUrl = (fileName) => {
     //     const config = {
     //         headers: {Authorization: `Bearer ${token}`},
@@ -185,6 +212,11 @@ const OtherDocs = () => {
 
 
                         <h1 className="text-secondary text-success mb-4">File Links:</h1>
+                        <input
+                            type="file" id="fileUpload" name="file"
+                            onChange={onUploadFile}
+                        />
+                        <p>You may NOT upload the same file more than once, Please delete and re-upload for changed files</p>
                         {downloadLink.map(link =>
                             <div key={link.id}>
 
@@ -200,7 +232,7 @@ const OtherDocs = () => {
                                         <Button onClick={() => {deleteFile(link.name);
                                         window.location.reload();
                                              }}
-                                            style={{ width: "8%" }}><FontAwesomeIcon icon={faTrash} /></Button>
+                                            style={{ width: "5%" }}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </td>
                                 </table>
                             </div>
