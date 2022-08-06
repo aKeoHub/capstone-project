@@ -17,49 +17,49 @@ const RentSale = () => {
 			<div className="--inner">
 				<h1>Available Sites</h1>
 				<br/>
-				<table className="site_table" style={{width: "90%"}}>
+				<table className="site_table" style={{width: "90%", fontSize: "16px"}}>
 					<thead>
-						<tr>
-							<th>Lot Num</th>
-							<th>Name</th>
-							<th>Price</th>
-							<th>Category</th>
-							<th>Description</th>
-							<th>Status</th>
+						<tr className="bg-dark text-black">
+							<th style={{width: "4%", textAlign: "center" }}>Lot Num</th>
+							<th style={{width: "12%",  textAlign: "center" }}>Name</th>
+							<th style={{width: "12%",  textAlign: "center" }}>Price</th>
+							<th style={{width: "12%",  textAlign: "center" }}>Category</th>
+							<th style={{width: "20%",  textAlign: "center" }}>Description</th>
+							<th style={{width: "15%",  textAlign: "center" }}>Status</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>15</td>
-							<td>Westend</td>
-							<td>$20,000</td>
-							<td>Entertainment</td>
-							<td>Beautiful site</td>
-							<td>Yearly rental</td>
+							<td style={{textAlign: "center" }}>15</td>
+							<td>&nbsp; Central Park</td>
+							<td style={{textAlign: "center" }}>$110,000</td>
+							<td style={{textAlign: "center" }}>Housing</td>
+							<td>&nbsp; 1900 sqft lot, close to amenities!</td>
+							<td style={{textAlign: "center" }}><i>Lot Sale</i></td>
 						</tr>
 						<tr>
-                            <td>20</td>
-                            <td>South Crevasse</td>
-                            <td>$1,000</td>
-                            <td>Social</td>
-                            <td>Adventurous Route</td>
-                            <td>Monthly rental</td>
+                            <td style={{textAlign: "center" }}>20</td>
+                            <td>&nbsp; Deer Lake</td>
+                            <td style={{textAlign: "center" }}>$2,000</td>
+                            <td style={{textAlign: "center" }}>Housing</td>
+                            <td>&nbsp; 1100 sqft lot, available now!</td>
+                            <td style={{textAlign: "center" }}><i>Monthly rental</i></td>
                         </tr>
                         <tr>
-                            <td>13</td>
-                            <td>Eastern Forest</td>
-                            <td>$10,000</td>
-                            <td>Entertainment</td>
-                            <td>Great Space</td>
-                            <td>Yearly rental</td>
+                            <td style={{textAlign: "center" }}>13</td>
+                            <td>&nbsp; Eastern Forest</td>
+                            <td style={{textAlign: "center" }}>$10,000</td>
+                            <td style={{textAlign: "center" }}>Entertainment</td>
+                            <td>&nbsp; Great Space</td>
+                            <td style={{textAlign: "center" }}><i>Yearly rental</i></td>
                         </tr>
                         <tr>
-                            <td>12</td>
-                            <td>West Park</td>
-                            <td>$100</td>
-                            <td>Entertainment</td>
-                            <td>For Various Activities</td>
-                            <td>Daily rental</td>
+                            <td style={{textAlign: "center" }}>12</td>
+                            <td>&nbsp; South Crevasse</td>
+                            <td style={{textAlign: "center" }}>$100</td>
+                            <td style={{textAlign: "center" }}>Social</td>
+                            <td>&nbsp; Group Hiking Tour</td>
+                            <td style={{textAlign: "center" }}><i>Daily rental</i></td>
                         </tr>
 					</tbody>
 				</table>
@@ -69,13 +69,13 @@ const RentSale = () => {
 				<div className='cards__container'>
 					<div className='cards__wrapper'>
 						<ul className='cards__items'>
-							<CardItem src={image1} text='$20,000/year' label='Housing' />
+							<CardItem src={image1} text='$50,000/year' label='Housing' />
 							<CardItem src={image3} text='$30,000/year' label='Entertainment' />
 
 						</ul>
 						<ul className='cards__items'>
-							<CardItem src={image2} text='$1000/day' label='Day use' />
-							<CardItem src={image4} text='$10,000/year' label='Storage' />
+							<CardItem src={image2} text='$1000/month' label='Storage' />
+							<CardItem src={image4} text='$100/day' label='Day Use' />
 						</ul>
 					</div>
 				</div>

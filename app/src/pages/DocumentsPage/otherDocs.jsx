@@ -137,13 +137,13 @@ const OtherDocs = () => {
                 <div className="table-responsive">
                     <table className="table">
                         <tr className="bg-dark text-black">
-                            <th style={{ width: "9%" }}>&nbsp;Doc_id</th>
-                            <th style={{ width: "9%" }}>&nbsp;Doc_Cat</th>
-                            <th style={{ width: "16%" }}>&nbsp;Doc_name</th>
-                            <th style={{ width: "16%" }}>&nbsp;Date_created</th>
-                            <th style={{ width: "18%" }}>&nbsp;Description</th>
-                            <th style={{ width: "8%" }}>&nbsp;Delete</th>
-                            <th style={{ width: "8%" }}>&nbsp;Edit</th>
+                            <th style={{ width: "9%", textAlign: "center" }}>&nbsp;Doc Id</th>
+                            <th style={{ width: "9%", textAlign: "center" }}>&nbsp;Doc Cat</th>
+                            <th style={{ width: "25%", textAlign: "center" }}>&nbsp;Doc Name</th>
+                            <th style={{ width: "16%", textAlign: "center" }}>&nbsp;Date Created</th>
+                            <th style={{ width: "18%", textAlign: "center" }}>&nbsp;Description</th>
+                            <th style={{ width: "8%", textAlign: "center" }}>&nbsp;Delete</th>
+                            <th style={{ width: "8%", textAlign: "center" }}>&nbsp;Edit</th>
                         </tr>
                     </table>
                     {documents.map(park_document =>
@@ -151,13 +151,13 @@ const OtherDocs = () => {
                         <div key={park_document.id}>
                             <table className="table">
                                 <tr>
-                                    <td style={{ width: "9%" }}>&nbsp;{park_document.document_id}</td>
-                                    <td style={{ width: "9%" }}>&nbsp;{park_document.document_category}</td>
-                                    <td style={{ width: "16%" }}><span
+                                    <td style={{ width: "9%", textAlign: "center" }}>&nbsp;{park_document.document_id}</td>
+                                    <td style={{ width: "9%", textAlign: "center" }}>&nbsp;{park_document.document_category}</td>
+                                    <td style={{ width: "25%" }}><span
                                         id={park_document.document_name}>{park_document.document_name}</span><input
                                             id={park_document.document_id} type="text"
                                             style={{ display: "none", width: "67%" }} /></td>
-                                    <td style={{ width: "16%" }}>&nbsp;{park_document.create_date}</td>
+                                    <td style={{ width: "16%", textAlign: "center" }}>&nbsp;{park_document.create_date}</td>
                                     <td style={{ width: "18%" }}><span
                                         id={park_document.description}>{park_document.description}</span><input
                                             id={park_document.document_id + "a"} type="text"
@@ -167,7 +167,7 @@ const OtherDocs = () => {
                                     <td>
                                         <Button onClick={() => {deleteDocument(park_document.document_id);
                                         window.location.reload();}}
-                                            style={{ width: "8%" }}><FontAwesomeIcon icon={faTrash} /></Button>
+                                            style={{ width: "100%" }}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </td>
 
                                     <td id={park_document.id + "c"}>
@@ -184,7 +184,7 @@ const OtherDocs = () => {
                                                 btn.setAttribute("onclick", updateDocument(park_document.id, park_document.creatorId, document.getElementById(park_document.id).value,
                                                     park_document.createDate, document.getElementById(park_document.id + "a").value, park_document.file));
                                             }}
-                                            style={{ width: "8%" }}><FontAwesomeIcon icon={faEdit} /></Button>
+                                            style={{ width: "100%" }}><FontAwesomeIcon icon={faEdit} /></Button>
                                     </td>
 
                                 </tr>
@@ -225,14 +225,14 @@ const OtherDocs = () => {
                                     <td style={{background: "#bcc1c4", width: "0.10%"}}>
                                         File ID:{link.fileId}
                                     </td>
-                                    <td style={{background: "#bcc1c4"}}>
+                                    <td style={{background: "#bcc1c4", width: "50%"}}>
                                         <a href={link.url}> {link.name}</a>
                                     </td>
                                     <td>
                                         <Button onClick={() => {deleteFile(link.name);
                                         window.location.reload();
                                              }}
-                                            style={{ width: "5%" }}><FontAwesomeIcon icon={faTrash} /></Button>
+                                            style={{ width: "100%" }}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </td>
                                 </table>
                             </div>
