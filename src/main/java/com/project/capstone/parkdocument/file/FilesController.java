@@ -50,7 +50,7 @@ public class FilesController {
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
     ///api/v1/downloadFile/{fileCode}
-    @GetMapping("/api/v1/downloadFile/{filename}")
+    @GetMapping("/api/v1/downloadFile/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getFile(@PathVariable("filename") String filename) {
         // get rid of white spaces
