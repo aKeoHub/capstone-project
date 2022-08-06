@@ -84,12 +84,12 @@ const OtherDocs = () => {
             })
     }
 
-    function deleteFile(id) {
+    function deleteFile(filename) {
 
-        fetch('api/v1/files/delete/' + id, {
+        fetch('/api/v1/deleteFile/' + filename, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        }).then(response => response.json())
+        })
             .then(data => {
                 setLoading(false);
                 console.log(data);
@@ -198,7 +198,8 @@ const OtherDocs = () => {
                                     </td>
                                     <td>
                                         <Button onClick={() => {deleteFile(link.name);
-                                        window.location.reload();}}
+                                        window.location.reload();
+                                             }}
                                             style={{ width: "8%" }}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </td>
                                 </table>

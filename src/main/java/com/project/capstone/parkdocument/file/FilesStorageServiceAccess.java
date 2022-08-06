@@ -55,6 +55,7 @@ public class FilesStorageServiceAccess implements FilesStorageService{
     try {
         Path file = root.resolve(filename);
         Resource resource = new UrlResource(file.toUri());
+        System.out.println();
         if (resource.exists() || resource.isReadable()) {
             Files.deleteIfExists(file);
         } else {

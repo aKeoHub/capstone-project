@@ -50,9 +50,9 @@ public class FilesController {
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
     ///api/v1/downloadFile/{fileCode}
-    @GetMapping("/api/v1/downloadFile/{filename:.+}")
+    @GetMapping("/api/v1/downloadFile/{filename}")
     @ResponseBody
-    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+    public ResponseEntity<Resource> getFile(@PathVariable("filename") String filename) {
         // get rid of white spaces
         filename= URLDecoder.decode(filename, StandardCharsets.UTF_8).replaceAll("[\s|\u00A0]+", " ");
         Resource file = storageService.load(filename);
@@ -61,8 +61,9 @@ public class FilesController {
     }
 
     @DeleteMapping ("/api/v1/deleteFile/{filename:.+}")
+    @ResponseBody
     public ResponseEntity<?> deleteFile(@PathVariable String filename) {
-        filename= URLDecoder.decode(filename, StandardCharsets.UTF_8).replaceAll("[\s|\u00A0]+", " ");
+        //filename= URLDecoder.decode(filename, StandardCharsets.UTF_8).replaceAll("[ ]", "%20");
         storageService.deleteFile(filename);
         return ResponseEntity.ok().build();
     }
