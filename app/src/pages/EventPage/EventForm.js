@@ -83,24 +83,32 @@ const EventForm = () => {
       }).then(response => response.json())
                     .then(data => {
                         console.log(data);
-                        window.location.reload();
+                     window.location.reload();
                     })
+                    .catch((error) => {
+                            alert("Event Failed to Add");
+                            window.location.reload();
+                        })
   }
 
   return (
     <form onSubmit={handleSubmit}>
+
       <label>Enter Event Name:
       <input
         type="text"
         name="eventName"
         pattern="[a-zA-Z0-9,#.-]+"
         max="20"
+        size="40"
         placeholder="Name of Event!"
         onChange={(e) => {
           setEventName(e.target.value);
           }}
       />
       </label>
+
+
       <label>Select Category:
       <select
         className="form-select"
@@ -127,6 +135,7 @@ const EventForm = () => {
               pattern="/[<]*<[\s\u200B]*script[\s\u200B]*>.*[/]*[<]*<[\s\u200B]*\/[\s\u200B]*script[\s\u200B]*>/ig;"
               min="10"
               max="30"
+              size="40"
               placeholder="A location must be specified"
               onChange={(e) => {
                 setLocation(e.target.value);
@@ -134,7 +143,7 @@ const EventForm = () => {
             />
         </label>
         <label>Enter Description:
-            <textarea name="description" value={textarea} max="120" onChange={textAreaChange} />
+            <textarea name="description" value={textarea} max="120" size="100" onChange={textAreaChange} />
         </label>
         <label for="startDate">Start Date:
           <input type="date" id="startDate" name="startDate" onChange={(e) => { setStartDate(e.target.value);}}/>
@@ -142,12 +151,13 @@ const EventForm = () => {
         <label for="endDate">End Date:
           <input type="date" id="endDate"  name="endDate" onChange={(e) => { setEndDate(e.target.value);}}/>
         </label>
-        <input
-            type="file"
-            //style={{ display: 'none' }}
-            onChange={onUploadFile}
-        />
-        <AddButtonEvent onClick={AddEvent}>Add Event</AddButtonEvent>
+        <br></br>
+        <br></br>
+        <AddButtonEvent style="float: right;" onClick={AddEvent}>Add Event</AddButtonEvent>
+
+
+
+
     </form>
   )
 };
