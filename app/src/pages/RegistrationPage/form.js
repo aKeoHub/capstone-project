@@ -54,7 +54,7 @@ const RegistrationForm = () => {
             .then((json) => {
                 console.log(json)
                 if (username === null){
-                    alert("Event Failed to Add, Please Review your Inputs");
+                    alert("Failed to Register, Please Review your Inputs");
                 } else {
                      window.location.replace("/login");
                 }
