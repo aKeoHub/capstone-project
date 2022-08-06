@@ -9,9 +9,9 @@ const DocForm = () => {
     const [inputs, setInputs] = useState({});
     const [docId, setDocId] = useState(0);
     const [docCat, setDocCat] = useState(0);
-    const [docName, setDocName] = useState("");
+    const [docName, setDocName] = useState(null);
     const [dateCreated, setDateCreated] = useState({varOne: new Date()});
-    const [textarea, setTextarea] = useState("");
+    const [textarea, setTextarea] = useState(null);
     const [file, setFile] = useState();
     const token = localStorage.getItem("accessToken");
     const username = (localStorage.getItem('username'));
@@ -83,7 +83,7 @@ const DocForm = () => {
             })
             .catch((error) => {
                 alert("Document Failed to Add");
-                window.location.reload();
+
             })
     }
 

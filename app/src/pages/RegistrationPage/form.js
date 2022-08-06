@@ -6,7 +6,7 @@ const RegistrationForm = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [userId, setIdReg] = useState(0);
-    const [username, setUsernameReg] = useState("");
+    const [username, setUsernameReg] = useState(null);
     const [password, setPasswordReg] = useState("");
     const [firstname, setFirstnameReg] = useState("");
     const [lastname, setLastnameReg] = useState("");
@@ -53,8 +53,13 @@ const RegistrationForm = () => {
             // Displaying results to console
             .then((json) => {
                 console.log(json)
-                window.location.replace("/")
-            });
+                if (username === null){
+                    alert("Event Failed to Add, Please Review your Inputs");
+                } else {
+                     window.location.replace("/login");
+                }
+            })
+            ;
 
         if (loading) {
             return <p>Loading...</p>;
@@ -98,8 +103,11 @@ const RegistrationForm = () => {
             // Displaying results to console
             .then((json) => {
                 console.log(json)
+//                window.location.replace("/")
+                }
                 //this.props.history.push("/profile");
-            });
+                );
+
 
         if (loading) {
             return <p>Loading...</p>;
