@@ -3,6 +3,13 @@ package com.project.capstone.forum;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service Interface for the Forum Object.
+ * Methods not to be Documented as they're self-explanatory instances
+ *
+ * @version 1.0
+ * @author Cole Humeniuk
+ */
 public interface ForumService {
 
     Optional<Forum> getForum(Integer id);
