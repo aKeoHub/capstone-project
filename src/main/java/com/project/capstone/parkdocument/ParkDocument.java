@@ -32,6 +32,7 @@ import java.util.List;
 public class ParkDocument implements Serializable {
 
     /**
+     * SQL Column and Primary Key
      */
     @Id
     @Column(name = "document_id", nullable = false)
