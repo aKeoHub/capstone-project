@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * The Repository Interface for the Item Entity.
+ */
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Integer> {
         @Query("" +
