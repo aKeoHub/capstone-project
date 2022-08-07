@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 
@@ -34,8 +33,8 @@ public class CapstoneApplication {
 	CommandLineRunner run(UserService userService, ParkService parkService, CategoryService categoryService, EventService eventService) {
 		return args -> {
 
-			userService.saveUser(new User( 0, "user", "1234", "user", "regular", "user@live.ca", 1, LocalDate.now()));
-			userService.saveUser(new User(0 , "admin", "1234", "admin", "admin", "admin@live.ca", 1, LocalDate.now()));
+			userService.saveUser(new User(0, "user", "1234", "user", "regular", "user@live.ca", 1, LocalDate.now()));
+			userService.saveUser(new User(0, "admin", "1234", "admin", "admin", "admin@live.ca", 1, LocalDate.now()));
 			userService.saveUser(new User(0, "manager", "1234", "manager", "manager", "manager@live.ca", 1, LocalDate.now()));
 
 
@@ -44,20 +43,12 @@ public class CapstoneApplication {
 			userService.addRoleToUser("manager", "ROLE_MANAGER");
 
 
-
-
-
-
 		};
 	}
-
-
-	@Bean
-	public RestTemplate getRestTemplate(){
-		return new RestTemplate();
-	};
-
 }
+
+
+
 
 
 

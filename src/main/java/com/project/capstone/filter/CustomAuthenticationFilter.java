@@ -4,18 +4,8 @@ import com.auth0.jwt.JWT;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,9 +13,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -39,30 +26,47 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * Filter for Authenticating a user. Extends UsernamePasswordAuthenticationFilter.
+ *
+ * @author Andy Keobounphan
+ * @version 1.0
+ */
 @Slf4j
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+    /**
+     * Instance for the AuthenticationManager.
+     */
     private final AuthenticationManager authenticationManager;
 
-
-    @Value("${jwt.secret}")
+    /**
+     * Jwt Secret key.
+     */
     private String jwtSecret = "capstoneSAITsecretKey";
-    @Value("${jwt.expirationDateInMs}")
-    private int jwtExpirationMs;
-
-    @Value("${jwt.refreshExpirationDateInMs}")
-    private int jwtRefreshMs;
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
 
 
+//    @Bean
+//    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+//        return new PropertySourcesPlaceholderConfigurer();
+//    }
 
+    /**
+     * Constructor for the filter which takes in an authenticationManager.
+     *
+     * @param authenticationManager The authenticationManager instance.
+     */
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
+    /**
+     * The method that handles every authentication attempt.
+     *
+     * @param request  An HTTP request for logging in.
+     * @param response Response used to respond to the end user.
+     * @return Return a authenticated user token.
+     * @throws AuthenticationException Thrown when the authentication is unsuccessful.
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String username = request.getParameter("username");
@@ -90,8 +94,17 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     }
 
+    /**
+     * The method that handles successful authentications.
+     *
+     * @param request        An HTTP request for logging in.
+     * @param response       Respond to the end user with the tokens.
+     * @param chain          Pass in a filter chain.
+     * @param authentication An authentication class used to verify the user.
+     * @throws IOException Thrown when the users credentials are incorrect.
+     */
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException {
         User user = (User) authentication.getPrincipal();
 
         // YOU SHOULD NOT BE DOING THIS, YOU NEED TO CHANGE SECRET AND SAVE IT SOMEWHERE SECURE AND ENCRYPT IT, PASS IT IN HERE FROM A UTILITY CLASS. 1:17 in video
@@ -110,25 +123,25 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
-//        response.setHeader("accessToken",access_token);
-//        response.setHeader("refreshToken",refreshToken);
         Map<String, Object> userInfo = new HashMap<>();
-        //Map<String, User> userMap = new HashMap<>();
-        //userMap.put("user", user);
         userInfo.put("accessToken", accessToken);
         userInfo.put("refreshToken", refreshToken);
         userInfo.put("username", user.getUsername());
-
-
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), userInfo);
-        //new ObjectMapper().writeValue(response.getOutputStream(), userMap);
         log.info("jwt token returned {}", userInfo.get("accessToken"));
-        //response.sendRedirect("http://localhost:3000");
 
 
     }
 
+    /**
+     * Handles all unsuccessful authentications.
+     *
+     * @param request  Takes in an HTTP request.
+     * @param response Used to respond to the end user.
+     * @param failed   Thrown if the request failed.
+     * @throws IOException Thrown if the user is not found.
+     */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         if (failed != null) {
