@@ -54,7 +54,7 @@ public class FilesController {
     @ResponseBody
     public ResponseEntity<Resource> getFile(@PathVariable("filename") String filename) {
         // get rid of white spaces
-        filename= URLDecoder.decode(filename, StandardCharsets.UTF_8).replaceAll("[\s|\u00A0]+", " ");
+        filename= URLDecoder.decode(filename, StandardCharsets.UTF_8).replaceAll("[\\s|\u00A0]+", " ");
         Resource file = storageService.load(filename);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
