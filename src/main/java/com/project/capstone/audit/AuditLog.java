@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * THIS ENTIRE CLASS IS DEPRECIATED AND NOT USED
+ */
 @Entity
 @Table(name = "audit_log")
 @RequiredArgsConstructor

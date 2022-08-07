@@ -7,6 +7,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * THIS ENTIRE CLASS IS DEPRECIATED AND NOT USED
+ */
 @Entity
 @Table(name ="response")
 @RequiredArgsConstructor

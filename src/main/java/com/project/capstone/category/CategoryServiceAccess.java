@@ -12,32 +12,60 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The Category Service Implementation Class declaring functionality. Extends the CategoryService Interface
+ *
+ * Denoted with Spring Annotations to declare this Service class has rights to make backend data-layer SQL changes(Transactional)
+ *
+ * @version 1.0
+ * @author Cole Humeniuk
+ */
 @Service
 @Transactional
 public class CategoryServiceAccess implements CategoryService{
+    /**
+     * Instantiates an Instance of the Category Repository (CRUD FUNCTIONS)
+     */
     @Autowired
     private CategoryRepository categoryRepository;
 
+    /**
+     * Uses Java Optionality to fetch Category Entities by ID (PK)
+     * @param id
+     * @return Requested Category Entity
+     */
     @Override
     public Optional<Category> getCategory(Integer id){
         return categoryRepository.findById(id);
     }
 
+    /**
+     * Persists a Category Entity to the database
+     * @param category
+     * @return
+     */
     @Override
     public Category saveCategory(Category category){
- //       if (categoryRepository.checkId(category.getCategoryId())) {
-  //          throw new RuntimeException("This id already Exists. Try PUT method");
-  //      } else {
-            System.out.println(category);
+
                 return categoryRepository.save(category);
         }
-  //  }
 
+    /**
+     * Fetches all Category Entities from the SQL Database
+     * @return Fetches Categories
+     */
     @Override
     public List<Category> fetchCategoryList() {
         return (List<Category>) categoryRepository.findAll();
     }
 
+    /**
+     * Edit the requested Category Entity via ID (PK)
+     * @param category Object
+     * @param categoryId
+     * @return updated Category Entity
+     * @throws CategoryNotFoundException
+     */
     @Override
     public Category updateCategory (Category category, Integer categoryId) throws CategoryNotFoundException{
 
@@ -56,6 +84,11 @@ public class CategoryServiceAccess implements CategoryService{
         }
     }
 
+    /**
+     * Delete the requested Category Entity using its ID (PK)
+     * @param categoryId
+     * @throws CategoryNotFoundException
+     */
     @Override
     public void deleteCategoryById(Integer categoryId) throws CategoryNotFoundException {
         Optional<Category> currentCategoryOptional = getCategory(categoryId);

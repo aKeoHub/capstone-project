@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.ObjectIdResolver;
 
 import javax.persistence.EntityManager;
 
+/**
+ * Assists the (De)Serialization of classes by establishing ID's for entity classes.
+ */
 public class EntityIdResolver implements ObjectIdResolver {
     private EntityManager entityManager;
 

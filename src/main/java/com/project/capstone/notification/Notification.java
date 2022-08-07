@@ -5,6 +5,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/**
+ * THIS ENTIRE CLASS IS DEPRECATED AND NOT USED
+ */
 @Entity
 @Table(schema = "capstonedb" , name = "notification")
 @RequiredArgsConstructor

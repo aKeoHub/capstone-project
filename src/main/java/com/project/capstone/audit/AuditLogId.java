@@ -7,6 +7,9 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * THIS ENTIRE CLASS S DEPRECIATED AND NOT USED
+ */
 @Embeddable
 public class AuditLogId implements Serializable {
     private static final long serialVersionUID = -2238440107078168984L;
