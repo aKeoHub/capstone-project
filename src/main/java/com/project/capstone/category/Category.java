@@ -39,7 +39,7 @@ public class Category implements Serializable {
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
-    
+
     /**
      * SQL Column
      */
