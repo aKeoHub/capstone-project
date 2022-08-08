@@ -65,18 +65,18 @@ public class CapstoneApplication {
 			categoryService.saveCategory(new Category(6, "Park Announcement", "NOTICE"));
 			categoryService.saveCategory(new Category(7, "Eviction Notice", "PRIORITY"));
 
-			parkService.createDocument(new ParkDocument(1, 1, 3, "PARK RULES AND GUIDELINES", LocalDate.parse("2020-03-19"), "This document explains the basic park guidelines", null));
-			parkService.createDocument(new ParkDocument(2, 1, 3, "PARK EVENTS POLICY", LocalDate.parse("2021-07-12"), "This document explains hosting events", null));
+			parkService.createDocument(new ParkDocument(1, parkService.returnDocCategoryId(1), 3, "PARK RULES AND GUIDELINES", LocalDate.parse("2020-03-19"), "This document explains the basic park guidelines", null));
+			parkService.createDocument(new ParkDocument(2, parkService.returnDocCategoryId(1), 3, "PARK EVENTS POLICY", LocalDate.parse("2021-07-12"), "This document explains hosting events", null));
 
-			eventService.createEvent(new Event(0, 0, 2,"EuroFest", "Main Square", "EuroFest is coming later this year!", LocalDate.parse("2022-04-10"), LocalDate.parse("2022-04-17"), null));
-			eventService.createEvent(new Event(0,0, 2,"Fastball Open", "North Field", "Come test your skills against the parks best!", LocalDate.parse("2022-05-20"), LocalDate.parse("2022-05-20"), null));
-			eventService.createEvent(new Event(0, 0, 2,"Color Parade", "North Field", "Get creative with local body artists and live entertainment next spring!", LocalDate.parse("2023-05-20"), LocalDate.parse("2023-05-20"), null));
-			eventService.createEvent(new Event(0, 0, 2,"Car Meet", "Main Square", "Proud of your ride? Come show it off!", LocalDate.parse("2023-06-04"), LocalDate.parse("2023-06-04"), null));
+			eventService.createEvent(new Event(1, 3, 2,"EuroFest", "Main Square", "EuroFest is coming later this year!", LocalDate.parse("2022-04-10"), LocalDate.parse("2022-04-17"), null));
+			eventService.createEvent(new Event(2,3, 2,"Fastball Open", "North Field", "Come test your skills against the parks best!", LocalDate.parse("2022-05-20"), LocalDate.parse("2022-05-20"), null));
+			eventService.createEvent(new Event(3, 3, 2,"Color Parade", "North Field", "Get creative with local body artists and live entertainment next spring!", LocalDate.parse("2023-05-20"), LocalDate.parse("2023-05-20"), null));
+			eventService.createEvent(new Event(4, 3, 2,"Car Meet", "Main Square", "Proud of your ride? Come show it off!", LocalDate.parse("2023-06-04"), LocalDate.parse("2023-06-04"), null));
 
 
-			forumService.createForum(new Forum(0, 3, "Welcome", "Please feel free to use the page as often as you require, but remember to follow park guidelines and policys! - Manager", LocalDate.parse("2022-06-10"), 1, "Annoucment", "Enjoy the forums page"));
-			forumService.createForum(new Forum(0, 1, "Ask me anything", "I am usually around the Mountain View lot 46 if anyone wants to chat in person", LocalDate.parse("2022-12-22"), 1, "AMA", "Enjoy the forums page"));
-			forumService.createForum(new Forum(0, 1, "I need help", "Theres a snake by my place and I need help removing it", LocalDate.parse("2022-09-12"), 1, "Annoucment", "Help"));
+			forumService.createForum(new Forum(1, 3, "Welcome", "Please feel free to use the page as often as you require, but remember to follow park guidelines and policys! - Manager", LocalDate.parse("2022-06-10"), 1, "Annoucment", "Enjoy the forums page"));
+			forumService.createForum(new Forum(2, 1, "Ask me anything", "I am usually around the Mountain View lot 46 if anyone wants to chat in person", LocalDate.parse("2022-12-22"), 1, "AMA", "Enjoy the forums page"));
+			forumService.createForum(new Forum(3, 1, "I need help", "Theres a snake by my place and I need help removing it", LocalDate.parse("2022-09-12"), 1, "Annoucment", "Help"));
 
 
 

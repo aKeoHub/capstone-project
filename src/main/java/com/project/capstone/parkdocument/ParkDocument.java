@@ -93,6 +93,9 @@ public class ParkDocument implements Serializable {
     @ToString.Exclude
     private List<AuditLog> auditLogs = new ArrayList<>();
 
+    @JsonIgnore
+    private final Integer documentCategoryInt;
+
     /**
      * Required args Constructor assisting in Spring Annotations
      * @param documentId
@@ -104,14 +107,14 @@ public class ParkDocument implements Serializable {
      * @param file
      */
     public ParkDocument(@JsonProperty("document_id") Integer documentId,
-                        @JsonProperty("document_category") Integer documentCategory,
+                        @JsonProperty("document_category") Integer documentCategoryInt,
                         @JsonProperty("creator_id") Integer creatorId,
                         @JsonProperty("document_name") String documentName,
                         @JsonProperty("create_date") LocalDate createDate,
                         @JsonProperty("description") String description,
                         @JsonProperty("file") byte[] file) {
         this.documentId = documentId;
-        this.documentCategory.setCategoryId(documentCategory);
+        this.documentCategory = documentCategoryInt;
         this.creatorId.setUserId(creatorId);
         this.documentName = documentName;
         this.createDate = createDate;
