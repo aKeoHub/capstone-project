@@ -3,13 +3,14 @@ import React from 'react';
 import axios from "axios";
 import {AddButtonEvent} from "../../components/Button/AddButtonEvent";
 
-
+//Component of Editing the selected Event.
 const EventEditForm = () => {
+
+    //Constants and sets for all the use states of variables
     const [inputs, setInputs] = useState({});
     const [eventId, setEventId] = useState(0);
     const [categoryId, setCategoryId] = useState(0);
     const [eventName, setEventName] = useState("");
-    // const [eventCreator, setEventCreator] = useState('');
     const [location, setLocation] = useState("");
     const [startDate, setStartDate] = useState({varOne:new Date()});
     const [endDate, setEndDate] = useState({varOne:new Date()});
@@ -20,13 +21,8 @@ const EventEditForm = () => {
     const [user, setUser] = useState('');
     const [Events, setEvents] = useState({});
     const [loading, setLoading] = useState('');
-//  const handleChange = (event) => {
-//    const name = event.target.name;
-//    const value = event.target.value;
-//    setInputs(values => ({...values, [name]: value}));
-//    setEventName(event.target.eventName.value);
-//  }
 
+    //Loads all the events
     useEffect(() => {
         setLoading(true);
 
@@ -59,25 +55,31 @@ const EventEditForm = () => {
             return <p>Loading...</p>;
         }
 
+    //Handles the change in the textarea.
     const textAreaChange = (event) => {
     setTextarea(event.target.value)
     }
 
+    //Handles the name change for event.
     const eventNameChange = (event) => {
        setEventName(event.target.value)
     }
 
+    //Handles the Submit of the Forum
     const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event.target.eventName.value);
     console.log(inputs);
 
     }
+
+    //Handles the Uploading of Files
     const onUploadFile = e => {
         console.log('file: ', file);
         setFile(e.target.files[0]);
     };
 
+        //Handles the editing of Events
         const editEvents = async(eventId) => {
 
                 fetch('api/v1/events/edit/' + eventId, {
@@ -104,7 +106,9 @@ const EventEditForm = () => {
                                   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>\
+
+        {/*The form for Editing the Event*/}
       <label>Enter Event Name:
       <input
         type="text"

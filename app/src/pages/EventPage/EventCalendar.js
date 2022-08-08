@@ -2,20 +2,16 @@ import React, {useState} from "react";
 import Calendar from "react-calendar";
 import "./Event.css";
 
-//import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function EventCalendar() {
 
-//    const [value, onChange] = useState(new Date());
+    //Constants and sets for all the use states of variables
     const [date, setDate] = useState(new Date());
-//    const [users, setUsers] = useState([]);
-//    const [loading, setLoading] = useState(false);
-//
     const [category, setCategory] = useState([]);
     const [categoryText, setCategoryText] = useState(`No Category is selected`);
     const [calendarText, setCalendarText] = useState(`No Date is selected`);
-
- const events = [
+    const events = [
         {
             title: "Big Meeting",
             allDay: true,
@@ -32,17 +28,17 @@ function EventCalendar() {
             start: new Date(2021, 6, 20),
             end: new Date(2021, 6, 23),
         },
-    ];
+        ];
     const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
     const [allEvents, setAllEvents] = useState(events);
 
 
-
+    //Handling add events.
     function handleAddEvent() {
         setAllEvents([...allEvents, newEvent]);
     }
 
-
+    //Handling the date changing
     const onDateChange = (newDate) => {
         setDate(newDate);
         const selectedDate = newDate;
@@ -50,6 +46,7 @@ function EventCalendar() {
         setCalendarText(`Date: ${newDate.toLocaleDateString()}`);
       }
 
+      //Handling the Category changing
     const onCategoryChange = (category) => {
         setCategory(category);
         setCategoryText(`${category.toString()}`);
@@ -63,6 +60,7 @@ return (
         <h1 class="white-text"> Whats Going On? </h1>
     </div>
     <div>
+        {/*The calendar itself*/}
         <div class="calendarContainer">
             <div class="calendarHeaderDiv">
                 <div class="row">

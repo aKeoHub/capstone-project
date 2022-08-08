@@ -6,7 +6,7 @@ import image2 from '../../images/img_2.png';
 import image3 from '../../images/img_3.png';
 import image4 from '../../images/img_4.png';
 
-
+//Component for the Single Cards.
 function Cards() {
     return (
         <div className='cards'>

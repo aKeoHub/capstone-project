@@ -6,6 +6,7 @@ import EventService from './EventService/EventService';
 import EventEditForm from './EventEditForm';
 import {EditButtonEvent} from "../../components/Button/EditButtonEvent";
 
+
 function EventEditModal() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

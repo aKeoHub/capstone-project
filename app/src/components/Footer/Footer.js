@@ -4,6 +4,7 @@ import { LoginButton } from '../Button/LoginButton';
 import { Link } from 'react-router-dom';
 import image from '../../images/WendysRVTrans.png';
 
+//Component for the Footer for all the Pages.
 function Footer() {
     return (
         <div className='--footer-container'>

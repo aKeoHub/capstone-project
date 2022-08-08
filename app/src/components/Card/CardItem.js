@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Component for Card Items
 function CardItem(props) {
     return (
         <>

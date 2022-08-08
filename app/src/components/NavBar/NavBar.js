@@ -8,14 +8,17 @@ import AuthService from "../../services/auth.service";
 import { LogoutButton } from "../Button/LogoutButton";
 import { SignUpButton } from "../Button/SignUpButton";
 
+//Component for the Navigation Bar on all the pages when not logged in.
 function NavBar() {
+
+  //Constants and sets for all the use states of variables
   const token = localStorage.getItem("accessToken");
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
-
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
+  //Shows button for mobile version
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -30,6 +33,7 @@ function NavBar() {
 
   window.addEventListener("resize", showButton);
 
+  //If Logged in go to profile page if not you need to be logged in.
   let loggedIn = "";
   if (token) {
     loggedIn = "/Profile";
@@ -42,12 +46,16 @@ function NavBar() {
   return (
 
       <>
+        {/* The component of the NavBar */}
         <nav className='--navbar'>
           <div className='--navbar-container'>
-            <Link to='/' className='--navbar-logo' onClick={closeMobileMenu}>
 
+            {/* NavBar Logo */}
+            <Link to='/' className='--navbar-logo' onClick={closeMobileMenu}>
               <img className='logoimg'src={image} alt='Logo' />
             </Link>
+
+            {/* HyperLinks for Pages*/}
             <div className='--menu-icon' onClick={handleClick}>
               <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
             </div>
@@ -104,6 +112,8 @@ function NavBar() {
                 </Link>
               </li>
             </ul>
+
+            {/* Login and Signup Buttons*/}
             {button && <LoginButton buttonStyle='--btn--outline'>LOGIN</LoginButton>}
             {button && <SignUpButton buttonStyle='--btn--outline'>SIGNUP</SignUpButton>}
           </div>

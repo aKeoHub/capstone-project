@@ -10,47 +10,44 @@ import {CancelButtonForum} from "../../components/Button/CancelButtonForum";
 
 
 
-
-
 const ForumLayout = () => {
 
 
 
 // Constants that are used to set variables and the states of the variables.
 
-    const [forums, setForums] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [forums, setForums] = useState([]);                 // Forum array that sets the forums
+    const [loading, setLoading] = useState(false);            // shows if the backend is still loading
 
-    const token = localStorage.getItem("accessToken");
-    const username = (localStorage.getItem('username'));
-    const [user, setUser] = useState([]);
+    const token = localStorage.getItem("accessToken");             // Access token of the user signed in.
+    const username = (localStorage.getItem('username'));           // Username of the user.
+    const [user, setUser] = useState([]);                     // Sets the user
 
-    const [showAdd, setShowAdd] = useState(false);
-    const handleCloseAdd = () => setShowAdd(false);
-    const handleShowAdd = () => setShowAdd(true);
+    const [showAdd, setShowAdd] = useState(false);            // Shows the Add Modal
+    const handleCloseAdd = () => setShowAdd(false);              // Closes the Add Modal
+    const handleShowAdd = () => setShowAdd(true);                // Opens the Add Modal
 
-    const [modalEditInfo, setModalEditInfo] = useState([]);
-    const [showEdit, setShowEdit] = useState(false);
-    const handleCloseEdit = () => setShowEdit(false);
-    const handleShowEdit = () => setShowEdit(true);
+    const [modalEditInfo, setModalEditInfo] = useState([]);   // Array of selected forum info to Edit
+    const [showEdit, setShowEdit] = useState(false);          // Shows the Edit Modal
+    const handleCloseEdit = () => setShowEdit(false);             // Closes the Edit Modal
+    const handleShowEdit = () => setShowEdit(true);               // Opens the Edit Modal
 
+    const [modalViewInfo, setModalViewInfo] = useState([]);    // Array of selected forum to View
+    const [showView, setShowView] = useState (false);          // Shows the View Modal
+    const handleCloseView = () => setShowView( false);            // Closes the View Modal
+    const handleShowView = () => setShowView( true);              // Opens the View Modal
 
-    const [modalViewInfo, setModalViewInfo] = useState([]);
-    const [showView, setShowView] = useState (false);
-    const handleCloseView = () => setShowView( false);
-    const handleShowView = () => setShowView( true);
+    const [showDelete, setShowDelete] = useState (false);      // Shows Delete Modal
+    const handleCloseDelete = () => setShowDelete( false);        // Closes the Delete Modal
+    const handleShowDelete = () => setShowDelete( true);          // Opens the Delete Modal
 
-    const [showDelete, setShowDelete] = useState (false);
-    const handleCloseDelete = () => setShowDelete( false);
-    const handleShowDelete = () => setShowDelete( true);
-
-    const [forumId, setForumIdReg] = useState(0);
-    const [title, setTitleReg] = useState(null);
-    const [subTitle, setSubTitleReg] = useState(null);
-    const [description, setDescriptionReg] = useState(null);
-    const [forumCategory, setForumCategoryReg] = useState(null);
-    const [picture_id, setPictureId] = useState(null);
-    const [createDate, setCreateDate] = useState(new Date());
+    const [forumId, setForumIdReg] = useState(0);              // Sets forum id to 0
+    const [title, setTitleReg] = useState(null);               // Sets title to null
+    const [subTitle, setSubTitleReg] = useState(null);         // Sets subtitle to null
+    const [description, setDescriptionReg] = useState(null);    // Sets description to null
+    const [forumCategory, setForumCategoryReg] = useState(null);// Sets forum category to null
+    const [picture_id, setPictureId] = useState(null);          // Sets picture id to null
+    const [createDate, setCreateDate] = useState(new Date());            // Sets create date to a new Date()
 
 
 //This will load all the forums into the forums array and display on forum page.
@@ -208,8 +205,6 @@ const ForumLayout = () => {
 
 
         }
-
-
 
 
     return (

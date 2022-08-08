@@ -5,12 +5,16 @@ import Button from "@material-ui/core/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 
-
+//Component of the Admin Page shows a table on the admin page.
 const AdminPage = () => {
+
+    //Constants and sets for all the use states of variables
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("accessToken");
     const username = localStorage.getItem("username");
+
+    //Loads all the users onto the page.
     useEffect(() => {
         setLoading(true);
 
@@ -22,7 +26,7 @@ const AdminPage = () => {
             })
     }, []);
 
-
+    //Deletes a selected user.
     function deleteUser(id) {
         setLoading(true)
         if (!username) {
@@ -48,6 +52,7 @@ const AdminPage = () => {
 
     return (
         <>
+            {/* The component of the Admin Table */}
             <div className="mx-auto mb-7 px-7 py-7" style={{width: "1070px", background: "#bcc1c4"}}>
                 <h1 className="text-secondary text-success mb-4">Users</h1>
                 <div className="table-responsive">
@@ -62,6 +67,8 @@ const AdminPage = () => {
                             {/*<th style={{width: "8%"}}>&nbsp;Edit</th>*/}
                         </tr>
                     </table>
+
+                    {/* Maps all the user to the table */}
                     {users.map(user =>
 
                         <div key={user.id}>

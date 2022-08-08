@@ -2,33 +2,50 @@ import {useState, useEffect} from 'react';
 import React from 'react';
 import axios from "axios";
 
+/**
+ * Adding a document Component
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const DocForm = () => {
 
+    /**
+     * Constants that are used to set variables and the states of the variables.
+     */
+    const [loading, setLoading] = useState(false);                            //Show if the page is loading or loaded
+    const [inputs, setInputs] = useState({});                                 //Inputs of the form to add Documents
+    const [docId, setDocId] = useState(0);                                    //Sets document id to 0
+    const [docCat, setDocCat] = useState(0);                                  //Sets document category to 0
+    const [docName, setDocName] = useState(null);                             //Sets document name to null
+    const [textarea, setTextarea] = useState(null);                           //Sets textarea to null
+    const [file, setFile] = useState();                                                //Sets file
+    const token = localStorage.getItem("accessToken");                            //Access token of the user signed in
+    const username = (localStorage.getItem('username'));                          //Username of the User
+    const [user, setUser] = useState('');                                     //Sets the user
+    const [createDate, setCreateDate] = useState(new Date());                          //Sets create date to a new Date()
 
-    const [loading, setLoading] = useState(false);
-    const [inputs, setInputs] = useState({});
-    const [docId, setDocId] = useState(0);
-    const [docCat, setDocCat] = useState(0);
-    const [docName, setDocName] = useState(null);
-    const [dateCreated, setDateCreated] = useState({varOne: new Date()});
-    const [textarea, setTextarea] = useState(null);
-    const [file, setFile] = useState();
-    const token = localStorage.getItem("accessToken");
-    const username = (localStorage.getItem('username'));
-    const [user, setUser] = useState('');
-    const [createDate, setCreateDate] = useState(new Date());
-
+    /**
+     * Changes state of text area.
+     * @param doc Document Object
+     */
     const textAreaChange = (doc) => {
         setTextarea(doc.target.value)
 
     }
 
+    /**
+     * Handles the Submitting of a Document.
+     * @param doc Document Object
+     */
     const handleSubmit = (doc) => {
         doc.preventDefault();
         console.log(doc.target.docName.value);
         console.log(inputs);
     }
-
+    /**
+     * Uploades the File
+     * @param e Event
+     */
     const onUploadFile = e => {
 
         //console.log('file: ', file);
@@ -58,8 +75,11 @@ const DocForm = () => {
             })
     }
 
-
-    const AddDocument = (doc) => {
+    /**
+     * Adds a Document to the Document Page
+     * @constructor
+     */
+    const AddDocument = () => {
         const todaysDate = new Date();
         console.log(todaysDate.toLocaleDateString());
         setCreateDate(todaysDate);
@@ -89,7 +109,9 @@ const DocForm = () => {
 
             })
     }
-
+    /**
+     * Loads the signed in user object.
+     */
     useEffect(() => {
         setLoading(true);
         const bodyParameters = {

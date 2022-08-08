@@ -2,10 +2,11 @@ import React from 'react';
 import './Button.css';
 import { Link } from 'react-router-dom';
 
+// All the button sizes and styles
 const STYLES = ['--btn--primary', '--btn--outline', '--btn--test'];
-
 const SIZES = ['--btn--medium', '--btn--large'];
 
+// The Login button for Home Page.
 export const LoginButton = ({
                            children,
                            type,
@@ -20,6 +21,8 @@ export const LoginButton = ({
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
     return (
+        <>
+        {/* The component of the Login Button Home Page */}
         <Link to='/login' className='--btn-mobile'>
             <button
                 className={`--btn ${checkButtonStyle} ${checkButtonSize}`}
@@ -29,5 +32,6 @@ export const LoginButton = ({
                 {children}
             </button>
         </Link>
+        </>
     );
 };

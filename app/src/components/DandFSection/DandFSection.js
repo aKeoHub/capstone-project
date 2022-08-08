@@ -4,7 +4,7 @@ import { DocumentsButton } from '../Button/DocumentsButton';
 import { ForumButton } from '../Button/ForumButton';
 import './DandFSection.css';
 
-
+//Component for Document and Forum section of the Home Page.
 function DandFSection() {
     return (
         <div className='dandf-container'>

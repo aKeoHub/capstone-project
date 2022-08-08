@@ -5,6 +5,7 @@ import { SignUpButton } from '../Button/SignUpButton';
 import './HeroSection.css';
 const token = localStorage.getItem("accessToken");
 
+//Component for the Login and Sign up section of the Home Page.
 function HeroSection() {
     if(!token) {
         return (

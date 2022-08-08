@@ -6,7 +6,6 @@ import RegistrationPage from "./pages/RegistrationPage";
 import EventPage from "./pages/EventPage/EventPage";
 import ForumPage from "./pages/ForumPage/ForumPage";
 import DocumentsPage from "./pages/DocumentsPage";
-import ViewForum from "./pages/ForumPage/ViewForum";
 import Footer from "./components/Footer/Footer";
 import AdminPage from "./pages/AdminPage";
 import Profile from "./pages/LoginPage/components/profile.component";
@@ -49,7 +48,6 @@ return(
           <Route path="/events" exact component={EventPage} />
           <Route path="/forum" exact component={ForumPage} />
           <Route path="/documents" exact component={DocumentsPage} />
-          <Route path="/viewForum" exact component={ViewForum} />
           <Route path="/rent" exact component={RentPage} />
         </Switch>
         <Footer />
@@ -71,7 +69,6 @@ return(
               <Route path="/events" exact component={EventPage} />
               <Route path="/forum" exact component={ForumPage} />
               <Route path="/documents" exact component={DocumentsPage} />
-              <Route path="/viewForum" exact component={ViewForum} />
               <Route path="/rent" exact component={RentPage} />
             </Switch>
             <Footer />
