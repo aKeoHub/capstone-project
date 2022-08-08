@@ -45,7 +45,7 @@ public class CategoryController {
      */
     @GetMapping("/get/{id}")
     public Category getCategory(@PathVariable("id") Integer id) throws CategoryNotFoundException {
-        Optional<Category> category = categoryService.getCategory(id);
+        Optional<Category> category = Optional.ofNullable(categoryService.getCategory(id));
         if (category.isPresent()){
             return category.get();
         } else {

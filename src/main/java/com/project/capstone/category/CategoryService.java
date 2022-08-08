@@ -13,7 +13,9 @@ import java.util.Optional;
  */
 public interface CategoryService {
 
-    Optional<Category> getCategory(Integer id);
+    Category getCategory(Integer id);
+
+    Integer returnCategoryId( Integer categoryId) throws CategoryNotFoundException;
 
 
     Category saveCategory (Category category) throws CategoryNotFoundException;

@@ -1,8 +1,11 @@
 package com.project.capstone.event;
 
+import com.project.capstone.category.Category;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 /**
  * Using Spring Annotations to define the Repository Interface. Extends the functionality of the prebuilt CrudRepository interface
@@ -21,5 +24,11 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
             "= ?1"
     )
     boolean checkId(Integer eventId);
+
+    default Event findEventById(Integer id){
+        Optional<Event> currentEventOptional = findById(id);
+        Event currentEvent = currentEventOptional.get();
+        return currentEvent;
+    }
 
 }

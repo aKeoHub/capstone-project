@@ -47,6 +47,7 @@ public class ParkDocument implements Serializable {
     @JoinColumn(name = "document_category", referencedColumnName = "category_id", nullable = false)
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
+    @JsonBackReference("doctCats")
     private Category documentCategory;
 
     /**
@@ -103,15 +104,15 @@ public class ParkDocument implements Serializable {
      * @param file
      */
     public ParkDocument(@JsonProperty("document_id") Integer documentId,
-                        @JsonProperty("document_category") Category documentCategory,
-                        @JsonProperty("creator_id") User creatorId,
+                        @JsonProperty("document_category") Integer documentCategory,
+                        @JsonProperty("creator_id") Integer creatorId,
                         @JsonProperty("document_name") String documentName,
                         @JsonProperty("create_date") LocalDate createDate,
                         @JsonProperty("description") String description,
                         @JsonProperty("file") byte[] file) {
         this.documentId = documentId;
-        this.documentCategory=documentCategory;
-        this.creatorId = creatorId;
+        this.documentCategory.setCategoryId(documentCategory);
+        this.creatorId.setUserId(creatorId);
         this.documentName = documentName;
         this.createDate = createDate;
         this.description = description;

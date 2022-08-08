@@ -32,8 +32,8 @@ public class ForumServiceAccess implements ForumService {
      * @return Requested Forum Entity
      */
     @Override
-    public Optional<Forum> getForum(Integer id) {
-        return forumRepository.findById(id);
+    public Forum getForum(Integer id) {
+        return forumRepository.findForumById(id);
     }
 
     /**
@@ -68,7 +68,7 @@ public class ForumServiceAccess implements ForumService {
      */
     @Override
     public Forum updateForum(Forum forum, Integer id) throws ForumNotFoundException {
-        Optional<Forum> currentForumOptional = getForum(id);
+        Optional<Forum> currentForumOptional = forumRepository.findById(id);
 
         if (currentForumOptional.isPresent()) {
             Forum currentForum = currentForumOptional.get();

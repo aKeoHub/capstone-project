@@ -22,7 +22,7 @@ public class ParkController {
 
     @GetMapping("/get/{id}")
     public ParkDocument getDocument (@PathVariable("id") Integer id) throws DocumentNotFoundException {
-        Optional<ParkDocument> document = parkService.getDocument(id);
+        Optional<ParkDocument> document = Optional.ofNullable(parkService.getDocument(id));
         if(document.isPresent()) {
             return document.get();
         } else {

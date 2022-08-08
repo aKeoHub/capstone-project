@@ -1,5 +1,7 @@
 package com.project.capstone.parkdocument;
 
+import com.project.capstone.category.Category;
+import com.project.capstone.category.CategoryNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,8 @@ public class ParkServiceAccess implements ParkService {
     private ParkRepository parkRepository;
 
     @Override
-    public Optional<ParkDocument> getDocument(Integer Id) {
-        return parkRepository.findById(Id);
+    public ParkDocument getDocument(Integer Id) {
+        return parkRepository.findParkDocumentById(Id);
     }
 
     @Override
@@ -33,14 +35,25 @@ public class ParkServiceAccess implements ParkService {
     }
 
     @Override
+    public Integer returnDocCategoryId(Integer categoryId) {
+        Optional<ParkDocument> currentDocumentOptional = parkRepository.findById(categoryId);
+
+        if (currentDocumentOptional.isPresent()) {
+            ParkDocument currentCategory = currentDocumentOptional.get();
+            return currentCategory.getDocumentId();
+        } else {
+            throw new RuntimeException("Category Doesnt Exist");
+        }
+    }
+
+    @Override
     public List<ParkDocument> fetchDocumentList() {
         return (List<ParkDocument>) parkRepository.findAll();
     }
 
     @Override
     public ParkDocument updateDocument(ParkDocument document, Integer id) throws DocumentNotFoundException {
-        Optional<ParkDocument> currentDocumentOptional = getDocument(id);
-
+        Optional<ParkDocument> currentDocumentOptional = parkRepository.findById(id);
         if (currentDocumentOptional.isPresent()) {
             ParkDocument currentDocument = currentDocumentOptional.get();
 

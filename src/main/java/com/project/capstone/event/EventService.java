@@ -12,7 +12,7 @@ import java.util.Optional;
  */
 public interface EventService {
 
-    Optional<Event> getEvent(Integer id);
+    Event getEvent(Integer id);
 
     Event createEvent(Event event);
 

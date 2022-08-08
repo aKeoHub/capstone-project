@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ParkService {
-    Optional<ParkDocument> getDocument(Integer Id);
+    ParkDocument getDocument(Integer Id);
 
     ParkDocument createDocument(ParkDocument document);
+
+    Integer returnDocCategoryId (Integer categoryId);
 
     List<ParkDocument> fetchDocumentList();
 

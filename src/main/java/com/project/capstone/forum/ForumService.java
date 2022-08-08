@@ -12,7 +12,7 @@ import java.util.Optional;
  */
 public interface ForumService {
 
-    Optional<Forum> getForum(Integer id);
+    Forum getForum(Integer id);
 
     Forum createForum(Forum forum);
 

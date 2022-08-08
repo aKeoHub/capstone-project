@@ -38,6 +38,7 @@ public class Category implements Serializable {
     @Id
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIdentityReference(alwaysAsId = true)
     private Integer categoryId;
 
     /**
@@ -70,7 +71,8 @@ public class Category implements Serializable {
      * Bridging the SQL Documents Table & Category Table using Spring Annotation
      */
     @OneToMany(fetch = LAZY, mappedBy = "documentCategory")
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonManagedReference("doctCats")
+    @JsonIgnore
     @ToString.Exclude
     private Collection<ParkDocument> documents = new ArrayList<>();
 
@@ -126,10 +128,10 @@ public class Category implements Serializable {
 
     /**
      * Set the Category ID using the SQL Column reference
-     * @param category_id
+     * @param categoryId
      */
-    public void setCategoryId(Integer category_id) {
-        this.categoryId = category_id;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     /**

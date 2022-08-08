@@ -35,14 +35,32 @@ public class CategoryServiceAccess implements CategoryService{
      * @return Requested Category Entity
      */
     @Override
-    public Optional<Category> getCategory(Integer id){
-        return categoryRepository.findById(id);
+    public Category getCategory(Integer id){
+        return categoryRepository.findCategoryById(id);
+    }
+
+    /**
+     * Fetch a Category Entity by ID (PK) and return the ID
+     * @param category
+     * @param categoryId
+     * @return Requested Category Entity
+     */
+    @Override
+    public Integer returnCategoryId( Integer categoryId) throws CategoryNotFoundException{
+        Optional<Category> currentCategoryOptional = categoryRepository.findById(categoryId);
+
+        if (currentCategoryOptional.isPresent()) {
+            Category currentCategory = currentCategoryOptional.get();
+            return currentCategory.getCategoryId();
+        } else {
+            throw new CategoryNotFoundException(categoryId);
+        }
     }
 
     /**
      * Persists a Category Entity to the database
      * @param category
-     * @return
+     * @return Persisted Category
      */
     @Override
     public Category saveCategory(Category category){
@@ -69,7 +87,7 @@ public class CategoryServiceAccess implements CategoryService{
     @Override
     public Category updateCategory (Category category, Integer categoryId) throws CategoryNotFoundException{
 
-        Optional<Category> currentCategoryOptional = getCategory(categoryId);
+        Optional<Category> currentCategoryOptional = categoryRepository.findById(categoryId);
 
         if (currentCategoryOptional.isPresent()) {
             Category currentCategory = currentCategoryOptional.get();
@@ -91,7 +109,7 @@ public class CategoryServiceAccess implements CategoryService{
      */
     @Override
     public void deleteCategoryById(Integer categoryId) throws CategoryNotFoundException {
-        Optional<Category> currentCategoryOptional = getCategory(categoryId);
+        Optional<Category> currentCategoryOptional = categoryRepository.findById(categoryId);
         if (currentCategoryOptional.isPresent()) {
             categoryRepository.deleteById(categoryId);
         } else {

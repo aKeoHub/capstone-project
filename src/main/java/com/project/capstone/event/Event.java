@@ -105,8 +105,8 @@ public class Event implements Serializable {
      * @param file
      */
     public Event(@JsonProperty("event_id") Integer eventId,
-                 @JsonProperty("event_creator") User eventCreator,
-                 @JsonProperty("category_id") Category category,
+                 @JsonProperty("event_creator") Integer eventCreator,
+                 @JsonProperty("category_id") Integer category,
                  @JsonProperty("event_name") String eventName,
                  @JsonProperty("location") String location,
                  @JsonProperty("description") String description,
@@ -114,8 +114,8 @@ public class Event implements Serializable {
                  @JsonProperty("end_date") LocalDate endDate,
                  @JsonProperty("file") byte[] file) {
         this.eventId = eventId;
-        this.eventCreator = eventCreator;
-        this.category = category;
+        this.eventCreator.getUserId();
+        this.category.getCategoryId();
         this.eventName = eventName;
         this.location = location;
         this.description = description;

@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Using Spring Annotations to define the Repository Interface. Extends the functionality of the prebuilt CrudRepository interface
  *
@@ -15,5 +17,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CategoryRepository extends CrudRepository<Category, Integer> {
+
+
+    default Category findCategoryById(Integer id){
+        Optional<Category> currentCategoryOptional = findById(id);
+        Category currentCategory = currentCategoryOptional.get();
+      return currentCategory;
+  }
 
 }

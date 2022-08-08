@@ -32,8 +32,8 @@ public class EventServiceAccess implements EventService{
      * @return Requested Event Entity
      */
     @Override
-    public Optional<Event> getEvent(Integer id) {
-        return eventRepository.findById(id);
+    public Event getEvent(Integer id) {
+        return eventRepository.findEventById(id);
     }
 
     /**
@@ -68,7 +68,7 @@ public class EventServiceAccess implements EventService{
      */
     @Override
     public Event updateEvent(Event event, Integer id) throws EventNotFoundException {
-        Optional<Event> currentEventOptional = getEvent(id);
+        Optional<Event> currentEventOptional = eventRepository.findById(id);
 
         if (currentEventOptional.isPresent()) {
             Event currentEvent = currentEventOptional.get();

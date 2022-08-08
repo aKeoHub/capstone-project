@@ -43,7 +43,7 @@ public class EventController {
      */
     @GetMapping("/get/{id}")
     public Event getEvent(@PathVariable("id") Integer id) throws EventNotFoundException {
-        Optional<Event> event = eventService.getEvent(id);
+        Optional<Event> event = Optional.ofNullable(eventService.getEvent(id));
         if (event.isPresent()){
             return event.get();
         } else {

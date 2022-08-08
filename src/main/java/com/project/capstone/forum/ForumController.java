@@ -45,7 +45,7 @@ public class ForumController {
      */
     @GetMapping("/get/{id}")
     public Forum getForum (@PathVariable("id") Integer id) throws ForumNotFoundException {
-        Optional<Forum> forum = forumService.getForum(id);
+        Optional<Forum> forum = Optional.ofNullable(forumService.getForum(id));
         if(forum.isPresent()){
             return forum.get();
         } else {

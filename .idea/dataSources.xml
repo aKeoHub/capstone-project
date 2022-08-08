@@ -8,5 +8,18 @@
       <jdbc-url>jdbc:mysql://localhost:3306/capstonedb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="capstone-project/Hibernate" uuid="4d3d3110-1b6a-4bdd-9f3b-691d63c0c6c4">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://db-capstone.ccw3ivoryqwy.ca-central-1.rds.amazonaws.com:3306/capstone</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="AWS.RegionId" value="ca-central-1" />
+        <property name="AWS.CredentialId" value="profile:default" />
+      </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

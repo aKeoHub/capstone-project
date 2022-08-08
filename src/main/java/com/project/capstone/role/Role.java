@@ -25,7 +25,7 @@ public class Role {
     private String roleName;
 
 
-    public Role(@JsonProperty("role_id") int id,
+    public Role(@JsonProperty("role_id") Integer id,
                 @JsonProperty("role_name") String name){
         this.id=id;
         this.roleName=name;

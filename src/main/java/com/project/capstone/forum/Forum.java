@@ -113,7 +113,7 @@ public class Forum implements Serializable{
      * @param subTitle
      */
     public Forum(@JsonProperty("forum_id") Integer forumId,
-                 @JsonProperty("creator_id") User creator,
+                 @JsonProperty("creator_id") Integer creator,
                  @JsonProperty("title") String title,
                  @JsonProperty("description") String description,
                  @JsonProperty("create_date") LocalDate createDate,
@@ -121,7 +121,7 @@ public class Forum implements Serializable{
                  @JsonProperty("forum_category") String forumCategory,
                  @JsonProperty("sub_title") String subTitle) {
         this.forumId = forumId;
-        this.creator = creator;
+        this.creator.getUserId();
         this.title = title;
         this.description = description;
         this.createDate = createDate;
