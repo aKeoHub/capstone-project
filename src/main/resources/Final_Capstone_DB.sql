@@ -173,17 +173,8 @@ CREATE TABLE IF NOT EXISTS `capstonedb`.`response` (
 	INSERT INTO `category` (`category_name`,`category_type`) 
 		VALUES ('Eviction Notice','PRIORITY');
 	
-	INSERT INTO `user` (`username`,`firstname`,`lastname`,`password`,`email`,`picture_id`,`create_date`) 
-		VALUES ('user','user','regular', 'password', 'user@gmail.com', 1, current_date);
-	INSERT INTO `user` (`username`,`firstname`,`lastname`,`password`,`email`,`picture_id`,`create_date`) 
-		VALUES ('admin','admin','admin', 'password','admin@gmail.com', 1, current_date);
-	INSERT INTO `user` (`username`,`firstname`,`lastname`,`password`,`email`,`picture_id`,`create_date`) 
-		VALUES ('manager','manager','manager', 'password','manager@gmail.com', 1, current_date);	
-		
--- 	INSERT INTO `item` (`category_id`,`owner_id`,`name`,`lot_num`,`description`,`price`,`picture_id`,`create_time`,`renter_id`,`status`) 
--- 		VALUES (3, 1,'MountainView', 46,'Beautiful Mount fiew lot', 20000, NULL, '2022-10-15', NULL, 'FOR RENT');
--- 	INSERT INTO `item` (`category_id`,`owner_id`,`name`,`lot_num`,`description`,`price`,`picture_id`,`create_time`,`renter_id`,`status`) 
--- 		VALUES (3, 1,'CentreSquare', 48,'Close to local shops', 16000, NULL, '2022-05-25', 2, 'RENTED');
+ 	INSERT INTO `user` (`username`,`firstname`,`lastname`,`password`,`email`,`picture_id`,`create_date`) 
+ 		VALUES ('Test','Test','regular', 'password', 'test@gmail.com', 1, current_date);
 
  	INSERT INTO `park_document` (`document_category`,`creator_id`,`document_name`,`create_date`,`description`,`file`) 
  		VALUES (1, 1, 'PARK RULES AND GUIDELINES','2020-03-19','This document explains basic park guidelines', NULL);	
@@ -191,11 +182,11 @@ CREATE TABLE IF NOT EXISTS `capstonedb`.`response` (
  		VALUES (1, 1, 'PARK EVENTS POLICY','2021-07-12','This document explains hosting events', NULL);
 	
 	INSERT INTO `forum` (`creator_id`,`forum_category`,`title`,`sub_title`,`description`,`create_date`, `picture_id`) 
-		VALUES (2, 'Annoucment', 'Welcome','Enjoy the forums page','Please feel free to use the page as often as you require, but remember to follow park guidelines and policys! - Manager','2022-06-10', NULL);
+		VALUES (1, 'Annoucment', 'Welcome','Enjoy the forums page','Please feel free to use the page as often as you require, but remember to follow park guidelines and policys! - Manager','2022-06-10', NULL);
 	INSERT INTO `forum` (`creator_id`,`forum_category`,`title`,`sub_title`,`description`,`create_date`, `picture_id`) 
-		VALUES (2, 'AMA', 'Ask me anything!','I will do my best to help','I am usually around the Mountain View lot 46 if anyone wants to chat in person','2022-12-22', NULL);
+		VALUES (1, 'AMA', 'Ask me anything!','I will do my best to help','I am usually around the Mountain View lot 46 if anyone wants to chat in person','2022-12-22', NULL);
 	INSERT INTO `forum` (`creator_id`,`forum_category`,`title`,`sub_title`,`description`,`create_date`, `picture_id`) 
-		VALUES (2, 'Help', 'I need help','I need to remove a snake','Theres a snake by my place and I need help removing it','2022-09-12', NULL);
+		VALUES (1, 'Help', 'I need help','I need to remove a snake','Theres a snake by my place and I need help removing it','2022-09-12', NULL);
 		
 	INSERT INTO `event` (`category_id`,`event_creator`,`event_name`,`location`,`description`, `start_date`, `end_date`, `file`) 
 		VALUES (2, 1, 'EuroFest', 'Main Square', 'EuroFest is coming later this year!','2022-04-10','2022-04-17', NULL);
@@ -206,6 +197,3 @@ CREATE TABLE IF NOT EXISTS `capstonedb`.`response` (
 	INSERT INTO `event` (`category_id`,`event_creator`,`event_name`,`location`,`description`, `start_date`, `end_date`, `file`) 
 		VALUES (2, 1, 'Car Meet', 'Main Square', 'Proud of your ride? Come show it off!','2023-06-04','2023-06-04', NULL);
         
-	INSERT INTO `user_role` (`user_id`, `role_id`) VALUES (1,1);
-	INSERT INTO `user_role` (`user_id`, `role_id`) VALUES (2,2);
-	INSERT INTO `user_role` (`user_id`, `role_id`) VALUES (3,3);
