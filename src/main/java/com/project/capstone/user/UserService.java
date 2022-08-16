@@ -2,6 +2,7 @@ package com.project.capstone.user;
 
 import com.project.capstone.role.Role;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface for the user service.
@@ -64,6 +65,13 @@ public interface UserService {
      */
     List<User> getUsers();
 
+    /**
+     *
+     * Get User by Id
+     * @param id User Id you wish to fetch by
+     * @return Return user if exists
+     */
+    Optional<User> getUser (Integer id);
 }
 
 

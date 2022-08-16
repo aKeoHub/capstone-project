@@ -166,5 +166,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return (List<User>) userRepo.findAll();
     }
 
+    @Override
+    public Optional<User> getUser(Integer id) {
+        return userRepo.findById(id);
+    }
+
 
 }
