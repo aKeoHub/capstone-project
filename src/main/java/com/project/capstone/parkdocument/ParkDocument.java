@@ -93,8 +93,30 @@ public class ParkDocument implements Serializable {
     @ToString.Exclude
     private List<AuditLog> auditLogs = new ArrayList<>();
 
-    @JsonIgnore
-    private final Integer documentCategoryInt;
+
+    public Integer getCategoryInteger() {
+        return categoryInteger;
+    }
+
+    public void setCategoryInteger(Integer categoryInteger) {
+        this.categoryInteger = categoryInteger;
+    }
+
+    @Transient
+    @JoinColumn(name = "document_category")
+    private Integer categoryInteger;
+
+    public Integer getCreatorInteger() {
+        return creatorInteger;
+    }
+
+    public void setCreatorInteger(Integer creatorInteger) {
+        this.creatorInteger = creatorInteger;
+    }
+
+    @Transient
+    @JoinColumn(name = "creator_id")
+    private Integer creatorInteger;
 
     /**
      * Required args Constructor assisting in Spring Annotations
@@ -107,15 +129,34 @@ public class ParkDocument implements Serializable {
      * @param file
      */
     public ParkDocument(@JsonProperty("document_id") Integer documentId,
-                        @JsonProperty("document_category") Integer documentCategoryInt,
-                        @JsonProperty("creator_id") Integer creatorId,
+                        @JsonProperty("document_category") Category documentCategory,
+                        @JsonProperty("creator_id") User creatorId,
                         @JsonProperty("document_name") String documentName,
                         @JsonProperty("create_date") LocalDate createDate,
                         @JsonProperty("description") String description,
                         @JsonProperty("file") byte[] file) {
         this.documentId = documentId;
-        this.documentCategory = documentCategoryInt;
-        this.creatorId.setUserId(creatorId);
+        this.documentCategory = documentCategory;
+        this.creatorId = creatorId;
+        this.documentName = documentName;
+        this.createDate = createDate;
+        this.description = description;
+        this.file = file;
+    }
+
+
+    public ParkDocument(@JsonProperty("document_id") Integer documentId,
+                        @JsonProperty("document_category") Integer documentCategory,
+                        @JsonProperty("creator_id") Integer creatorId,
+                        @JsonProperty("document_name") String documentName,
+                        @JsonProperty("create_date") LocalDate createDate,
+                        @JsonProperty("description") String description,
+                        @JsonProperty("file") byte[] file) {
+
+
+        this.documentId = documentId;
+        this.categoryInteger = documentCategory;
+        this.creatorInteger = creatorId;
         this.documentName = documentName;
         this.createDate = createDate;
         this.description = description;
