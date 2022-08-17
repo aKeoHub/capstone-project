@@ -1,0 +1,17 @@
+com.project.capstone
+com.project.capstone.audit
+com.project.capstone.category
+com.project.capstone.event
+com.project.capstone.event.datatable
+com.project.capstone.exceptions
+com.project.capstone.filter
+com.project.capstone.forum
+com.project.capstone.notification
+com.project.capstone.parkdocument
+com.project.capstone.parkdocument.file
+com.project.capstone.picture
+com.project.capstone.response
+com.project.capstone.role
+com.project.capstone.sales
+com.project.capstone.security
+com.project.capstone.user
