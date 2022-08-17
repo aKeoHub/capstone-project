@@ -13,7 +13,7 @@
 	<name>Capstone</name>
 	<description>Capstone project</description>
 	<properties>
-		<java.version>14</java.version>
+		<java.version>18</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
