@@ -2,8 +2,8 @@ version: '3.1'
 
 services:
 
-  db:
-    platform: linux/x86_64
+  database:
+    platform: windows/x86_64
     image: mysql:8.0
     restart: always
     ports:
