@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 }).and();
 
         // Authorize all these endpoints.
-        http.authorizeRequests().antMatchers("/api/v1/login/**", "/api/v1/token/refresh/**", "/api/v1/user/save/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/login/**", "/api/v1/token/refresh/**", "/api/v1/user/save/**", "/").permitAll();
 
         // User permissions
         http.authorizeRequests().antMatchers(GET, "/api/v1/user/**").hasAnyAuthority("ROLE_USER");
